@@ -138,7 +138,7 @@ consume_argument(struct argparse *ap)
 struct pb_Parameters *
 pb_ReadParameters(int *_argc, char **argv)
 {
-  char *err_message;
+  const char *err_message;
   struct argparse ap;
   struct pb_Parameters *ret =
     (struct pb_Parameters *)malloc(sizeof(struct pb_Parameters));
@@ -434,7 +434,7 @@ pb_AddSubTimer(struct pb_TimerSet *timers, char *label, enum pb_TimerID pb_Categ
   int len = strlen(label);
     
   subtimer->label = (char *) malloc (sizeof(char)*(len+1));
-  sprintf(subtimer->label, "%s\0", label);
+  sprintf(subtimer->label, "%s", label);
   
   pb_ResetTimer(&subtimer->timer);
   subtimer->next = NULL;
