@@ -2,6 +2,7 @@
 
 # Process-management and directory management routines are collected here.
 
+import pdb
 import os
 import os.path as path
 import stat
@@ -85,6 +86,7 @@ def makefile(target=None, action=None, filepath=None, env={}):
     elif action is 'run':
         def run():
             args.append('run')
+            pdb.set_trace()
             rc = os.spawnvp(os.P_WAIT, "make", args)
             return rc == 0
     elif action is 'debug':
