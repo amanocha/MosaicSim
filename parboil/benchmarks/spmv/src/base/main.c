@@ -6,6 +6,7 @@
  *cr
  ***************************************************************************/
 
+#include "DECADES/DECADES.h"
 #include <parboil.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,7 +14,26 @@
 #include "file.h"
 #include "convert_dataset.h"
 
+void _kernel_(int dim, int* h_nzcnt, int* h_ptr, int* h_indices, int* h_perm, float* h_data, float* h_x_vector, float* h_Ax_vector, int tid, int num_threads) {
+  int p, i, k;
+  for(p=tid;p<50;p+=num_threads) {
+    for (i = 0; i < dim; i++) {
+      float sum = 0.0f;
+      //int  bound = h_nzcnt[i / 32];
+      int  bound = h_nzcnt[i];
+      for(k=0;k<bound;k++ ) {
+        int j = h_ptr[k] + i;
+	int in = h_indices[j];
 
+	float d = h_data[j];
+	float t = h_x_vector[in];
+
+	sum += d*t;
+      }
+      h_Ax_vector[h_perm[i]] = sum;
+    }
+  }	
+}
 
 int main(int argc, char** argv) {
 	struct pb_TimerSet timers;
@@ -54,7 +74,6 @@ int main(int argc, char** argv) {
 	float *h_Ax_vector;
     float *h_x_vector;
 	
-	
     //load matrix from files
 	pb_SwitchToTimer(&timers, pb_TimerID_IO);
 	//inputData(parameters->inpFiles[0], &len, &depth, &dim,&nzcnt_len,&pad,
@@ -79,29 +98,8 @@ int main(int argc, char** argv) {
   input_vec( parameters->inpFiles[1], h_x_vector,dim);
 	
 	pb_SwitchToTimer(&timers, pb_TimerID_COMPUTE);
-
-
 	
-  int p, i, k;
-	//main execution
-	for(p=0;p<50;p++)
-	{
-		for (i = 0; i < dim; i++) {
-		  float sum = 0.0f;
-		  //int  bound = h_nzcnt[i / 32];
-		  int  bound = h_nzcnt[i];
-		  for(k=0;k<bound;k++ ) {
-			int j = h_ptr[k] + i;
-			int in = h_indices[j];
-
-			float d = h_data[j];
-			float t = h_x_vector[in];
-
-			sum += d*t;
-		  }
-		  h_Ax_vector[h_perm[i]] = sum;
-		}
-	}	
+        _kernel_(dim, h_nzcnt, h_ptr, h_indices, h_perm, h_data, h_x_vector, h_Ax_vector, 0, 1);
 
 	if (parameters->outFile) {
 		pb_SwitchToTimer(&timers, pb_TimerID_IO);

@@ -6,6 +6,105 @@
 # 1 "<built-in>" 2
 # 1 "main.cc" 2
 # 25 "main.cc"
+# 1 "/home/aninda/DECADES_compiler/build/include/DECADES/DECADES.h" 1
+
+
+# 1 "/home/ts20/share/llvm9/llvm-project/build/projects/openmp/runtime/src/omp.h" 1
+# 24 "/home/ts20/share/llvm9/llvm-project/build/projects/openmp/runtime/src/omp.h"
+    extern "C" {
+# 45 "/home/ts20/share/llvm9/llvm-project/build/projects/openmp/runtime/src/omp.h"
+    typedef enum omp_sched_t {
+ omp_sched_static = 1,
+ omp_sched_dynamic = 2,
+ omp_sched_guided = 3,
+ omp_sched_auto = 4
+    } omp_sched_t;
+
+
+    extern void omp_set_num_threads (int);
+    extern void omp_set_dynamic (int);
+    extern void omp_set_nested (int);
+    extern void omp_set_max_active_levels (int);
+    extern void omp_set_schedule (omp_sched_t, int);
+
+
+    extern int omp_get_num_threads (void);
+    extern int omp_get_dynamic (void);
+    extern int omp_get_nested (void);
+    extern int omp_get_max_threads (void);
+    extern int omp_get_thread_num (void);
+    extern int omp_get_num_procs (void);
+    extern int omp_in_parallel (void);
+    extern int omp_in_final (void);
+    extern int omp_get_active_level (void);
+    extern int omp_get_level (void);
+    extern int omp_get_ancestor_thread_num (int);
+    extern int omp_get_team_size (int);
+    extern int omp_get_thread_limit (void);
+    extern int omp_get_max_active_levels (void);
+    extern void omp_get_schedule (omp_sched_t *, int *);
+    extern int omp_get_max_task_priority (void);
+
+
+    typedef struct omp_lock_t {
+        void * _lk;
+    } omp_lock_t;
+
+    extern void omp_init_lock (omp_lock_t *);
+    extern void omp_set_lock (omp_lock_t *);
+    extern void omp_unset_lock (omp_lock_t *);
+    extern void omp_destroy_lock (omp_lock_t *);
+    extern int omp_test_lock (omp_lock_t *);
+
+
+    typedef struct omp_nest_lock_t {
+        void * _lk;
+    } omp_nest_lock_t;
+
+    extern void omp_init_nest_lock (omp_nest_lock_t *);
+    extern void omp_set_nest_lock (omp_nest_lock_t *);
+    extern void omp_unset_nest_lock (omp_nest_lock_t *);
+    extern void omp_destroy_nest_lock (omp_nest_lock_t *);
+    extern int omp_test_nest_lock (omp_nest_lock_t *);
+
+
+    typedef enum omp_sync_hint_t {
+        omp_sync_hint_none = 0,
+        omp_lock_hint_none = omp_sync_hint_none,
+        omp_sync_hint_uncontended = 1,
+        omp_lock_hint_uncontended = omp_sync_hint_uncontended,
+        omp_sync_hint_contended = (1<<1),
+        omp_lock_hint_contended = omp_sync_hint_contended,
+        omp_sync_hint_nonspeculative = (1<<2),
+        omp_lock_hint_nonspeculative = omp_sync_hint_nonspeculative,
+        omp_sync_hint_speculative = (1<<3),
+        omp_lock_hint_speculative = omp_sync_hint_speculative,
+        kmp_lock_hint_hle = (1<<16),
+        kmp_lock_hint_rtm = (1<<17),
+        kmp_lock_hint_adaptive = (1<<18)
+    } omp_sync_hint_t;
+
+
+    typedef omp_sync_hint_t omp_lock_hint_t;
+
+
+    extern void omp_init_lock_with_hint(omp_lock_t *, omp_lock_hint_t);
+    extern void omp_init_nest_lock_with_hint(omp_nest_lock_t *, omp_lock_hint_t);
+
+
+    extern double omp_get_wtime (void);
+    extern double omp_get_wtick (void);
+
+
+    extern int omp_get_default_device (void);
+    extern void omp_set_default_device (int);
+    extern int omp_is_initial_device (void);
+    extern int omp_get_num_devices (void);
+    extern int omp_get_num_teams (void);
+    extern int omp_get_team_num (void);
+    extern int omp_get_cancellation (void);
+
+
 # 1 "/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/../../../../include/c++/7/stdlib.h" 1 3
 # 36 "/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/../../../../include/c++/7/stdlib.h" 3
 # 1 "/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/../../../../include/c++/7/cstdlib" 1 3
@@ -1556,7 +1655,435 @@ using std::system;
 
 using std::wcstombs;
 using std::wctomb;
+# 137 "/home/ts20/share/llvm9/llvm-project/build/projects/openmp/runtime/src/omp.h" 2
+# 1 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stdint.h" 1 3
+# 47 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stdint.h" 3
+# 1 "/usr/include/stdint.h" 1 3 4
+# 26 "/usr/include/stdint.h" 3 4
+# 1 "/usr/include/bits/wchar.h" 1 3 4
+# 22 "/usr/include/bits/wchar.h" 3 4
+# 1 "/usr/include/bits/wordsize.h" 1 3 4
+# 23 "/usr/include/bits/wchar.h" 2 3 4
+# 27 "/usr/include/stdint.h" 2 3 4
+# 1 "/usr/include/bits/wordsize.h" 1 3 4
+# 28 "/usr/include/stdint.h" 2 3 4
+# 48 "/usr/include/stdint.h" 3 4
+typedef unsigned char uint8_t;
+typedef unsigned short int uint16_t;
+
+typedef unsigned int uint32_t;
+
+
+
+typedef unsigned long int uint64_t;
+# 65 "/usr/include/stdint.h" 3 4
+typedef signed char int_least8_t;
+typedef short int int_least16_t;
+typedef int int_least32_t;
+
+typedef long int int_least64_t;
+
+
+
+
+
+
+typedef unsigned char uint_least8_t;
+typedef unsigned short int uint_least16_t;
+typedef unsigned int uint_least32_t;
+
+typedef unsigned long int uint_least64_t;
+# 90 "/usr/include/stdint.h" 3 4
+typedef signed char int_fast8_t;
+
+typedef long int int_fast16_t;
+typedef long int int_fast32_t;
+typedef long int int_fast64_t;
+# 103 "/usr/include/stdint.h" 3 4
+typedef unsigned char uint_fast8_t;
+
+typedef unsigned long int uint_fast16_t;
+typedef unsigned long int uint_fast32_t;
+typedef unsigned long int uint_fast64_t;
+# 119 "/usr/include/stdint.h" 3 4
+typedef long int intptr_t;
+
+
+typedef unsigned long int uintptr_t;
+# 134 "/usr/include/stdint.h" 3 4
+typedef long int intmax_t;
+typedef unsigned long int uintmax_t;
+# 48 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stdint.h" 2 3
+# 138 "/home/ts20/share/llvm9/llvm-project/build/projects/openmp/runtime/src/omp.h" 2
+
+    extern int omp_get_initial_device (void);
+    extern void* omp_target_alloc(size_t, int);
+    extern void omp_target_free(void *, int);
+    extern int omp_target_is_present(void *, int);
+    extern int omp_target_memcpy(void *, void *, size_t, size_t, size_t, int, int);
+    extern int omp_target_memcpy_rect(void *, void *, size_t, int, const size_t *,
+                                            const size_t *, const size_t *, const size_t *, const size_t *, int, int);
+    extern int omp_target_associate_ptr(void *, void *, size_t, size_t, int);
+    extern int omp_target_disassociate_ptr(void *, int);
+
+
+    extern int omp_get_device_num (void);
+
+
+    extern int kmp_get_stacksize (void);
+    extern void kmp_set_stacksize (int);
+    extern size_t kmp_get_stacksize_s (void);
+    extern void kmp_set_stacksize_s (size_t);
+    extern int kmp_get_blocktime (void);
+    extern int kmp_get_library (void);
+    extern void kmp_set_blocktime (int);
+    extern void kmp_set_library (int);
+    extern void kmp_set_library_serial (void);
+    extern void kmp_set_library_turnaround (void);
+    extern void kmp_set_library_throughput (void);
+    extern void kmp_set_defaults (char const *);
+    extern void kmp_set_disp_num_buffers (int);
+
+
+    typedef void * kmp_affinity_mask_t;
+
+    extern int kmp_set_affinity (kmp_affinity_mask_t *);
+    extern int kmp_get_affinity (kmp_affinity_mask_t *);
+    extern int kmp_get_affinity_max_proc (void);
+    extern void kmp_create_affinity_mask (kmp_affinity_mask_t *);
+    extern void kmp_destroy_affinity_mask (kmp_affinity_mask_t *);
+    extern int kmp_set_affinity_mask_proc (int, kmp_affinity_mask_t *);
+    extern int kmp_unset_affinity_mask_proc (int, kmp_affinity_mask_t *);
+    extern int kmp_get_affinity_mask_proc (int, kmp_affinity_mask_t *);
+
+
+    typedef enum omp_proc_bind_t {
+        omp_proc_bind_false = 0,
+        omp_proc_bind_true = 1,
+        omp_proc_bind_master = 2,
+        omp_proc_bind_close = 3,
+        omp_proc_bind_spread = 4
+    } omp_proc_bind_t;
+
+    extern omp_proc_bind_t omp_get_proc_bind (void);
+
+
+    extern int omp_get_num_places (void);
+    extern int omp_get_place_num_procs (int);
+    extern void omp_get_place_proc_ids (int, int *);
+    extern int omp_get_place_num (void);
+    extern int omp_get_partition_num_places (void);
+    extern void omp_get_partition_place_nums (int *);
+
+    extern void * kmp_malloc (size_t);
+    extern void * kmp_aligned_malloc (size_t, size_t);
+    extern void * kmp_calloc (size_t, size_t);
+    extern void * kmp_realloc (void *, size_t);
+    extern void kmp_free (void *);
+
+    extern void kmp_set_warnings_on(void);
+    extern void kmp_set_warnings_off(void);
+
+
+    typedef enum omp_control_tool_result_t {
+        omp_control_tool_notool = -2,
+        omp_control_tool_nocallback = -1,
+        omp_control_tool_success = 0,
+        omp_control_tool_ignored = 1
+    } omp_control_tool_result_t;
+
+    typedef enum omp_control_tool_t {
+        omp_control_tool_start = 1,
+        omp_control_tool_pause = 2,
+        omp_control_tool_flush = 3,
+        omp_control_tool_end = 4
+    } omp_control_tool_t;
+
+    extern int omp_control_tool(int, int, void*);
+
+
+    typedef uintptr_t omp_uintptr_t;
+
+    typedef enum {
+        OMP_ATK_THREADMODEL = 1,
+        OMP_ATK_ALIGNMENT = 2,
+        OMP_ATK_ACCESS = 3,
+        OMP_ATK_POOL_SIZE = 4,
+        OMP_ATK_FALLBACK = 5,
+        OMP_ATK_FB_DATA = 6,
+        OMP_ATK_PINNED = 7,
+        OMP_ATK_PARTITION = 8
+    } omp_alloctrait_key_t;
+
+    typedef enum {
+        OMP_ATV_FALSE = 0,
+        OMP_ATV_TRUE = 1,
+        OMP_ATV_DEFAULT = 2,
+        OMP_ATV_CONTENDED = 3,
+        OMP_ATV_UNCONTENDED = 4,
+        OMP_ATV_SEQUENTIAL = 5,
+        OMP_ATV_PRIVATE = 6,
+        OMP_ATV_ALL = 7,
+        OMP_ATV_THREAD = 8,
+        OMP_ATV_PTEAM = 9,
+        OMP_ATV_CGROUP = 10,
+        OMP_ATV_DEFAULT_MEM_FB = 11,
+        OMP_ATV_NULL_FB = 12,
+        OMP_ATV_ABORT_FB = 13,
+        OMP_ATV_ALLOCATOR_FB = 14,
+        OMP_ATV_ENVIRONMENT = 15,
+        OMP_ATV_NEAREST = 16,
+        OMP_ATV_BLOCKED = 17,
+        OMP_ATV_INTERLEAVED = 18
+    } omp_alloctrait_value_t;
+
+    typedef struct {
+        omp_alloctrait_key_t key;
+        omp_uintptr_t value;
+    } omp_alloctrait_t;
+# 285 "/home/ts20/share/llvm9/llvm-project/build/projects/openmp/runtime/src/omp.h"
+    typedef enum omp_allocator_handle_t : omp_uintptr_t
+
+
+
+    {
+      omp_null_allocator = 0,
+      omp_default_mem_alloc = 1,
+      omp_large_cap_mem_alloc = 2,
+      omp_const_mem_alloc = 3,
+      omp_high_bw_mem_alloc = 4,
+      omp_low_lat_mem_alloc = 5,
+      omp_cgroup_mem_alloc = 6,
+      omp_pteam_mem_alloc = 7,
+      omp_thread_mem_alloc = 8,
+      KMP_ALLOCATOR_MAX_HANDLE = (18446744073709551615UL)
+    } omp_allocator_handle_t;
+
+    typedef enum omp_memspace_handle_t : omp_uintptr_t
+
+
+
+    {
+      omp_default_mem_space = 0,
+      omp_large_cap_mem_space = 1,
+      omp_const_mem_space = 2,
+      omp_high_bw_mem_space = 3,
+      omp_low_lat_mem_space = 4,
+      KMP_MEMSPACE_MAX_HANDLE = (18446744073709551615UL)
+    } omp_memspace_handle_t;
+
+    extern omp_allocator_handle_t omp_init_allocator(omp_memspace_handle_t m,
+                                                       int ntraits, omp_alloctrait_t traits[]);
+    extern void omp_destroy_allocator(omp_allocator_handle_t allocator);
+
+    extern void omp_set_default_allocator(omp_allocator_handle_t a);
+    extern omp_allocator_handle_t omp_get_default_allocator(void);
+
+    extern void * omp_alloc(size_t size, omp_allocator_handle_t a = omp_null_allocator);
+    extern void omp_free(void * ptr, omp_allocator_handle_t a = omp_null_allocator);
+
+
+
+
+
+
+    extern void ompc_set_affinity_format(char const *);
+    extern size_t ompc_get_affinity_format(char *, size_t);
+    extern void ompc_display_affinity(char const *);
+    extern size_t ompc_capture_affinity(char *, size_t, char const *);
+
+
+    typedef enum omp_pause_resource_t {
+      omp_pause_resume = 0,
+      omp_pause_soft = 1,
+      omp_pause_hard = 2
+    } omp_pause_resource_t;
+    extern int omp_pause_resource(omp_pause_resource_t, int);
+    extern int omp_pause_resource_all(omp_pause_resource_t);
+
+    extern int omp_get_supported_active_levels(void);
+
+
+
+
+
+
+
+    typedef int omp_int_t;
+    typedef double omp_wtime_t;
+
+
+    }
+# 4 "/home/aninda/DECADES_compiler/build/include/DECADES/DECADES.h" 2
+# 1 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stdatomic.h" 1 3
+# 20 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stdatomic.h" 3
+# 1 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stddef.h" 1 3
+# 35 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stddef.h" 3
+typedef long int ptrdiff_t;
+# 102 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stddef.h" 3
+# 1 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/__stddef_max_align_t.h" 1 3
+# 19 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/__stddef_max_align_t.h" 3
+typedef struct {
+  long long __clang_max_align_nonce1
+      __attribute__((__aligned__(__alignof__(long long))));
+  long double __clang_max_align_nonce2
+      __attribute__((__aligned__(__alignof__(long double))));
+} max_align_t;
+# 103 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stddef.h" 2 3
+# 21 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stdatomic.h" 2 3
+
+
+
+extern "C" {
+# 47 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stdatomic.h" 3
+typedef enum memory_order {
+  memory_order_relaxed = 0,
+  memory_order_consume = 1,
+  memory_order_acquire = 2,
+  memory_order_release = 3,
+  memory_order_acq_rel = 4,
+  memory_order_seq_cst = 5
+} memory_order;
+
+
+
+
+
+
+void atomic_thread_fence(memory_order);
+void atomic_signal_fence(memory_order);
+# 74 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stdatomic.h" 3
+typedef _Atomic(bool) atomic_bool;
+
+
+
+typedef _Atomic(char) atomic_char;
+typedef _Atomic(signed char) atomic_schar;
+typedef _Atomic(unsigned char) atomic_uchar;
+typedef _Atomic(short) atomic_short;
+typedef _Atomic(unsigned short) atomic_ushort;
+typedef _Atomic(int) atomic_int;
+typedef _Atomic(unsigned int) atomic_uint;
+typedef _Atomic(long) atomic_long;
+typedef _Atomic(unsigned long) atomic_ulong;
+typedef _Atomic(long long) atomic_llong;
+typedef _Atomic(unsigned long long) atomic_ullong;
+typedef _Atomic(uint_least16_t) atomic_char16_t;
+typedef _Atomic(uint_least32_t) atomic_char32_t;
+typedef _Atomic(wchar_t) atomic_wchar_t;
+typedef _Atomic(int_least8_t) atomic_int_least8_t;
+typedef _Atomic(uint_least8_t) atomic_uint_least8_t;
+typedef _Atomic(int_least16_t) atomic_int_least16_t;
+typedef _Atomic(uint_least16_t) atomic_uint_least16_t;
+typedef _Atomic(int_least32_t) atomic_int_least32_t;
+typedef _Atomic(uint_least32_t) atomic_uint_least32_t;
+typedef _Atomic(int_least64_t) atomic_int_least64_t;
+typedef _Atomic(uint_least64_t) atomic_uint_least64_t;
+typedef _Atomic(int_fast8_t) atomic_int_fast8_t;
+typedef _Atomic(uint_fast8_t) atomic_uint_fast8_t;
+typedef _Atomic(int_fast16_t) atomic_int_fast16_t;
+typedef _Atomic(uint_fast16_t) atomic_uint_fast16_t;
+typedef _Atomic(int_fast32_t) atomic_int_fast32_t;
+typedef _Atomic(uint_fast32_t) atomic_uint_fast32_t;
+typedef _Atomic(int_fast64_t) atomic_int_fast64_t;
+typedef _Atomic(uint_fast64_t) atomic_uint_fast64_t;
+typedef _Atomic(intptr_t) atomic_intptr_t;
+typedef _Atomic(uintptr_t) atomic_uintptr_t;
+typedef _Atomic(size_t) atomic_size_t;
+typedef _Atomic(ptrdiff_t) atomic_ptrdiff_t;
+typedef _Atomic(intmax_t) atomic_intmax_t;
+typedef _Atomic(uintmax_t) atomic_uintmax_t;
+# 149 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stdatomic.h" 3
+typedef struct atomic_flag { atomic_bool _Value; } atomic_flag;
+
+
+
+
+
+bool atomic_flag_test_and_set(volatile atomic_flag *);
+bool atomic_flag_test_and_set_explicit(volatile atomic_flag *, memory_order);
+
+
+
+
+void atomic_flag_clear(volatile atomic_flag *);
+void atomic_flag_clear_explicit(volatile atomic_flag *, memory_order);
+# 171 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stdatomic.h" 3
+}
+# 5 "/home/aninda/DECADES_compiler/build/include/DECADES/DECADES.h" 2
+
+
+
+
+__attribute__((noinline))
+extern "C"
+void DECADES_BARRIER() {
+#pragma omp barrier
+}
+
+__attribute__((noinline))
+extern "C"
+int DECADES_COMPARE_EXCHANGE_STRONG(atomic_int* addr, int *expected, int desired) {
+  return __c11_atomic_compare_exchange_strong(addr, expected, desired, memory_order_relaxed, memory_order_relaxed);
+}
+
+__attribute__((noinline))
+extern "C"
+int DECADES_COMPARE_EXCHANGE_WEAK(atomic_int* addr, int *expected, int desired) {
+  return __c11_atomic_compare_exchange_weak(addr, expected, desired, memory_order_relaxed, memory_order_relaxed);
+}
+
+__attribute__((noinline))
+extern "C"
+int DECADES_COMPARE_AND_SWAP(volatile int* addr, int to_compare, int new_val) {
+  int ret = *addr;
+  DECADES_COMPARE_EXCHANGE_STRONG((atomic_int *) addr, &to_compare, new_val);
+  return ret;
+}
+
+__attribute__((noinline))
+extern "C"
+int DECADES_FETCH_ADD(volatile int* addr, int to_add) {
+  int ret;
+#pragma omp atomic capture
+ {
+    ret = addr[0];
+    addr[0] += to_add;
+  }
+  return ret;
+}
+
+__attribute__((noinline))
+extern "C"
+int DECADES_FETCH_MIN(volatile int* addr, int to_min) {
+  int ret;
+  int value = *addr;
+  while (to_min < value) {
+    if (DECADES_COMPARE_EXCHANGE_WEAK((atomic_int *) addr, &value, to_min)) {
+ return 1;
+      }
+  }
+  return 0;
+}
+
+__attribute__((noinline))
+extern "C"
+float DECADES_FETCH_ADD_FLOAT(volatile float* addr, float to_add) {
+  union {
+    int int_val;
+    float float_val;
+  } value, ret;
+
+  do {
+    value.float_val = *addr;
+    ret.float_val = value.float_val + to_add;
+  } while (!DECADES_COMPARE_EXCHANGE_WEAK((atomic_int *) addr, &value.int_val, ret.int_val));
+
+  return value.float_val;
+}
 # 26 "main.cc" 2
+# 1 "/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/../../../../include/c++/7/stdlib.h" 1 3
+# 27 "main.cc" 2
 # 1 "/usr/include/stdio.h" 1 3 4
 # 29 "/usr/include/stdio.h" 3 4
 extern "C" {
@@ -2244,7 +2771,7 @@ extern int ftrylockfile (FILE *__stream) throw () ;
 extern void funlockfile (FILE *__stream) throw ();
 # 943 "/usr/include/stdio.h" 3 4
 }
-# 27 "main.cc" 2
+# 28 "main.cc" 2
 # 1 "/usr/include/string.h" 1 3 4
 # 27 "/usr/include/string.h" 3 4
 extern "C" {
@@ -2544,7 +3071,7 @@ extern void *memfrob (void *__s, size_t __n) throw () __attribute__ ((__nonnull_
 extern char *basename (const char *__filename) throw () __attribute__ ((__nonnull__ (1)));
 # 642 "/usr/include/string.h" 3 4
 }
-# 28 "main.cc" 2
+# 29 "main.cc" 2
 # 1 "/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/../../../../include/c++/7/math.h" 1 3
 # 36 "/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/../../../../include/c++/7/math.h" 3
 # 1 "/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/../../../../include/c++/7/cmath" 1 3
@@ -5627,7 +6154,7 @@ using std::scalbln;
 using std::scalbn;
 using std::tgamma;
 using std::trunc;
-# 29 "main.cc" 2
+# 30 "main.cc" 2
 # 1 "../../../../common/include/parboil.h" 1
 
 
@@ -5657,14 +6184,7 @@ extern "C" {
 # 226 "/usr/include/unistd.h" 3 4
 # 1 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stddef.h" 1 3 4
 # 227 "/usr/include/unistd.h" 2 3 4
-# 267 "/usr/include/unistd.h" 3 4
-typedef __intptr_t intptr_t;
-
-
-
-
-
-
+# 274 "/usr/include/unistd.h" 3 4
 typedef __socklen_t socklen_t;
 # 287 "/usr/include/unistd.h" 3 4
 extern int access (const char *__name, int __type) throw () __attribute__ ((__nonnull__ (1)));
@@ -7126,7 +7646,7 @@ pb_SetOpenCL(void *clContextPtr, void *clCommandQueuePtr);
 
 
 }
-# 30 "main.cc" 2
+# 31 "main.cc" 2
 # 1 "/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/../../../../include/c++/7/deque" 1 3
 # 59 "/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/../../../../include/c++/7/deque" 3
 
@@ -13193,18 +13713,6 @@ namespace __gnu_cxx
 
 
 # 1 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stddef.h" 1 3
-# 35 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stddef.h" 3
-typedef long int ptrdiff_t;
-# 102 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stddef.h" 3
-# 1 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/__stddef_max_align_t.h" 1 3
-# 19 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/__stddef_max_align_t.h" 3
-typedef struct {
-  long long __clang_max_align_nonce1
-      __attribute__((__aligned__(__alignof__(long long))));
-  long double __clang_max_align_nonce2
-      __attribute__((__aligned__(__alignof__(long double))));
-} max_align_t;
-# 103 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stddef.h" 2 3
 # 39 "/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/../../../../include/c++/7/bits/cxxabi_init_exception.h" 2 3
 # 50 "/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/../../../../include/c++/7/bits/cxxabi_init_exception.h" 3
 namespace std
@@ -18452,7 +18960,7 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 }
 # 67 "/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/../../../../include/c++/7/deque" 2 3
-# 31 "main.cc" 2
+# 32 "main.cc" 2
 # 1 "/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/../../../../include/c++/7/iostream" 1 3
 # 37 "/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/../../../../include/c++/7/iostream" 3
 
@@ -18531,12 +19039,6 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 
 # 1 "/usr/include/wchar.h" 1 3 4
-# 41 "/usr/include/wchar.h" 3 4
-# 1 "/usr/include/bits/wchar.h" 1 3 4
-# 22 "/usr/include/bits/wchar.h" 3 4
-# 1 "/usr/include/bits/wordsize.h" 1 3 4
-# 23 "/usr/include/bits/wchar.h" 2 3 4
-# 42 "/usr/include/wchar.h" 2 3 4
 # 51 "/usr/include/wchar.h" 3 4
 # 1 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stddef.h" 1 3 4
 # 116 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stddef.h" 3 4
@@ -19899,69 +20401,7 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 # 1 "/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/../../../../include/c++/7/cstdint" 1 3
 # 33 "/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/../../../../include/c++/7/cstdint" 3
-
-
-
-
-
-
-
-
-# 1 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stdint.h" 1 3
-# 47 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stdint.h" 3
-# 1 "/usr/include/stdint.h" 1 3 4
-# 27 "/usr/include/stdint.h" 3 4
-# 1 "/usr/include/bits/wordsize.h" 1 3 4
-# 28 "/usr/include/stdint.h" 2 3 4
-# 48 "/usr/include/stdint.h" 3 4
-typedef unsigned char uint8_t;
-typedef unsigned short int uint16_t;
-
-typedef unsigned int uint32_t;
-
-
-
-typedef unsigned long int uint64_t;
-# 65 "/usr/include/stdint.h" 3 4
-typedef signed char int_least8_t;
-typedef short int int_least16_t;
-typedef int int_least32_t;
-
-typedef long int int_least64_t;
-
-
-
-
-
-
-typedef unsigned char uint_least8_t;
-typedef unsigned short int uint_least16_t;
-typedef unsigned int uint_least32_t;
-
-typedef unsigned long int uint_least64_t;
-# 90 "/usr/include/stdint.h" 3 4
-typedef signed char int_fast8_t;
-
-typedef long int int_fast16_t;
-typedef long int int_fast32_t;
-typedef long int int_fast64_t;
-# 103 "/usr/include/stdint.h" 3 4
-typedef unsigned char uint_fast8_t;
-
-typedef unsigned long int uint_fast16_t;
-typedef unsigned long int uint_fast32_t;
-typedef unsigned long int uint_fast64_t;
-# 122 "/usr/include/stdint.h" 3 4
-typedef unsigned long int uintptr_t;
-# 134 "/usr/include/stdint.h" 3 4
-typedef long int intmax_t;
-typedef unsigned long int uintmax_t;
-# 48 "/home/ts20/share/llvm9/llvm-project/build/lib/clang/9.0.0/include/stdint.h" 2 3
-# 42 "/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/../../../../include/c++/7/cstdint" 2 3
-
-
-
-
+# 46 "/opt/rh/devtoolset-7/root/usr/lib/gcc/x86_64-redhat-linux/7/../../../../include/c++/7/cstdint" 3
 namespace std
 {
   using ::int8_t;
@@ -35591,8 +36031,8 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 
 }
-# 32 "main.cc" 2
-# 49 "main.cc"
+# 33 "main.cc" 2
+# 50 "main.cc"
 int no_of_nodes;
 int edge_list_size;
 FILE *fp;
@@ -35619,8 +36059,9 @@ void runGPU(int argc, char** argv);
 
 
 
-void BFS_CPU( Node * h_graph_nodes,Edge * h_graph_edges,
- int * color, int * h_cost, int source){
+void _kernel_( Node * h_graph_nodes,Edge * h_graph_edges,
+ int * color, int * h_cost, int source,
+        int tid, int num_threads) {
  std::deque<int> wavefront;
  wavefront.push_back(source);
  color[source] = 16677218;
@@ -35653,7 +36094,7 @@ int main( int argc, char** argv)
  no_of_nodes=0;
  edge_list_size=0;
  runCPU(argc,argv);
-# 117 "main.cc"
+# 119 "main.cc"
 }
 
 
@@ -35723,8 +36164,7 @@ void runCPU( int argc, char** argv)
 
  unsigned int cpu_timer = 0;
     pb_SwitchToTimer(&timers, pb_TimerID_COMPUTE);
- BFS_CPU( h_graph_nodes, h_graph_edges, color, h_cost, source
-   );
+ _kernel_( h_graph_nodes, h_graph_edges, color, h_cost, source, 0, 1);
     pb_SwitchToTimer(&timers, pb_TimerID_IO);
     if(params->outFile!=__null)
     {

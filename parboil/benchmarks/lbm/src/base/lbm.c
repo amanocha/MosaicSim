@@ -26,7 +26,7 @@ void LBM_allocateGrid( float** ptr ) {
 	const size_t margin = 2*SIZE_X*SIZE_Y*N_CELL_ENTRIES,
 	             size   = sizeof( LBM_Grid ) + 2*margin*sizeof( float );
 
-	*ptr = malloc( size );
+	*ptr = (float*) malloc( size );
 	if( ! *ptr ) {
 		printf( "LBM_allocateGrid: could not allocate %.1f MByte\n",
 		        size / (1024.0*1024.0) );

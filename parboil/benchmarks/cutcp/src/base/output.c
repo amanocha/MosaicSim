@@ -13,6 +13,7 @@
 #include "atom.h"
 #include "cutoff.h"
 
+extern "C"
 void
 write_lattice_summary(const char *filename, Lattice *lattice)
 {

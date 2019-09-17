@@ -31,6 +31,7 @@ target triple = "x86_64-unknown-linux-gnu"
 %"class.std::ctype" = type <{ %"class.std::locale::facet.base", [4 x i8], %struct.__locale_struct*, i8, [7 x i8], i32*, i32*, i16*, i8, [256 x i8], [256 x i8], i8, [6 x i8] }>
 %"class.std::num_put" = type { %"class.std::locale::facet.base", [4 x i8] }
 %"class.std::ios_base::Init" = type { i8 }
+%struct.ident_t = type { i32, i32, i32, i32, i8* }
 %"class.std::basic_string" = type { %"struct.std::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider" }
 %"struct.std::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider" = type { i8* }
 %"class.std::basic_ostringstream" = type { %"class.std::basic_ostream.base", %"class.std::basic_stringbuf", %"class.std::basic_ios" }
@@ -46,14 +47,6 @@ target triple = "x86_64-unknown-linux-gnu"
 %struct.pb_async_time_marker_list = type { i8*, i32, i8*, %struct.pb_async_time_marker_list* }
 %struct.pb_SubTimerList = type { %struct.pb_SubTimer*, %struct.pb_SubTimer* }
 %struct.pb_SubTimer = type { i8*, %struct.pb_Timer, %struct.pb_SubTimer* }
-%"class.std::deque" = type { %"class.std::_Deque_base" }
-%"class.std::_Deque_base" = type { %"struct.std::_Deque_base<int, std::allocator<int> >::_Deque_impl" }
-%"struct.std::_Deque_base<int, std::allocator<int> >::_Deque_impl" = type { i32**, i64, %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator" }
-%"struct.std::_Deque_iterator" = type { i32*, i32*, i32*, i32** }
-
-$_ZNSt11_Deque_baseIiSaIiEE17_M_initialize_mapEm = comdat any
-
-$__clang_call_terminate = comdat any
 
 @f1 = dso_local global [1024 x %"class.std::basic_ofstream"] zeroinitializer, align 16
 @f2 = dso_local global [1024 x %"class.std::basic_ofstream"] zeroinitializer, align 16
@@ -119,14 +112,400 @@ $__clang_call_terminate = comdat any
 @.str.20 = private unnamed_addr constant [12 x i8] c" -%-*s: %f\0A\00", align 1
 @.str.21 = private unnamed_addr constant [24 x i8] c"CPU/Kernel Overlap: %f\0A\00", align 1
 @.str.22 = private unnamed_addr constant [21 x i8] c"Timer Wall Time: %f\0A\00", align 1
-@.str.12.34 = private unnamed_addr constant [30 x i8] c"Expecting one input filename\0A\00", align 1
-@.str.1.13 = private unnamed_addr constant [2 x i8] c"r\00", align 1
+@0 = private unnamed_addr global %struct.ident_t { i32 0, i32 2, i32 0, i32 0, i8* getelementptr inbounds ([23 x i8], [23 x i8]* @.str.12.34, i32 0, i32 0) }, align 8
+@1 = private unnamed_addr global %struct.ident_t { i32 0, i32 34, i32 0, i32 0, i8* getelementptr inbounds ([23 x i8], [23 x i8]* @.str.12.34, i32 0, i32 0) }, align 8
+@.str.12.34 = private unnamed_addr constant [23 x i8] c";unknown;unknown;0;0;;\00", align 1
+@2 = private unnamed_addr constant [2 x i8] c"0\00", align 1
+@3 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@4 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@5 = private unnamed_addr constant [2 x i8] c"1\00", align 1
+@6 = private unnamed_addr constant [3 x i8] c"16\00", align 1
+@7 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@8 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@9 = private unnamed_addr constant [2 x i8] c"1\00", align 1
+@10 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@11 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@12 = private unnamed_addr constant [2 x i8] c"2\00", align 1
+@13 = private unnamed_addr constant [2 x i8] c"1\00", align 1
+@14 = private unnamed_addr constant [3 x i8] c"20\00", align 1
+@15 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@16 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@17 = private unnamed_addr constant [3 x i8] c"24\00", align 1
+@18 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@19 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@20 = private unnamed_addr constant [2 x i8] c"2\00", align 1
+@21 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@22 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@23 = private unnamed_addr constant [2 x i8] c"3\00", align 1
+@24 = private unnamed_addr constant [2 x i8] c"4\00", align 1
+@25 = private unnamed_addr constant [3 x i8] c"32\00", align 1
+@26 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@27 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@28 = private unnamed_addr constant [2 x i8] c"3\00", align 1
+@29 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@30 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@31 = private unnamed_addr constant [3 x i8] c"21\00", align 1
+@32 = private unnamed_addr constant [2 x i8] c"4\00", align 1
+@33 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@34 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@35 = private unnamed_addr constant [3 x i8] c"19\00", align 1
+@36 = private unnamed_addr constant [2 x i8] c"5\00", align 1
+@37 = private unnamed_addr constant [2 x i8] c"5\00", align 1
+@38 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@39 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@40 = private unnamed_addr constant [3 x i8] c"11\00", align 1
+@41 = private unnamed_addr constant [2 x i8] c"6\00", align 1
+@42 = private unnamed_addr constant [2 x i8] c"6\00", align 1
+@43 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@44 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@45 = private unnamed_addr constant [2 x i8] c"9\00", align 1
+@46 = private unnamed_addr constant [2 x i8] c"7\00", align 1
+@47 = private unnamed_addr constant [2 x i8] c"7\00", align 1
+@48 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@49 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@50 = private unnamed_addr constant [2 x i8] c"8\00", align 1
+@51 = private unnamed_addr constant [3 x i8] c"18\00", align 1
+@52 = private unnamed_addr constant [2 x i8] c"8\00", align 1
+@53 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@54 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@55 = private unnamed_addr constant [3 x i8] c"18\00", align 1
+@56 = private unnamed_addr constant [2 x i8] c"9\00", align 1
+@57 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@58 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@59 = private unnamed_addr constant [3 x i8] c"10\00", align 1
+@60 = private unnamed_addr constant [3 x i8] c"18\00", align 1
+@61 = private unnamed_addr constant [3 x i8] c"10\00", align 1
+@62 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@63 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@64 = private unnamed_addr constant [3 x i8] c"18\00", align 1
+@65 = private unnamed_addr constant [3 x i8] c"11\00", align 1
+@66 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@67 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@68 = private unnamed_addr constant [3 x i8] c"14\00", align 1
+@69 = private unnamed_addr constant [3 x i8] c"12\00", align 1
+@70 = private unnamed_addr constant [3 x i8] c"12\00", align 1
+@71 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@72 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@73 = private unnamed_addr constant [3 x i8] c"13\00", align 1
+@74 = private unnamed_addr constant [3 x i8] c"14\00", align 1
+@75 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@76 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@77 = private unnamed_addr constant [3 x i8] c"15\00", align 1
+@78 = private unnamed_addr constant [3 x i8] c"15\00", align 1
+@79 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@80 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@81 = private unnamed_addr constant [3 x i8] c"16\00", align 1
+@82 = private unnamed_addr constant [3 x i8] c"17\00", align 1
+@83 = private unnamed_addr constant [3 x i8] c"16\00", align 1
+@84 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@85 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@86 = private unnamed_addr constant [3 x i8] c"17\00", align 1
+@87 = private unnamed_addr constant [3 x i8] c"17\00", align 1
+@88 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@89 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@90 = private unnamed_addr constant [3 x i8] c"18\00", align 1
+@91 = private unnamed_addr constant [4 x i8] c"108\00", align 1
+@92 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@93 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@94 = private unnamed_addr constant [4 x i8] c"112\00", align 1
+@95 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@96 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@97 = private unnamed_addr constant [3 x i8] c"18\00", align 1
+@98 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@99 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@100 = private unnamed_addr constant [3 x i8] c"19\00", align 1
+@101 = private unnamed_addr constant [3 x i8] c"19\00", align 1
+@102 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@103 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@104 = private unnamed_addr constant [3 x i8] c"20\00", align 1
+@105 = private unnamed_addr constant [4 x i8] c"126\00", align 1
+@106 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@107 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@108 = private unnamed_addr constant [4 x i8] c"128\00", align 1
+@109 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@110 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@111 = private unnamed_addr constant [4 x i8] c"132\00", align 1
+@112 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@113 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@114 = private unnamed_addr constant [3 x i8] c"20\00", align 1
+@115 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@116 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@117 = private unnamed_addr constant [3 x i8] c"21\00", align 1
+@118 = private unnamed_addr constant [4 x i8] c"147\00", align 1
+@119 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@120 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@121 = private unnamed_addr constant [3 x i8] c"21\00", align 1
+@122 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@123 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@124 = private unnamed_addr constant [3 x i8] c"22\00", align 1
+@125 = private unnamed_addr constant [3 x i8] c"55\00", align 1
+@126 = private unnamed_addr constant [3 x i8] c"22\00", align 1
+@127 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@128 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@129 = private unnamed_addr constant [3 x i8] c"23\00", align 1
+@130 = private unnamed_addr constant [4 x i8] c"161\00", align 1
+@131 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@132 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@133 = private unnamed_addr constant [3 x i8] c"23\00", align 1
+@134 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@135 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@136 = private unnamed_addr constant [3 x i8] c"24\00", align 1
+@137 = private unnamed_addr constant [3 x i8] c"25\00", align 1
+@138 = private unnamed_addr constant [3 x i8] c"24\00", align 1
+@139 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@140 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@141 = private unnamed_addr constant [3 x i8] c"26\00", align 1
+@142 = private unnamed_addr constant [4 x i8] c"171\00", align 1
+@143 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@144 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@145 = private unnamed_addr constant [3 x i8] c"25\00", align 1
+@146 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@147 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@148 = private unnamed_addr constant [3 x i8] c"26\00", align 1
+@149 = private unnamed_addr constant [4 x i8] c"183\00", align 1
+@150 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@151 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@152 = private unnamed_addr constant [3 x i8] c"26\00", align 1
+@153 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@154 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@155 = private unnamed_addr constant [3 x i8] c"29\00", align 1
+@156 = private unnamed_addr constant [3 x i8] c"27\00", align 1
+@157 = private unnamed_addr constant [4 x i8] c"186\00", align 1
+@158 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@159 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@160 = private unnamed_addr constant [3 x i8] c"27\00", align 1
+@161 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@162 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@163 = private unnamed_addr constant [3 x i8] c"31\00", align 1
+@164 = private unnamed_addr constant [3 x i8] c"28\00", align 1
+@165 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@166 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@167 = private unnamed_addr constant [3 x i8] c"29\00", align 1
+@168 = private unnamed_addr constant [4 x i8] c"202\00", align 1
+@169 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@170 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@171 = private unnamed_addr constant [3 x i8] c"29\00", align 1
+@172 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@173 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@174 = private unnamed_addr constant [3 x i8] c"23\00", align 1
+@175 = private unnamed_addr constant [3 x i8] c"55\00", align 1
+@176 = private unnamed_addr constant [3 x i8] c"30\00", align 1
+@177 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@178 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@179 = private unnamed_addr constant [3 x i8] c"61\00", align 1
+@180 = private unnamed_addr constant [4 x i8] c"220\00", align 1
+@181 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@182 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@183 = private unnamed_addr constant [4 x i8] c"223\00", align 1
+@184 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@185 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@186 = private unnamed_addr constant [3 x i8] c"31\00", align 1
+@187 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@188 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@189 = private unnamed_addr constant [3 x i8] c"54\00", align 1
+@190 = private unnamed_addr constant [3 x i8] c"32\00", align 1
+@191 = private unnamed_addr constant [4 x i8] c"226\00", align 1
+@192 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@193 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@194 = private unnamed_addr constant [4 x i8] c"229\00", align 1
+@195 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@196 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@197 = private unnamed_addr constant [3 x i8] c"32\00", align 1
+@198 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@199 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@200 = private unnamed_addr constant [3 x i8] c"33\00", align 1
+@201 = private unnamed_addr constant [3 x i8] c"34\00", align 1
+@202 = private unnamed_addr constant [4 x i8] c"234\00", align 1
+@203 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@204 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@205 = private unnamed_addr constant [3 x i8] c"33\00", align 1
+@206 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@207 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@208 = private unnamed_addr constant [3 x i8] c"51\00", align 1
+@209 = private unnamed_addr constant [3 x i8] c"34\00", align 1
+@210 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@211 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@212 = private unnamed_addr constant [3 x i8] c"49\00", align 1
+@213 = private unnamed_addr constant [3 x i8] c"35\00", align 1
+@214 = private unnamed_addr constant [3 x i8] c"35\00", align 1
+@215 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@216 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@217 = private unnamed_addr constant [3 x i8] c"41\00", align 1
+@218 = private unnamed_addr constant [3 x i8] c"36\00", align 1
+@219 = private unnamed_addr constant [3 x i8] c"36\00", align 1
+@220 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@221 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@222 = private unnamed_addr constant [3 x i8] c"39\00", align 1
+@223 = private unnamed_addr constant [3 x i8] c"37\00", align 1
+@224 = private unnamed_addr constant [3 x i8] c"37\00", align 1
+@225 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@226 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@227 = private unnamed_addr constant [3 x i8] c"38\00", align 1
+@228 = private unnamed_addr constant [3 x i8] c"48\00", align 1
+@229 = private unnamed_addr constant [3 x i8] c"38\00", align 1
+@230 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@231 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@232 = private unnamed_addr constant [3 x i8] c"48\00", align 1
+@233 = private unnamed_addr constant [3 x i8] c"39\00", align 1
+@234 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@235 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@236 = private unnamed_addr constant [3 x i8] c"40\00", align 1
+@237 = private unnamed_addr constant [3 x i8] c"48\00", align 1
+@238 = private unnamed_addr constant [3 x i8] c"40\00", align 1
+@239 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@240 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@241 = private unnamed_addr constant [3 x i8] c"48\00", align 1
+@242 = private unnamed_addr constant [3 x i8] c"41\00", align 1
+@243 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@244 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@245 = private unnamed_addr constant [3 x i8] c"44\00", align 1
+@246 = private unnamed_addr constant [3 x i8] c"42\00", align 1
+@247 = private unnamed_addr constant [3 x i8] c"42\00", align 1
+@248 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@249 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@250 = private unnamed_addr constant [3 x i8] c"43\00", align 1
+@251 = private unnamed_addr constant [3 x i8] c"44\00", align 1
+@252 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@253 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@254 = private unnamed_addr constant [3 x i8] c"45\00", align 1
+@255 = private unnamed_addr constant [3 x i8] c"45\00", align 1
+@256 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@257 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@258 = private unnamed_addr constant [3 x i8] c"46\00", align 1
+@259 = private unnamed_addr constant [3 x i8] c"47\00", align 1
+@260 = private unnamed_addr constant [3 x i8] c"46\00", align 1
+@261 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@262 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@263 = private unnamed_addr constant [3 x i8] c"47\00", align 1
+@264 = private unnamed_addr constant [3 x i8] c"47\00", align 1
+@265 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@266 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@267 = private unnamed_addr constant [3 x i8] c"48\00", align 1
+@268 = private unnamed_addr constant [4 x i8] c"310\00", align 1
+@269 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@270 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@271 = private unnamed_addr constant [4 x i8] c"314\00", align 1
+@272 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@273 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@274 = private unnamed_addr constant [3 x i8] c"48\00", align 1
+@275 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@276 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@277 = private unnamed_addr constant [3 x i8] c"49\00", align 1
+@278 = private unnamed_addr constant [3 x i8] c"49\00", align 1
+@279 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@280 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@281 = private unnamed_addr constant [3 x i8] c"50\00", align 1
+@282 = private unnamed_addr constant [4 x i8] c"328\00", align 1
+@283 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@284 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@285 = private unnamed_addr constant [4 x i8] c"330\00", align 1
+@286 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@287 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@288 = private unnamed_addr constant [4 x i8] c"334\00", align 1
+@289 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@290 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@291 = private unnamed_addr constant [3 x i8] c"50\00", align 1
+@292 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@293 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@294 = private unnamed_addr constant [3 x i8] c"51\00", align 1
+@295 = private unnamed_addr constant [4 x i8] c"346\00", align 1
+@296 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@297 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@298 = private unnamed_addr constant [4 x i8] c"347\00", align 1
+@299 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@300 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@301 = private unnamed_addr constant [4 x i8] c"348\00", align 1
+@302 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@303 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@304 = private unnamed_addr constant [3 x i8] c"51\00", align 1
+@305 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@306 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@307 = private unnamed_addr constant [3 x i8] c"54\00", align 1
+@308 = private unnamed_addr constant [3 x i8] c"52\00", align 1
+@309 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@310 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@311 = private unnamed_addr constant [3 x i8] c"61\00", align 1
+@312 = private unnamed_addr constant [3 x i8] c"53\00", align 1
+@313 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@314 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@315 = private unnamed_addr constant [3 x i8] c"61\00", align 1
+@316 = private unnamed_addr constant [3 x i8] c"54\00", align 1
+@317 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@318 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@319 = private unnamed_addr constant [3 x i8] c"28\00", align 1
+@320 = private unnamed_addr constant [3 x i8] c"31\00", align 1
+@321 = private unnamed_addr constant [3 x i8] c"55\00", align 1
+@322 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@323 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@324 = private unnamed_addr constant [3 x i8] c"56\00", align 1
+@325 = private unnamed_addr constant [3 x i8] c"60\00", align 1
+@326 = private unnamed_addr constant [3 x i8] c"56\00", align 1
+@327 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@328 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@329 = private unnamed_addr constant [3 x i8] c"59\00", align 1
+@330 = private unnamed_addr constant [3 x i8] c"57\00", align 1
+@331 = private unnamed_addr constant [4 x i8] c"382\00", align 1
+@332 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@333 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@334 = private unnamed_addr constant [3 x i8] c"57\00", align 1
+@335 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@336 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@337 = private unnamed_addr constant [3 x i8] c"58\00", align 1
+@338 = private unnamed_addr constant [3 x i8] c"57\00", align 1
+@339 = private unnamed_addr constant [3 x i8] c"58\00", align 1
+@340 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@341 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@342 = private unnamed_addr constant [3 x i8] c"59\00", align 1
+@343 = private unnamed_addr constant [3 x i8] c"59\00", align 1
+@344 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@345 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@346 = private unnamed_addr constant [3 x i8] c"60\00", align 1
+@347 = private unnamed_addr constant [4 x i8] c"394\00", align 1
+@348 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@349 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@350 = private unnamed_addr constant [3 x i8] c"61\00", align 1
+@351 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@352 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@353 = private unnamed_addr constant [3 x i8] c"62\00", align 1
+@354 = private unnamed_addr constant [3 x i8] c"66\00", align 1
+@355 = private unnamed_addr constant [4 x i8] c"399\00", align 1
+@356 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@357 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@358 = private unnamed_addr constant [4 x i8] c"400\00", align 1
+@359 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@360 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@361 = private unnamed_addr constant [3 x i8] c"62\00", align 1
+@362 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@363 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@364 = private unnamed_addr constant [3 x i8] c"65\00", align 1
+@365 = private unnamed_addr constant [3 x i8] c"63\00", align 1
+@366 = private unnamed_addr constant [4 x i8] c"407\00", align 1
+@367 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@368 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@369 = private unnamed_addr constant [3 x i8] c"63\00", align 1
+@370 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@371 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@372 = private unnamed_addr constant [3 x i8] c"64\00", align 1
+@373 = private unnamed_addr constant [3 x i8] c"63\00", align 1
+@374 = private unnamed_addr constant [4 x i8] c"412\00", align 1
+@375 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@376 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@377 = private unnamed_addr constant [3 x i8] c"64\00", align 1
+@378 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@379 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@380 = private unnamed_addr constant [3 x i8] c"65\00", align 1
+@381 = private unnamed_addr constant [3 x i8] c"65\00", align 1
+@382 = private unnamed_addr constant [8 x i8] c"compute\00", align 1
+@383 = private unnamed_addr constant [13 x i8] c"decades_base\00", align 1
+@384 = private unnamed_addr constant [3 x i8] c"66\00", align 1
+@.str.1.13 = private unnamed_addr constant [30 x i8] c"Expecting one input filename\0A\00", align 1
+@.str.2.14 = private unnamed_addr constant [2 x i8] c"r\00", align 1
 @str = private unnamed_addr constant [25 x i8] c"Error Reading graph file\00", align 1
-@.str.3.14 = private unnamed_addr constant [3 x i8] c"%d\00", align 1
-@.str.4.15 = private unnamed_addr constant [6 x i8] c"%d %d\00", align 1
-@.str.5.16 = private unnamed_addr constant [2 x i8] c"w\00", align 1
-@.str.6.17 = private unnamed_addr constant [4 x i8] c"%d\0A\00", align 1
-@.str.7.18 = private unnamed_addr constant [7 x i8] c"%d %d\0A\00", align 1
+@.str.4.15 = private unnamed_addr constant [3 x i8] c"%d\00", align 1
+@.str.5.16 = private unnamed_addr constant [6 x i8] c"%d %d\00", align 1
+@.str.6.17 = private unnamed_addr constant [2 x i8] c"w\00", align 1
+@.str.7.18 = private unnamed_addr constant [4 x i8] c"%d\0A\00", align 1
+@.str.8.19 = private unnamed_addr constant [7 x i8] c"%d %d\0A\00", align 1
 
 ; Function Attrs: uwtable
 define internal void @_GLOBAL__sub_I_tracer.cc() #0 section ".text.startup" personality i32 (...)* @__gxx_personality_v0 {
@@ -333,7 +712,7 @@ for.body:                                         ; preds = %for.inc, %entry
   %indvars.iv = phi i64 [ 0, %entry ], [ %indvars.iv.next, %for.inc ]
   %arrayidx = getelementptr inbounds [1024 x %"class.std::basic_ofstream"], [1024 x %"class.std::basic_ofstream"]* @f1, i64 0, i64 %indvars.iv
   %_M_file.i.i = getelementptr inbounds [1024 x %"class.std::basic_ofstream"], [1024 x %"class.std::basic_ofstream"]* @f1, i64 0, i64 %indvars.iv, i32 1, i32 2
-  %call.i.i = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i) #18
+  %call.i.i = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i) #22
   br i1 %call.i.i, label %if.then, label %if.end
 
 if.then:                                          ; preds = %for.body
@@ -361,7 +740,7 @@ if.then.i:                                        ; preds = %if.then
 if.end:                                           ; preds = %if.then.i, %if.then, %for.body
   %arrayidx4 = getelementptr inbounds [1024 x %"class.std::basic_ofstream"], [1024 x %"class.std::basic_ofstream"]* @f2, i64 0, i64 %indvars.iv
   %_M_file.i.i25 = getelementptr inbounds [1024 x %"class.std::basic_ofstream"], [1024 x %"class.std::basic_ofstream"]* @f2, i64 0, i64 %indvars.iv, i32 1, i32 2
-  %call.i.i26 = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i25) #18
+  %call.i.i26 = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i25) #22
   br i1 %call.i.i26, label %if.then6, label %if.end9
 
 if.then6:                                         ; preds = %if.end
@@ -389,7 +768,7 @@ if.then.i36:                                      ; preds = %if.then6
 if.end9:                                          ; preds = %if.then.i36, %if.then6, %if.end
   %arrayidx11 = getelementptr inbounds [1024 x %"class.std::basic_ofstream"], [1024 x %"class.std::basic_ofstream"]* @f3, i64 0, i64 %indvars.iv
   %_M_file.i.i38 = getelementptr inbounds [1024 x %"class.std::basic_ofstream"], [1024 x %"class.std::basic_ofstream"]* @f3, i64 0, i64 %indvars.iv, i32 1, i32 2
-  %call.i.i39 = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i38) #18
+  %call.i.i39 = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i38) #22
   br i1 %call.i.i39, label %if.then13, label %for.inc
 
 if.then13:                                        ; preds = %if.end9
@@ -442,7 +821,7 @@ entry:
 if.then:                                          ; preds = %entry
   %call1 = tail call dereferenceable(272) %"class.std::basic_ostream"* @_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc(%"class.std::basic_ostream"* nonnull dereferenceable(272) @_ZSt4cout, i8* getelementptr inbounds ([72 x i8], [72 x i8]* @.str, i64 0, i64 0))
   %call2 = tail call dereferenceable(272) %"class.std::basic_ostream"* @_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc(%"class.std::basic_ostream"* nonnull dereferenceable(272) %call1, i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str.1, i64 0, i64 0))
-  tail call void @__assert_fail(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str.2, i64 0, i64 0), i8* getelementptr inbounds ([10 x i8], [10 x i8]* @.str.3, i64 0, i64 0), i32 43, i8* getelementptr inbounds ([64 x i8], [64 x i8]* @__PRETTY_FUNCTION__._Z12get_dir_nameSsSsSs, i64 0, i64 0)) #19
+  tail call void @__assert_fail(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str.2, i64 0, i64 0), i8* getelementptr inbounds ([10 x i8], [10 x i8]* @.str.3, i64 0, i64 0), i32 43, i8* getelementptr inbounds ([64 x i8], [64 x i8]* @__PRETTY_FUNCTION__._Z12get_dir_nameSsSsSs, i64 0, i64 0)) #23
   unreachable
 
 if.end:                                           ; preds = %entry
@@ -725,7 +1104,7 @@ entry:
   %call = tail call i32 @omp_get_thread_num() #3
   %idxprom = sext i32 %call to i64
   %_M_file.i.i = getelementptr inbounds [1024 x %"class.std::basic_ofstream"], [1024 x %"class.std::basic_ofstream"]* @f1, i64 0, i64 %idxprom, i32 1, i32 2
-  %call.i.i = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i) #18
+  %call.i.i = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i) #22
   br i1 %call.i.i, label %if.end, label %if.then
 
 if.then:                                          ; preds = %entry
@@ -1134,7 +1513,7 @@ entry:
   %call = tail call i32 @omp_get_thread_num() #3
   %idxprom = sext i32 %call to i64
   %_M_file.i.i = getelementptr inbounds [1024 x %"class.std::basic_ofstream"], [1024 x %"class.std::basic_ofstream"]* @f1, i64 0, i64 %idxprom, i32 1, i32 2
-  %call.i.i = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i) #18
+  %call.i.i = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i) #22
   br i1 %call.i.i, label %if.end, label %if.then
 
 if.then:                                          ; preds = %entry
@@ -1459,11 +1838,11 @@ if.end:                                           ; preds = %_ZNSsD2Ev.exit78, %
   %call26 = call i32 @omp_get_thread_num() #3
   %idxprom27 = sext i32 %call26 to i64
   %_M_file.i.i136 = getelementptr inbounds [1024 x %"class.std::basic_ofstream"], [1024 x %"class.std::basic_ofstream"]* @f1, i64 0, i64 %idxprom27, i32 1, i32 2
-  %call.i.i137 = call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i136) #18
+  %call.i.i137 = call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i136) #22
   br i1 %call.i.i137, label %if.end31, label %if.then30
 
 if.then30:                                        ; preds = %if.end
-  call void @__assert_fail(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @.str.10, i64 0, i64 0), i8* getelementptr inbounds ([10 x i8], [10 x i8]* @.str.3, i64 0, i64 0), i32 77, i8* getelementptr inbounds ([50 x i8], [50 x i8]* @__PRETTY_FUNCTION__.printuBranch, i64 0, i64 0)) #19
+  call void @__assert_fail(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @.str.10, i64 0, i64 0), i8* getelementptr inbounds ([10 x i8], [10 x i8]* @.str.3, i64 0, i64 0), i32 77, i8* getelementptr inbounds ([50 x i8], [50 x i8]* @__PRETTY_FUNCTION__.printuBranch, i64 0, i64 0)) #23
   unreachable
 
 if.end31:                                         ; preds = %if.end
@@ -1553,7 +1932,7 @@ if.then:                                          ; preds = %entry
 
 if.then1:                                         ; preds = %if.then
   %call = tail call dereferenceable(272) %"class.std::basic_ostream"* @_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc(%"class.std::basic_ostream"* nonnull dereferenceable(272) @_ZSt4cout, i8* getelementptr inbounds ([66 x i8], [66 x i8]* @.str.12, i64 0, i64 0))
-  tail call void @__assert_fail(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @.str.10, i64 0, i64 0), i8* getelementptr inbounds ([10 x i8], [10 x i8]* @.str.3, i64 0, i64 0), i32 90, i8* getelementptr inbounds ([60 x i8], [60 x i8]* @__PRETTY_FUNCTION__.printMem, i64 0, i64 0)) #19
+  tail call void @__assert_fail(i8* getelementptr inbounds ([6 x i8], [6 x i8]* @.str.10, i64 0, i64 0), i8* getelementptr inbounds ([10 x i8], [10 x i8]* @.str.3, i64 0, i64 0), i32 90, i8* getelementptr inbounds ([60 x i8], [60 x i8]* @__PRETTY_FUNCTION__.printMem, i64 0, i64 0)) #23
   unreachable
 
 if.end:                                           ; preds = %if.then
@@ -1565,7 +1944,7 @@ if.end2:                                          ; preds = %if.end, %entry
   %call3 = tail call i32 @omp_get_thread_num() #3
   %idxprom = sext i32 %call3 to i64
   %_M_file.i.i = getelementptr inbounds [1024 x %"class.std::basic_ofstream"], [1024 x %"class.std::basic_ofstream"]* @f2, i64 0, i64 %idxprom, i32 1, i32 2
-  %call.i.i = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i) #18
+  %call.i.i = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i) #22
   br i1 %call.i.i, label %if.end30, label %if.then5
 
 if.then5:                                         ; preds = %if.end2
@@ -1974,7 +2353,7 @@ entry:
   %call = tail call i32 @omp_get_thread_num() #3
   %idxprom = sext i32 %call to i64
   %_M_file.i.i = getelementptr inbounds [1024 x %"class.std::basic_ofstream"], [1024 x %"class.std::basic_ofstream"]* @f3, i64 0, i64 %idxprom, i32 1, i32 2
-  %call.i.i = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i) #18
+  %call.i.i = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i) #22
   br i1 %call.i.i, label %if.end, label %if.then
 
 if.then:                                          ; preds = %entry
@@ -2383,7 +2762,7 @@ entry:
   %call = tail call i32 @omp_get_thread_num() #3
   %idxprom = sext i32 %call to i64
   %_M_file.i.i = getelementptr inbounds [1024 x %"class.std::basic_ofstream"], [1024 x %"class.std::basic_ofstream"]* @f3, i64 0, i64 %idxprom, i32 1, i32 2
-  %call.i.i = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i) #18
+  %call.i.i = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i) #22
   br i1 %call.i.i, label %if.end, label %if.then
 
 if.then:                                          ; preds = %entry
@@ -2786,7 +3165,7 @@ entry:
   %call = tail call i32 @omp_get_thread_num() #3
   %idxprom = sext i32 %call to i64
   %_M_file.i.i = getelementptr inbounds [1024 x %"class.std::basic_ofstream"], [1024 x %"class.std::basic_ofstream"]* @f3, i64 0, i64 %idxprom, i32 1, i32 2
-  %call.i.i = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i) #18
+  %call.i.i = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i) #22
   br i1 %call.i.i, label %if.end, label %if.then
 
 if.then:                                          ; preds = %entry
@@ -3217,7 +3596,7 @@ entry:
   %call = tail call i32 @omp_get_thread_num() #3
   %idxprom = sext i32 %call to i64
   %_M_file.i.i = getelementptr inbounds [1024 x %"class.std::basic_ofstream"], [1024 x %"class.std::basic_ofstream"]* @f3, i64 0, i64 %idxprom, i32 1, i32 2
-  %call.i.i = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i) #18
+  %call.i.i = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i) #22
   br i1 %call.i.i, label %if.end, label %if.then
 
 if.then:                                          ; preds = %entry
@@ -3623,7 +4002,7 @@ entry:
   %call = tail call i32 @omp_get_thread_num() #3
   %idxprom = sext i32 %call to i64
   %_M_file.i.i = getelementptr inbounds [1024 x %"class.std::basic_ofstream"], [1024 x %"class.std::basic_ofstream"]* @f1, i64 0, i64 %idxprom, i32 1, i32 2
-  %call.i.i = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i) #18
+  %call.i.i = tail call zeroext i1 @_ZNKSt12__basic_fileIcE7is_openEv(%"class.std::__basic_file"* nonnull %_M_file.i.i) #22
   br i1 %call.i.i, label %if.end, label %if.then
 
 if.then:                                          ; preds = %entry
@@ -4185,7 +4564,7 @@ if.then59:                                        ; preds = %invoke.cont56
   br i1 %cmp.i.i254, label %89, label %if.then.i.i255
 
 if.then.i.i255:                                   ; preds = %if.then59
-  invoke void (i8*, ...) @_ZSt24__throw_out_of_range_fmtPKcz(i8* getelementptr inbounds ([74 x i8], [74 x i8]* @.str.26, i64 0, i64 0), i64 %indvars.iv, i64 %sub.ptr.div.i.i.i253) #20
+  invoke void (i8*, ...) @_ZSt24__throw_out_of_range_fmtPKcz(i8* getelementptr inbounds ([74 x i8], [74 x i8]* @.str.26, i64 0, i64 0), i64 %indvars.iv, i64 %sub.ptr.div.i.i.i253) #24
           to label %.noexc257 unwind label %lpad55
 
 .noexc257:                                        ; preds = %if.then.i.i255
@@ -4403,7 +4782,7 @@ if.then:                                          ; preds = %land.lhs.true9
 
 if.then.i:                                        ; preds = %if.then
   %tmp8 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp9 = tail call i64 @fwrite(i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.23, i64 0, i64 0), i64 16, i64 1, %struct._IO_FILE* %tmp8) #21
+  %tmp9 = tail call i64 @fwrite(i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.23, i64 0, i64 0), i64 16, i64 1, %struct._IO_FILE* %tmp8) #25
   %.pre = load i8, i8* %arrayidx6, align 1, !tbaa !30
   br label %_ZL15delete_argumentP8argparse.exit
 
@@ -4431,7 +4810,7 @@ if.end:                                           ; preds = %sw.bb
 
 if.then.i.i:                                      ; preds = %if.end
   %tmp12 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp13 = tail call i64 @fwrite(i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.23, i64 0, i64 0), i64 16, i64 1, %struct._IO_FILE* %tmp12) #21
+  %tmp13 = tail call i64 @fwrite(i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.23, i64 0, i64 0), i64 16, i64 1, %struct._IO_FILE* %tmp12) #25
   br label %_ZL16consume_argumentP8argparse.exit
 
 _ZL16consume_argumentP8argparse.exit:             ; preds = %if.then.i.i, %if.end
@@ -4452,7 +4831,7 @@ if.end26:                                         ; preds = %sw.bb22
 
 if.then.i.i89:                                    ; preds = %if.end26
   %tmp14 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp15 = tail call i64 @fwrite(i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.23, i64 0, i64 0), i64 16, i64 1, %struct._IO_FILE* %tmp14) #21
+  %tmp15 = tail call i64 @fwrite(i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.23, i64 0, i64 0), i64 16, i64 1, %struct._IO_FILE* %tmp14) #25
   br label %_ZL16consume_argumentP8argparse.exit92
 
 _ZL16consume_argumentP8argparse.exit92:           ; preds = %if.then.i.i89, %if.end26
@@ -4541,7 +4920,7 @@ if.else:                                          ; preds = %land.lhs.true9, %la
 
 if.then.i75:                                      ; preds = %if.else
   %tmp19 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp20 = tail call i64 @fwrite(i8* getelementptr inbounds ([15 x i8], [15 x i8]* @.str.24, i64 0, i64 0), i64 14, i64 1, %struct._IO_FILE* %tmp19) #21
+  %tmp20 = tail call i64 @fwrite(i8* getelementptr inbounds ([15 x i8], [15 x i8]* @.str.24, i64 0, i64 0), i64 14, i64 1, %struct._IO_FILE* %tmp19) #25
   %.phi.trans.insert = bitcast i8** %ap.sroa.31111.0124 to i64*
   %.pre138 = load i64, i64* %.phi.trans.insert, align 8, !tbaa !26
   br label %_ZL13next_argumentP8argparse.exit
@@ -4590,7 +4969,7 @@ for.body.i:                                       ; preds = %for.body.i, %end_of
 error:                                            ; preds = %sw.bb22, %sw.bb, %_ZL15delete_argumentP8argparse.exit
   %err_message.1.ph = phi i8* [ getelementptr inbounds ([32 x i8], [32 x i8]* @.str.1.3, i64 0, i64 0), %sw.bb22 ], [ getelementptr inbounds ([32 x i8], [32 x i8]* @.str.17, i64 0, i64 0), %sw.bb ], [ getelementptr inbounds ([35 x i8], [35 x i8]* @.str.2.18, i64 0, i64 0), %_ZL15delete_argumentP8argparse.exit ]
   %tmp27 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %call32 = tail call i32 @fputs(i8* nonnull %err_message.1.ph, %struct._IO_FILE* %tmp27) #22
+  %call32 = tail call i32 @fputs(i8* nonnull %err_message.1.ph, %struct._IO_FILE* %tmp27) #26
   %tmp28 = load i8*, i8** %outFile, align 8, !tbaa !27
   tail call void @free(i8* %tmp28) #3
   %tmp29 = bitcast i8* %inpFiles to i8***
@@ -4721,7 +5100,7 @@ entry:
 
 if.then:                                          ; preds = %entry
   %tmp1 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp2 = tail call i64 @fwrite(i8* getelementptr inbounds ([43 x i8], [43 x i8]* @.str.3.19, i64 0, i64 0), i64 42, i64 1, %struct._IO_FILE* %tmp1) #22
+  %tmp2 = tail call i64 @fwrite(i8* getelementptr inbounds ([43 x i8], [43 x i8]* @.str.3.19, i64 0, i64 0), i64 42, i64 1, %struct._IO_FILE* %tmp1) #26
   br label %return
 
 if.end:                                           ; preds = %entry
@@ -4758,7 +5137,7 @@ entry:
 
 if.then:                                          ; preds = %entry
   %tmp1 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp2 = tail call i64 @fwrite(i8* getelementptr inbounds ([32 x i8], [32 x i8]* @.str.4.20, i64 0, i64 0), i64 31, i64 1, %struct._IO_FILE* %tmp1) #22
+  %tmp2 = tail call i64 @fwrite(i8* getelementptr inbounds ([32 x i8], [32 x i8]* @.str.4.20, i64 0, i64 0), i64 31, i64 1, %struct._IO_FILE* %tmp1) #26
   br label %if.end
 
 if.end:                                           ; preds = %if.then, %entry
@@ -4770,14 +5149,14 @@ if.end:                                           ; preds = %if.then, %entry
 
 if.end6:                                          ; preds = %if.end
   %tmp4 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp5 = tail call i64 @fwrite(i8* getelementptr inbounds ([35 x i8], [35 x i8]* @.str.5.21, i64 0, i64 0), i64 34, i64 1, %struct._IO_FILE* %tmp4) #22
+  %tmp5 = tail call i64 @fwrite(i8* getelementptr inbounds ([35 x i8], [35 x i8]* @.str.5.21, i64 0, i64 0), i64 34, i64 1, %struct._IO_FILE* %tmp4) #26
   %and5 = and i32 %numNotStopped.0, 2
   %cmp7 = icmp eq i32 %and5, 0
   br i1 %cmp7, label %if.then8, label %if.end10
 
 if.then8:                                         ; preds = %if.end6
   %tmp6 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp7 = tail call i64 @fwrite(i8* getelementptr inbounds ([54 x i8], [54 x i8]* @.str.6.22, i64 0, i64 0), i64 53, i64 1, %struct._IO_FILE* %tmp6) #22
+  %tmp7 = tail call i64 @fwrite(i8* getelementptr inbounds ([54 x i8], [54 x i8]* @.str.6.22, i64 0, i64 0), i64 53, i64 1, %struct._IO_FILE* %tmp6) #26
   br label %cleanup
 
 if.end10:                                         ; preds = %if.end6, %if.end
@@ -4837,7 +5216,7 @@ entry:
 
 if.then:                                          ; preds = %entry
   %tmp1 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp2 = tail call i64 @fwrite(i8* getelementptr inbounds ([42 x i8], [42 x i8]* @.str.7.23, i64 0, i64 0), i64 41, i64 1, %struct._IO_FILE* %tmp1) #22
+  %tmp2 = tail call i64 @fwrite(i8* getelementptr inbounds ([42 x i8], [42 x i8]* @.str.7.23, i64 0, i64 0), i64 41, i64 1, %struct._IO_FILE* %tmp1) #26
   br label %cleanup
 
 if.end:                                           ; preds = %entry
@@ -4877,7 +5256,7 @@ entry:
 
 if.then:                                          ; preds = %entry
   %tmp1 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp2 = tail call i64 @fwrite(i8* getelementptr inbounds ([32 x i8], [32 x i8]* @.str.8.24, i64 0, i64 0), i64 31, i64 1, %struct._IO_FILE* %tmp1) #22
+  %tmp2 = tail call i64 @fwrite(i8* getelementptr inbounds ([32 x i8], [32 x i8]* @.str.8.24, i64 0, i64 0), i64 31, i64 1, %struct._IO_FILE* %tmp1) #26
   br label %if.end
 
 if.end:                                           ; preds = %if.then, %entry
@@ -4889,14 +5268,14 @@ if.end:                                           ; preds = %if.then, %entry
 
 if.end6:                                          ; preds = %if.end
   %tmp4 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp5 = tail call i64 @fwrite(i8* getelementptr inbounds ([35 x i8], [35 x i8]* @.str.9.25, i64 0, i64 0), i64 34, i64 1, %struct._IO_FILE* %tmp4) #22
+  %tmp5 = tail call i64 @fwrite(i8* getelementptr inbounds ([35 x i8], [35 x i8]* @.str.9.25, i64 0, i64 0), i64 34, i64 1, %struct._IO_FILE* %tmp4) #26
   %and5 = and i32 %numNotRunning.0, 2
   %cmp7 = icmp eq i32 %and5, 0
   br i1 %cmp7, label %if.then8, label %if.end10
 
 if.then8:                                         ; preds = %if.end6
   %tmp6 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp7 = tail call i64 @fwrite(i8* getelementptr inbounds ([53 x i8], [53 x i8]* @.str.10.26, i64 0, i64 0), i64 52, i64 1, %struct._IO_FILE* %tmp6) #22
+  %tmp7 = tail call i64 @fwrite(i8* getelementptr inbounds ([53 x i8], [53 x i8]* @.str.10.26, i64 0, i64 0), i64 52, i64 1, %struct._IO_FILE* %tmp6) #26
   br label %cleanup
 
 if.end10:                                         ; preds = %if.end6, %if.end
@@ -4958,7 +5337,7 @@ entry:
 
 if.then:                                          ; preds = %entry
   %tmp1 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp2 = tail call i64 @fwrite(i8* getelementptr inbounds ([49 x i8], [49 x i8]* @.str.11.27, i64 0, i64 0), i64 48, i64 1, %struct._IO_FILE* %tmp1) #22
+  %tmp2 = tail call i64 @fwrite(i8* getelementptr inbounds ([49 x i8], [49 x i8]* @.str.11.27, i64 0, i64 0), i64 48, i64 1, %struct._IO_FILE* %tmp1) #26
   br label %if.end
 
 if.end:                                           ; preds = %if.then, %entry
@@ -5011,7 +5390,7 @@ for.end:                                          ; preds = %for.body
 define dso_local void @pb_AddSubTimer(%struct.pb_TimerSet* nocapture %timers, i8* nocapture readonly %label, i32 %pb_Category) local_unnamed_addr #5 {
 entry:
   %call = tail call noalias i8* @malloc(i64 40) #3
-  %call1 = tail call i64 @strlen(i8* %label) #18
+  %call1 = tail call i64 @strlen(i8* %label) #22
   %add = shl i64 %call1, 32
   %sext = add i64 %add, 4294967296
   %conv2 = ashr exact i64 %sext, 32
@@ -5118,7 +5497,7 @@ if.then18:                                        ; preds = %if.else
 
 if.then.i:                                        ; preds = %if.then18
   %tmp4 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp5 = tail call i64 @fwrite(i8* getelementptr inbounds ([42 x i8], [42 x i8]* @.str.7.23, i64 0, i64 0), i64 41, i64 1, %struct._IO_FILE* %tmp4) #21
+  %tmp5 = tail call i64 @fwrite(i8* getelementptr inbounds ([42 x i8], [42 x i8]* @.str.7.23, i64 0, i64 0), i64 41, i64 1, %struct._IO_FILE* %tmp4) #25
   br label %if.end23
 
 if.end.i:                                         ; preds = %if.then18
@@ -5151,7 +5530,7 @@ if.else20:                                        ; preds = %if.else
 
 if.then.i108:                                     ; preds = %if.else20
   %tmp12 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp13 = tail call i64 @fwrite(i8* getelementptr inbounds ([42 x i8], [42 x i8]* @.str.7.23, i64 0, i64 0), i64 41, i64 1, %struct._IO_FILE* %tmp12) #21
+  %tmp13 = tail call i64 @fwrite(i8* getelementptr inbounds ([42 x i8], [42 x i8]* @.str.7.23, i64 0, i64 0), i64 41, i64 1, %struct._IO_FILE* %tmp12) #25
   br label %if.end23
 
 if.end.i118:                                      ; preds = %if.else20
@@ -5193,7 +5572,7 @@ while.body:                                       ; preds = %if.else33, %if.then
   %subtimer.0146 = phi %struct.pb_SubTimer* [ %subtimer.0, %if.else33 ], [ %subtimer.0144, %if.then28 ]
   %label30 = getelementptr inbounds %struct.pb_SubTimer, %struct.pb_SubTimer* %subtimer.0146, i64 0, i32 0
   %tmp20 = load i8*, i8** %label30, align 8, !tbaa !46
-  %call = tail call i32 @strcmp(i8* %tmp20, i8* nonnull %label) #18
+  %call = tail call i32 @strcmp(i8* %tmp20, i8* nonnull %label) #22
   %cmp31 = icmp eq i32 %call, 0
   br i1 %cmp31, label %if.end35, label %if.else33
 
@@ -5241,7 +5620,7 @@ if.then53:                                        ; preds = %if.else51
 
 if.then.i123:                                     ; preds = %if.then53
   %tmp23 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp24 = tail call i64 @fwrite(i8* getelementptr inbounds ([43 x i8], [43 x i8]* @.str.3.19, i64 0, i64 0), i64 42, i64 1, %struct._IO_FILE* %tmp23) #21
+  %tmp24 = tail call i64 @fwrite(i8* getelementptr inbounds ([43 x i8], [43 x i8]* @.str.3.19, i64 0, i64 0), i64 42, i64 1, %struct._IO_FILE* %tmp23) #25
   br label %if.end61
 
 if.end.i130:                                      ; preds = %if.then53
@@ -5268,7 +5647,7 @@ if.else55:                                        ; preds = %if.else51
 
 if.then.i134:                                     ; preds = %if.else55
   %tmp29 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp30 = tail call i64 @fwrite(i8* getelementptr inbounds ([43 x i8], [43 x i8]* @.str.3.19, i64 0, i64 0), i64 42, i64 1, %struct._IO_FILE* %tmp29) #21
+  %tmp30 = tail call i64 @fwrite(i8* getelementptr inbounds ([43 x i8], [43 x i8]* @.str.3.19, i64 0, i64 0), i64 42, i64 1, %struct._IO_FILE* %tmp29) #25
   br label %if.end61
 
 if.end.i141:                                      ; preds = %if.else55
@@ -5332,7 +5711,7 @@ if.else:                                          ; preds = %if.end, %if.then
 
 if.then.i:                                        ; preds = %if.else
   %tmp4 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp5 = tail call i64 @fwrite(i8* getelementptr inbounds ([42 x i8], [42 x i8]* @.str.7.23, i64 0, i64 0), i64 41, i64 1, %struct._IO_FILE* %tmp4) #21
+  %tmp5 = tail call i64 @fwrite(i8* getelementptr inbounds ([42 x i8], [42 x i8]* @.str.7.23, i64 0, i64 0), i64 41, i64 1, %struct._IO_FILE* %tmp4) #25
   br label %if.end21
 
 if.end.i:                                         ; preds = %if.else
@@ -5371,7 +5750,7 @@ if.then24:                                        ; preds = %if.end21
 
 if.then.i46:                                      ; preds = %if.then24
   %tmp12 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp13 = tail call i64 @fwrite(i8* getelementptr inbounds ([43 x i8], [43 x i8]* @.str.3.19, i64 0, i64 0), i64 42, i64 1, %struct._IO_FILE* %tmp12) #21
+  %tmp13 = tail call i64 @fwrite(i8* getelementptr inbounds ([43 x i8], [43 x i8]* @.str.3.19, i64 0, i64 0), i64 42, i64 1, %struct._IO_FILE* %tmp12) #25
   br label %if.end28
 
 if.end.i53:                                       ; preds = %if.then24
@@ -5432,7 +5811,7 @@ for.body:                                         ; preds = %for.inc, %entry
 
 if.then.i:                                        ; preds = %for.body
   %tmp11 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp12 = tail call i64 @fwrite(i8* getelementptr inbounds ([49 x i8], [49 x i8]* @.str.11.27, i64 0, i64 0), i64 48, i64 1, %struct._IO_FILE* %tmp11) #21
+  %tmp12 = tail call i64 @fwrite(i8* getelementptr inbounds ([49 x i8], [49 x i8]* @.str.11.27, i64 0, i64 0), i64 48, i64 1, %struct._IO_FILE* %tmp11) #25
   br label %pb_GetElapsedTime.exit
 
 pb_GetElapsedTime.exit:                           ; preds = %if.then.i, %for.body
@@ -5453,7 +5832,7 @@ if.then:                                          ; preds = %pb_GetElapsedTime.e
 
 if.then.i87:                                      ; preds = %if.then
   %tmp17 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp18 = tail call i64 @fwrite(i8* getelementptr inbounds ([49 x i8], [49 x i8]* @.str.11.27, i64 0, i64 0), i64 48, i64 1, %struct._IO_FILE* %tmp17) #21
+  %tmp18 = tail call i64 @fwrite(i8* getelementptr inbounds ([49 x i8], [49 x i8]* @.str.11.27, i64 0, i64 0), i64 48, i64 1, %struct._IO_FILE* %tmp17) #25
   %.pre = load i64, i64* %elapsed.i, align 8, !tbaa !35
   %.pre124 = uitofp i64 %.pre to double
   %.pre125 = fdiv double %.pre124, 1.000000e+06
@@ -5478,7 +5857,7 @@ while.body:                                       ; preds = %while.body, %if.the
   %maxSubLength.0115 = phi i32 [ %spec.select, %while.body ], [ 0, %if.then14 ]
   %label = getelementptr inbounds %struct.pb_SubTimer, %struct.pb_SubTimer* %sub.0116, i64 0, i32 0
   %tmp20 = load i8*, i8** %label, align 8, !tbaa !46
-  %call19 = tail call i64 @strlen(i8* %tmp20) #18
+  %call19 = tail call i64 @strlen(i8* %tmp20) #22
   %conv = sext i32 %maxSubLength.0115 to i64
   %cmp20 = icmp ugt i64 %call19, %conv
   %conv24 = trunc i64 %call19 to i32
@@ -5504,7 +5883,7 @@ while.body34:                                     ; preds = %pb_GetElapsedTime.e
 
 if.then.i94:                                      ; preds = %while.body34
   %tmp23 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp24 = tail call i64 @fwrite(i8* getelementptr inbounds ([49 x i8], [49 x i8]* @.str.11.27, i64 0, i64 0), i64 48, i64 1, %struct._IO_FILE* %tmp23) #21
+  %tmp24 = tail call i64 @fwrite(i8* getelementptr inbounds ([49 x i8], [49 x i8]* @.str.11.27, i64 0, i64 0), i64 48, i64 1, %struct._IO_FILE* %tmp23) #25
   br label %pb_GetElapsedTime.exit98
 
 pb_GetElapsedTime.exit98:                         ; preds = %if.then.i94, %while.body34
@@ -5533,7 +5912,7 @@ for.end:                                          ; preds = %for.inc
 
 if.then.i101:                                     ; preds = %for.end
   %tmp27 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp28 = tail call i64 @fwrite(i8* getelementptr inbounds ([49 x i8], [49 x i8]* @.str.11.27, i64 0, i64 0), i64 48, i64 1, %struct._IO_FILE* %tmp27) #21
+  %tmp28 = tail call i64 @fwrite(i8* getelementptr inbounds ([49 x i8], [49 x i8]* @.str.11.27, i64 0, i64 0), i64 48, i64 1, %struct._IO_FILE* %tmp27) #25
   br label %pb_GetElapsedTime.exit105
 
 pb_GetElapsedTime.exit105:                        ; preds = %if.then.i101, %for.end
@@ -5551,7 +5930,7 @@ if.then45:                                        ; preds = %pb_GetElapsedTime.e
 
 if.then.i108:                                     ; preds = %if.then45
   %tmp31 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp32 = tail call i64 @fwrite(i8* getelementptr inbounds ([49 x i8], [49 x i8]* @.str.11.27, i64 0, i64 0), i64 48, i64 1, %struct._IO_FILE* %tmp31) #21
+  %tmp32 = tail call i64 @fwrite(i8* getelementptr inbounds ([49 x i8], [49 x i8]* @.str.11.27, i64 0, i64 0), i64 48, i64 1, %struct._IO_FILE* %tmp31) #25
   %.pre123 = load i64, i64* %elapsed.i102, align 8, !tbaa !35
   %.pre126 = uitofp i64 %.pre123 to double
   %.pre127 = fdiv double %.pre126, 1.000000e+06
@@ -5645,63 +6024,913 @@ for.end:                                          ; preds = %for.inc
   ret void
 }
 
-; Function Attrs: uwtable
-define dso_local void @_Z7BFS_CPUP4NodeP4EdgePiS3_i(%struct.timezone* nocapture readonly %h_graph_nodes, %struct.timezone* nocapture readonly %h_graph_edges, i32* nocapture %color, i32* nocapture %h_cost, i32 %source) local_unnamed_addr #0 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+; Function Attrs: noinline uwtable
+define dso_local void @DECADES_BARRIER() local_unnamed_addr #6 {
 entry:
-  %wavefront = alloca %"class.std::deque", align 8
-  %tmp = bitcast %"class.std::deque"* %wavefront to i8*
-  call void @llvm.lifetime.start.p0i8(i64 80, i8* nonnull %tmp) #3
-  %tmp1 = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0
-  call void @llvm.memset.p0i8.i64(i8* nonnull align 8 %tmp, i8 0, i64 80, i1 false) #3
-  call void @_ZNSt11_Deque_baseIiSaIiEE17_M_initialize_mapEm(%"class.std::_Deque_base"* nonnull %tmp1, i64 0)
-  %_M_cur.i = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 3, i32 0
-  %tmp2 = load i32*, i32** %_M_cur.i, align 8, !tbaa !52
-  %_M_last.i = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 3, i32 2
-  %tmp3 = load i32*, i32** %_M_last.i, align 8, !tbaa !56
-  %add.ptr.i = getelementptr inbounds i32, i32* %tmp3, i64 -1
-  %cmp.i = icmp eq i32* %tmp2, %add.ptr.i
+  %tmp = tail call i32 @__kmpc_global_thread_num(%struct.ident_t* nonnull @0)
+  tail call void @__kmpc_barrier(%struct.ident_t* nonnull @1, i32 %tmp)
+  ret void
+}
+
+declare dso_local i32 @__kmpc_global_thread_num(%struct.ident_t*) local_unnamed_addr
+
+declare dso_local void @__kmpc_barrier(%struct.ident_t*, i32) local_unnamed_addr
+
+; Function Attrs: noinline norecurse nounwind uwtable
+define dso_local i32 @DECADES_COMPARE_EXCHANGE_STRONG(i32* nocapture %addr, i32* nocapture %expected, i32 %desired) local_unnamed_addr #16 {
+entry:
+  %tmp = load i32, i32* %expected, align 4
+  %tmp1 = cmpxchg i32* %addr, i32 %tmp, i32 %desired monotonic monotonic
+  %tmp2 = extractvalue { i32, i1 } %tmp1, 1
+  br i1 %tmp2, label %cmpxchg.continue, label %cmpxchg.store_expected
+
+cmpxchg.store_expected:                           ; preds = %entry
+  %tmp3 = extractvalue { i32, i1 } %tmp1, 0
+  store i32 %tmp3, i32* %expected, align 4
+  br label %cmpxchg.continue
+
+cmpxchg.continue:                                 ; preds = %cmpxchg.store_expected, %entry
+  %conv = zext i1 %tmp2 to i32
+  ret i32 %conv
+}
+
+; Function Attrs: noinline norecurse nounwind uwtable
+define dso_local i32 @DECADES_COMPARE_EXCHANGE_WEAK(i32* nocapture %addr, i32* nocapture %expected, i32 %desired) local_unnamed_addr #16 {
+entry:
+  %tmp = load i32, i32* %expected, align 4
+  %tmp1 = cmpxchg weak i32* %addr, i32 %tmp, i32 %desired monotonic monotonic
+  %tmp2 = extractvalue { i32, i1 } %tmp1, 1
+  br i1 %tmp2, label %cmpxchg.continue, label %cmpxchg.store_expected
+
+cmpxchg.store_expected:                           ; preds = %entry
+  %tmp3 = extractvalue { i32, i1 } %tmp1, 0
+  store i32 %tmp3, i32* %expected, align 4
+  br label %cmpxchg.continue
+
+cmpxchg.continue:                                 ; preds = %cmpxchg.store_expected, %entry
+  %conv = zext i1 %tmp2 to i32
+  ret i32 %conv
+}
+
+; Function Attrs: noinline norecurse nounwind uwtable
+define dso_local i32 @DECADES_COMPARE_AND_SWAP(i32* %addr, i32 %to_compare, i32 %new_val) local_unnamed_addr #16 {
+entry:
+  %to_compare.addr = alloca i32, align 4
+  store i32 %to_compare, i32* %to_compare.addr, align 4, !tbaa !23
+  %tmp = load volatile i32, i32* %addr, align 4, !tbaa !23
+  %call = call i32 @DECADES_COMPARE_EXCHANGE_STRONG(i32* %addr, i32* nonnull %to_compare.addr, i32 %new_val)
+  ret i32 %tmp
+}
+
+; Function Attrs: noinline norecurse nounwind uwtable
+define dso_local i32 @DECADES_FETCH_ADD(i32* nocapture %addr, i32 %to_add) local_unnamed_addr #16 {
+entry:
+  %tmp = atomicrmw add i32* %addr, i32 %to_add monotonic
+  ret i32 %tmp
+}
+
+; Function Attrs: noinline nounwind uwtable
+define dso_local i32 @DECADES_FETCH_MIN(i32* %addr, i32 %to_min) local_unnamed_addr #17 {
+entry:
+  %value = alloca i32, align 4
+  %tmp = bitcast i32* %value to i8*
+  call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %tmp) #3
+  %tmp1 = load volatile i32, i32* %addr, align 4, !tbaa !23
+  store i32 %tmp1, i32* %value, align 4, !tbaa !23
+  %cmp5 = icmp sgt i32 %tmp1, %to_min
+  br i1 %cmp5, label %while.body, label %cleanup
+
+while.body:                                       ; preds = %while.body.while.cond_crit_edge, %entry
+  %call = call i32 @DECADES_COMPARE_EXCHANGE_WEAK(i32* %addr, i32* nonnull %value, i32 %to_min)
+  %tobool = icmp eq i32 %call, 0
+  br i1 %tobool, label %while.body.while.cond_crit_edge, label %cleanup
+
+while.body.while.cond_crit_edge:                  ; preds = %while.body
+  %.pre = load i32, i32* %value, align 4, !tbaa !23
+  %cmp = icmp sgt i32 %.pre, %to_min
+  br i1 %cmp, label %while.body, label %cleanup
+
+cleanup:                                          ; preds = %while.body.while.cond_crit_edge, %while.body, %entry
+  %retval.0 = phi i32 [ 0, %entry ], [ 1, %while.body ], [ 0, %while.body.while.cond_crit_edge ]
+  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %tmp) #3
+  ret i32 %retval.0
+}
+
+; Function Attrs: noinline nounwind uwtable
+define dso_local float @DECADES_FETCH_ADD_FLOAT(float* %addr, float %to_add) local_unnamed_addr #17 {
+entry:
+  %value = alloca %union.anon, align 4
+  %tmp = bitcast %union.anon* %value to i8*
+  call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %tmp) #3
+  %float_val = bitcast %union.anon* %value to float*
+  %tmp1 = bitcast float* %addr to i32*
+  %int_val = getelementptr inbounds %union.anon, %union.anon* %value, i64 0, i32 0
+  br label %do.body
+
+do.body:                                          ; preds = %do.body, %entry
+  %tmp2 = load volatile float, float* %addr, align 4, !tbaa !52
+  store float %tmp2, float* %float_val, align 4, !tbaa !30
+  %add = fadd float %tmp2, %to_add
+  %tmp3 = bitcast float %add to i32
+  %call = call i32 @DECADES_COMPARE_EXCHANGE_WEAK(i32* %tmp1, i32* nonnull %int_val, i32 %tmp3)
+  %tobool = icmp eq i32 %call, 0
+  br i1 %tobool, label %do.body, label %do.end
+
+do.end:                                           ; preds = %do.body
+  %tmp4 = load float, float* %float_val, align 4, !tbaa !30
+  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %tmp) #3
+  ret float %tmp4
+}
+
+; Function Attrs: noinline uwtable
+define dso_local void @_Z15_kernel_computeP4NodeP4EdgePiS3_iii(%struct.timezone* nocapture readonly %h_graph_nodes, %struct.timezone* nocapture readonly %h_graph_edges, i32* nocapture %color, i32* nocapture %h_cost, i32 %source, i32 %tid, i32 %num_threads) local_unnamed_addr #18 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+entry:
+  %tmp = ptrtoint i32* undef to i64
+  %tmp1 = ptrtoint i32* undef to i64
+  %tmp2 = ptrtoint i32** undef to i64
+  %tmp3 = ptrtoint i32* undef to i64
+  %tmp4 = ptrtoint i32* undef to i64
+  %call2.i.i3.i.i = call i8* @_Znwm(i64 64)
+  %tmp5 = bitcast i8* %call2.i.i3.i.i to i32**
+  %tmp6 = ptrtoint i8* %call2.i.i3.i.i to i64
+  %sub.i1 = sub i64 8, 1
+  %div13.i = lshr i64 %sub.i1, 1
+  %add.ptr.i2 = getelementptr inbounds i32*, i32** %tmp5, i64 %div13.i
+  %add.ptr14.i = getelementptr inbounds i32*, i32** %add.ptr.i2, i64 1
+  call void @printuBranch(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @2, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @3, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @4, i32 0, i32 0), i8* getelementptr inbounds ([2 x i8], [2 x i8]* @5, i32 0, i32 0))
+  br label %for.body.i.i
+
+for.body.i.i:                                     ; preds = %for.body.i.i, %entry
+  %__cur.015.i.i = phi i32** [ %incdec.ptr.i.i, %for.body.i.i ], [ %add.ptr.i2, %entry ]
+  %call2.i.i.i12.i.i = call i8* @_Znwm(i64 512)
+  %tmp7 = bitcast i32** %__cur.015.i.i to i8**
+  %castInst = ptrtoint i8** %tmp7 to i64
+  call void @printMem(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @6, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @7, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @8, i32 0, i32 0), i1 true, i64 %castInst, i32 8)
+  store i8* %call2.i.i.i12.i.i, i8** %tmp7, align 8, !tbaa !26
+  %incdec.ptr.i.i = getelementptr inbounds i32*, i32** %__cur.015.i.i, i64 1
+  %cmp.i58.i = icmp ult i32** %incdec.ptr.i.i, %add.ptr14.i
+  %castInst96 = zext i1 %cmp.i58.i to i32
+  call void @printBranch(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @9, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @10, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @11, i32 0, i32 0), i32 %castInst96, i8* getelementptr inbounds ([2 x i8], [2 x i8]* @12, i32 0, i32 0), i8* getelementptr inbounds ([2 x i8], [2 x i8]* @13, i32 0, i32 0))
+  br i1 %cmp.i58.i, label %for.body.i.i, label %_ZNSt11_Deque_baseIiSaIiEE17_M_initialize_mapEm.exit
+
+_ZNSt11_Deque_baseIiSaIiEE17_M_initialize_mapEm.exit: ; preds = %for.body.i.i
+  %castInst97 = ptrtoint i32** %add.ptr.i2 to i64
+  call void @printMem(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @14, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @15, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @16, i32 0, i32 0), i1 false, i64 %castInst97, i32 8)
+  %tmp8 = load i32*, i32** %add.ptr.i2, align 8, !tbaa !26
+  %add.ptr.i56.i = getelementptr inbounds i32, i32* %tmp8, i64 128
+  %add.ptr27.i = getelementptr inbounds i32*, i32** %add.ptr14.i, i64 -1
+  %tmp9 = ptrtoint i32** %add.ptr27.i to i64
+  %castInst98 = ptrtoint i32** %add.ptr27.i to i64
+  call void @printMem(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @17, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @18, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @19, i32 0, i32 0), i1 false, i64 %castInst98, i32 8)
+  %tmp10 = load i32*, i32** %add.ptr27.i, align 8, !tbaa !26
+  %add.ptr.i.i6 = getelementptr inbounds i32, i32* %tmp10, i64 128
+  %tmp11 = ptrtoint i32* %tmp8 to i64
+  %tmp12 = ptrtoint i32* %tmp10 to i64
+  %tmp13 = inttoptr i64 %tmp12 to i32*
+  %add.ptr.i = getelementptr inbounds i32, i32* %add.ptr.i.i6, i64 -1
+  %cmp.i = icmp eq i32* %tmp13, %add.ptr.i
+  %castInst99 = zext i1 %cmp.i to i32
+  call void @printBranch(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @20, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @21, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @22, i32 0, i32 0), i32 %castInst99, i8* getelementptr inbounds ([2 x i8], [2 x i8]* @23, i32 0, i32 0), i8* getelementptr inbounds ([2 x i8], [2 x i8]* @24, i32 0, i32 0))
   br i1 %cmp.i, label %if.else.i, label %if.then.i
 
-if.then.i:                                        ; preds = %entry
-  store i32 %source, i32* %tmp2, align 4, !tbaa !23
-  %incdec.ptr.i = getelementptr inbounds i32, i32* %tmp2, i64 1
-  store i32* %incdec.ptr.i, i32** %_M_cur.i, align 8, !tbaa !52
+if.then.i:                                        ; preds = %_ZNSt11_Deque_baseIiSaIiEE17_M_initialize_mapEm.exit
+  %castInst100 = ptrtoint i32* %tmp13 to i64
+  call void @printMem(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @25, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @26, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @27, i32 0, i32 0), i1 true, i64 %castInst100, i32 4)
+  store i32 %source, i32* %tmp13, align 4, !tbaa !23
+  %incdec.ptr.i = getelementptr inbounds i32, i32* %tmp13, i64 1
+  %tmp14 = ptrtoint i32* %incdec.ptr.i to i64
+  call void @printuBranch(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @28, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @29, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @30, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @31, i32 0, i32 0))
   br label %invoke.cont
 
-if.else.i:                                        ; preds = %entry
-  %_M_map_size.i.i.i = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 1
-  %tmp4 = load i64, i64* %_M_map_size.i.i.i, align 8, !tbaa !57
-  %_M_node.i.i.i = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 3, i32 3
-  %tmp5 = bitcast i32*** %_M_node.i.i.i to i64*
-  %tmp6 = load i64, i64* %tmp5, align 8, !tbaa !58
-  %tmp7 = bitcast %"class.std::deque"* %wavefront to i64*
-  %tmp8 = load i64, i64* %tmp7, align 8, !tbaa !59
-  %sub.ptr.sub.i.i.i = sub i64 %tmp6, %tmp8
+if.else.i:                                        ; preds = %_ZNSt11_Deque_baseIiSaIiEE17_M_initialize_mapEm.exit
+  %sub.ptr.sub.i.i.i = sub i64 %tmp9, %tmp6
   %sub.ptr.div.i.i.i = ashr exact i64 %sub.ptr.sub.i.i.i, 3
-  %sub.i.i.i = sub i64 %tmp4, %sub.ptr.div.i.i.i
+  %sub.i.i.i = sub i64 8, %sub.ptr.div.i.i.i
   %cmp.i.i.i = icmp ult i64 %sub.i.i.i, 2
-  %tmp9 = inttoptr i64 %tmp6 to i32**
-  %tmp10 = inttoptr i64 %tmp8 to i32**
+  %tmp15 = inttoptr i64 %tmp9 to i32**
+  %tmp16 = inttoptr i64 %tmp6 to i32**
+  %castInst101 = zext i1 %cmp.i.i.i to i32
+  call void @printBranch(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @32, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @33, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @34, i32 0, i32 0), i32 %castInst101, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @35, i32 0, i32 0), i8* getelementptr inbounds ([2 x i8], [2 x i8]* @36, i32 0, i32 0))
   br i1 %cmp.i.i.i, label %if.then.i.i.i, label %_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i
 
 if.then.i.i.i:                                    ; preds = %if.else.i
-  %_M_node3.i = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 2, i32 3
-  %tmp11 = load i32**, i32*** %_M_node3.i, align 8, !tbaa !60
-  %sub.ptr.rhs.cast.i = ptrtoint i32** %tmp11 to i64
-  %sub.ptr.sub.i = sub i64 %tmp6, %sub.ptr.rhs.cast.i
+  %sub.ptr.rhs.cast.i = ptrtoint i32** %add.ptr.i2 to i64
+  %sub.ptr.sub.i = sub i64 %tmp9, %sub.ptr.rhs.cast.i
   %sub.ptr.div.i = ashr exact i64 %sub.ptr.sub.i, 3
   %add.i = add nsw i64 %sub.ptr.div.i, 1
   %add4.i = add nsw i64 %sub.ptr.div.i, 2
   %mul.i = shl nsw i64 %add4.i, 1
-  %cmp.i45 = icmp ugt i64 %tmp4, %mul.i
+  %cmp.i45 = icmp ugt i64 8, %mul.i
+  %castInst102 = zext i1 %cmp.i45 to i32
+  call void @printBranch(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @37, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @38, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @39, i32 0, i32 0), i32 %castInst102, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @40, i32 0, i32 0), i8* getelementptr inbounds ([2 x i8], [2 x i8]* @41, i32 0, i32 0))
   br i1 %cmp.i45, label %if.then.i47, label %if.else31.i
 
 if.then.i47:                                      ; preds = %if.then.i.i.i
-  %sub.i = sub i64 %tmp4, %add4.i
+  %sub.i = sub i64 8, %add4.i
   %div.i = lshr i64 %sub.i, 1
-  %add.ptr.i46 = getelementptr inbounds i32*, i32** %tmp10, i64 %div.i
-  %cmp13.i = icmp ult i32** %add.ptr.i46, %tmp11
-  %add.ptr21.i = getelementptr inbounds i32*, i32** %tmp9, i64 1
+  %add.ptr.i46 = getelementptr inbounds i32*, i32** %tmp16, i64 %div.i
+  %cmp13.i = icmp ult i32** %add.ptr.i46, %add.ptr.i2
+  %add.ptr21.i = getelementptr inbounds i32*, i32** %tmp15, i64 1
+  %sub.ptr.lhs.cast.i.i.i.i.i = ptrtoint i32** %add.ptr21.i to i64
+  %sub.ptr.sub.i.i.i.i.i = sub i64 %sub.ptr.lhs.cast.i.i.i.i.i, %sub.ptr.rhs.cast.i
+  %tobool.i.i.i.i.i = icmp eq i64 %sub.ptr.sub.i.i.i.i.i, 0
+  %castInst103 = zext i1 %cmp13.i to i32
+  call void @printBranch(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @42, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @43, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @44, i32 0, i32 0), i32 %castInst103, i8* getelementptr inbounds ([2 x i8], [2 x i8]* @45, i32 0, i32 0), i8* getelementptr inbounds ([2 x i8], [2 x i8]* @46, i32 0, i32 0))
+  br i1 %cmp13.i, label %if.then14.i, label %if.else.i48
+
+if.then14.i:                                      ; preds = %if.then.i47
+  %castInst104 = zext i1 %tobool.i.i.i.i.i to i32
+  call void @printBranch(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @47, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @48, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @49, i32 0, i32 0), i32 %castInst104, i8* getelementptr inbounds ([2 x i8], [2 x i8]* @50, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @51, i32 0, i32 0))
+  br i1 %tobool.i.i.i.i.i, label %.noexc, label %if.then.i.i.i.i.i
+
+if.then.i.i.i.i.i:                                ; preds = %if.then14.i
+  %tmp17 = bitcast i32** %add.ptr.i46 to i8*
+  %tmp18 = bitcast i32** %add.ptr.i2 to i8*
+  call void @llvm.memmove.p0i8.p0i8.i64(i8* align 8 %tmp17, i8* align 8 %tmp18, i64 %sub.ptr.sub.i.i.i.i.i, i1 false) #3
+  call void @printuBranch(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @52, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @53, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @54, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @55, i32 0, i32 0))
+  br label %.noexc
+
+if.else.i48:                                      ; preds = %if.then.i47
+  %castInst105 = zext i1 %tobool.i.i.i.i.i to i32
+  call void @printBranch(i8* getelementptr inbounds ([2 x i8], [2 x i8]* @56, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @57, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @58, i32 0, i32 0), i32 %castInst105, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @59, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @60, i32 0, i32 0))
+  br i1 %tobool.i.i.i.i.i, label %.noexc, label %if.then.i.i.i.i101.i
+
+if.then.i.i.i.i101.i:                             ; preds = %if.else.i48
+  %add.ptr29.i = getelementptr inbounds i32*, i32** %add.ptr.i46, i64 %add.i
+  %sub.ptr.div.i.i.i.i99.i = ashr exact i64 %sub.ptr.sub.i.i.i.i.i, 3
+  %idx.neg.i.i.i.i.i = sub nsw i64 0, %sub.ptr.div.i.i.i.i99.i
+  %add.ptr.i.i.i.i100.i = getelementptr inbounds i32*, i32** %add.ptr29.i, i64 %idx.neg.i.i.i.i.i
+  %tmp19 = bitcast i32** %add.ptr.i.i.i.i100.i to i8*
+  %tmp20 = bitcast i32** %add.ptr.i2 to i8*
+  call void @llvm.memmove.p0i8.p0i8.i64(i8* align 8 %tmp19, i8* align 8 %tmp20, i64 %sub.ptr.sub.i.i.i.i.i, i1 false) #3
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @61, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @62, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @63, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @64, i32 0, i32 0))
+  br label %.noexc
+
+if.else31.i:                                      ; preds = %if.then.i.i.i
+  %cmp.i.i = icmp eq i64 8, 0
+  %.sroa.speculated.i = select i1 %cmp.i.i, i64 1, i64 8
+  %add37.i = add i64 8, 2
+  %add38.i = add i64 %add37.i, %.sroa.speculated.i
+  %cmp.i.i.i.i = icmp ugt i64 %add38.i, 2305843009213693951
+  %castInst106 = zext i1 %cmp.i.i.i.i to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @65, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @66, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @67, i32 0, i32 0), i32 %castInst106, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @68, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @69, i32 0, i32 0))
+  br i1 %cmp.i.i.i.i, label %if.then.i.i.i.i, label %_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit.i
+
+if.then.i.i.i.i:                                  ; preds = %if.else31.i
+  call void @_ZSt17__throw_bad_allocv() #24
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @70, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @71, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @72, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @73, i32 0, i32 0))
+  br label %.noexc50
+
+.noexc50:                                         ; preds = %if.then.i.i.i.i
+  unreachable
+
+_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit.i: ; preds = %if.else31.i
+  %mul.i.i.i.i = shl i64 %add38.i, 3
+  %call2.i.i3.i.i51 = call i8* @_Znwm(i64 %mul.i.i.i.i)
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @74, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @75, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @76, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @77, i32 0, i32 0))
+  br label %call2.i.i3.i.i.noexc
+
+call2.i.i3.i.i.noexc:                             ; preds = %_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit.i
+  %tmp21 = bitcast i8* %call2.i.i3.i.i51 to i32**
+  %sub40.i = sub i64 %add38.i, %add4.i
+  %div41.i = lshr i64 %sub40.i, 1
+  %add.ptr42.i = getelementptr inbounds i32*, i32** %tmp21, i64 %div41.i
+  %tmp22 = inttoptr i64 %tmp9 to i32**
+  %add.ptr55.i = getelementptr inbounds i32*, i32** %tmp22, i64 1
+  %sub.ptr.lhs.cast.i.i.i.i102.i = ptrtoint i32** %add.ptr55.i to i64
+  %sub.ptr.rhs.cast.i.i.i.i103.i = ptrtoint i32** %add.ptr.i2 to i64
+  %sub.ptr.sub.i.i.i.i104.i = sub i64 %sub.ptr.lhs.cast.i.i.i.i102.i, %sub.ptr.rhs.cast.i.i.i.i103.i
+  %tobool.i.i.i.i106.i = icmp eq i64 %sub.ptr.sub.i.i.i.i104.i, 0
+  %castInst107 = zext i1 %tobool.i.i.i.i106.i to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @78, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @79, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @80, i32 0, i32 0), i32 %castInst107, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @81, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @82, i32 0, i32 0))
+  br i1 %tobool.i.i.i.i106.i, label %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i, label %if.then.i.i.i.i107.i
+
+if.then.i.i.i.i107.i:                             ; preds = %call2.i.i3.i.i.noexc
+  %tmp23 = bitcast i32** %add.ptr42.i to i8*
+  %tmp24 = bitcast i32** %add.ptr.i2 to i8*
+  call void @llvm.memmove.p0i8.p0i8.i64(i8* nonnull align 8 %tmp23, i8* align 8 %tmp24, i64 %sub.ptr.sub.i.i.i.i104.i, i1 false) #3
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @83, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @84, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @85, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @86, i32 0, i32 0))
+  br label %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i
+
+_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i:           ; preds = %if.then.i.i.i.i107.i, %call2.i.i3.i.i.noexc
+  %tmp25 = inttoptr i64 %tmp6 to i8*
+  call void @_ZdlPv(i8* %tmp25) #3
+  %tmp26 = ptrtoint i8* %call2.i.i3.i.i51 to i64
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @87, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @88, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @89, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @90, i32 0, i32 0))
+  br label %.noexc
+
+.noexc:                                           ; preds = %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i, %if.then.i.i.i.i101.i, %if.else.i48, %if.then.i.i.i.i.i, %if.then14.i
+  %wavefront.sroa.0.0 = phi i64 [ %tmp6, %if.then14.i ], [ %tmp6, %if.then.i.i.i.i.i ], [ %tmp6, %if.else.i48 ], [ %tmp6, %if.then.i.i.i.i101.i ], [ %tmp26, %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i ]
+  %wavefront.sroa.15.0 = phi i64 [ 8, %if.then14.i ], [ 8, %if.then.i.i.i.i.i ], [ 8, %if.else.i48 ], [ 8, %if.then.i.i.i.i101.i ], [ %add38.i, %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i ]
+  %__new_nstart.0.i = phi i32** [ %add.ptr42.i, %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i ], [ %add.ptr.i46, %if.then14.i ], [ %add.ptr.i46, %if.then.i.i.i.i.i ], [ %add.ptr.i46, %if.else.i48 ], [ %add.ptr.i46, %if.then.i.i.i.i101.i ]
+  %castInst108 = ptrtoint i32** %__new_nstart.0.i to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @91, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @92, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @93, i32 0, i32 0), i1 false, i64 %castInst108, i32 8)
+  %tmp27 = load i32*, i32** %__new_nstart.0.i, align 8, !tbaa !26
+  %add.ptr.i93.i = getelementptr inbounds i32, i32* %tmp27, i64 128
+  %add.ptr71.i = getelementptr inbounds i32*, i32** %__new_nstart.0.i, i64 %sub.ptr.div.i
+  %tmp28 = ptrtoint i32** %add.ptr71.i to i64
+  %castInst109 = ptrtoint i32** %add.ptr71.i to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @94, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @95, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @96, i32 0, i32 0), i1 false, i64 %castInst109, i32 8)
+  %tmp29 = load i32*, i32** %add.ptr71.i, align 8, !tbaa !26
+  %add.ptr.i.i49 = getelementptr inbounds i32, i32* %tmp29, i64 128
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @97, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @98, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @99, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @100, i32 0, i32 0))
+  br label %_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i
+
+_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i: ; preds = %.noexc, %if.else.i
+  %wavefront.sroa.0.1 = phi i64 [ %wavefront.sroa.0.0, %.noexc ], [ %tmp6, %if.else.i ]
+  %wavefront.sroa.15.1 = phi i64 [ %wavefront.sroa.15.0, %.noexc ], [ 8, %if.else.i ]
+  %wavefront.sroa.26.0 = phi i32* [ %tmp27, %.noexc ], [ %tmp8, %if.else.i ]
+  %wavefront.sroa.31.0 = phi i32* [ %add.ptr.i93.i, %.noexc ], [ %add.ptr.i56.i, %if.else.i ]
+  %wavefront.sroa.36.0 = phi i32** [ %__new_nstart.0.i, %.noexc ], [ %add.ptr.i2, %if.else.i ]
+  %wavefront.sroa.69.0 = phi i64 [ %tmp28, %.noexc ], [ %tmp9, %if.else.i ]
+  %call2.i.i.i.i.i44 = call i8* @_Znwm(i64 512)
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @101, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @102, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @103, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @104, i32 0, i32 0))
+  br label %call2.i.i.i.i.i.noexc
+
+call2.i.i.i.i.i.noexc:                            ; preds = %_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i
+  %tmp30 = inttoptr i64 %wavefront.sroa.69.0 to i32**
+  %add.ptr.i.i = getelementptr inbounds i32*, i32** %tmp30, i64 1
+  %tmp31 = bitcast i32** %add.ptr.i.i to i8**
+  %castInst110 = ptrtoint i8** %tmp31 to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @105, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @106, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @107, i32 0, i32 0), i1 true, i64 %castInst110, i32 8)
+  store i8* %call2.i.i.i.i.i44, i8** %tmp31, align 8, !tbaa !26
+  %tmp32 = inttoptr i64 %tmp12 to i32*
+  %castInst111 = ptrtoint i32* %tmp32 to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @108, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @109, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @110, i32 0, i32 0), i1 true, i64 %castInst111, i32 4)
+  store i32 %source, i32* %tmp32, align 4, !tbaa !23
+  %tmp33 = inttoptr i64 %wavefront.sroa.69.0 to i32**
+  %add.ptr11.i.i = getelementptr inbounds i32*, i32** %tmp33, i64 1
+  %tmp34 = ptrtoint i32** %add.ptr11.i.i to i64
+  %castInst112 = ptrtoint i32** %add.ptr11.i.i to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @111, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @112, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @113, i32 0, i32 0), i1 false, i64 %castInst112, i32 8)
+  %tmp35 = load i32*, i32** %add.ptr11.i.i, align 8, !tbaa !26
+  %add.ptr.i.i.i = getelementptr inbounds i32, i32* %tmp35, i64 128
+  %.cast.i.i = ptrtoint i32* %tmp35 to i64
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @114, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @115, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @116, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @117, i32 0, i32 0))
+  br label %invoke.cont
+
+invoke.cont:                                      ; preds = %call2.i.i.i.i.i.noexc, %if.then.i
+  %wavefront.sroa.0.2 = phi i64 [ %wavefront.sroa.0.1, %call2.i.i.i.i.i.noexc ], [ %tmp6, %if.then.i ]
+  %wavefront.sroa.15.2 = phi i64 [ %wavefront.sroa.15.1, %call2.i.i.i.i.i.noexc ], [ 8, %if.then.i ]
+  %wavefront.sroa.26.1 = phi i32* [ %wavefront.sroa.26.0, %call2.i.i.i.i.i.noexc ], [ %tmp8, %if.then.i ]
+  %wavefront.sroa.31.1 = phi i32* [ %wavefront.sroa.31.0, %call2.i.i.i.i.i.noexc ], [ %add.ptr.i56.i, %if.then.i ]
+  %wavefront.sroa.36.1 = phi i32** [ %wavefront.sroa.36.0, %call2.i.i.i.i.i.noexc ], [ %add.ptr.i2, %if.then.i ]
+  %wavefront.sroa.47.0 = phi i64 [ %.cast.i.i, %call2.i.i.i.i.i.noexc ], [ %tmp14, %if.then.i ]
+  %wavefront.sroa.62.0 = phi i32* [ %add.ptr.i.i.i, %call2.i.i.i.i.i.noexc ], [ %add.ptr.i.i6, %if.then.i ]
+  %wavefront.sroa.69.1 = phi i64 [ %tmp34, %call2.i.i.i.i.i.noexc ], [ %tmp9, %if.then.i ]
+  %tmp36 = phi i32* [ %tmp35, %call2.i.i.i.i.i.noexc ], [ %incdec.ptr.i, %if.then.i ]
+  %idxprom = sext i32 %source to i64
+  %arrayidx = getelementptr inbounds i32, i32* %color, i64 %idxprom
+  %castInst113 = ptrtoint i32* %arrayidx to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @118, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @119, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @120, i32 0, i32 0), i1 true, i64 %castInst113, i32 4)
+  store i32 16677218, i32* %arrayidx, align 4, !tbaa !23
+  %tmp37 = inttoptr i64 %tmp11 to i32*
+  %cmp.i.i53178 = icmp eq i32* %tmp36, %tmp37
+  %castInst114 = zext i1 %cmp.i.i53178 to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @121, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @122, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @123, i32 0, i32 0), i32 %castInst114, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @124, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @125, i32 0, i32 0))
+  br i1 %cmp.i.i53178, label %while.end, label %while.body.lr.ph
+
+while.body.lr.ph:                                 ; preds = %invoke.cont
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @126, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @127, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @128, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @129, i32 0, i32 0))
+  br label %while.body
+
+while.body:                                       ; preds = %for.cond.cleanup, %while.body.lr.ph
+  %wavefront.sroa.0.3 = phi i64 [ %wavefront.sroa.0.2, %while.body.lr.ph ], [ %wavefront.sroa.0.4, %for.cond.cleanup ]
+  %wavefront.sroa.15.3 = phi i64 [ %wavefront.sroa.15.2, %while.body.lr.ph ], [ %wavefront.sroa.15.4, %for.cond.cleanup ]
+  %wavefront.sroa.26.2 = phi i32* [ %wavefront.sroa.26.1, %while.body.lr.ph ], [ %wavefront.sroa.26.4, %for.cond.cleanup ]
+  %wavefront.sroa.31.2 = phi i32* [ %wavefront.sroa.31.1, %while.body.lr.ph ], [ %wavefront.sroa.31.4, %for.cond.cleanup ]
+  %wavefront.sroa.36.2 = phi i32** [ %wavefront.sroa.36.1, %while.body.lr.ph ], [ %wavefront.sroa.36.4, %for.cond.cleanup ]
+  %wavefront.sroa.47.1 = phi i64 [ %wavefront.sroa.47.0, %while.body.lr.ph ], [ %wavefront.sroa.47.2, %for.cond.cleanup ]
+  %wavefront.sroa.62.1 = phi i32* [ %wavefront.sroa.62.0, %while.body.lr.ph ], [ %wavefront.sroa.62.2, %for.cond.cleanup ]
+  %wavefront.sroa.69.2 = phi i64 [ %wavefront.sroa.69.1, %while.body.lr.ph ], [ %wavefront.sroa.69.3, %for.cond.cleanup ]
+  %tmp38 = phi i32* [ %tmp37, %while.body.lr.ph ], [ %tmp48, %for.cond.cleanup ]
+  %castInst115 = ptrtoint i32* %tmp38 to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @130, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @131, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @132, i32 0, i32 0), i1 false, i64 %castInst115, i32 4)
+  %tmp39 = load i32, i32* %tmp38, align 4, !tbaa !23
+  %add.ptr.i56 = getelementptr inbounds i32, i32* %wavefront.sroa.31.2, i64 -1
+  %cmp.i57 = icmp eq i32* %tmp38, %add.ptr.i56
+  %castInst116 = zext i1 %cmp.i57 to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @133, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @134, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @135, i32 0, i32 0), i32 %castInst116, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @136, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @137, i32 0, i32 0))
+  br i1 %cmp.i57, label %if.else.i63, label %invoke.cont.i
+
+invoke.cont.i:                                    ; preds = %while.body
+  %incdec.ptr.i58 = getelementptr inbounds i32, i32* %tmp38, i64 1
+  %tmp40 = ptrtoint i32* %incdec.ptr.i58 to i64
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @138, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @139, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @140, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @141, i32 0, i32 0))
+  br label %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit
+
+if.else.i63:                                      ; preds = %while.body
+  %tmp41 = bitcast i32* %wavefront.sroa.26.2 to i8*
+  call void @_ZdlPv(i8* %tmp41) #3
+  %add.ptr.i.i60 = getelementptr inbounds i32*, i32** %wavefront.sroa.36.2, i64 1
+  %castInst117 = ptrtoint i32** %add.ptr.i.i60 to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @142, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @143, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @144, i32 0, i32 0), i1 false, i64 %castInst117, i32 8)
+  %tmp42 = load i32*, i32** %add.ptr.i.i60, align 8, !tbaa !26
+  %add.ptr.i.i.i61 = getelementptr inbounds i32, i32* %tmp42, i64 128
+  %.cast.i.i62 = ptrtoint i32* %tmp42 to i64
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @145, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @146, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @147, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @148, i32 0, i32 0))
+  br label %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit
+
+_ZNSt5dequeIiSaIiEE9pop_frontEv.exit:             ; preds = %if.else.i63, %invoke.cont.i
+  %wavefront.sroa.21.0 = phi i64 [ %.cast.i.i62, %if.else.i63 ], [ %tmp40, %invoke.cont.i ]
+  %wavefront.sroa.26.3 = phi i32* [ %tmp42, %if.else.i63 ], [ %wavefront.sroa.26.2, %invoke.cont.i ]
+  %wavefront.sroa.31.3 = phi i32* [ %add.ptr.i.i.i61, %if.else.i63 ], [ %wavefront.sroa.31.2, %invoke.cont.i ]
+  %wavefront.sroa.36.3 = phi i32** [ %add.ptr.i.i60, %if.else.i63 ], [ %wavefront.sroa.36.2, %invoke.cont.i ]
+  %tmp43 = phi i32* [ %incdec.ptr.i58, %invoke.cont.i ], [ %tmp42, %if.else.i63 ]
+  %idxprom2 = sext i32 %tmp39 to i64
+  %x = getelementptr inbounds %struct.timezone, %struct.timezone* %h_graph_nodes, i64 %idxprom2, i32 0
+  %y = getelementptr inbounds %struct.timezone, %struct.timezone* %h_graph_nodes, i64 %idxprom2, i32 1
+  %castInst118 = ptrtoint i32* %y to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @149, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @150, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @151, i32 0, i32 0), i1 false, i64 %castInst118, i32 4)
+  %tmp44 = load i32, i32* %y, align 4, !tbaa !54
+  %cmp176 = icmp sgt i32 %tmp44, 0
+  %castInst119 = zext i1 %cmp176 to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @152, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @153, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @154, i32 0, i32 0), i32 %castInst119, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @155, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @156, i32 0, i32 0))
+  br i1 %cmp176, label %for.body.lr.ph, label %for.cond.cleanup
+
+for.body.lr.ph:                                   ; preds = %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit
+  %castInst120 = ptrtoint i32* %x to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @157, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @158, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @159, i32 0, i32 0), i1 false, i64 %castInst120, i32 4)
+  %tmp45 = load i32, i32* %x, align 4, !tbaa !56
+  %arrayidx16 = getelementptr inbounds i32, i32* %h_cost, i64 %idxprom2
+  %tmp46 = sext i32 %tmp45 to i64
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @160, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @161, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @162, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @163, i32 0, i32 0))
+  br label %for.body
+
+for.cond.cleanup.loopexit:                        ; preds = %if.end
+  %tmp47 = inttoptr i64 %wavefront.sroa.21.0 to i32*
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @164, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @165, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @166, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @167, i32 0, i32 0))
+  br label %for.cond.cleanup
+
+for.cond.cleanup:                                 ; preds = %for.cond.cleanup.loopexit, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit
+  %wavefront.sroa.0.4 = phi i64 [ %wavefront.sroa.0.9, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.0.3, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.15.4 = phi i64 [ %wavefront.sroa.15.9, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.15.3, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.26.4 = phi i32* [ %wavefront.sroa.26.8, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.26.3, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.31.4 = phi i32* [ %wavefront.sroa.31.8, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.31.3, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.36.4 = phi i32** [ %wavefront.sroa.36.8, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.36.3, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.47.2 = phi i64 [ %wavefront.sroa.47.5, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.47.1, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.62.2 = phi i32* [ %wavefront.sroa.62.5, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.62.1, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.69.3 = phi i64 [ %wavefront.sroa.69.7, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.69.2, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %tmp48 = phi i32* [ %tmp47, %for.cond.cleanup.loopexit ], [ %tmp43, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %arrayidx25 = getelementptr inbounds i32, i32* %color, i64 %idxprom2
+  %castInst121 = ptrtoint i32* %arrayidx25 to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @168, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @169, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @170, i32 0, i32 0), i1 true, i64 %castInst121, i32 4)
+  store i32 16677221, i32* %arrayidx25, align 4, !tbaa !23
+  %tmp49 = inttoptr i64 %wavefront.sroa.47.2 to i32*
+  %cmp.i.i53 = icmp eq i32* %tmp49, %tmp48
+  %castInst122 = zext i1 %cmp.i.i53 to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @171, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @172, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @173, i32 0, i32 0), i32 %castInst122, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @174, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @175, i32 0, i32 0))
+  br i1 %cmp.i.i53, label %while.end, label %while.body
+
+lpad:                                             ; No predecessors!
+  %tmp50 = landingpad { i8*, i32 }
+          cleanup
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @176, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @177, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @178, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @179, i32 0, i32 0))
+  br label %ehcleanup
+
+for.body:                                         ; preds = %if.end, %for.body.lr.ph
+  %wavefront.sroa.0.5 = phi i64 [ %wavefront.sroa.0.3, %for.body.lr.ph ], [ %wavefront.sroa.0.9, %if.end ]
+  %wavefront.sroa.15.5 = phi i64 [ %wavefront.sroa.15.3, %for.body.lr.ph ], [ %wavefront.sroa.15.9, %if.end ]
+  %wavefront.sroa.26.5 = phi i32* [ %wavefront.sroa.26.3, %for.body.lr.ph ], [ %wavefront.sroa.26.8, %if.end ]
+  %wavefront.sroa.31.5 = phi i32* [ %wavefront.sroa.31.3, %for.body.lr.ph ], [ %wavefront.sroa.31.8, %if.end ]
+  %wavefront.sroa.36.5 = phi i32** [ %wavefront.sroa.36.3, %for.body.lr.ph ], [ %wavefront.sroa.36.8, %if.end ]
+  %wavefront.sroa.47.3 = phi i64 [ %wavefront.sroa.47.1, %for.body.lr.ph ], [ %wavefront.sroa.47.5, %if.end ]
+  %wavefront.sroa.62.3 = phi i32* [ %wavefront.sroa.62.1, %for.body.lr.ph ], [ %wavefront.sroa.62.5, %if.end ]
+  %wavefront.sroa.69.4 = phi i64 [ %wavefront.sroa.69.2, %for.body.lr.ph ], [ %wavefront.sroa.69.7, %if.end ]
+  %tmp51 = phi i32 [ %tmp45, %for.body.lr.ph ], [ %tmp79, %if.end ]
+  %tmp52 = phi i32 [ %tmp44, %for.body.lr.ph ], [ %tmp80, %if.end ]
+  %indvars.iv = phi i64 [ %tmp46, %for.body.lr.ph ], [ %indvars.iv.next, %if.end ]
+  %x11 = getelementptr inbounds %struct.timezone, %struct.timezone* %h_graph_edges, i64 %indvars.iv, i32 0
+  %castInst123 = ptrtoint i32* %x11 to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @180, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @181, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @182, i32 0, i32 0), i1 false, i64 %castInst123, i32 4)
+  %tmp53 = load i32, i32* %x11, align 4, !tbaa !57
+  %idxprom12 = sext i32 %tmp53 to i64
+  %arrayidx13 = getelementptr inbounds i32, i32* %color, i64 %idxprom12
+  %castInst124 = ptrtoint i32* %arrayidx13 to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @183, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @184, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @185, i32 0, i32 0), i1 false, i64 %castInst124, i32 4)
+  %tmp54 = load i32, i32* %arrayidx13, align 4, !tbaa !23
+  %cmp14 = icmp eq i32 %tmp54, 16677217
+  %castInst125 = zext i1 %cmp14 to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @186, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @187, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @188, i32 0, i32 0), i32 %castInst125, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @189, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @190, i32 0, i32 0))
+  br i1 %cmp14, label %if.then, label %if.end
+
+if.then:                                          ; preds = %for.body
+  %castInst126 = ptrtoint i32* %arrayidx16 to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @191, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @192, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @193, i32 0, i32 0), i1 false, i64 %castInst126, i32 4)
+  %tmp55 = load i32, i32* %arrayidx16, align 4, !tbaa !23
+  %add17 = add nsw i32 %tmp55, 1
+  %arrayidx19 = getelementptr inbounds i32, i32* %h_cost, i64 %idxprom12
+  %castInst127 = ptrtoint i32* %arrayidx19 to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @194, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @195, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @196, i32 0, i32 0), i1 true, i64 %castInst127, i32 4)
+  store i32 %add17, i32* %arrayidx19, align 4, !tbaa !23
+  %tmp56 = inttoptr i64 %wavefront.sroa.47.3 to i32*
+  %add.ptr.i66 = getelementptr inbounds i32, i32* %wavefront.sroa.62.3, i64 -1
+  %cmp.i67 = icmp eq i32* %tmp56, %add.ptr.i66
+  %castInst128 = zext i1 %cmp.i67 to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @197, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @198, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @199, i32 0, i32 0), i32 %castInst128, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @200, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @201, i32 0, i32 0))
+  br i1 %cmp.i67, label %if.else.i76, label %if.then.i69
+
+if.then.i69:                                      ; preds = %if.then
+  %castInst129 = ptrtoint i32* %tmp56 to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @202, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @203, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @204, i32 0, i32 0), i1 true, i64 %castInst129, i32 4)
+  store i32 %tmp53, i32* %tmp56, align 4, !tbaa !23
+  %incdec.ptr.i68 = getelementptr inbounds i32, i32* %tmp56, i64 1
+  %tmp57 = ptrtoint i32* %incdec.ptr.i68 to i64
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @205, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @206, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @207, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @208, i32 0, i32 0))
+  br label %invoke.cont21
+
+if.else.i76:                                      ; preds = %if.then
+  %sub.ptr.sub.i.i.i72 = sub i64 %wavefront.sroa.69.4, %wavefront.sroa.0.5
+  %sub.ptr.div.i.i.i73 = ashr exact i64 %sub.ptr.sub.i.i.i72, 3
+  %sub.i.i.i74 = sub i64 %wavefront.sroa.15.5, %sub.ptr.div.i.i.i73
+  %cmp.i.i.i75 = icmp ult i64 %sub.i.i.i74, 2
+  %tmp58 = inttoptr i64 %wavefront.sroa.69.4 to i32**
+  %tmp59 = inttoptr i64 %wavefront.sroa.0.5 to i32**
+  %castInst130 = zext i1 %cmp.i.i.i75 to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @209, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @210, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @211, i32 0, i32 0), i32 %castInst130, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @212, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @213, i32 0, i32 0))
+  br i1 %cmp.i.i.i75, label %if.then.i.i.i77, label %_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i85
+
+if.then.i.i.i77:                                  ; preds = %if.else.i76
+  %sub.ptr.rhs.cast.i93 = ptrtoint i32** %wavefront.sroa.36.5 to i64
+  %sub.ptr.sub.i94 = sub i64 %wavefront.sroa.69.4, %sub.ptr.rhs.cast.i93
+  %sub.ptr.div.i95 = ashr exact i64 %sub.ptr.sub.i94, 3
+  %add.i96 = add nsw i64 %sub.ptr.div.i95, 1
+  %add4.i97 = add nsw i64 %sub.ptr.div.i95, 2
+  %mul.i99 = shl nsw i64 %add4.i97, 1
+  %cmp.i100 = icmp ugt i64 %wavefront.sroa.15.5, %mul.i99
+  %castInst131 = zext i1 %cmp.i100 to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @214, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @215, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @216, i32 0, i32 0), i32 %castInst131, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @217, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @218, i32 0, i32 0))
+  br i1 %cmp.i100, label %if.then.i110, label %if.else31.i124
+
+if.then.i110:                                     ; preds = %if.then.i.i.i77
+  %sub.i102 = sub i64 %wavefront.sroa.15.5, %add4.i97
+  %div.i103 = lshr i64 %sub.i102, 1
+  %add.ptr.i104 = getelementptr inbounds i32*, i32** %tmp59, i64 %div.i103
+  %cmp13.i105 = icmp ult i32** %add.ptr.i104, %wavefront.sroa.36.5
+  %add.ptr21.i106 = getelementptr inbounds i32*, i32** %tmp58, i64 1
+  %sub.ptr.lhs.cast.i.i.i.i.i107 = ptrtoint i32** %add.ptr21.i106 to i64
+  %sub.ptr.sub.i.i.i.i.i108 = sub i64 %sub.ptr.lhs.cast.i.i.i.i.i107, %sub.ptr.rhs.cast.i93
+  %tobool.i.i.i.i.i109 = icmp eq i64 %sub.ptr.sub.i.i.i.i.i108, 0
+  %castInst132 = zext i1 %cmp13.i105 to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @219, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @220, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @221, i32 0, i32 0), i32 %castInst132, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @222, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @223, i32 0, i32 0))
+  br i1 %cmp13.i105, label %if.then14.i111, label %if.else.i113
+
+if.then14.i111:                                   ; preds = %if.then.i110
+  %castInst133 = zext i1 %tobool.i.i.i.i.i109 to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @224, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @225, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @226, i32 0, i32 0), i32 %castInst133, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @227, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @228, i32 0, i32 0))
+  br i1 %tobool.i.i.i.i.i109, label %.noexc86, label %if.then.i.i.i.i.i112
+
+if.then.i.i.i.i.i112:                             ; preds = %if.then14.i111
+  %tmp60 = bitcast i32** %add.ptr.i104 to i8*
+  %tmp61 = bitcast i32** %wavefront.sroa.36.5 to i8*
+  call void @llvm.memmove.p0i8.p0i8.i64(i8* align 8 %tmp60, i8* align 8 %tmp61, i64 %sub.ptr.sub.i.i.i.i.i108, i1 false) #3
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @229, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @230, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @231, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @232, i32 0, i32 0))
+  br label %.noexc86
+
+if.else.i113:                                     ; preds = %if.then.i110
+  %castInst134 = zext i1 %tobool.i.i.i.i.i109 to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @233, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @234, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @235, i32 0, i32 0), i32 %castInst134, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @236, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @237, i32 0, i32 0))
+  br i1 %tobool.i.i.i.i.i109, label %.noexc86, label %if.then.i.i.i.i101.i118
+
+if.then.i.i.i.i101.i118:                          ; preds = %if.else.i113
+  %add.ptr29.i114 = getelementptr inbounds i32*, i32** %add.ptr.i104, i64 %add.i96
+  %sub.ptr.div.i.i.i.i99.i115 = ashr exact i64 %sub.ptr.sub.i.i.i.i.i108, 3
+  %idx.neg.i.i.i.i.i116 = sub nsw i64 0, %sub.ptr.div.i.i.i.i99.i115
+  %add.ptr.i.i.i.i100.i117 = getelementptr inbounds i32*, i32** %add.ptr29.i114, i64 %idx.neg.i.i.i.i.i116
+  %tmp62 = bitcast i32** %add.ptr.i.i.i.i100.i117 to i8*
+  %tmp63 = bitcast i32** %wavefront.sroa.36.5 to i8*
+  call void @llvm.memmove.p0i8.p0i8.i64(i8* align 8 %tmp62, i8* align 8 %tmp63, i64 %sub.ptr.sub.i.i.i.i.i108, i1 false) #3
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @238, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @239, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @240, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @241, i32 0, i32 0))
+  br label %.noexc86
+
+if.else31.i124:                                   ; preds = %if.then.i.i.i77
+  %cmp.i.i119 = icmp eq i64 %wavefront.sroa.15.5, 0
+  %.sroa.speculated.i120 = select i1 %cmp.i.i119, i64 1, i64 %wavefront.sroa.15.5
+  %add37.i121 = add i64 %wavefront.sroa.15.5, 2
+  %add38.i122 = add i64 %add37.i121, %.sroa.speculated.i120
+  %cmp.i.i.i.i123 = icmp ugt i64 %add38.i122, 2305843009213693951
+  %castInst135 = zext i1 %cmp.i.i.i.i123 to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @242, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @243, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @244, i32 0, i32 0), i32 %castInst135, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @245, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @246, i32 0, i32 0))
+  br i1 %cmp.i.i.i.i123, label %if.then.i.i.i.i125, label %_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit.i135
+
+if.then.i.i.i.i125:                               ; preds = %if.else31.i124
+  call void @_ZSt17__throw_bad_allocv() #24
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @247, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @248, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @249, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @250, i32 0, i32 0))
+  br label %.noexc146
+
+.noexc146:                                        ; preds = %if.then.i.i.i.i125
+  unreachable
+
+_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit.i135: ; preds = %if.else31.i124
+  %mul.i.i.i.i126 = shl i64 %add38.i122, 3
+  %call2.i.i3.i.i148 = call i8* @_Znwm(i64 %mul.i.i.i.i126)
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @251, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @252, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @253, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @254, i32 0, i32 0))
+  br label %call2.i.i3.i.i.noexc147
+
+call2.i.i3.i.i.noexc147:                          ; preds = %_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit.i135
+  %tmp64 = bitcast i8* %call2.i.i3.i.i148 to i32**
+  %sub40.i127 = sub i64 %add38.i122, %add4.i97
+  %div41.i128 = lshr i64 %sub40.i127, 1
+  %add.ptr42.i129 = getelementptr inbounds i32*, i32** %tmp64, i64 %div41.i128
+  %tmp65 = inttoptr i64 %wavefront.sroa.69.4 to i32**
+  %add.ptr55.i130 = getelementptr inbounds i32*, i32** %tmp65, i64 1
+  %sub.ptr.lhs.cast.i.i.i.i102.i131 = ptrtoint i32** %add.ptr55.i130 to i64
+  %sub.ptr.rhs.cast.i.i.i.i103.i132 = ptrtoint i32** %wavefront.sroa.36.5 to i64
+  %sub.ptr.sub.i.i.i.i104.i133 = sub i64 %sub.ptr.lhs.cast.i.i.i.i102.i131, %sub.ptr.rhs.cast.i.i.i.i103.i132
+  %tobool.i.i.i.i106.i134 = icmp eq i64 %sub.ptr.sub.i.i.i.i104.i133, 0
+  %castInst136 = zext i1 %tobool.i.i.i.i106.i134 to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @255, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @256, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @257, i32 0, i32 0), i32 %castInst136, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @258, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @259, i32 0, i32 0))
+  br i1 %tobool.i.i.i.i106.i134, label %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137, label %if.then.i.i.i.i107.i136
+
+if.then.i.i.i.i107.i136:                          ; preds = %call2.i.i3.i.i.noexc147
+  %tmp66 = bitcast i32** %add.ptr42.i129 to i8*
+  %tmp67 = bitcast i32** %wavefront.sroa.36.5 to i8*
+  call void @llvm.memmove.p0i8.p0i8.i64(i8* nonnull align 8 %tmp66, i8* align 8 %tmp67, i64 %sub.ptr.sub.i.i.i.i104.i133, i1 false) #3
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @260, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @261, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @262, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @263, i32 0, i32 0))
+  br label %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137
+
+_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137:        ; preds = %if.then.i.i.i.i107.i136, %call2.i.i3.i.i.noexc147
+  %tmp68 = inttoptr i64 %wavefront.sroa.0.5 to i8*
+  call void @_ZdlPv(i8* %tmp68) #3
+  %tmp69 = ptrtoint i8* %call2.i.i3.i.i148 to i64
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @264, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @265, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @266, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @267, i32 0, i32 0))
+  br label %.noexc86
+
+.noexc86:                                         ; preds = %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137, %if.then.i.i.i.i101.i118, %if.else.i113, %if.then.i.i.i.i.i112, %if.then14.i111
+  %wavefront.sroa.0.6 = phi i64 [ %wavefront.sroa.0.5, %if.then14.i111 ], [ %wavefront.sroa.0.5, %if.then.i.i.i.i.i112 ], [ %wavefront.sroa.0.5, %if.else.i113 ], [ %wavefront.sroa.0.5, %if.then.i.i.i.i101.i118 ], [ %tmp69, %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137 ]
+  %wavefront.sroa.15.6 = phi i64 [ %wavefront.sroa.15.5, %if.then14.i111 ], [ %wavefront.sroa.15.5, %if.then.i.i.i.i.i112 ], [ %wavefront.sroa.15.5, %if.else.i113 ], [ %wavefront.sroa.15.5, %if.then.i.i.i.i101.i118 ], [ %add38.i122, %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137 ]
+  %__new_nstart.0.i138 = phi i32** [ %add.ptr42.i129, %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137 ], [ %add.ptr.i104, %if.then14.i111 ], [ %add.ptr.i104, %if.then.i.i.i.i.i112 ], [ %add.ptr.i104, %if.else.i113 ], [ %add.ptr.i104, %if.then.i.i.i.i101.i118 ]
+  %castInst137 = ptrtoint i32** %__new_nstart.0.i138 to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @268, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @269, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @270, i32 0, i32 0), i1 false, i64 %castInst137, i32 8)
+  %tmp70 = load i32*, i32** %__new_nstart.0.i138, align 8, !tbaa !26
+  %add.ptr.i93.i140 = getelementptr inbounds i32, i32* %tmp70, i64 128
+  %add.ptr71.i142 = getelementptr inbounds i32*, i32** %__new_nstart.0.i138, i64 %sub.ptr.div.i95
+  %tmp71 = ptrtoint i32** %add.ptr71.i142 to i64
+  %castInst138 = ptrtoint i32** %add.ptr71.i142 to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @271, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @272, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @273, i32 0, i32 0), i1 false, i64 %castInst138, i32 8)
+  %tmp72 = load i32*, i32** %add.ptr71.i142, align 8, !tbaa !26
+  %add.ptr.i.i144 = getelementptr inbounds i32, i32* %tmp72, i64 128
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @274, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @275, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @276, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @277, i32 0, i32 0))
+  br label %_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i85
+
+_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i85: ; preds = %.noexc86, %if.else.i76
+  %wavefront.sroa.0.7 = phi i64 [ %wavefront.sroa.0.6, %.noexc86 ], [ %wavefront.sroa.0.5, %if.else.i76 ]
+  %wavefront.sroa.15.7 = phi i64 [ %wavefront.sroa.15.6, %.noexc86 ], [ %wavefront.sroa.15.5, %if.else.i76 ]
+  %wavefront.sroa.26.6 = phi i32* [ %tmp70, %.noexc86 ], [ %wavefront.sroa.26.5, %if.else.i76 ]
+  %wavefront.sroa.31.6 = phi i32* [ %add.ptr.i93.i140, %.noexc86 ], [ %wavefront.sroa.31.5, %if.else.i76 ]
+  %wavefront.sroa.36.6 = phi i32** [ %__new_nstart.0.i138, %.noexc86 ], [ %wavefront.sroa.36.5, %if.else.i76 ]
+  %wavefront.sroa.69.5 = phi i64 [ %tmp71, %.noexc86 ], [ %wavefront.sroa.69.4, %if.else.i76 ]
+  %call2.i.i.i.i.i88 = call i8* @_Znwm(i64 512)
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @278, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @279, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @280, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @281, i32 0, i32 0))
+  br label %call2.i.i.i.i.i.noexc87
+
+call2.i.i.i.i.i.noexc87:                          ; preds = %_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i85
+  %tmp73 = inttoptr i64 %wavefront.sroa.69.5 to i32**
+  %add.ptr.i.i79 = getelementptr inbounds i32*, i32** %tmp73, i64 1
+  %tmp74 = bitcast i32** %add.ptr.i.i79 to i8**
+  %castInst139 = ptrtoint i8** %tmp74 to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @282, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @283, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @284, i32 0, i32 0), i1 true, i64 %castInst139, i32 8)
+  store i8* %call2.i.i.i.i.i88, i8** %tmp74, align 8, !tbaa !26
+  %tmp75 = inttoptr i64 %wavefront.sroa.47.3 to i32*
+  %castInst140 = ptrtoint i32* %tmp75 to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @285, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @286, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @287, i32 0, i32 0), i1 true, i64 %castInst140, i32 4)
+  store i32 %tmp53, i32* %tmp75, align 4, !tbaa !23
+  %tmp76 = inttoptr i64 %wavefront.sroa.69.5 to i32**
+  %add.ptr11.i.i81 = getelementptr inbounds i32*, i32** %tmp76, i64 1
+  %tmp77 = ptrtoint i32** %add.ptr11.i.i81 to i64
+  %castInst141 = ptrtoint i32** %add.ptr11.i.i81 to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @288, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @289, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @290, i32 0, i32 0), i1 false, i64 %castInst141, i32 8)
+  %tmp78 = load i32*, i32** %add.ptr11.i.i81, align 8, !tbaa !26
+  %add.ptr.i.i.i83 = getelementptr inbounds i32, i32* %tmp78, i64 128
+  %.cast.i.i84 = ptrtoint i32* %tmp78 to i64
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @291, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @292, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @293, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @294, i32 0, i32 0))
+  br label %invoke.cont21
+
+invoke.cont21:                                    ; preds = %call2.i.i.i.i.i.noexc87, %if.then.i69
+  %wavefront.sroa.0.8 = phi i64 [ %wavefront.sroa.0.7, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.0.5, %if.then.i69 ]
+  %wavefront.sroa.15.8 = phi i64 [ %wavefront.sroa.15.7, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.15.5, %if.then.i69 ]
+  %wavefront.sroa.26.7 = phi i32* [ %wavefront.sroa.26.6, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.26.5, %if.then.i69 ]
+  %wavefront.sroa.31.7 = phi i32* [ %wavefront.sroa.31.6, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.31.5, %if.then.i69 ]
+  %wavefront.sroa.36.7 = phi i32** [ %wavefront.sroa.36.6, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.36.5, %if.then.i69 ]
+  %wavefront.sroa.47.4 = phi i64 [ %.cast.i.i84, %call2.i.i.i.i.i.noexc87 ], [ %tmp57, %if.then.i69 ]
+  %wavefront.sroa.62.4 = phi i32* [ %add.ptr.i.i.i83, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.62.3, %if.then.i69 ]
+  %wavefront.sroa.69.6 = phi i64 [ %tmp77, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.69.4, %if.then.i69 ]
+  %castInst142 = ptrtoint i32* %arrayidx13 to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @295, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @296, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @297, i32 0, i32 0), i1 true, i64 %castInst142, i32 4)
+  store i32 16677218, i32* %arrayidx13, align 4, !tbaa !23
+  %castInst143 = ptrtoint i32* %y to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @298, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @299, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @300, i32 0, i32 0), i1 false, i64 %castInst143, i32 4)
+  %.pre = load i32, i32* %y, align 4, !tbaa !54
+  %castInst144 = ptrtoint i32* %x to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @301, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @302, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @303, i32 0, i32 0), i1 false, i64 %castInst144, i32 4)
+  %.pre179 = load i32, i32* %x, align 4, !tbaa !56
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @304, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @305, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @306, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @307, i32 0, i32 0))
+  br label %if.end
+
+lpad20.loopexit:                                  ; No predecessors!
+  %lpad.loopexit = landingpad { i8*, i32 }
+          cleanup
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @308, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @309, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @310, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @311, i32 0, i32 0))
+  br label %ehcleanup
+
+lpad20.loopexit.split-lp:                         ; No predecessors!
+  %lpad.loopexit.split-lp = landingpad { i8*, i32 }
+          cleanup
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @312, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @313, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @314, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @315, i32 0, i32 0))
+  br label %ehcleanup
+
+if.end:                                           ; preds = %invoke.cont21, %for.body
+  %wavefront.sroa.0.9 = phi i64 [ %wavefront.sroa.0.8, %invoke.cont21 ], [ %wavefront.sroa.0.5, %for.body ]
+  %wavefront.sroa.15.9 = phi i64 [ %wavefront.sroa.15.8, %invoke.cont21 ], [ %wavefront.sroa.15.5, %for.body ]
+  %wavefront.sroa.26.8 = phi i32* [ %wavefront.sroa.26.7, %invoke.cont21 ], [ %wavefront.sroa.26.5, %for.body ]
+  %wavefront.sroa.31.8 = phi i32* [ %wavefront.sroa.31.7, %invoke.cont21 ], [ %wavefront.sroa.31.5, %for.body ]
+  %wavefront.sroa.36.8 = phi i32** [ %wavefront.sroa.36.7, %invoke.cont21 ], [ %wavefront.sroa.36.5, %for.body ]
+  %wavefront.sroa.47.5 = phi i64 [ %wavefront.sroa.47.4, %invoke.cont21 ], [ %wavefront.sroa.47.3, %for.body ]
+  %wavefront.sroa.62.5 = phi i32* [ %wavefront.sroa.62.4, %invoke.cont21 ], [ %wavefront.sroa.62.3, %for.body ]
+  %wavefront.sroa.69.7 = phi i64 [ %wavefront.sroa.69.6, %invoke.cont21 ], [ %wavefront.sroa.69.4, %for.body ]
+  %tmp79 = phi i32 [ %.pre179, %invoke.cont21 ], [ %tmp51, %for.body ]
+  %tmp80 = phi i32 [ %.pre, %invoke.cont21 ], [ %tmp52, %for.body ]
+  %indvars.iv.next = add nsw i64 %indvars.iv, 1
+  %add = add nsw i32 %tmp79, %tmp80
+  %tmp81 = sext i32 %add to i64
+  %cmp = icmp slt i64 %indvars.iv.next, %tmp81
+  %castInst145 = zext i1 %cmp to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @316, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @317, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @318, i32 0, i32 0), i32 %castInst145, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @319, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @320, i32 0, i32 0))
+  br i1 %cmp, label %for.body, label %for.cond.cleanup.loopexit
+
+while.end:                                        ; preds = %for.cond.cleanup, %invoke.cont
+  %wavefront.sroa.0.10 = phi i64 [ %wavefront.sroa.0.2, %invoke.cont ], [ %wavefront.sroa.0.4, %for.cond.cleanup ]
+  %wavefront.sroa.36.9 = phi i32** [ %wavefront.sroa.36.1, %invoke.cont ], [ %wavefront.sroa.36.4, %for.cond.cleanup ]
+  %wavefront.sroa.69.8 = phi i64 [ %wavefront.sroa.69.1, %invoke.cont ], [ %wavefront.sroa.69.3, %for.cond.cleanup ]
+  %tmp82 = inttoptr i64 %wavefront.sroa.0.10 to i32**
+  %tobool.i.i = icmp eq i32** %tmp82, null
+  %castInst146 = zext i1 %tobool.i.i to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @321, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @322, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @323, i32 0, i32 0), i32 %castInst146, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @324, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @325, i32 0, i32 0))
+  br i1 %tobool.i.i, label %_ZNSt5dequeIiSaIiEED2Ev.exit, label %if.then.i.i
+
+if.then.i.i:                                      ; preds = %while.end
+  %tmp83 = bitcast i32** %tmp82 to i8*
+  %tmp84 = inttoptr i64 %wavefront.sroa.69.8 to i32**
+  %add.ptr.i.i151 = getelementptr inbounds i32*, i32** %tmp84, i64 1
+  %cmp5.i.i.i = icmp ult i32** %wavefront.sroa.36.9, %add.ptr.i.i151
+  %castInst147 = zext i1 %cmp5.i.i.i to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @326, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @327, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @328, i32 0, i32 0), i32 %castInst147, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @329, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @330, i32 0, i32 0))
+  br i1 %cmp5.i.i.i, label %for.body.i.i.i, label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i
+
+for.body.i.i.i:                                   ; preds = %for.body.i.i.i, %if.then.i.i
+  %__n.06.i.i.i = phi i32** [ %incdec.ptr.i.i.i, %for.body.i.i.i ], [ %wavefront.sroa.36.9, %if.then.i.i ]
+  %tmp85 = bitcast i32** %__n.06.i.i.i to i8**
+  %castInst148 = ptrtoint i8** %tmp85 to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @331, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @332, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @333, i32 0, i32 0), i1 false, i64 %castInst148, i32 8)
+  %tmp86 = load i8*, i8** %tmp85, align 8, !tbaa !26
+  call void @_ZdlPv(i8* %tmp86) #3
+  %incdec.ptr.i.i.i = getelementptr inbounds i32*, i32** %__n.06.i.i.i, i64 1
+  %cmp.i.i.i152 = icmp ult i32** %__n.06.i.i.i, %tmp84
+  %castInst149 = zext i1 %cmp.i.i.i152 to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @334, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @335, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @336, i32 0, i32 0), i32 %castInst149, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @337, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @338, i32 0, i32 0))
+  br i1 %cmp.i.i.i152, label %for.body.i.i.i, label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i
+
+_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i: ; preds = %for.body.i.i.i
+  %tmp87 = inttoptr i64 %wavefront.sroa.0.10 to i8*
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @339, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @340, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @341, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @342, i32 0, i32 0))
+  br label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i
+
+_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i: ; preds = %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i, %if.then.i.i
+  %tmp88 = phi i8* [ %tmp87, %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i ], [ %tmp83, %if.then.i.i ]
+  call void @_ZdlPv(i8* %tmp88) #3
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @343, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @344, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @345, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @346, i32 0, i32 0))
+  br label %_ZNSt5dequeIiSaIiEED2Ev.exit
+
+_ZNSt5dequeIiSaIiEED2Ev.exit:                     ; preds = %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i, %while.end
+  ret void
+
+ehcleanup:                                        ; preds = %lpad20.loopexit.split-lp, %lpad20.loopexit, %lpad
+  %lpad.phi.sink181 = phi { i8*, i32 } [ %tmp50, %lpad ], [ %lpad.loopexit, %lpad20.loopexit ], [ %lpad.loopexit.split-lp, %lpad20.loopexit.split-lp ]
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @347, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @348, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @349, i32 0, i32 0), i1 false, i64 undef, i32 8)
+  %wavefront.sroa.0.0.load = load i64, i64* undef
+  %tmp89 = inttoptr i64 %wavefront.sroa.0.0.load to i32**
+  %tobool.i.i154 = icmp eq i32** %tmp89, null
+  %castInst150 = zext i1 %tobool.i.i154 to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @350, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @351, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @352, i32 0, i32 0), i32 %castInst150, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @353, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @354, i32 0, i32 0))
+  br i1 %tobool.i.i154, label %_ZNSt5dequeIiSaIiEED2Ev.exit168, label %if.then.i.i159
+
+if.then.i.i159:                                   ; preds = %ehcleanup
+  %tmp90 = bitcast i32** %tmp89 to i8*
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @355, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @356, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @357, i32 0, i32 0), i1 false, i64 undef, i32 8)
+  %wavefront.sroa.36.0.wavefront.sroa.36.40. = load i32**, i32*** undef, !tbaa !59
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @358, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @359, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @360, i32 0, i32 0), i1 false, i64 undef, i32 8)
+  %wavefront.sroa.69.72.54 = load i64, i64* undef, !tbaa !63
+  %tmp91 = inttoptr i64 %wavefront.sroa.69.72.54 to i32**
+  %add.ptr.i.i157 = getelementptr inbounds i32*, i32** %tmp91, i64 1
+  %cmp5.i.i.i158 = icmp ult i32** %wavefront.sroa.36.0.wavefront.sroa.36.40., %add.ptr.i.i157
+  %castInst151 = zext i1 %cmp5.i.i.i158 to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @361, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @362, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @363, i32 0, i32 0), i32 %castInst151, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @364, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @365, i32 0, i32 0))
+  br i1 %cmp5.i.i.i158, label %for.body.i.i.i163, label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i167
+
+for.body.i.i.i163:                                ; preds = %for.body.i.i.i163, %if.then.i.i159
+  %__n.06.i.i.i160 = phi i32** [ %incdec.ptr.i.i.i161, %for.body.i.i.i163 ], [ %wavefront.sroa.36.0.wavefront.sroa.36.40., %if.then.i.i159 ]
+  %tmp92 = bitcast i32** %__n.06.i.i.i160 to i8**
+  %castInst152 = ptrtoint i8** %tmp92 to i64
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @366, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @367, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @368, i32 0, i32 0), i1 false, i64 %castInst152, i32 8)
+  %tmp93 = load i8*, i8** %tmp92, align 8, !tbaa !26
+  call void @_ZdlPv(i8* %tmp93) #3
+  %incdec.ptr.i.i.i161 = getelementptr inbounds i32*, i32** %__n.06.i.i.i160, i64 1
+  %cmp.i.i.i162 = icmp ult i32** %__n.06.i.i.i160, %tmp91
+  %castInst153 = zext i1 %cmp.i.i.i162 to i32
+  call void @printBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @369, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @370, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @371, i32 0, i32 0), i32 %castInst153, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @372, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @373, i32 0, i32 0))
+  br i1 %cmp.i.i.i162, label %for.body.i.i.i163, label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i166
+
+_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i166: ; preds = %for.body.i.i.i163
+  call void @printMem(i8* getelementptr inbounds ([4 x i8], [4 x i8]* @374, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @375, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @376, i32 0, i32 0), i1 false, i64 undef, i32 8)
+  %wavefront.sroa.0.0.load87 = load i64, i64* undef
+  %tmp94 = inttoptr i64 %wavefront.sroa.0.0.load87 to i8*
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @377, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @378, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @379, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @380, i32 0, i32 0))
+  br label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i167
+
+_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i167: ; preds = %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i166, %if.then.i.i159
+  %tmp95 = phi i8* [ %tmp94, %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i166 ], [ %tmp90, %if.then.i.i159 ]
+  call void @_ZdlPv(i8* %tmp95) #3
+  call void @printuBranch(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @381, i32 0, i32 0), i8* getelementptr inbounds ([8 x i8], [8 x i8]* @382, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @383, i32 0, i32 0), i8* getelementptr inbounds ([3 x i8], [3 x i8]* @384, i32 0, i32 0))
+  br label %_ZNSt5dequeIiSaIiEED2Ev.exit168
+
+_ZNSt5dequeIiSaIiEED2Ev.exit168:                  ; preds = %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i167, %ehcleanup
+  resume { i8*, i32 } %lpad.phi.sink181
+}
+
+; Function Attrs: noreturn
+declare dso_local void @_ZSt17__throw_bad_allocv() local_unnamed_addr #13
+
+; Function Attrs: noinline uwtable
+define dso_local void @_Z14_kernel_supplyP4NodeP4EdgePiS3_iii(%struct.timezone* nocapture readonly %h_graph_nodes, %struct.timezone* nocapture readonly %h_graph_edges, i32* nocapture %color, i32* nocapture %h_cost, i32 %source, i32 %tid, i32 %num_threads) local_unnamed_addr #18 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+entry:
+  %tmp = ptrtoint i32* undef to i64
+  %tmp1 = ptrtoint i32* undef to i64
+  %tmp2 = ptrtoint i32** undef to i64
+  %tmp3 = ptrtoint i32* undef to i64
+  %tmp4 = ptrtoint i32* undef to i64
+  %call2.i.i3.i.i = call i8* @_Znwm(i64 64)
+  %tmp5 = bitcast i8* %call2.i.i3.i.i to i32**
+  %tmp6 = ptrtoint i8* %call2.i.i3.i.i to i64
+  %sub.i1 = sub i64 8, 1
+  %div13.i = lshr i64 %sub.i1, 1
+  %add.ptr.i2 = getelementptr inbounds i32*, i32** %tmp5, i64 %div13.i
+  %add.ptr14.i = getelementptr inbounds i32*, i32** %add.ptr.i2, i64 1
+  br label %for.body.i.i
+
+for.body.i.i:                                     ; preds = %for.body.i.i, %entry
+  %__cur.015.i.i = phi i32** [ %incdec.ptr.i.i, %for.body.i.i ], [ %add.ptr.i2, %entry ]
+  %call2.i.i.i12.i.i = call i8* @_Znwm(i64 512)
+  %tmp7 = bitcast i32** %__cur.015.i.i to i8**
+  store i8* %call2.i.i.i12.i.i, i8** %tmp7, align 8, !tbaa !26
+  %incdec.ptr.i.i = getelementptr inbounds i32*, i32** %__cur.015.i.i, i64 1
+  %cmp.i58.i = icmp ult i32** %incdec.ptr.i.i, %add.ptr14.i
+  br i1 %cmp.i58.i, label %for.body.i.i, label %_ZNSt11_Deque_baseIiSaIiEE17_M_initialize_mapEm.exit
+
+_ZNSt11_Deque_baseIiSaIiEE17_M_initialize_mapEm.exit: ; preds = %for.body.i.i
+  %tmp8 = load i32*, i32** %add.ptr.i2, align 8, !tbaa !26
+  %add.ptr.i56.i = getelementptr inbounds i32, i32* %tmp8, i64 128
+  %add.ptr27.i = getelementptr inbounds i32*, i32** %add.ptr14.i, i64 -1
+  %tmp9 = ptrtoint i32** %add.ptr27.i to i64
+  %tmp10 = load i32*, i32** %add.ptr27.i, align 8, !tbaa !26
+  %add.ptr.i.i6 = getelementptr inbounds i32, i32* %tmp10, i64 128
+  %tmp11 = ptrtoint i32* %tmp8 to i64
+  %tmp12 = ptrtoint i32* %tmp10 to i64
+  %tmp13 = inttoptr i64 %tmp12 to i32*
+  %add.ptr.i = getelementptr inbounds i32, i32* %add.ptr.i.i6, i64 -1
+  %cmp.i = icmp eq i32* %tmp13, %add.ptr.i
+  br i1 %cmp.i, label %if.else.i, label %if.then.i
+
+if.then.i:                                        ; preds = %_ZNSt11_Deque_baseIiSaIiEE17_M_initialize_mapEm.exit
+  store i32 %source, i32* %tmp13, align 4, !tbaa !23
+  %incdec.ptr.i = getelementptr inbounds i32, i32* %tmp13, i64 1
+  %tmp14 = ptrtoint i32* %incdec.ptr.i to i64
+  br label %invoke.cont
+
+if.else.i:                                        ; preds = %_ZNSt11_Deque_baseIiSaIiEE17_M_initialize_mapEm.exit
+  %sub.ptr.sub.i.i.i = sub i64 %tmp9, %tmp6
+  %sub.ptr.div.i.i.i = ashr exact i64 %sub.ptr.sub.i.i.i, 3
+  %sub.i.i.i = sub i64 8, %sub.ptr.div.i.i.i
+  %cmp.i.i.i = icmp ult i64 %sub.i.i.i, 2
+  %tmp15 = inttoptr i64 %tmp9 to i32**
+  %tmp16 = inttoptr i64 %tmp6 to i32**
+  br i1 %cmp.i.i.i, label %if.then.i.i.i, label %_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i
+
+if.then.i.i.i:                                    ; preds = %if.else.i
+  %sub.ptr.rhs.cast.i = ptrtoint i32** %add.ptr.i2 to i64
+  %sub.ptr.sub.i = sub i64 %tmp9, %sub.ptr.rhs.cast.i
+  %sub.ptr.div.i = ashr exact i64 %sub.ptr.sub.i, 3
+  %add.i = add nsw i64 %sub.ptr.div.i, 1
+  %add4.i = add nsw i64 %sub.ptr.div.i, 2
+  %mul.i = shl nsw i64 %add4.i, 1
+  %cmp.i45 = icmp ugt i64 8, %mul.i
+  br i1 %cmp.i45, label %if.then.i47, label %if.else31.i
+
+if.then.i47:                                      ; preds = %if.then.i.i.i
+  %sub.i = sub i64 8, %add4.i
+  %div.i = lshr i64 %sub.i, 1
+  %add.ptr.i46 = getelementptr inbounds i32*, i32** %tmp16, i64 %div.i
+  %cmp13.i = icmp ult i32** %add.ptr.i46, %add.ptr.i2
+  %add.ptr21.i = getelementptr inbounds i32*, i32** %tmp15, i64 1
   %sub.ptr.lhs.cast.i.i.i.i.i = ptrtoint i32** %add.ptr21.i to i64
   %sub.ptr.sub.i.i.i.i.i = sub i64 %sub.ptr.lhs.cast.i.i.i.i.i, %sub.ptr.rhs.cast.i
   %tobool.i.i.i.i.i = icmp eq i64 %sub.ptr.sub.i.i.i.i.i, 0
@@ -5711,9 +6940,9 @@ if.then14.i:                                      ; preds = %if.then.i47
   br i1 %tobool.i.i.i.i.i, label %.noexc, label %if.then.i.i.i.i.i
 
 if.then.i.i.i.i.i:                                ; preds = %if.then14.i
-  %tmp12 = bitcast i32** %add.ptr.i46 to i8*
-  %tmp13 = bitcast i32** %tmp11 to i8*
-  call void @llvm.memmove.p0i8.p0i8.i64(i8* align 8 %tmp12, i8* align 8 %tmp13, i64 %sub.ptr.sub.i.i.i.i.i, i1 false) #3
+  %tmp17 = bitcast i32** %add.ptr.i46 to i8*
+  %tmp18 = bitcast i32** %add.ptr.i2 to i8*
+  call void @llvm.memmove.p0i8.p0i8.i64(i8* align 8 %tmp17, i8* align 8 %tmp18, i64 %sub.ptr.sub.i.i.i.i.i, i1 false) #3
   br label %.noexc
 
 if.else.i48:                                      ; preds = %if.then.i47
@@ -5724,21 +6953,21 @@ if.then.i.i.i.i101.i:                             ; preds = %if.else.i48
   %sub.ptr.div.i.i.i.i99.i = ashr exact i64 %sub.ptr.sub.i.i.i.i.i, 3
   %idx.neg.i.i.i.i.i = sub nsw i64 0, %sub.ptr.div.i.i.i.i99.i
   %add.ptr.i.i.i.i100.i = getelementptr inbounds i32*, i32** %add.ptr29.i, i64 %idx.neg.i.i.i.i.i
-  %tmp14 = bitcast i32** %add.ptr.i.i.i.i100.i to i8*
-  %tmp15 = bitcast i32** %tmp11 to i8*
-  call void @llvm.memmove.p0i8.p0i8.i64(i8* align 8 %tmp14, i8* align 8 %tmp15, i64 %sub.ptr.sub.i.i.i.i.i, i1 false) #3
+  %tmp19 = bitcast i32** %add.ptr.i.i.i.i100.i to i8*
+  %tmp20 = bitcast i32** %add.ptr.i2 to i8*
+  call void @llvm.memmove.p0i8.p0i8.i64(i8* align 8 %tmp19, i8* align 8 %tmp20, i64 %sub.ptr.sub.i.i.i.i.i, i1 false) #3
   br label %.noexc
 
 if.else31.i:                                      ; preds = %if.then.i.i.i
-  %cmp.i.i = icmp eq i64 %tmp4, 0
-  %.sroa.speculated.i = select i1 %cmp.i.i, i64 1, i64 %tmp4
-  %add37.i = add i64 %tmp4, 2
+  %cmp.i.i = icmp eq i64 8, 0
+  %.sroa.speculated.i = select i1 %cmp.i.i, i64 1, i64 8
+  %add37.i = add i64 8, 2
   %add38.i = add i64 %add37.i, %.sroa.speculated.i
   %cmp.i.i.i.i = icmp ugt i64 %add38.i, 2305843009213693951
   br i1 %cmp.i.i.i.i, label %if.then.i.i.i.i, label %_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit.i
 
 if.then.i.i.i.i:                                  ; preds = %if.else31.i
-  call void @_ZSt17__throw_bad_allocv() #20
+  call void @_ZSt17__throw_bad_allocv() #24
   br label %.noexc50
 
 .noexc50:                                         ; preds = %if.then.i.i.i.i
@@ -5750,222 +6979,221 @@ _ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit.i: ; preds = %if.else31.i
   br label %call2.i.i3.i.i.noexc
 
 call2.i.i3.i.i.noexc:                             ; preds = %_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit.i
-  %tmp16 = bitcast i8* %call2.i.i3.i.i51 to i32**
+  %tmp21 = bitcast i8* %call2.i.i3.i.i51 to i32**
   %sub40.i = sub i64 %add38.i, %add4.i
   %div41.i = lshr i64 %sub40.i, 1
-  %add.ptr42.i = getelementptr inbounds i32*, i32** %tmp16, i64 %div41.i
-  %tmp17 = load i32**, i32*** %_M_node3.i, align 8, !tbaa !60
-  %tmp18 = load i32**, i32*** %_M_node.i.i.i, align 8, !tbaa !58
-  %add.ptr55.i = getelementptr inbounds i32*, i32** %tmp18, i64 1
+  %add.ptr42.i = getelementptr inbounds i32*, i32** %tmp21, i64 %div41.i
+  %tmp22 = inttoptr i64 %tmp9 to i32**
+  %add.ptr55.i = getelementptr inbounds i32*, i32** %tmp22, i64 1
   %sub.ptr.lhs.cast.i.i.i.i102.i = ptrtoint i32** %add.ptr55.i to i64
-  %sub.ptr.rhs.cast.i.i.i.i103.i = ptrtoint i32** %tmp17 to i64
+  %sub.ptr.rhs.cast.i.i.i.i103.i = ptrtoint i32** %add.ptr.i2 to i64
   %sub.ptr.sub.i.i.i.i104.i = sub i64 %sub.ptr.lhs.cast.i.i.i.i102.i, %sub.ptr.rhs.cast.i.i.i.i103.i
   %tobool.i.i.i.i106.i = icmp eq i64 %sub.ptr.sub.i.i.i.i104.i, 0
   br i1 %tobool.i.i.i.i106.i, label %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i, label %if.then.i.i.i.i107.i
 
 if.then.i.i.i.i107.i:                             ; preds = %call2.i.i3.i.i.noexc
-  %tmp19 = bitcast i32** %add.ptr42.i to i8*
-  %tmp20 = bitcast i32** %tmp17 to i8*
-  call void @llvm.memmove.p0i8.p0i8.i64(i8* nonnull align 8 %tmp19, i8* align 8 %tmp20, i64 %sub.ptr.sub.i.i.i.i104.i, i1 false) #3
+  %tmp23 = bitcast i32** %add.ptr42.i to i8*
+  %tmp24 = bitcast i32** %add.ptr.i2 to i8*
+  call void @llvm.memmove.p0i8.p0i8.i64(i8* nonnull align 8 %tmp23, i8* align 8 %tmp24, i64 %sub.ptr.sub.i.i.i.i104.i, i1 false) #3
   br label %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i
 
 _ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i:           ; preds = %if.then.i.i.i.i107.i, %call2.i.i3.i.i.noexc
-  %tmp21 = bitcast %"class.std::deque"* %wavefront to i8**
-  %tmp22 = load i8*, i8** %tmp21, align 8, !tbaa !59
-  call void @_ZdlPv(i8* %tmp22) #3
-  store i8* %call2.i.i3.i.i51, i8** %tmp21, align 8, !tbaa !59
-  store i64 %add38.i, i64* %_M_map_size.i.i.i, align 8, !tbaa !57
+  %tmp25 = inttoptr i64 %tmp6 to i8*
+  call void @_ZdlPv(i8* %tmp25) #3
+  %tmp26 = ptrtoint i8* %call2.i.i3.i.i51 to i64
   br label %.noexc
 
 .noexc:                                           ; preds = %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i, %if.then.i.i.i.i101.i, %if.else.i48, %if.then.i.i.i.i.i, %if.then14.i
+  %wavefront.sroa.0.0 = phi i64 [ %tmp6, %if.then14.i ], [ %tmp6, %if.then.i.i.i.i.i ], [ %tmp6, %if.else.i48 ], [ %tmp6, %if.then.i.i.i.i101.i ], [ %tmp26, %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i ]
+  %wavefront.sroa.15.0 = phi i64 [ 8, %if.then14.i ], [ 8, %if.then.i.i.i.i.i ], [ 8, %if.else.i48 ], [ 8, %if.then.i.i.i.i101.i ], [ %add38.i, %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i ]
   %__new_nstart.0.i = phi i32** [ %add.ptr42.i, %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i ], [ %add.ptr.i46, %if.then14.i ], [ %add.ptr.i46, %if.then.i.i.i.i.i ], [ %add.ptr.i46, %if.else.i48 ], [ %add.ptr.i46, %if.then.i.i.i.i101.i ]
-  store i32** %__new_nstart.0.i, i32*** %_M_node3.i, align 8, !tbaa !61
-  %tmp23 = load i32*, i32** %__new_nstart.0.i, align 8, !tbaa !26
-  %_M_first.i92.i = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 2, i32 1
-  store i32* %tmp23, i32** %_M_first.i92.i, align 8, !tbaa !62
-  %add.ptr.i93.i = getelementptr inbounds i32, i32* %tmp23, i64 128
-  %_M_last.i94.i = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 2, i32 2
-  store i32* %add.ptr.i93.i, i32** %_M_last.i94.i, align 8, !tbaa !63
+  %tmp27 = load i32*, i32** %__new_nstart.0.i, align 8, !tbaa !26
+  %add.ptr.i93.i = getelementptr inbounds i32, i32* %tmp27, i64 128
   %add.ptr71.i = getelementptr inbounds i32*, i32** %__new_nstart.0.i, i64 %sub.ptr.div.i
-  store i32** %add.ptr71.i, i32*** %_M_node.i.i.i, align 8, !tbaa !61
-  %tmp24 = load i32*, i32** %add.ptr71.i, align 8, !tbaa !26
-  %_M_first.i.i = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 3, i32 1
-  store i32* %tmp24, i32** %_M_first.i.i, align 8, !tbaa !62
-  %add.ptr.i.i49 = getelementptr inbounds i32, i32* %tmp24, i64 128
-  store i32* %add.ptr.i.i49, i32** %_M_last.i, align 8, !tbaa !63
+  %tmp28 = ptrtoint i32** %add.ptr71.i to i64
+  %tmp29 = load i32*, i32** %add.ptr71.i, align 8, !tbaa !26
+  %add.ptr.i.i49 = getelementptr inbounds i32, i32* %tmp29, i64 128
   br label %_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i
 
 _ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i: ; preds = %.noexc, %if.else.i
+  %wavefront.sroa.0.1 = phi i64 [ %wavefront.sroa.0.0, %.noexc ], [ %tmp6, %if.else.i ]
+  %wavefront.sroa.15.1 = phi i64 [ %wavefront.sroa.15.0, %.noexc ], [ 8, %if.else.i ]
+  %wavefront.sroa.26.0 = phi i32* [ %tmp27, %.noexc ], [ %tmp8, %if.else.i ]
+  %wavefront.sroa.31.0 = phi i32* [ %add.ptr.i93.i, %.noexc ], [ %add.ptr.i56.i, %if.else.i ]
+  %wavefront.sroa.36.0 = phi i32** [ %__new_nstart.0.i, %.noexc ], [ %add.ptr.i2, %if.else.i ]
+  %wavefront.sroa.69.0 = phi i64 [ %tmp28, %.noexc ], [ %tmp9, %if.else.i ]
   %call2.i.i.i.i.i44 = call i8* @_Znwm(i64 512)
   br label %call2.i.i.i.i.i.noexc
 
 call2.i.i.i.i.i.noexc:                            ; preds = %_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i
-  %_M_finish.i.i = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 3
-  %tmp25 = load i32**, i32*** %_M_node.i.i.i, align 8, !tbaa !58
-  %add.ptr.i.i = getelementptr inbounds i32*, i32** %tmp25, i64 1
-  %tmp26 = bitcast i32** %add.ptr.i.i to i8**
-  store i8* %call2.i.i.i.i.i44, i8** %tmp26, align 8, !tbaa !26
-  %_M_cur.i.i = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish.i.i, i64 0, i32 0
-  %tmp27 = load i32*, i32** %_M_cur.i.i, align 8, !tbaa !52
-  store i32 %source, i32* %tmp27, align 4, !tbaa !23
-  %tmp28 = load i32**, i32*** %_M_node.i.i.i, align 8, !tbaa !58
-  %add.ptr11.i.i = getelementptr inbounds i32*, i32** %tmp28, i64 1
-  store i32** %add.ptr11.i.i, i32*** %_M_node.i.i.i, align 8, !tbaa !61
-  %tmp29 = load i32*, i32** %add.ptr11.i.i, align 8, !tbaa !26
-  %_M_first.i.i.i = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 3, i32 1
-  store i32* %tmp29, i32** %_M_first.i.i.i, align 8, !tbaa !62
-  %add.ptr.i.i.i = getelementptr inbounds i32, i32* %tmp29, i64 128
-  store i32* %add.ptr.i.i.i, i32** %_M_last.i, align 8, !tbaa !63
-  %.cast.i.i = ptrtoint i32* %tmp29 to i64
-  %tmp30 = bitcast %"struct.std::_Deque_iterator"* %_M_finish.i.i to i64*
-  store i64 %.cast.i.i, i64* %tmp30, align 8, !tbaa !52
+  %tmp30 = inttoptr i64 %wavefront.sroa.69.0 to i32**
+  %add.ptr.i.i = getelementptr inbounds i32*, i32** %tmp30, i64 1
+  %tmp31 = bitcast i32** %add.ptr.i.i to i8**
+  store i8* %call2.i.i.i.i.i44, i8** %tmp31, align 8, !tbaa !26
+  %tmp32 = inttoptr i64 %tmp12 to i32*
+  store i32 %source, i32* %tmp32, align 4, !tbaa !23
+  %tmp33 = inttoptr i64 %wavefront.sroa.69.0 to i32**
+  %add.ptr11.i.i = getelementptr inbounds i32*, i32** %tmp33, i64 1
+  %tmp34 = ptrtoint i32** %add.ptr11.i.i to i64
+  %tmp35 = load i32*, i32** %add.ptr11.i.i, align 8, !tbaa !26
+  %add.ptr.i.i.i = getelementptr inbounds i32, i32* %tmp35, i64 128
+  %.cast.i.i = ptrtoint i32* %tmp35 to i64
   br label %invoke.cont
 
 invoke.cont:                                      ; preds = %call2.i.i.i.i.i.noexc, %if.then.i
-  %tmp31 = phi i32* [ %tmp29, %call2.i.i.i.i.i.noexc ], [ %incdec.ptr.i, %if.then.i ]
+  %wavefront.sroa.0.2 = phi i64 [ %wavefront.sroa.0.1, %call2.i.i.i.i.i.noexc ], [ %tmp6, %if.then.i ]
+  %wavefront.sroa.15.2 = phi i64 [ %wavefront.sroa.15.1, %call2.i.i.i.i.i.noexc ], [ 8, %if.then.i ]
+  %wavefront.sroa.26.1 = phi i32* [ %wavefront.sroa.26.0, %call2.i.i.i.i.i.noexc ], [ %tmp8, %if.then.i ]
+  %wavefront.sroa.31.1 = phi i32* [ %wavefront.sroa.31.0, %call2.i.i.i.i.i.noexc ], [ %add.ptr.i56.i, %if.then.i ]
+  %wavefront.sroa.36.1 = phi i32** [ %wavefront.sroa.36.0, %call2.i.i.i.i.i.noexc ], [ %add.ptr.i2, %if.then.i ]
+  %wavefront.sroa.47.0 = phi i64 [ %.cast.i.i, %call2.i.i.i.i.i.noexc ], [ %tmp14, %if.then.i ]
+  %wavefront.sroa.62.0 = phi i32* [ %add.ptr.i.i.i, %call2.i.i.i.i.i.noexc ], [ %add.ptr.i.i6, %if.then.i ]
+  %wavefront.sroa.69.1 = phi i64 [ %tmp34, %call2.i.i.i.i.i.noexc ], [ %tmp9, %if.then.i ]
+  %tmp36 = phi i32* [ %tmp35, %call2.i.i.i.i.i.noexc ], [ %incdec.ptr.i, %if.then.i ]
   %idxprom = sext i32 %source to i64
   %arrayidx = getelementptr inbounds i32, i32* %color, i64 %idxprom
   store i32 16677218, i32* %arrayidx, align 4, !tbaa !23
-  %_M_cur1.i.i = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 2, i32 0
-  %tmp32 = load i32*, i32** %_M_cur1.i.i, align 8, !tbaa !64
-  %cmp.i.i53178 = icmp eq i32* %tmp31, %tmp32
+  %tmp37 = inttoptr i64 %tmp11 to i32*
+  %cmp.i.i53178 = icmp eq i32* %tmp36, %tmp37
   br i1 %cmp.i.i53178, label %while.end, label %while.body.lr.ph
 
 while.body.lr.ph:                                 ; preds = %invoke.cont
-  %_M_last.i55 = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 2, i32 2
-  %_M_start.i.i = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 2
-  %_M_first.i.i59 = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 2, i32 1
-  %tmp33 = bitcast i32** %_M_first.i.i59 to i8**
-  %_M_node.i.i = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 2, i32 3
-  %tmp34 = bitcast %"struct.std::_Deque_iterator"* %_M_start.i.i to i64*
-  %_M_map_size.i.i.i70 = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 1
-  %_M_node.i.i.i71 = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 3, i32 3
-  %tmp35 = bitcast i32*** %_M_node.i.i.i71 to i64*
-  %tmp36 = bitcast %"class.std::deque"* %wavefront to i64*
-  %tmp37 = bitcast %"class.std::deque"* %wavefront to i8**
-  %_M_first.i.i143 = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 3, i32 1
-  %_M_finish.i.i78 = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 3
-  %_M_cur.i.i80 = getelementptr inbounds %"struct.std::_Deque_iterator", %"struct.std::_Deque_iterator"* %_M_finish.i.i78, i64 0, i32 0
-  %tmp38 = bitcast %"struct.std::_Deque_iterator"* %_M_finish.i.i78 to i64*
   br label %while.body
 
 while.body:                                       ; preds = %for.cond.cleanup, %while.body.lr.ph
-  %tmp39 = phi i32* [ %tmp32, %while.body.lr.ph ], [ %tmp49, %for.cond.cleanup ]
-  %tmp40 = load i32, i32* %tmp39, align 4, !tbaa !23
-  %tmp41 = load i32*, i32** %_M_last.i55, align 8, !tbaa !65
-  %add.ptr.i56 = getelementptr inbounds i32, i32* %tmp41, i64 -1
-  %cmp.i57 = icmp eq i32* %tmp39, %add.ptr.i56
+  %wavefront.sroa.0.3 = phi i64 [ %wavefront.sroa.0.2, %while.body.lr.ph ], [ %wavefront.sroa.0.4, %for.cond.cleanup ]
+  %wavefront.sroa.15.3 = phi i64 [ %wavefront.sroa.15.2, %while.body.lr.ph ], [ %wavefront.sroa.15.4, %for.cond.cleanup ]
+  %wavefront.sroa.26.2 = phi i32* [ %wavefront.sroa.26.1, %while.body.lr.ph ], [ %wavefront.sroa.26.4, %for.cond.cleanup ]
+  %wavefront.sroa.31.2 = phi i32* [ %wavefront.sroa.31.1, %while.body.lr.ph ], [ %wavefront.sroa.31.4, %for.cond.cleanup ]
+  %wavefront.sroa.36.2 = phi i32** [ %wavefront.sroa.36.1, %while.body.lr.ph ], [ %wavefront.sroa.36.4, %for.cond.cleanup ]
+  %wavefront.sroa.47.1 = phi i64 [ %wavefront.sroa.47.0, %while.body.lr.ph ], [ %wavefront.sroa.47.2, %for.cond.cleanup ]
+  %wavefront.sroa.62.1 = phi i32* [ %wavefront.sroa.62.0, %while.body.lr.ph ], [ %wavefront.sroa.62.2, %for.cond.cleanup ]
+  %wavefront.sroa.69.2 = phi i64 [ %wavefront.sroa.69.1, %while.body.lr.ph ], [ %wavefront.sroa.69.3, %for.cond.cleanup ]
+  %tmp38 = phi i32* [ %tmp37, %while.body.lr.ph ], [ %tmp48, %for.cond.cleanup ]
+  %tmp39 = load i32, i32* %tmp38, align 4, !tbaa !23
+  %add.ptr.i56 = getelementptr inbounds i32, i32* %wavefront.sroa.31.2, i64 -1
+  %cmp.i57 = icmp eq i32* %tmp38, %add.ptr.i56
   br i1 %cmp.i57, label %if.else.i63, label %invoke.cont.i
 
 invoke.cont.i:                                    ; preds = %while.body
-  %incdec.ptr.i58 = getelementptr inbounds i32, i32* %tmp39, i64 1
-  store i32* %incdec.ptr.i58, i32** %_M_cur1.i.i, align 8, !tbaa !66
+  %incdec.ptr.i58 = getelementptr inbounds i32, i32* %tmp38, i64 1
+  %tmp40 = ptrtoint i32* %incdec.ptr.i58 to i64
   br label %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit
 
 if.else.i63:                                      ; preds = %while.body
-  %tmp42 = load i8*, i8** %tmp33, align 8, !tbaa !67
-  call void @_ZdlPv(i8* %tmp42) #3
-  %tmp43 = load i32**, i32*** %_M_node.i.i, align 8, !tbaa !60
-  %add.ptr.i.i60 = getelementptr inbounds i32*, i32** %tmp43, i64 1
-  store i32** %add.ptr.i.i60, i32*** %_M_node.i.i, align 8, !tbaa !61
-  %tmp44 = load i32*, i32** %add.ptr.i.i60, align 8, !tbaa !26
-  store i32* %tmp44, i32** %_M_first.i.i59, align 8, !tbaa !62
-  %add.ptr.i.i.i61 = getelementptr inbounds i32, i32* %tmp44, i64 128
-  store i32* %add.ptr.i.i.i61, i32** %_M_last.i55, align 8, !tbaa !63
-  %.cast.i.i62 = ptrtoint i32* %tmp44 to i64
-  store i64 %.cast.i.i62, i64* %tmp34, align 8, !tbaa !66
+  %tmp41 = bitcast i32* %wavefront.sroa.26.2 to i8*
+  call void @_ZdlPv(i8* %tmp41) #3
+  %add.ptr.i.i60 = getelementptr inbounds i32*, i32** %wavefront.sroa.36.2, i64 1
+  %tmp42 = load i32*, i32** %add.ptr.i.i60, align 8, !tbaa !26
+  %add.ptr.i.i.i61 = getelementptr inbounds i32, i32* %tmp42, i64 128
+  %.cast.i.i62 = ptrtoint i32* %tmp42 to i64
   br label %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit
 
 _ZNSt5dequeIiSaIiEE9pop_frontEv.exit:             ; preds = %if.else.i63, %invoke.cont.i
-  %tmp45 = phi i32* [ %incdec.ptr.i58, %invoke.cont.i ], [ %tmp44, %if.else.i63 ]
-  %idxprom2 = sext i32 %tmp40 to i64
+  %wavefront.sroa.21.0 = phi i64 [ %.cast.i.i62, %if.else.i63 ], [ %tmp40, %invoke.cont.i ]
+  %wavefront.sroa.26.3 = phi i32* [ %tmp42, %if.else.i63 ], [ %wavefront.sroa.26.2, %invoke.cont.i ]
+  %wavefront.sroa.31.3 = phi i32* [ %add.ptr.i.i.i61, %if.else.i63 ], [ %wavefront.sroa.31.2, %invoke.cont.i ]
+  %wavefront.sroa.36.3 = phi i32** [ %add.ptr.i.i60, %if.else.i63 ], [ %wavefront.sroa.36.2, %invoke.cont.i ]
+  %tmp43 = phi i32* [ %incdec.ptr.i58, %invoke.cont.i ], [ %tmp42, %if.else.i63 ]
+  %idxprom2 = sext i32 %tmp39 to i64
   %x = getelementptr inbounds %struct.timezone, %struct.timezone* %h_graph_nodes, i64 %idxprom2, i32 0
   %y = getelementptr inbounds %struct.timezone, %struct.timezone* %h_graph_nodes, i64 %idxprom2, i32 1
-  %tmp46 = load i32, i32* %y, align 4, !tbaa !68
-  %cmp176 = icmp sgt i32 %tmp46, 0
+  %tmp44 = load i32, i32* %y, align 4, !tbaa !54
+  %cmp176 = icmp sgt i32 %tmp44, 0
   br i1 %cmp176, label %for.body.lr.ph, label %for.cond.cleanup
 
 for.body.lr.ph:                                   ; preds = %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit
-  %tmp47 = load i32, i32* %x, align 4, !tbaa !70
+  %tmp45 = load i32, i32* %x, align 4, !tbaa !56
   %arrayidx16 = getelementptr inbounds i32, i32* %h_cost, i64 %idxprom2
-  %tmp48 = sext i32 %tmp47 to i64
+  %tmp46 = sext i32 %tmp45 to i64
   br label %for.body
 
 for.cond.cleanup.loopexit:                        ; preds = %if.end
-  %.pre180 = load i32*, i32** %_M_cur1.i.i, align 8, !tbaa !64
+  %tmp47 = inttoptr i64 %wavefront.sroa.21.0 to i32*
   br label %for.cond.cleanup
 
 for.cond.cleanup:                                 ; preds = %for.cond.cleanup.loopexit, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit
-  %tmp49 = phi i32* [ %.pre180, %for.cond.cleanup.loopexit ], [ %tmp45, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.0.4 = phi i64 [ %wavefront.sroa.0.9, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.0.3, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.15.4 = phi i64 [ %wavefront.sroa.15.9, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.15.3, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.26.4 = phi i32* [ %wavefront.sroa.26.8, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.26.3, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.31.4 = phi i32* [ %wavefront.sroa.31.8, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.31.3, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.36.4 = phi i32** [ %wavefront.sroa.36.8, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.36.3, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.47.2 = phi i64 [ %wavefront.sroa.47.5, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.47.1, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.62.2 = phi i32* [ %wavefront.sroa.62.5, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.62.1, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.69.3 = phi i64 [ %wavefront.sroa.69.7, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.69.2, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %tmp48 = phi i32* [ %tmp47, %for.cond.cleanup.loopexit ], [ %tmp43, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
   %arrayidx25 = getelementptr inbounds i32, i32* %color, i64 %idxprom2
   store i32 16677221, i32* %arrayidx25, align 4, !tbaa !23
-  %tmp50 = load i32*, i32** %_M_cur.i, align 8, !tbaa !64
-  %cmp.i.i53 = icmp eq i32* %tmp50, %tmp49
+  %tmp49 = inttoptr i64 %wavefront.sroa.47.2 to i32*
+  %cmp.i.i53 = icmp eq i32* %tmp49, %tmp48
   br i1 %cmp.i.i53, label %while.end, label %while.body
 
 lpad:                                             ; No predecessors!
-  %tmp51 = landingpad { i8*, i32 }
+  %tmp50 = landingpad { i8*, i32 }
           cleanup
   br label %ehcleanup
 
 for.body:                                         ; preds = %if.end, %for.body.lr.ph
-  %tmp52 = phi i32 [ %tmp47, %for.body.lr.ph ], [ %tmp82, %if.end ]
-  %tmp53 = phi i32 [ %tmp46, %for.body.lr.ph ], [ %tmp83, %if.end ]
-  %indvars.iv = phi i64 [ %tmp48, %for.body.lr.ph ], [ %indvars.iv.next, %if.end ]
+  %wavefront.sroa.0.5 = phi i64 [ %wavefront.sroa.0.3, %for.body.lr.ph ], [ %wavefront.sroa.0.9, %if.end ]
+  %wavefront.sroa.15.5 = phi i64 [ %wavefront.sroa.15.3, %for.body.lr.ph ], [ %wavefront.sroa.15.9, %if.end ]
+  %wavefront.sroa.26.5 = phi i32* [ %wavefront.sroa.26.3, %for.body.lr.ph ], [ %wavefront.sroa.26.8, %if.end ]
+  %wavefront.sroa.31.5 = phi i32* [ %wavefront.sroa.31.3, %for.body.lr.ph ], [ %wavefront.sroa.31.8, %if.end ]
+  %wavefront.sroa.36.5 = phi i32** [ %wavefront.sroa.36.3, %for.body.lr.ph ], [ %wavefront.sroa.36.8, %if.end ]
+  %wavefront.sroa.47.3 = phi i64 [ %wavefront.sroa.47.1, %for.body.lr.ph ], [ %wavefront.sroa.47.5, %if.end ]
+  %wavefront.sroa.62.3 = phi i32* [ %wavefront.sroa.62.1, %for.body.lr.ph ], [ %wavefront.sroa.62.5, %if.end ]
+  %wavefront.sroa.69.4 = phi i64 [ %wavefront.sroa.69.2, %for.body.lr.ph ], [ %wavefront.sroa.69.7, %if.end ]
+  %tmp51 = phi i32 [ %tmp45, %for.body.lr.ph ], [ %tmp79, %if.end ]
+  %tmp52 = phi i32 [ %tmp44, %for.body.lr.ph ], [ %tmp80, %if.end ]
+  %indvars.iv = phi i64 [ %tmp46, %for.body.lr.ph ], [ %indvars.iv.next, %if.end ]
   %x11 = getelementptr inbounds %struct.timezone, %struct.timezone* %h_graph_edges, i64 %indvars.iv, i32 0
-  %tmp54 = load i32, i32* %x11, align 4, !tbaa !71
-  %idxprom12 = sext i32 %tmp54 to i64
+  %tmp53 = load i32, i32* %x11, align 4, !tbaa !57
+  %idxprom12 = sext i32 %tmp53 to i64
   %arrayidx13 = getelementptr inbounds i32, i32* %color, i64 %idxprom12
-  %tmp55 = load i32, i32* %arrayidx13, align 4, !tbaa !23
-  %cmp14 = icmp eq i32 %tmp55, 16677217
+  %tmp54 = load i32, i32* %arrayidx13, align 4, !tbaa !23
+  %cmp14 = icmp eq i32 %tmp54, 16677217
   br i1 %cmp14, label %if.then, label %if.end
 
 if.then:                                          ; preds = %for.body
-  %tmp56 = load i32, i32* %arrayidx16, align 4, !tbaa !23
-  %add17 = add nsw i32 %tmp56, 1
+  %tmp55 = load i32, i32* %arrayidx16, align 4, !tbaa !23
+  %add17 = add nsw i32 %tmp55, 1
   %arrayidx19 = getelementptr inbounds i32, i32* %h_cost, i64 %idxprom12
   store i32 %add17, i32* %arrayidx19, align 4, !tbaa !23
-  %tmp57 = load i32*, i32** %_M_cur.i, align 8, !tbaa !52
-  %tmp58 = load i32*, i32** %_M_last.i, align 8, !tbaa !56
-  %add.ptr.i66 = getelementptr inbounds i32, i32* %tmp58, i64 -1
-  %cmp.i67 = icmp eq i32* %tmp57, %add.ptr.i66
+  %tmp56 = inttoptr i64 %wavefront.sroa.47.3 to i32*
+  %add.ptr.i66 = getelementptr inbounds i32, i32* %wavefront.sroa.62.3, i64 -1
+  %cmp.i67 = icmp eq i32* %tmp56, %add.ptr.i66
   br i1 %cmp.i67, label %if.else.i76, label %if.then.i69
 
 if.then.i69:                                      ; preds = %if.then
-  store i32 %tmp54, i32* %tmp57, align 4, !tbaa !23
-  %incdec.ptr.i68 = getelementptr inbounds i32, i32* %tmp57, i64 1
-  store i32* %incdec.ptr.i68, i32** %_M_cur.i, align 8, !tbaa !52
+  store i32 %tmp53, i32* %tmp56, align 4, !tbaa !23
+  %incdec.ptr.i68 = getelementptr inbounds i32, i32* %tmp56, i64 1
+  %tmp57 = ptrtoint i32* %incdec.ptr.i68 to i64
   br label %invoke.cont21
 
 if.else.i76:                                      ; preds = %if.then
-  %tmp59 = load i64, i64* %_M_map_size.i.i.i70, align 8, !tbaa !57
-  %tmp60 = load i64, i64* %tmp35, align 8, !tbaa !58
-  %tmp61 = load i64, i64* %tmp36, align 8, !tbaa !59
-  %sub.ptr.sub.i.i.i72 = sub i64 %tmp60, %tmp61
+  %sub.ptr.sub.i.i.i72 = sub i64 %wavefront.sroa.69.4, %wavefront.sroa.0.5
   %sub.ptr.div.i.i.i73 = ashr exact i64 %sub.ptr.sub.i.i.i72, 3
-  %sub.i.i.i74 = sub i64 %tmp59, %sub.ptr.div.i.i.i73
+  %sub.i.i.i74 = sub i64 %wavefront.sroa.15.5, %sub.ptr.div.i.i.i73
   %cmp.i.i.i75 = icmp ult i64 %sub.i.i.i74, 2
-  %tmp62 = inttoptr i64 %tmp60 to i32**
-  %tmp63 = inttoptr i64 %tmp61 to i32**
+  %tmp58 = inttoptr i64 %wavefront.sroa.69.4 to i32**
+  %tmp59 = inttoptr i64 %wavefront.sroa.0.5 to i32**
   br i1 %cmp.i.i.i75, label %if.then.i.i.i77, label %_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i85
 
 if.then.i.i.i77:                                  ; preds = %if.else.i76
-  %tmp64 = load i32**, i32*** %_M_node.i.i, align 8, !tbaa !60
-  %sub.ptr.rhs.cast.i93 = ptrtoint i32** %tmp64 to i64
-  %sub.ptr.sub.i94 = sub i64 %tmp60, %sub.ptr.rhs.cast.i93
+  %sub.ptr.rhs.cast.i93 = ptrtoint i32** %wavefront.sroa.36.5 to i64
+  %sub.ptr.sub.i94 = sub i64 %wavefront.sroa.69.4, %sub.ptr.rhs.cast.i93
   %sub.ptr.div.i95 = ashr exact i64 %sub.ptr.sub.i94, 3
   %add.i96 = add nsw i64 %sub.ptr.div.i95, 1
   %add4.i97 = add nsw i64 %sub.ptr.div.i95, 2
   %mul.i99 = shl nsw i64 %add4.i97, 1
-  %cmp.i100 = icmp ugt i64 %tmp59, %mul.i99
+  %cmp.i100 = icmp ugt i64 %wavefront.sroa.15.5, %mul.i99
   br i1 %cmp.i100, label %if.then.i110, label %if.else31.i124
 
 if.then.i110:                                     ; preds = %if.then.i.i.i77
-  %sub.i102 = sub i64 %tmp59, %add4.i97
+  %sub.i102 = sub i64 %wavefront.sroa.15.5, %add4.i97
   %div.i103 = lshr i64 %sub.i102, 1
-  %add.ptr.i104 = getelementptr inbounds i32*, i32** %tmp63, i64 %div.i103
-  %cmp13.i105 = icmp ult i32** %add.ptr.i104, %tmp64
-  %add.ptr21.i106 = getelementptr inbounds i32*, i32** %tmp62, i64 1
+  %add.ptr.i104 = getelementptr inbounds i32*, i32** %tmp59, i64 %div.i103
+  %cmp13.i105 = icmp ult i32** %add.ptr.i104, %wavefront.sroa.36.5
+  %add.ptr21.i106 = getelementptr inbounds i32*, i32** %tmp58, i64 1
   %sub.ptr.lhs.cast.i.i.i.i.i107 = ptrtoint i32** %add.ptr21.i106 to i64
   %sub.ptr.sub.i.i.i.i.i108 = sub i64 %sub.ptr.lhs.cast.i.i.i.i.i107, %sub.ptr.rhs.cast.i93
   %tobool.i.i.i.i.i109 = icmp eq i64 %sub.ptr.sub.i.i.i.i.i108, 0
@@ -5975,9 +7203,9 @@ if.then14.i111:                                   ; preds = %if.then.i110
   br i1 %tobool.i.i.i.i.i109, label %.noexc86, label %if.then.i.i.i.i.i112
 
 if.then.i.i.i.i.i112:                             ; preds = %if.then14.i111
-  %tmp65 = bitcast i32** %add.ptr.i104 to i8*
-  %tmp66 = bitcast i32** %tmp64 to i8*
-  call void @llvm.memmove.p0i8.p0i8.i64(i8* align 8 %tmp65, i8* align 8 %tmp66, i64 %sub.ptr.sub.i.i.i.i.i108, i1 false) #3
+  %tmp60 = bitcast i32** %add.ptr.i104 to i8*
+  %tmp61 = bitcast i32** %wavefront.sroa.36.5 to i8*
+  call void @llvm.memmove.p0i8.p0i8.i64(i8* align 8 %tmp60, i8* align 8 %tmp61, i64 %sub.ptr.sub.i.i.i.i.i108, i1 false) #3
   br label %.noexc86
 
 if.else.i113:                                     ; preds = %if.then.i110
@@ -5988,21 +7216,21 @@ if.then.i.i.i.i101.i118:                          ; preds = %if.else.i113
   %sub.ptr.div.i.i.i.i99.i115 = ashr exact i64 %sub.ptr.sub.i.i.i.i.i108, 3
   %idx.neg.i.i.i.i.i116 = sub nsw i64 0, %sub.ptr.div.i.i.i.i99.i115
   %add.ptr.i.i.i.i100.i117 = getelementptr inbounds i32*, i32** %add.ptr29.i114, i64 %idx.neg.i.i.i.i.i116
-  %tmp67 = bitcast i32** %add.ptr.i.i.i.i100.i117 to i8*
-  %tmp68 = bitcast i32** %tmp64 to i8*
-  call void @llvm.memmove.p0i8.p0i8.i64(i8* align 8 %tmp67, i8* align 8 %tmp68, i64 %sub.ptr.sub.i.i.i.i.i108, i1 false) #3
+  %tmp62 = bitcast i32** %add.ptr.i.i.i.i100.i117 to i8*
+  %tmp63 = bitcast i32** %wavefront.sroa.36.5 to i8*
+  call void @llvm.memmove.p0i8.p0i8.i64(i8* align 8 %tmp62, i8* align 8 %tmp63, i64 %sub.ptr.sub.i.i.i.i.i108, i1 false) #3
   br label %.noexc86
 
 if.else31.i124:                                   ; preds = %if.then.i.i.i77
-  %cmp.i.i119 = icmp eq i64 %tmp59, 0
-  %.sroa.speculated.i120 = select i1 %cmp.i.i119, i64 1, i64 %tmp59
-  %add37.i121 = add i64 %tmp59, 2
+  %cmp.i.i119 = icmp eq i64 %wavefront.sroa.15.5, 0
+  %.sroa.speculated.i120 = select i1 %cmp.i.i119, i64 1, i64 %wavefront.sroa.15.5
+  %add37.i121 = add i64 %wavefront.sroa.15.5, 2
   %add38.i122 = add i64 %add37.i121, %.sroa.speculated.i120
   %cmp.i.i.i.i123 = icmp ugt i64 %add38.i122, 2305843009213693951
   br i1 %cmp.i.i.i.i123, label %if.then.i.i.i.i125, label %_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit.i135
 
 if.then.i.i.i.i125:                               ; preds = %if.else31.i124
-  call void @_ZSt17__throw_bad_allocv() #20
+  call void @_ZSt17__throw_bad_allocv() #24
   br label %.noexc146
 
 .noexc146:                                        ; preds = %if.then.i.i.i.i125
@@ -6014,73 +7242,79 @@ _ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit.i135: ; preds = %if.else31.i1
   br label %call2.i.i3.i.i.noexc147
 
 call2.i.i3.i.i.noexc147:                          ; preds = %_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit.i135
-  %tmp69 = bitcast i8* %call2.i.i3.i.i148 to i32**
+  %tmp64 = bitcast i8* %call2.i.i3.i.i148 to i32**
   %sub40.i127 = sub i64 %add38.i122, %add4.i97
   %div41.i128 = lshr i64 %sub40.i127, 1
-  %add.ptr42.i129 = getelementptr inbounds i32*, i32** %tmp69, i64 %div41.i128
-  %tmp70 = load i32**, i32*** %_M_node.i.i, align 8, !tbaa !60
-  %tmp71 = load i32**, i32*** %_M_node.i.i.i71, align 8, !tbaa !58
-  %add.ptr55.i130 = getelementptr inbounds i32*, i32** %tmp71, i64 1
+  %add.ptr42.i129 = getelementptr inbounds i32*, i32** %tmp64, i64 %div41.i128
+  %tmp65 = inttoptr i64 %wavefront.sroa.69.4 to i32**
+  %add.ptr55.i130 = getelementptr inbounds i32*, i32** %tmp65, i64 1
   %sub.ptr.lhs.cast.i.i.i.i102.i131 = ptrtoint i32** %add.ptr55.i130 to i64
-  %sub.ptr.rhs.cast.i.i.i.i103.i132 = ptrtoint i32** %tmp70 to i64
+  %sub.ptr.rhs.cast.i.i.i.i103.i132 = ptrtoint i32** %wavefront.sroa.36.5 to i64
   %sub.ptr.sub.i.i.i.i104.i133 = sub i64 %sub.ptr.lhs.cast.i.i.i.i102.i131, %sub.ptr.rhs.cast.i.i.i.i103.i132
   %tobool.i.i.i.i106.i134 = icmp eq i64 %sub.ptr.sub.i.i.i.i104.i133, 0
   br i1 %tobool.i.i.i.i106.i134, label %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137, label %if.then.i.i.i.i107.i136
 
 if.then.i.i.i.i107.i136:                          ; preds = %call2.i.i3.i.i.noexc147
-  %tmp72 = bitcast i32** %add.ptr42.i129 to i8*
-  %tmp73 = bitcast i32** %tmp70 to i8*
-  call void @llvm.memmove.p0i8.p0i8.i64(i8* nonnull align 8 %tmp72, i8* align 8 %tmp73, i64 %sub.ptr.sub.i.i.i.i104.i133, i1 false) #3
+  %tmp66 = bitcast i32** %add.ptr42.i129 to i8*
+  %tmp67 = bitcast i32** %wavefront.sroa.36.5 to i8*
+  call void @llvm.memmove.p0i8.p0i8.i64(i8* nonnull align 8 %tmp66, i8* align 8 %tmp67, i64 %sub.ptr.sub.i.i.i.i104.i133, i1 false) #3
   br label %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137
 
 _ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137:        ; preds = %if.then.i.i.i.i107.i136, %call2.i.i3.i.i.noexc147
-  %tmp74 = load i8*, i8** %tmp37, align 8, !tbaa !59
-  call void @_ZdlPv(i8* %tmp74) #3
-  store i8* %call2.i.i3.i.i148, i8** %tmp37, align 8, !tbaa !59
-  store i64 %add38.i122, i64* %_M_map_size.i.i.i70, align 8, !tbaa !57
+  %tmp68 = inttoptr i64 %wavefront.sroa.0.5 to i8*
+  call void @_ZdlPv(i8* %tmp68) #3
+  %tmp69 = ptrtoint i8* %call2.i.i3.i.i148 to i64
   br label %.noexc86
 
 .noexc86:                                         ; preds = %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137, %if.then.i.i.i.i101.i118, %if.else.i113, %if.then.i.i.i.i.i112, %if.then14.i111
+  %wavefront.sroa.0.6 = phi i64 [ %wavefront.sroa.0.5, %if.then14.i111 ], [ %wavefront.sroa.0.5, %if.then.i.i.i.i.i112 ], [ %wavefront.sroa.0.5, %if.else.i113 ], [ %wavefront.sroa.0.5, %if.then.i.i.i.i101.i118 ], [ %tmp69, %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137 ]
+  %wavefront.sroa.15.6 = phi i64 [ %wavefront.sroa.15.5, %if.then14.i111 ], [ %wavefront.sroa.15.5, %if.then.i.i.i.i.i112 ], [ %wavefront.sroa.15.5, %if.else.i113 ], [ %wavefront.sroa.15.5, %if.then.i.i.i.i101.i118 ], [ %add38.i122, %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137 ]
   %__new_nstart.0.i138 = phi i32** [ %add.ptr42.i129, %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137 ], [ %add.ptr.i104, %if.then14.i111 ], [ %add.ptr.i104, %if.then.i.i.i.i.i112 ], [ %add.ptr.i104, %if.else.i113 ], [ %add.ptr.i104, %if.then.i.i.i.i101.i118 ]
-  store i32** %__new_nstart.0.i138, i32*** %_M_node.i.i, align 8, !tbaa !61
-  %tmp75 = load i32*, i32** %__new_nstart.0.i138, align 8, !tbaa !26
-  store i32* %tmp75, i32** %_M_first.i.i59, align 8, !tbaa !62
-  %add.ptr.i93.i140 = getelementptr inbounds i32, i32* %tmp75, i64 128
-  store i32* %add.ptr.i93.i140, i32** %_M_last.i55, align 8, !tbaa !63
+  %tmp70 = load i32*, i32** %__new_nstart.0.i138, align 8, !tbaa !26
+  %add.ptr.i93.i140 = getelementptr inbounds i32, i32* %tmp70, i64 128
   %add.ptr71.i142 = getelementptr inbounds i32*, i32** %__new_nstart.0.i138, i64 %sub.ptr.div.i95
-  store i32** %add.ptr71.i142, i32*** %_M_node.i.i.i71, align 8, !tbaa !61
-  %tmp76 = load i32*, i32** %add.ptr71.i142, align 8, !tbaa !26
-  store i32* %tmp76, i32** %_M_first.i.i143, align 8, !tbaa !62
-  %add.ptr.i.i144 = getelementptr inbounds i32, i32* %tmp76, i64 128
-  store i32* %add.ptr.i.i144, i32** %_M_last.i, align 8, !tbaa !63
+  %tmp71 = ptrtoint i32** %add.ptr71.i142 to i64
+  %tmp72 = load i32*, i32** %add.ptr71.i142, align 8, !tbaa !26
+  %add.ptr.i.i144 = getelementptr inbounds i32, i32* %tmp72, i64 128
   br label %_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i85
 
 _ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i85: ; preds = %.noexc86, %if.else.i76
+  %wavefront.sroa.0.7 = phi i64 [ %wavefront.sroa.0.6, %.noexc86 ], [ %wavefront.sroa.0.5, %if.else.i76 ]
+  %wavefront.sroa.15.7 = phi i64 [ %wavefront.sroa.15.6, %.noexc86 ], [ %wavefront.sroa.15.5, %if.else.i76 ]
+  %wavefront.sroa.26.6 = phi i32* [ %tmp70, %.noexc86 ], [ %wavefront.sroa.26.5, %if.else.i76 ]
+  %wavefront.sroa.31.6 = phi i32* [ %add.ptr.i93.i140, %.noexc86 ], [ %wavefront.sroa.31.5, %if.else.i76 ]
+  %wavefront.sroa.36.6 = phi i32** [ %__new_nstart.0.i138, %.noexc86 ], [ %wavefront.sroa.36.5, %if.else.i76 ]
+  %wavefront.sroa.69.5 = phi i64 [ %tmp71, %.noexc86 ], [ %wavefront.sroa.69.4, %if.else.i76 ]
   %call2.i.i.i.i.i88 = call i8* @_Znwm(i64 512)
   br label %call2.i.i.i.i.i.noexc87
 
 call2.i.i.i.i.i.noexc87:                          ; preds = %_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i85
-  %tmp77 = load i32**, i32*** %_M_node.i.i.i71, align 8, !tbaa !58
-  %add.ptr.i.i79 = getelementptr inbounds i32*, i32** %tmp77, i64 1
-  %tmp78 = bitcast i32** %add.ptr.i.i79 to i8**
-  store i8* %call2.i.i.i.i.i88, i8** %tmp78, align 8, !tbaa !26
-  %tmp79 = load i32*, i32** %_M_cur.i.i80, align 8, !tbaa !52
-  store i32 %tmp54, i32* %tmp79, align 4, !tbaa !23
-  %tmp80 = load i32**, i32*** %_M_node.i.i.i71, align 8, !tbaa !58
-  %add.ptr11.i.i81 = getelementptr inbounds i32*, i32** %tmp80, i64 1
-  store i32** %add.ptr11.i.i81, i32*** %_M_node.i.i.i71, align 8, !tbaa !61
-  %tmp81 = load i32*, i32** %add.ptr11.i.i81, align 8, !tbaa !26
-  store i32* %tmp81, i32** %_M_first.i.i143, align 8, !tbaa !62
-  %add.ptr.i.i.i83 = getelementptr inbounds i32, i32* %tmp81, i64 128
-  store i32* %add.ptr.i.i.i83, i32** %_M_last.i, align 8, !tbaa !63
-  %.cast.i.i84 = ptrtoint i32* %tmp81 to i64
-  store i64 %.cast.i.i84, i64* %tmp38, align 8, !tbaa !52
+  %tmp73 = inttoptr i64 %wavefront.sroa.69.5 to i32**
+  %add.ptr.i.i79 = getelementptr inbounds i32*, i32** %tmp73, i64 1
+  %tmp74 = bitcast i32** %add.ptr.i.i79 to i8**
+  store i8* %call2.i.i.i.i.i88, i8** %tmp74, align 8, !tbaa !26
+  %tmp75 = inttoptr i64 %wavefront.sroa.47.3 to i32*
+  store i32 %tmp53, i32* %tmp75, align 4, !tbaa !23
+  %tmp76 = inttoptr i64 %wavefront.sroa.69.5 to i32**
+  %add.ptr11.i.i81 = getelementptr inbounds i32*, i32** %tmp76, i64 1
+  %tmp77 = ptrtoint i32** %add.ptr11.i.i81 to i64
+  %tmp78 = load i32*, i32** %add.ptr11.i.i81, align 8, !tbaa !26
+  %add.ptr.i.i.i83 = getelementptr inbounds i32, i32* %tmp78, i64 128
+  %.cast.i.i84 = ptrtoint i32* %tmp78 to i64
   br label %invoke.cont21
 
 invoke.cont21:                                    ; preds = %call2.i.i.i.i.i.noexc87, %if.then.i69
+  %wavefront.sroa.0.8 = phi i64 [ %wavefront.sroa.0.7, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.0.5, %if.then.i69 ]
+  %wavefront.sroa.15.8 = phi i64 [ %wavefront.sroa.15.7, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.15.5, %if.then.i69 ]
+  %wavefront.sroa.26.7 = phi i32* [ %wavefront.sroa.26.6, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.26.5, %if.then.i69 ]
+  %wavefront.sroa.31.7 = phi i32* [ %wavefront.sroa.31.6, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.31.5, %if.then.i69 ]
+  %wavefront.sroa.36.7 = phi i32** [ %wavefront.sroa.36.6, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.36.5, %if.then.i69 ]
+  %wavefront.sroa.47.4 = phi i64 [ %.cast.i.i84, %call2.i.i.i.i.i.noexc87 ], [ %tmp57, %if.then.i69 ]
+  %wavefront.sroa.62.4 = phi i32* [ %add.ptr.i.i.i83, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.62.3, %if.then.i69 ]
+  %wavefront.sroa.69.6 = phi i64 [ %tmp77, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.69.4, %if.then.i69 ]
   store i32 16677218, i32* %arrayidx13, align 4, !tbaa !23
-  %.pre = load i32, i32* %y, align 4, !tbaa !68
-  %.pre179 = load i32, i32* %x, align 4, !tbaa !70
+  %.pre = load i32, i32* %y, align 4, !tbaa !54
+  %.pre179 = load i32, i32* %x, align 4, !tbaa !56
   br label %if.end
 
 lpad20.loopexit:                                  ; No predecessors!
@@ -6094,255 +7328,658 @@ lpad20.loopexit.split-lp:                         ; No predecessors!
   br label %ehcleanup
 
 if.end:                                           ; preds = %invoke.cont21, %for.body
-  %tmp82 = phi i32 [ %.pre179, %invoke.cont21 ], [ %tmp52, %for.body ]
-  %tmp83 = phi i32 [ %.pre, %invoke.cont21 ], [ %tmp53, %for.body ]
+  %wavefront.sroa.0.9 = phi i64 [ %wavefront.sroa.0.8, %invoke.cont21 ], [ %wavefront.sroa.0.5, %for.body ]
+  %wavefront.sroa.15.9 = phi i64 [ %wavefront.sroa.15.8, %invoke.cont21 ], [ %wavefront.sroa.15.5, %for.body ]
+  %wavefront.sroa.26.8 = phi i32* [ %wavefront.sroa.26.7, %invoke.cont21 ], [ %wavefront.sroa.26.5, %for.body ]
+  %wavefront.sroa.31.8 = phi i32* [ %wavefront.sroa.31.7, %invoke.cont21 ], [ %wavefront.sroa.31.5, %for.body ]
+  %wavefront.sroa.36.8 = phi i32** [ %wavefront.sroa.36.7, %invoke.cont21 ], [ %wavefront.sroa.36.5, %for.body ]
+  %wavefront.sroa.47.5 = phi i64 [ %wavefront.sroa.47.4, %invoke.cont21 ], [ %wavefront.sroa.47.3, %for.body ]
+  %wavefront.sroa.62.5 = phi i32* [ %wavefront.sroa.62.4, %invoke.cont21 ], [ %wavefront.sroa.62.3, %for.body ]
+  %wavefront.sroa.69.7 = phi i64 [ %wavefront.sroa.69.6, %invoke.cont21 ], [ %wavefront.sroa.69.4, %for.body ]
+  %tmp79 = phi i32 [ %.pre179, %invoke.cont21 ], [ %tmp51, %for.body ]
+  %tmp80 = phi i32 [ %.pre, %invoke.cont21 ], [ %tmp52, %for.body ]
   %indvars.iv.next = add nsw i64 %indvars.iv, 1
-  %add = add nsw i32 %tmp82, %tmp83
-  %tmp84 = sext i32 %add to i64
-  %cmp = icmp slt i64 %indvars.iv.next, %tmp84
+  %add = add nsw i32 %tmp79, %tmp80
+  %tmp81 = sext i32 %add to i64
+  %cmp = icmp slt i64 %indvars.iv.next, %tmp81
   br i1 %cmp, label %for.body, label %for.cond.cleanup.loopexit
 
 while.end:                                        ; preds = %for.cond.cleanup, %invoke.cont
-  %_M_map.i.i = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 0
-  %tmp85 = load i32**, i32*** %_M_map.i.i, align 8, !tbaa !59
-  %tobool.i.i = icmp eq i32** %tmp85, null
+  %wavefront.sroa.0.10 = phi i64 [ %wavefront.sroa.0.2, %invoke.cont ], [ %wavefront.sroa.0.4, %for.cond.cleanup ]
+  %wavefront.sroa.36.9 = phi i32** [ %wavefront.sroa.36.1, %invoke.cont ], [ %wavefront.sroa.36.4, %for.cond.cleanup ]
+  %wavefront.sroa.69.8 = phi i64 [ %wavefront.sroa.69.1, %invoke.cont ], [ %wavefront.sroa.69.3, %for.cond.cleanup ]
+  %tmp82 = inttoptr i64 %wavefront.sroa.0.10 to i32**
+  %tobool.i.i = icmp eq i32** %tmp82, null
   br i1 %tobool.i.i, label %_ZNSt5dequeIiSaIiEED2Ev.exit, label %if.then.i.i
 
 if.then.i.i:                                      ; preds = %while.end
-  %tmp86 = bitcast i32** %tmp85 to i8*
-  %_M_node.i.i150 = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 2, i32 3
-  %tmp87 = load i32**, i32*** %_M_node.i.i150, align 8, !tbaa !60
-  %_M_node4.i.i = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 3, i32 3
-  %tmp88 = load i32**, i32*** %_M_node4.i.i, align 8, !tbaa !58
-  %add.ptr.i.i151 = getelementptr inbounds i32*, i32** %tmp88, i64 1
-  %cmp5.i.i.i = icmp ult i32** %tmp87, %add.ptr.i.i151
+  %tmp83 = bitcast i32** %tmp82 to i8*
+  %tmp84 = inttoptr i64 %wavefront.sroa.69.8 to i32**
+  %add.ptr.i.i151 = getelementptr inbounds i32*, i32** %tmp84, i64 1
+  %cmp5.i.i.i = icmp ult i32** %wavefront.sroa.36.9, %add.ptr.i.i151
   br i1 %cmp5.i.i.i, label %for.body.i.i.i, label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i
 
 for.body.i.i.i:                                   ; preds = %for.body.i.i.i, %if.then.i.i
-  %__n.06.i.i.i = phi i32** [ %incdec.ptr.i.i.i, %for.body.i.i.i ], [ %tmp87, %if.then.i.i ]
-  %tmp89 = bitcast i32** %__n.06.i.i.i to i8**
-  %tmp90 = load i8*, i8** %tmp89, align 8, !tbaa !26
-  call void @_ZdlPv(i8* %tmp90) #3
+  %__n.06.i.i.i = phi i32** [ %incdec.ptr.i.i.i, %for.body.i.i.i ], [ %wavefront.sroa.36.9, %if.then.i.i ]
+  %tmp85 = bitcast i32** %__n.06.i.i.i to i8**
+  %tmp86 = load i8*, i8** %tmp85, align 8, !tbaa !26
+  call void @_ZdlPv(i8* %tmp86) #3
   %incdec.ptr.i.i.i = getelementptr inbounds i32*, i32** %__n.06.i.i.i, i64 1
-  %cmp.i.i.i152 = icmp ult i32** %__n.06.i.i.i, %tmp88
+  %cmp.i.i.i152 = icmp ult i32** %__n.06.i.i.i, %tmp84
   br i1 %cmp.i.i.i152, label %for.body.i.i.i, label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i
 
 _ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i: ; preds = %for.body.i.i.i
-  %.phi.trans.insert.i.i = bitcast %"class.std::deque"* %wavefront to i8**
-  %.pre.i.i = load i8*, i8** %.phi.trans.insert.i.i, align 8, !tbaa !59
+  %tmp87 = inttoptr i64 %wavefront.sroa.0.10 to i8*
   br label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i
 
 _ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i: ; preds = %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i, %if.then.i.i
-  %tmp91 = phi i8* [ %.pre.i.i, %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i ], [ %tmp86, %if.then.i.i ]
-  call void @_ZdlPv(i8* %tmp91) #3
+  %tmp88 = phi i8* [ %tmp87, %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i ], [ %tmp83, %if.then.i.i ]
+  call void @_ZdlPv(i8* %tmp88) #3
   br label %_ZNSt5dequeIiSaIiEED2Ev.exit
 
 _ZNSt5dequeIiSaIiEED2Ev.exit:                     ; preds = %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i, %while.end
-  call void @llvm.lifetime.end.p0i8(i64 80, i8* nonnull %tmp) #3
   ret void
 
 ehcleanup:                                        ; preds = %lpad20.loopexit.split-lp, %lpad20.loopexit, %lpad
-  %lpad.phi.sink181 = phi { i8*, i32 } [ %tmp51, %lpad ], [ %lpad.loopexit, %lpad20.loopexit ], [ %lpad.loopexit.split-lp, %lpad20.loopexit.split-lp ]
-  %_M_map.i.i153 = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 0
-  %tmp92 = load i32**, i32*** %_M_map.i.i153, align 8, !tbaa !59
-  %tobool.i.i154 = icmp eq i32** %tmp92, null
+  %lpad.phi.sink181 = phi { i8*, i32 } [ %tmp50, %lpad ], [ %lpad.loopexit, %lpad20.loopexit ], [ %lpad.loopexit.split-lp, %lpad20.loopexit.split-lp ]
+  %wavefront.sroa.0.0.load = load i64, i64* undef
+  %tmp89 = inttoptr i64 %wavefront.sroa.0.0.load to i32**
+  %tobool.i.i154 = icmp eq i32** %tmp89, null
   br i1 %tobool.i.i154, label %_ZNSt5dequeIiSaIiEED2Ev.exit168, label %if.then.i.i159
 
 if.then.i.i159:                                   ; preds = %ehcleanup
-  %tmp93 = bitcast i32** %tmp92 to i8*
-  %_M_node.i.i155 = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 2, i32 3
-  %tmp94 = load i32**, i32*** %_M_node.i.i155, align 8, !tbaa !60
-  %_M_node4.i.i156 = getelementptr inbounds %"class.std::deque", %"class.std::deque"* %wavefront, i64 0, i32 0, i32 0, i32 3, i32 3
-  %tmp95 = load i32**, i32*** %_M_node4.i.i156, align 8, !tbaa !58
-  %add.ptr.i.i157 = getelementptr inbounds i32*, i32** %tmp95, i64 1
-  %cmp5.i.i.i158 = icmp ult i32** %tmp94, %add.ptr.i.i157
+  %tmp90 = bitcast i32** %tmp89 to i8*
+  %wavefront.sroa.36.0.wavefront.sroa.36.40. = load i32**, i32*** undef, !tbaa !59
+  %wavefront.sroa.69.72.54 = load i64, i64* undef, !tbaa !63
+  %tmp91 = inttoptr i64 %wavefront.sroa.69.72.54 to i32**
+  %add.ptr.i.i157 = getelementptr inbounds i32*, i32** %tmp91, i64 1
+  %cmp5.i.i.i158 = icmp ult i32** %wavefront.sroa.36.0.wavefront.sroa.36.40., %add.ptr.i.i157
   br i1 %cmp5.i.i.i158, label %for.body.i.i.i163, label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i167
 
 for.body.i.i.i163:                                ; preds = %for.body.i.i.i163, %if.then.i.i159
-  %__n.06.i.i.i160 = phi i32** [ %incdec.ptr.i.i.i161, %for.body.i.i.i163 ], [ %tmp94, %if.then.i.i159 ]
-  %tmp96 = bitcast i32** %__n.06.i.i.i160 to i8**
-  %tmp97 = load i8*, i8** %tmp96, align 8, !tbaa !26
-  call void @_ZdlPv(i8* %tmp97) #3
+  %__n.06.i.i.i160 = phi i32** [ %incdec.ptr.i.i.i161, %for.body.i.i.i163 ], [ %wavefront.sroa.36.0.wavefront.sroa.36.40., %if.then.i.i159 ]
+  %tmp92 = bitcast i32** %__n.06.i.i.i160 to i8**
+  %tmp93 = load i8*, i8** %tmp92, align 8, !tbaa !26
+  call void @_ZdlPv(i8* %tmp93) #3
   %incdec.ptr.i.i.i161 = getelementptr inbounds i32*, i32** %__n.06.i.i.i160, i64 1
-  %cmp.i.i.i162 = icmp ult i32** %__n.06.i.i.i160, %tmp95
+  %cmp.i.i.i162 = icmp ult i32** %__n.06.i.i.i160, %tmp91
   br i1 %cmp.i.i.i162, label %for.body.i.i.i163, label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i166
 
 _ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i166: ; preds = %for.body.i.i.i163
-  %.phi.trans.insert.i.i164 = bitcast %"class.std::deque"* %wavefront to i8**
-  %.pre.i.i165 = load i8*, i8** %.phi.trans.insert.i.i164, align 8, !tbaa !59
+  %wavefront.sroa.0.0.load87 = load i64, i64* undef
+  %tmp94 = inttoptr i64 %wavefront.sroa.0.0.load87 to i8*
   br label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i167
 
 _ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i167: ; preds = %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i166, %if.then.i.i159
-  %tmp98 = phi i8* [ %.pre.i.i165, %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i166 ], [ %tmp93, %if.then.i.i159 ]
-  call void @_ZdlPv(i8* %tmp98) #3
+  %tmp95 = phi i8* [ %tmp94, %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i166 ], [ %tmp90, %if.then.i.i159 ]
+  call void @_ZdlPv(i8* %tmp95) #3
   br label %_ZNSt5dequeIiSaIiEED2Ev.exit168
 
 _ZNSt5dequeIiSaIiEED2Ev.exit168:                  ; preds = %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i167, %ehcleanup
-  call void @llvm.lifetime.end.p0i8(i64 80, i8* nonnull %tmp) #3
   resume { i8*, i32 } %lpad.phi.sink181
 }
 
-; Function Attrs: argmemonly nounwind
-declare void @llvm.memset.p0i8.i64(i8* nocapture writeonly, i8, i64, i1 immarg) #9
-
 ; Function Attrs: uwtable
-define linkonce_odr dso_local void @_ZNSt11_Deque_baseIiSaIiEE17_M_initialize_mapEm(%"class.std::_Deque_base"* %this, i64 %__num_elements) local_unnamed_addr #0 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+define dso_local void @_Z8_kernel_P4NodeP4EdgePiS3_iii(%struct.timezone* nocapture readonly %h_graph_nodes, %struct.timezone* nocapture readonly %h_graph_edges, i32* nocapture %color, i32* nocapture %h_cost, i32 %source, i32 %tid, i32 %num_threads) local_unnamed_addr #19 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
 entry:
-  %div = lshr i64 %__num_elements, 7
-  %add = add nuw nsw i64 %div, 1
-  %tmp = icmp ugt i64 %div, 5
-  %tmp1 = select i1 %tmp, i64 %div, i64 5
-  %.sroa.speculated = add nuw nsw i64 %tmp1, 3
-  %_M_map_size = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this, i64 0, i32 0, i32 1
-  store i64 %.sroa.speculated, i64* %_M_map_size, align 8, !tbaa !57
-  %cmp.i.i.i = icmp ugt i64 %.sroa.speculated, 2305843009213693951
-  br i1 %cmp.i.i.i, label %if.then.i.i.i, label %_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit
+  %tmp = ptrtoint i32* undef to i64
+  %tmp1 = ptrtoint i32* undef to i64
+  %tmp2 = ptrtoint i32** undef to i64
+  %tmp3 = ptrtoint i32* undef to i64
+  %tmp4 = ptrtoint i32* undef to i64
+  %call2.i.i3.i.i = call i8* @_Znwm(i64 64)
+  %tmp5 = bitcast i8* %call2.i.i3.i.i to i32**
+  %tmp6 = ptrtoint i8* %call2.i.i3.i.i to i64
+  %sub.i1 = sub i64 8, 1
+  %div13.i = lshr i64 %sub.i1, 1
+  %add.ptr.i2 = getelementptr inbounds i32*, i32** %tmp5, i64 %div13.i
+  %add.ptr14.i = getelementptr inbounds i32*, i32** %add.ptr.i2, i64 1
+  br label %for.body.i.i
 
-if.then.i.i.i:                                    ; preds = %entry
-  tail call void @_ZSt17__throw_bad_allocv() #20
+for.body.i.i:                                     ; preds = %for.body.i.i, %entry
+  %__cur.015.i.i = phi i32** [ %incdec.ptr.i.i, %for.body.i.i ], [ %add.ptr.i2, %entry ]
+  %call2.i.i.i12.i.i = call i8* @_Znwm(i64 512)
+  %tmp7 = bitcast i32** %__cur.015.i.i to i8**
+  store i8* %call2.i.i.i12.i.i, i8** %tmp7, align 8, !tbaa !26
+  %incdec.ptr.i.i = getelementptr inbounds i32*, i32** %__cur.015.i.i, i64 1
+  %cmp.i58.i = icmp ult i32** %incdec.ptr.i.i, %add.ptr14.i
+  br i1 %cmp.i58.i, label %for.body.i.i, label %_ZNSt11_Deque_baseIiSaIiEE17_M_initialize_mapEm.exit
+
+_ZNSt11_Deque_baseIiSaIiEE17_M_initialize_mapEm.exit: ; preds = %for.body.i.i
+  %tmp8 = load i32*, i32** %add.ptr.i2, align 8, !tbaa !26
+  %add.ptr.i56.i = getelementptr inbounds i32, i32* %tmp8, i64 128
+  %add.ptr27.i = getelementptr inbounds i32*, i32** %add.ptr14.i, i64 -1
+  %tmp9 = ptrtoint i32** %add.ptr27.i to i64
+  %tmp10 = load i32*, i32** %add.ptr27.i, align 8, !tbaa !26
+  %add.ptr.i.i6 = getelementptr inbounds i32, i32* %tmp10, i64 128
+  %tmp11 = ptrtoint i32* %tmp8 to i64
+  %tmp12 = ptrtoint i32* %tmp10 to i64
+  %tmp13 = inttoptr i64 %tmp12 to i32*
+  %add.ptr.i = getelementptr inbounds i32, i32* %add.ptr.i.i6, i64 -1
+  %cmp.i = icmp eq i32* %tmp13, %add.ptr.i
+  br i1 %cmp.i, label %if.else.i, label %if.then.i
+
+if.then.i:                                        ; preds = %_ZNSt11_Deque_baseIiSaIiEE17_M_initialize_mapEm.exit
+  store i32 %source, i32* %tmp13, align 4, !tbaa !23
+  %incdec.ptr.i = getelementptr inbounds i32, i32* %tmp13, i64 1
+  %tmp14 = ptrtoint i32* %incdec.ptr.i to i64
+  br label %invoke.cont
+
+if.else.i:                                        ; preds = %_ZNSt11_Deque_baseIiSaIiEE17_M_initialize_mapEm.exit
+  %sub.ptr.sub.i.i.i = sub i64 %tmp9, %tmp6
+  %sub.ptr.div.i.i.i = ashr exact i64 %sub.ptr.sub.i.i.i, 3
+  %sub.i.i.i = sub i64 8, %sub.ptr.div.i.i.i
+  %cmp.i.i.i = icmp ult i64 %sub.i.i.i, 2
+  %tmp15 = inttoptr i64 %tmp9 to i32**
+  %tmp16 = inttoptr i64 %tmp6 to i32**
+  br i1 %cmp.i.i.i, label %if.then.i.i.i, label %_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i
+
+if.then.i.i.i:                                    ; preds = %if.else.i
+  %sub.ptr.rhs.cast.i = ptrtoint i32** %add.ptr.i2 to i64
+  %sub.ptr.sub.i = sub i64 %tmp9, %sub.ptr.rhs.cast.i
+  %sub.ptr.div.i = ashr exact i64 %sub.ptr.sub.i, 3
+  %add.i = add nsw i64 %sub.ptr.div.i, 1
+  %add4.i = add nsw i64 %sub.ptr.div.i, 2
+  %mul.i = shl nsw i64 %add4.i, 1
+  %cmp.i45 = icmp ugt i64 8, %mul.i
+  br i1 %cmp.i45, label %if.then.i47, label %if.else31.i
+
+if.then.i47:                                      ; preds = %if.then.i.i.i
+  %sub.i = sub i64 8, %add4.i
+  %div.i = lshr i64 %sub.i, 1
+  %add.ptr.i46 = getelementptr inbounds i32*, i32** %tmp16, i64 %div.i
+  %cmp13.i = icmp ult i32** %add.ptr.i46, %add.ptr.i2
+  %add.ptr21.i = getelementptr inbounds i32*, i32** %tmp15, i64 1
+  %sub.ptr.lhs.cast.i.i.i.i.i = ptrtoint i32** %add.ptr21.i to i64
+  %sub.ptr.sub.i.i.i.i.i = sub i64 %sub.ptr.lhs.cast.i.i.i.i.i, %sub.ptr.rhs.cast.i
+  %tobool.i.i.i.i.i = icmp eq i64 %sub.ptr.sub.i.i.i.i.i, 0
+  br i1 %cmp13.i, label %if.then14.i, label %if.else.i48
+
+if.then14.i:                                      ; preds = %if.then.i47
+  br i1 %tobool.i.i.i.i.i, label %.noexc, label %if.then.i.i.i.i.i
+
+if.then.i.i.i.i.i:                                ; preds = %if.then14.i
+  %tmp17 = bitcast i32** %add.ptr.i46 to i8*
+  %tmp18 = bitcast i32** %add.ptr.i2 to i8*
+  call void @llvm.memmove.p0i8.p0i8.i64(i8* align 8 %tmp17, i8* align 8 %tmp18, i64 %sub.ptr.sub.i.i.i.i.i, i1 false) #3
+  br label %.noexc
+
+if.else.i48:                                      ; preds = %if.then.i47
+  br i1 %tobool.i.i.i.i.i, label %.noexc, label %if.then.i.i.i.i101.i
+
+if.then.i.i.i.i101.i:                             ; preds = %if.else.i48
+  %add.ptr29.i = getelementptr inbounds i32*, i32** %add.ptr.i46, i64 %add.i
+  %sub.ptr.div.i.i.i.i99.i = ashr exact i64 %sub.ptr.sub.i.i.i.i.i, 3
+  %idx.neg.i.i.i.i.i = sub nsw i64 0, %sub.ptr.div.i.i.i.i99.i
+  %add.ptr.i.i.i.i100.i = getelementptr inbounds i32*, i32** %add.ptr29.i, i64 %idx.neg.i.i.i.i.i
+  %tmp19 = bitcast i32** %add.ptr.i.i.i.i100.i to i8*
+  %tmp20 = bitcast i32** %add.ptr.i2 to i8*
+  call void @llvm.memmove.p0i8.p0i8.i64(i8* align 8 %tmp19, i8* align 8 %tmp20, i64 %sub.ptr.sub.i.i.i.i.i, i1 false) #3
+  br label %.noexc
+
+if.else31.i:                                      ; preds = %if.then.i.i.i
+  %cmp.i.i = icmp eq i64 8, 0
+  %.sroa.speculated.i = select i1 %cmp.i.i, i64 1, i64 8
+  %add37.i = add i64 8, 2
+  %add38.i = add i64 %add37.i, %.sroa.speculated.i
+  %cmp.i.i.i.i = icmp ugt i64 %add38.i, 2305843009213693951
+  br i1 %cmp.i.i.i.i, label %if.then.i.i.i.i, label %_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit.i
+
+if.then.i.i.i.i:                                  ; preds = %if.else31.i
+  call void @_ZSt17__throw_bad_allocv() #24
+  br label %.noexc50
+
+.noexc50:                                         ; preds = %if.then.i.i.i.i
   unreachable
 
-_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit: ; preds = %entry
-  %mul.i.i.i = shl nuw nsw i64 %.sroa.speculated, 3
-  %call2.i.i3.i = tail call i8* @_Znwm(i64 %mul.i.i.i)
-  %tmp2 = bitcast i8* %call2.i.i3.i to i32**
-  %tmp3 = bitcast %"class.std::_Deque_base"* %this to i8**
-  store i8* %call2.i.i3.i, i8** %tmp3, align 8, !tbaa !59
-  %tmp4 = load i64, i64* %_M_map_size, align 8, !tbaa !57
-  %sub = sub i64 %tmp4, %add
-  %div13 = lshr i64 %sub, 1
-  %add.ptr = getelementptr inbounds i32*, i32** %tmp2, i64 %div13
-  %add.ptr14 = getelementptr inbounds i32*, i32** %add.ptr, i64 %add
-  br label %for.body.i
+_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit.i: ; preds = %if.else31.i
+  %mul.i.i.i.i = shl i64 %add38.i, 3
+  %call2.i.i3.i.i51 = call i8* @_Znwm(i64 %mul.i.i.i.i)
+  br label %call2.i.i3.i.i.noexc
 
-for.body.i:                                       ; preds = %invoke.cont.i, %_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit
-  %__cur.015.i = phi i32** [ %incdec.ptr.i, %invoke.cont.i ], [ %add.ptr, %_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit ]
-  %call2.i.i.i12.i = call i8* @_Znwm(i64 512)
-  br label %invoke.cont.i
+call2.i.i3.i.i.noexc:                             ; preds = %_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit.i
+  %tmp21 = bitcast i8* %call2.i.i3.i.i51 to i32**
+  %sub40.i = sub i64 %add38.i, %add4.i
+  %div41.i = lshr i64 %sub40.i, 1
+  %add.ptr42.i = getelementptr inbounds i32*, i32** %tmp21, i64 %div41.i
+  %tmp22 = inttoptr i64 %tmp9 to i32**
+  %add.ptr55.i = getelementptr inbounds i32*, i32** %tmp22, i64 1
+  %sub.ptr.lhs.cast.i.i.i.i102.i = ptrtoint i32** %add.ptr55.i to i64
+  %sub.ptr.rhs.cast.i.i.i.i103.i = ptrtoint i32** %add.ptr.i2 to i64
+  %sub.ptr.sub.i.i.i.i104.i = sub i64 %sub.ptr.lhs.cast.i.i.i.i102.i, %sub.ptr.rhs.cast.i.i.i.i103.i
+  %tobool.i.i.i.i106.i = icmp eq i64 %sub.ptr.sub.i.i.i.i104.i, 0
+  br i1 %tobool.i.i.i.i106.i, label %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i, label %if.then.i.i.i.i107.i
 
-invoke.cont.i:                                    ; preds = %for.body.i
-  %tmp5 = bitcast i32** %__cur.015.i to i8**
-  store i8* %call2.i.i.i12.i, i8** %tmp5, align 8, !tbaa !26
-  %incdec.ptr.i = getelementptr inbounds i32*, i32** %__cur.015.i, i64 1
-  %cmp.i58 = icmp ult i32** %incdec.ptr.i, %add.ptr14
-  br i1 %cmp.i58, label %for.body.i, label %try.cont
+if.then.i.i.i.i107.i:                             ; preds = %call2.i.i3.i.i.noexc
+  %tmp23 = bitcast i32** %add.ptr42.i to i8*
+  %tmp24 = bitcast i32** %add.ptr.i2 to i8*
+  call void @llvm.memmove.p0i8.p0i8.i64(i8* nonnull align 8 %tmp23, i8* align 8 %tmp24, i64 %sub.ptr.sub.i.i.i.i104.i, i1 false) #3
+  br label %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i
 
-lpad.i:                                           ; No predecessors!
-  %tmp6 = landingpad { i8*, i32 }
-          catch i8* null
-  %tmp7 = extractvalue { i8*, i32 } %tmp6, 0
-  %tmp8 = tail call i8* @__cxa_begin_catch(i8* %tmp7) #3
-  %cmp5.i.i = icmp ugt i32** %__cur.015.i, %add.ptr
-  br i1 %cmp5.i.i, label %for.body.i.i, label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i
+_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i:           ; preds = %if.then.i.i.i.i107.i, %call2.i.i3.i.i.noexc
+  %tmp25 = inttoptr i64 %tmp6 to i8*
+  call void @_ZdlPv(i8* %tmp25) #3
+  %tmp26 = ptrtoint i8* %call2.i.i3.i.i51 to i64
+  br label %.noexc
 
-for.body.i.i:                                     ; preds = %for.body.i.i, %lpad.i
-  %__n.06.i.i = phi i32** [ %incdec.ptr.i.i, %for.body.i.i ], [ %add.ptr, %lpad.i ]
-  %tmp9 = bitcast i32** %__n.06.i.i to i8**
-  %tmp10 = load i8*, i8** %tmp9, align 8, !tbaa !26
-  tail call void @_ZdlPv(i8* %tmp10) #3
-  %incdec.ptr.i.i = getelementptr inbounds i32*, i32** %__n.06.i.i, i64 1
-  %cmp.i.i = icmp ult i32** %incdec.ptr.i.i, %__cur.015.i
-  br i1 %cmp.i.i, label %for.body.i.i, label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i
+.noexc:                                           ; preds = %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i, %if.then.i.i.i.i101.i, %if.else.i48, %if.then.i.i.i.i.i, %if.then14.i
+  %wavefront.sroa.0.0 = phi i64 [ %tmp6, %if.then14.i ], [ %tmp6, %if.then.i.i.i.i.i ], [ %tmp6, %if.else.i48 ], [ %tmp6, %if.then.i.i.i.i101.i ], [ %tmp26, %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i ]
+  %wavefront.sroa.15.0 = phi i64 [ 8, %if.then14.i ], [ 8, %if.then.i.i.i.i.i ], [ 8, %if.else.i48 ], [ 8, %if.then.i.i.i.i101.i ], [ %add38.i, %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i ]
+  %__new_nstart.0.i = phi i32** [ %add.ptr42.i, %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i ], [ %add.ptr.i46, %if.then14.i ], [ %add.ptr.i46, %if.then.i.i.i.i.i ], [ %add.ptr.i46, %if.else.i48 ], [ %add.ptr.i46, %if.then.i.i.i.i101.i ]
+  %tmp27 = load i32*, i32** %__new_nstart.0.i, align 8, !tbaa !26
+  %add.ptr.i93.i = getelementptr inbounds i32, i32* %tmp27, i64 128
+  %add.ptr71.i = getelementptr inbounds i32*, i32** %__new_nstart.0.i, i64 %sub.ptr.div.i
+  %tmp28 = ptrtoint i32** %add.ptr71.i to i64
+  %tmp29 = load i32*, i32** %add.ptr71.i, align 8, !tbaa !26
+  %add.ptr.i.i49 = getelementptr inbounds i32, i32* %tmp29, i64 128
+  br label %_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i
 
-_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i: ; preds = %for.body.i.i, %lpad.i
-  call void @__cxa_rethrow() #20
-  br label %unreachable.i
+_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i: ; preds = %.noexc, %if.else.i
+  %wavefront.sroa.0.1 = phi i64 [ %wavefront.sroa.0.0, %.noexc ], [ %tmp6, %if.else.i ]
+  %wavefront.sroa.15.1 = phi i64 [ %wavefront.sroa.15.0, %.noexc ], [ 8, %if.else.i ]
+  %wavefront.sroa.26.0 = phi i32* [ %tmp27, %.noexc ], [ %tmp8, %if.else.i ]
+  %wavefront.sroa.31.0 = phi i32* [ %add.ptr.i93.i, %.noexc ], [ %add.ptr.i56.i, %if.else.i ]
+  %wavefront.sroa.36.0 = phi i32** [ %__new_nstart.0.i, %.noexc ], [ %add.ptr.i2, %if.else.i ]
+  %wavefront.sroa.69.0 = phi i64 [ %tmp28, %.noexc ], [ %tmp9, %if.else.i ]
+  %call2.i.i.i.i.i44 = call i8* @_Znwm(i64 512)
+  br label %call2.i.i.i.i.i.noexc
 
-lpad2.i:                                          ; No predecessors!
-  %tmp11 = landingpad { i8*, i32 }
-          catch i8* null
-  call void @__cxa_end_catch()
-  br label %lpad.body
+call2.i.i.i.i.i.noexc:                            ; preds = %_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i
+  %tmp30 = inttoptr i64 %wavefront.sroa.69.0 to i32**
+  %add.ptr.i.i = getelementptr inbounds i32*, i32** %tmp30, i64 1
+  %tmp31 = bitcast i32** %add.ptr.i.i to i8**
+  store i8* %call2.i.i.i.i.i44, i8** %tmp31, align 8, !tbaa !26
+  %tmp32 = inttoptr i64 %tmp12 to i32*
+  store i32 %source, i32* %tmp32, align 4, !tbaa !23
+  %tmp33 = inttoptr i64 %wavefront.sroa.69.0 to i32**
+  %add.ptr11.i.i = getelementptr inbounds i32*, i32** %tmp33, i64 1
+  %tmp34 = ptrtoint i32** %add.ptr11.i.i to i64
+  %tmp35 = load i32*, i32** %add.ptr11.i.i, align 8, !tbaa !26
+  %add.ptr.i.i.i = getelementptr inbounds i32, i32* %tmp35, i64 128
+  %.cast.i.i = ptrtoint i32* %tmp35 to i64
+  br label %invoke.cont
 
-terminate.lpad.i:                                 ; No predecessors!
-  %tmp12 = landingpad { i8*, i32 }
-          catch i8* null
-  %tmp13 = extractvalue { i8*, i32 } %tmp12, 0
-  tail call void @__clang_call_terminate(i8* %tmp13) #19
-  unreachable
+invoke.cont:                                      ; preds = %call2.i.i.i.i.i.noexc, %if.then.i
+  %wavefront.sroa.0.2 = phi i64 [ %wavefront.sroa.0.1, %call2.i.i.i.i.i.noexc ], [ %tmp6, %if.then.i ]
+  %wavefront.sroa.15.2 = phi i64 [ %wavefront.sroa.15.1, %call2.i.i.i.i.i.noexc ], [ 8, %if.then.i ]
+  %wavefront.sroa.26.1 = phi i32* [ %wavefront.sroa.26.0, %call2.i.i.i.i.i.noexc ], [ %tmp8, %if.then.i ]
+  %wavefront.sroa.31.1 = phi i32* [ %wavefront.sroa.31.0, %call2.i.i.i.i.i.noexc ], [ %add.ptr.i56.i, %if.then.i ]
+  %wavefront.sroa.36.1 = phi i32** [ %wavefront.sroa.36.0, %call2.i.i.i.i.i.noexc ], [ %add.ptr.i2, %if.then.i ]
+  %wavefront.sroa.47.0 = phi i64 [ %.cast.i.i, %call2.i.i.i.i.i.noexc ], [ %tmp14, %if.then.i ]
+  %wavefront.sroa.62.0 = phi i32* [ %add.ptr.i.i.i, %call2.i.i.i.i.i.noexc ], [ %add.ptr.i.i6, %if.then.i ]
+  %wavefront.sroa.69.1 = phi i64 [ %tmp34, %call2.i.i.i.i.i.noexc ], [ %tmp9, %if.then.i ]
+  %tmp36 = phi i32* [ %tmp35, %call2.i.i.i.i.i.noexc ], [ %incdec.ptr.i, %if.then.i ]
+  %idxprom = sext i32 %source to i64
+  %arrayidx = getelementptr inbounds i32, i32* %color, i64 %idxprom
+  store i32 16677218, i32* %arrayidx, align 4, !tbaa !23
+  %tmp37 = inttoptr i64 %tmp11 to i32*
+  %cmp.i.i53178 = icmp eq i32* %tmp36, %tmp37
+  br i1 %cmp.i.i53178, label %while.end, label %while.body.lr.ph
 
-unreachable.i:                                    ; preds = %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i
-  unreachable
+while.body.lr.ph:                                 ; preds = %invoke.cont
+  br label %while.body
 
-lpad.body:                                        ; preds = %lpad2.i
-  %tmp14 = extractvalue { i8*, i32 } %tmp11, 0
-  %tmp15 = tail call i8* @__cxa_begin_catch(i8* %tmp14) #3
-  %tmp16 = load i8*, i8** %tmp3, align 8, !tbaa !59
-  tail call void @_ZdlPv(i8* %tmp16) #3
-  %tmp17 = bitcast %"class.std::_Deque_base"* %this to i8*
-  call void @llvm.memset.p0i8.i64(i8* align 8 %tmp17, i8 0, i64 16, i1 false)
-  call void @__cxa_rethrow() #20
-  br label %unreachable
+while.body:                                       ; preds = %for.cond.cleanup, %while.body.lr.ph
+  %wavefront.sroa.0.3 = phi i64 [ %wavefront.sroa.0.2, %while.body.lr.ph ], [ %wavefront.sroa.0.4, %for.cond.cleanup ]
+  %wavefront.sroa.15.3 = phi i64 [ %wavefront.sroa.15.2, %while.body.lr.ph ], [ %wavefront.sroa.15.4, %for.cond.cleanup ]
+  %wavefront.sroa.26.2 = phi i32* [ %wavefront.sroa.26.1, %while.body.lr.ph ], [ %wavefront.sroa.26.4, %for.cond.cleanup ]
+  %wavefront.sroa.31.2 = phi i32* [ %wavefront.sroa.31.1, %while.body.lr.ph ], [ %wavefront.sroa.31.4, %for.cond.cleanup ]
+  %wavefront.sroa.36.2 = phi i32** [ %wavefront.sroa.36.1, %while.body.lr.ph ], [ %wavefront.sroa.36.4, %for.cond.cleanup ]
+  %wavefront.sroa.47.1 = phi i64 [ %wavefront.sroa.47.0, %while.body.lr.ph ], [ %wavefront.sroa.47.2, %for.cond.cleanup ]
+  %wavefront.sroa.62.1 = phi i32* [ %wavefront.sroa.62.0, %while.body.lr.ph ], [ %wavefront.sroa.62.2, %for.cond.cleanup ]
+  %wavefront.sroa.69.2 = phi i64 [ %wavefront.sroa.69.1, %while.body.lr.ph ], [ %wavefront.sroa.69.3, %for.cond.cleanup ]
+  %tmp38 = phi i32* [ %tmp37, %while.body.lr.ph ], [ %tmp48, %for.cond.cleanup ]
+  %tmp39 = load i32, i32* %tmp38, align 4, !tbaa !23
+  %add.ptr.i56 = getelementptr inbounds i32, i32* %wavefront.sroa.31.2, i64 -1
+  %cmp.i57 = icmp eq i32* %tmp38, %add.ptr.i56
+  br i1 %cmp.i57, label %if.else.i63, label %invoke.cont.i
 
-lpad23:                                           ; No predecessors!
-  %tmp18 = landingpad { i8*, i32 }
+invoke.cont.i:                                    ; preds = %while.body
+  %incdec.ptr.i58 = getelementptr inbounds i32, i32* %tmp38, i64 1
+  %tmp40 = ptrtoint i32* %incdec.ptr.i58 to i64
+  br label %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit
+
+if.else.i63:                                      ; preds = %while.body
+  %tmp41 = bitcast i32* %wavefront.sroa.26.2 to i8*
+  call void @_ZdlPv(i8* %tmp41) #3
+  %add.ptr.i.i60 = getelementptr inbounds i32*, i32** %wavefront.sroa.36.2, i64 1
+  %tmp42 = load i32*, i32** %add.ptr.i.i60, align 8, !tbaa !26
+  %add.ptr.i.i.i61 = getelementptr inbounds i32, i32* %tmp42, i64 128
+  %.cast.i.i62 = ptrtoint i32* %tmp42 to i64
+  br label %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit
+
+_ZNSt5dequeIiSaIiEE9pop_frontEv.exit:             ; preds = %if.else.i63, %invoke.cont.i
+  %wavefront.sroa.21.0 = phi i64 [ %.cast.i.i62, %if.else.i63 ], [ %tmp40, %invoke.cont.i ]
+  %wavefront.sroa.26.3 = phi i32* [ %tmp42, %if.else.i63 ], [ %wavefront.sroa.26.2, %invoke.cont.i ]
+  %wavefront.sroa.31.3 = phi i32* [ %add.ptr.i.i.i61, %if.else.i63 ], [ %wavefront.sroa.31.2, %invoke.cont.i ]
+  %wavefront.sroa.36.3 = phi i32** [ %add.ptr.i.i60, %if.else.i63 ], [ %wavefront.sroa.36.2, %invoke.cont.i ]
+  %tmp43 = phi i32* [ %incdec.ptr.i58, %invoke.cont.i ], [ %tmp42, %if.else.i63 ]
+  %idxprom2 = sext i32 %tmp39 to i64
+  %x = getelementptr inbounds %struct.timezone, %struct.timezone* %h_graph_nodes, i64 %idxprom2, i32 0
+  %y = getelementptr inbounds %struct.timezone, %struct.timezone* %h_graph_nodes, i64 %idxprom2, i32 1
+  %tmp44 = load i32, i32* %y, align 4, !tbaa !54
+  %cmp176 = icmp sgt i32 %tmp44, 0
+  br i1 %cmp176, label %for.body.lr.ph, label %for.cond.cleanup
+
+for.body.lr.ph:                                   ; preds = %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit
+  %tmp45 = load i32, i32* %x, align 4, !tbaa !56
+  %arrayidx16 = getelementptr inbounds i32, i32* %h_cost, i64 %idxprom2
+  %tmp46 = sext i32 %tmp45 to i64
+  br label %for.body
+
+for.cond.cleanup.loopexit:                        ; preds = %if.end
+  %tmp47 = inttoptr i64 %wavefront.sroa.21.0 to i32*
+  br label %for.cond.cleanup
+
+for.cond.cleanup:                                 ; preds = %for.cond.cleanup.loopexit, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit
+  %wavefront.sroa.0.4 = phi i64 [ %wavefront.sroa.0.9, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.0.3, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.15.4 = phi i64 [ %wavefront.sroa.15.9, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.15.3, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.26.4 = phi i32* [ %wavefront.sroa.26.8, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.26.3, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.31.4 = phi i32* [ %wavefront.sroa.31.8, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.31.3, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.36.4 = phi i32** [ %wavefront.sroa.36.8, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.36.3, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.47.2 = phi i64 [ %wavefront.sroa.47.5, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.47.1, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.62.2 = phi i32* [ %wavefront.sroa.62.5, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.62.1, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %wavefront.sroa.69.3 = phi i64 [ %wavefront.sroa.69.7, %for.cond.cleanup.loopexit ], [ %wavefront.sroa.69.2, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %tmp48 = phi i32* [ %tmp47, %for.cond.cleanup.loopexit ], [ %tmp43, %_ZNSt5dequeIiSaIiEE9pop_frontEv.exit ]
+  %arrayidx25 = getelementptr inbounds i32, i32* %color, i64 %idxprom2
+  store i32 16677221, i32* %arrayidx25, align 4, !tbaa !23
+  %tmp49 = inttoptr i64 %wavefront.sroa.47.2 to i32*
+  %cmp.i.i53 = icmp eq i32* %tmp49, %tmp48
+  br i1 %cmp.i.i53, label %while.end, label %while.body
+
+lpad:                                             ; No predecessors!
+  %tmp50 = landingpad { i8*, i32 }
           cleanup
-  call void @__cxa_end_catch()
-  br label %invoke.cont24
+  br label %ehcleanup
 
-invoke.cont24:                                    ; preds = %lpad23
-  resume { i8*, i32 } %tmp18
+for.body:                                         ; preds = %if.end, %for.body.lr.ph
+  %wavefront.sroa.0.5 = phi i64 [ %wavefront.sroa.0.3, %for.body.lr.ph ], [ %wavefront.sroa.0.9, %if.end ]
+  %wavefront.sroa.15.5 = phi i64 [ %wavefront.sroa.15.3, %for.body.lr.ph ], [ %wavefront.sroa.15.9, %if.end ]
+  %wavefront.sroa.26.5 = phi i32* [ %wavefront.sroa.26.3, %for.body.lr.ph ], [ %wavefront.sroa.26.8, %if.end ]
+  %wavefront.sroa.31.5 = phi i32* [ %wavefront.sroa.31.3, %for.body.lr.ph ], [ %wavefront.sroa.31.8, %if.end ]
+  %wavefront.sroa.36.5 = phi i32** [ %wavefront.sroa.36.3, %for.body.lr.ph ], [ %wavefront.sroa.36.8, %if.end ]
+  %wavefront.sroa.47.3 = phi i64 [ %wavefront.sroa.47.1, %for.body.lr.ph ], [ %wavefront.sroa.47.5, %if.end ]
+  %wavefront.sroa.62.3 = phi i32* [ %wavefront.sroa.62.1, %for.body.lr.ph ], [ %wavefront.sroa.62.5, %if.end ]
+  %wavefront.sroa.69.4 = phi i64 [ %wavefront.sroa.69.2, %for.body.lr.ph ], [ %wavefront.sroa.69.7, %if.end ]
+  %tmp51 = phi i32 [ %tmp45, %for.body.lr.ph ], [ %tmp79, %if.end ]
+  %tmp52 = phi i32 [ %tmp44, %for.body.lr.ph ], [ %tmp80, %if.end ]
+  %indvars.iv = phi i64 [ %tmp46, %for.body.lr.ph ], [ %indvars.iv.next, %if.end ]
+  %x11 = getelementptr inbounds %struct.timezone, %struct.timezone* %h_graph_edges, i64 %indvars.iv, i32 0
+  %tmp53 = load i32, i32* %x11, align 4, !tbaa !57
+  %idxprom12 = sext i32 %tmp53 to i64
+  %arrayidx13 = getelementptr inbounds i32, i32* %color, i64 %idxprom12
+  %tmp54 = load i32, i32* %arrayidx13, align 4, !tbaa !23
+  %cmp14 = icmp eq i32 %tmp54, 16677217
+  br i1 %cmp14, label %if.then, label %if.end
 
-try.cont:                                         ; preds = %invoke.cont.i
-  %_M_start = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this, i64 0, i32 0, i32 2
-  %_M_node.i54 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this, i64 0, i32 0, i32 2, i32 3
-  store i32** %add.ptr, i32*** %_M_node.i54, align 8, !tbaa !61
-  %tmp19 = load i32*, i32** %add.ptr, align 8, !tbaa !26
-  %_M_first.i55 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this, i64 0, i32 0, i32 2, i32 1
-  store i32* %tmp19, i32** %_M_first.i55, align 8, !tbaa !62
-  %add.ptr.i56 = getelementptr inbounds i32, i32* %tmp19, i64 128
-  %_M_last.i57 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this, i64 0, i32 0, i32 2, i32 2
-  store i32* %add.ptr.i56, i32** %_M_last.i57, align 8, !tbaa !63
-  %add.ptr27 = getelementptr inbounds i32*, i32** %add.ptr14, i64 -1
-  %_M_node.i = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this, i64 0, i32 0, i32 3, i32 3
-  store i32** %add.ptr27, i32*** %_M_node.i, align 8, !tbaa !61
-  %tmp20 = load i32*, i32** %add.ptr27, align 8, !tbaa !26
-  %_M_first.i = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this, i64 0, i32 0, i32 3, i32 1
-  store i32* %tmp20, i32** %_M_first.i, align 8, !tbaa !62
-  %add.ptr.i = getelementptr inbounds i32, i32* %tmp20, i64 128
-  %_M_last.i = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this, i64 0, i32 0, i32 3, i32 2
-  store i32* %add.ptr.i, i32** %_M_last.i, align 8, !tbaa !63
-  %tmp21 = ptrtoint i32* %tmp19 to i64
-  %tmp22 = bitcast %"struct.std::_Deque_iterator"* %_M_start to i64*
-  store i64 %tmp21, i64* %tmp22, align 8, !tbaa !66
-  %rem = and i64 %__num_elements, 127
-  %add.ptr36 = getelementptr inbounds i32, i32* %tmp20, i64 %rem
-  %_M_cur39 = getelementptr inbounds %"class.std::_Deque_base", %"class.std::_Deque_base"* %this, i64 0, i32 0, i32 3, i32 0
-  store i32* %add.ptr36, i32** %_M_cur39, align 8, !tbaa !52
+if.then:                                          ; preds = %for.body
+  %tmp55 = load i32, i32* %arrayidx16, align 4, !tbaa !23
+  %add17 = add nsw i32 %tmp55, 1
+  %arrayidx19 = getelementptr inbounds i32, i32* %h_cost, i64 %idxprom12
+  store i32 %add17, i32* %arrayidx19, align 4, !tbaa !23
+  %tmp56 = inttoptr i64 %wavefront.sroa.47.3 to i32*
+  %add.ptr.i66 = getelementptr inbounds i32, i32* %wavefront.sroa.62.3, i64 -1
+  %cmp.i67 = icmp eq i32* %tmp56, %add.ptr.i66
+  br i1 %cmp.i67, label %if.else.i76, label %if.then.i69
+
+if.then.i69:                                      ; preds = %if.then
+  store i32 %tmp53, i32* %tmp56, align 4, !tbaa !23
+  %incdec.ptr.i68 = getelementptr inbounds i32, i32* %tmp56, i64 1
+  %tmp57 = ptrtoint i32* %incdec.ptr.i68 to i64
+  br label %invoke.cont21
+
+if.else.i76:                                      ; preds = %if.then
+  %sub.ptr.sub.i.i.i72 = sub i64 %wavefront.sroa.69.4, %wavefront.sroa.0.5
+  %sub.ptr.div.i.i.i73 = ashr exact i64 %sub.ptr.sub.i.i.i72, 3
+  %sub.i.i.i74 = sub i64 %wavefront.sroa.15.5, %sub.ptr.div.i.i.i73
+  %cmp.i.i.i75 = icmp ult i64 %sub.i.i.i74, 2
+  %tmp58 = inttoptr i64 %wavefront.sroa.69.4 to i32**
+  %tmp59 = inttoptr i64 %wavefront.sroa.0.5 to i32**
+  br i1 %cmp.i.i.i75, label %if.then.i.i.i77, label %_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i85
+
+if.then.i.i.i77:                                  ; preds = %if.else.i76
+  %sub.ptr.rhs.cast.i93 = ptrtoint i32** %wavefront.sroa.36.5 to i64
+  %sub.ptr.sub.i94 = sub i64 %wavefront.sroa.69.4, %sub.ptr.rhs.cast.i93
+  %sub.ptr.div.i95 = ashr exact i64 %sub.ptr.sub.i94, 3
+  %add.i96 = add nsw i64 %sub.ptr.div.i95, 1
+  %add4.i97 = add nsw i64 %sub.ptr.div.i95, 2
+  %mul.i99 = shl nsw i64 %add4.i97, 1
+  %cmp.i100 = icmp ugt i64 %wavefront.sroa.15.5, %mul.i99
+  br i1 %cmp.i100, label %if.then.i110, label %if.else31.i124
+
+if.then.i110:                                     ; preds = %if.then.i.i.i77
+  %sub.i102 = sub i64 %wavefront.sroa.15.5, %add4.i97
+  %div.i103 = lshr i64 %sub.i102, 1
+  %add.ptr.i104 = getelementptr inbounds i32*, i32** %tmp59, i64 %div.i103
+  %cmp13.i105 = icmp ult i32** %add.ptr.i104, %wavefront.sroa.36.5
+  %add.ptr21.i106 = getelementptr inbounds i32*, i32** %tmp58, i64 1
+  %sub.ptr.lhs.cast.i.i.i.i.i107 = ptrtoint i32** %add.ptr21.i106 to i64
+  %sub.ptr.sub.i.i.i.i.i108 = sub i64 %sub.ptr.lhs.cast.i.i.i.i.i107, %sub.ptr.rhs.cast.i93
+  %tobool.i.i.i.i.i109 = icmp eq i64 %sub.ptr.sub.i.i.i.i.i108, 0
+  br i1 %cmp13.i105, label %if.then14.i111, label %if.else.i113
+
+if.then14.i111:                                   ; preds = %if.then.i110
+  br i1 %tobool.i.i.i.i.i109, label %.noexc86, label %if.then.i.i.i.i.i112
+
+if.then.i.i.i.i.i112:                             ; preds = %if.then14.i111
+  %tmp60 = bitcast i32** %add.ptr.i104 to i8*
+  %tmp61 = bitcast i32** %wavefront.sroa.36.5 to i8*
+  call void @llvm.memmove.p0i8.p0i8.i64(i8* align 8 %tmp60, i8* align 8 %tmp61, i64 %sub.ptr.sub.i.i.i.i.i108, i1 false) #3
+  br label %.noexc86
+
+if.else.i113:                                     ; preds = %if.then.i110
+  br i1 %tobool.i.i.i.i.i109, label %.noexc86, label %if.then.i.i.i.i101.i118
+
+if.then.i.i.i.i101.i118:                          ; preds = %if.else.i113
+  %add.ptr29.i114 = getelementptr inbounds i32*, i32** %add.ptr.i104, i64 %add.i96
+  %sub.ptr.div.i.i.i.i99.i115 = ashr exact i64 %sub.ptr.sub.i.i.i.i.i108, 3
+  %idx.neg.i.i.i.i.i116 = sub nsw i64 0, %sub.ptr.div.i.i.i.i99.i115
+  %add.ptr.i.i.i.i100.i117 = getelementptr inbounds i32*, i32** %add.ptr29.i114, i64 %idx.neg.i.i.i.i.i116
+  %tmp62 = bitcast i32** %add.ptr.i.i.i.i100.i117 to i8*
+  %tmp63 = bitcast i32** %wavefront.sroa.36.5 to i8*
+  call void @llvm.memmove.p0i8.p0i8.i64(i8* align 8 %tmp62, i8* align 8 %tmp63, i64 %sub.ptr.sub.i.i.i.i.i108, i1 false) #3
+  br label %.noexc86
+
+if.else31.i124:                                   ; preds = %if.then.i.i.i77
+  %cmp.i.i119 = icmp eq i64 %wavefront.sroa.15.5, 0
+  %.sroa.speculated.i120 = select i1 %cmp.i.i119, i64 1, i64 %wavefront.sroa.15.5
+  %add37.i121 = add i64 %wavefront.sroa.15.5, 2
+  %add38.i122 = add i64 %add37.i121, %.sroa.speculated.i120
+  %cmp.i.i.i.i123 = icmp ugt i64 %add38.i122, 2305843009213693951
+  br i1 %cmp.i.i.i.i123, label %if.then.i.i.i.i125, label %_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit.i135
+
+if.then.i.i.i.i125:                               ; preds = %if.else31.i124
+  call void @_ZSt17__throw_bad_allocv() #24
+  br label %.noexc146
+
+.noexc146:                                        ; preds = %if.then.i.i.i.i125
+  unreachable
+
+_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit.i135: ; preds = %if.else31.i124
+  %mul.i.i.i.i126 = shl i64 %add38.i122, 3
+  %call2.i.i3.i.i148 = call i8* @_Znwm(i64 %mul.i.i.i.i126)
+  br label %call2.i.i3.i.i.noexc147
+
+call2.i.i3.i.i.noexc147:                          ; preds = %_ZNSt11_Deque_baseIiSaIiEE15_M_allocate_mapEm.exit.i135
+  %tmp64 = bitcast i8* %call2.i.i3.i.i148 to i32**
+  %sub40.i127 = sub i64 %add38.i122, %add4.i97
+  %div41.i128 = lshr i64 %sub40.i127, 1
+  %add.ptr42.i129 = getelementptr inbounds i32*, i32** %tmp64, i64 %div41.i128
+  %tmp65 = inttoptr i64 %wavefront.sroa.69.4 to i32**
+  %add.ptr55.i130 = getelementptr inbounds i32*, i32** %tmp65, i64 1
+  %sub.ptr.lhs.cast.i.i.i.i102.i131 = ptrtoint i32** %add.ptr55.i130 to i64
+  %sub.ptr.rhs.cast.i.i.i.i103.i132 = ptrtoint i32** %wavefront.sroa.36.5 to i64
+  %sub.ptr.sub.i.i.i.i104.i133 = sub i64 %sub.ptr.lhs.cast.i.i.i.i102.i131, %sub.ptr.rhs.cast.i.i.i.i103.i132
+  %tobool.i.i.i.i106.i134 = icmp eq i64 %sub.ptr.sub.i.i.i.i104.i133, 0
+  br i1 %tobool.i.i.i.i106.i134, label %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137, label %if.then.i.i.i.i107.i136
+
+if.then.i.i.i.i107.i136:                          ; preds = %call2.i.i3.i.i.noexc147
+  %tmp66 = bitcast i32** %add.ptr42.i129 to i8*
+  %tmp67 = bitcast i32** %wavefront.sroa.36.5 to i8*
+  call void @llvm.memmove.p0i8.p0i8.i64(i8* nonnull align 8 %tmp66, i8* align 8 %tmp67, i64 %sub.ptr.sub.i.i.i.i104.i133, i1 false) #3
+  br label %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137
+
+_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137:        ; preds = %if.then.i.i.i.i107.i136, %call2.i.i3.i.i.noexc147
+  %tmp68 = inttoptr i64 %wavefront.sroa.0.5 to i8*
+  call void @_ZdlPv(i8* %tmp68) #3
+  %tmp69 = ptrtoint i8* %call2.i.i3.i.i148 to i64
+  br label %.noexc86
+
+.noexc86:                                         ; preds = %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137, %if.then.i.i.i.i101.i118, %if.else.i113, %if.then.i.i.i.i.i112, %if.then14.i111
+  %wavefront.sroa.0.6 = phi i64 [ %wavefront.sroa.0.5, %if.then14.i111 ], [ %wavefront.sroa.0.5, %if.then.i.i.i.i.i112 ], [ %wavefront.sroa.0.5, %if.else.i113 ], [ %wavefront.sroa.0.5, %if.then.i.i.i.i101.i118 ], [ %tmp69, %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137 ]
+  %wavefront.sroa.15.6 = phi i64 [ %wavefront.sroa.15.5, %if.then14.i111 ], [ %wavefront.sroa.15.5, %if.then.i.i.i.i.i112 ], [ %wavefront.sroa.15.5, %if.else.i113 ], [ %wavefront.sroa.15.5, %if.then.i.i.i.i101.i118 ], [ %add38.i122, %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137 ]
+  %__new_nstart.0.i138 = phi i32** [ %add.ptr42.i129, %_ZSt4copyIPPiS1_ET0_T_S3_S2_.exit109.i137 ], [ %add.ptr.i104, %if.then14.i111 ], [ %add.ptr.i104, %if.then.i.i.i.i.i112 ], [ %add.ptr.i104, %if.else.i113 ], [ %add.ptr.i104, %if.then.i.i.i.i101.i118 ]
+  %tmp70 = load i32*, i32** %__new_nstart.0.i138, align 8, !tbaa !26
+  %add.ptr.i93.i140 = getelementptr inbounds i32, i32* %tmp70, i64 128
+  %add.ptr71.i142 = getelementptr inbounds i32*, i32** %__new_nstart.0.i138, i64 %sub.ptr.div.i95
+  %tmp71 = ptrtoint i32** %add.ptr71.i142 to i64
+  %tmp72 = load i32*, i32** %add.ptr71.i142, align 8, !tbaa !26
+  %add.ptr.i.i144 = getelementptr inbounds i32, i32* %tmp72, i64 128
+  br label %_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i85
+
+_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i85: ; preds = %.noexc86, %if.else.i76
+  %wavefront.sroa.0.7 = phi i64 [ %wavefront.sroa.0.6, %.noexc86 ], [ %wavefront.sroa.0.5, %if.else.i76 ]
+  %wavefront.sroa.15.7 = phi i64 [ %wavefront.sroa.15.6, %.noexc86 ], [ %wavefront.sroa.15.5, %if.else.i76 ]
+  %wavefront.sroa.26.6 = phi i32* [ %tmp70, %.noexc86 ], [ %wavefront.sroa.26.5, %if.else.i76 ]
+  %wavefront.sroa.31.6 = phi i32* [ %add.ptr.i93.i140, %.noexc86 ], [ %wavefront.sroa.31.5, %if.else.i76 ]
+  %wavefront.sroa.36.6 = phi i32** [ %__new_nstart.0.i138, %.noexc86 ], [ %wavefront.sroa.36.5, %if.else.i76 ]
+  %wavefront.sroa.69.5 = phi i64 [ %tmp71, %.noexc86 ], [ %wavefront.sroa.69.4, %if.else.i76 ]
+  %call2.i.i.i.i.i88 = call i8* @_Znwm(i64 512)
+  br label %call2.i.i.i.i.i.noexc87
+
+call2.i.i.i.i.i.noexc87:                          ; preds = %_ZNSt5dequeIiSaIiEE16_M_push_back_auxIJRKiEEEvDpOT_.exit.i85
+  %tmp73 = inttoptr i64 %wavefront.sroa.69.5 to i32**
+  %add.ptr.i.i79 = getelementptr inbounds i32*, i32** %tmp73, i64 1
+  %tmp74 = bitcast i32** %add.ptr.i.i79 to i8**
+  store i8* %call2.i.i.i.i.i88, i8** %tmp74, align 8, !tbaa !26
+  %tmp75 = inttoptr i64 %wavefront.sroa.47.3 to i32*
+  store i32 %tmp53, i32* %tmp75, align 4, !tbaa !23
+  %tmp76 = inttoptr i64 %wavefront.sroa.69.5 to i32**
+  %add.ptr11.i.i81 = getelementptr inbounds i32*, i32** %tmp76, i64 1
+  %tmp77 = ptrtoint i32** %add.ptr11.i.i81 to i64
+  %tmp78 = load i32*, i32** %add.ptr11.i.i81, align 8, !tbaa !26
+  %add.ptr.i.i.i83 = getelementptr inbounds i32, i32* %tmp78, i64 128
+  %.cast.i.i84 = ptrtoint i32* %tmp78 to i64
+  br label %invoke.cont21
+
+invoke.cont21:                                    ; preds = %call2.i.i.i.i.i.noexc87, %if.then.i69
+  %wavefront.sroa.0.8 = phi i64 [ %wavefront.sroa.0.7, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.0.5, %if.then.i69 ]
+  %wavefront.sroa.15.8 = phi i64 [ %wavefront.sroa.15.7, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.15.5, %if.then.i69 ]
+  %wavefront.sroa.26.7 = phi i32* [ %wavefront.sroa.26.6, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.26.5, %if.then.i69 ]
+  %wavefront.sroa.31.7 = phi i32* [ %wavefront.sroa.31.6, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.31.5, %if.then.i69 ]
+  %wavefront.sroa.36.7 = phi i32** [ %wavefront.sroa.36.6, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.36.5, %if.then.i69 ]
+  %wavefront.sroa.47.4 = phi i64 [ %.cast.i.i84, %call2.i.i.i.i.i.noexc87 ], [ %tmp57, %if.then.i69 ]
+  %wavefront.sroa.62.4 = phi i32* [ %add.ptr.i.i.i83, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.62.3, %if.then.i69 ]
+  %wavefront.sroa.69.6 = phi i64 [ %tmp77, %call2.i.i.i.i.i.noexc87 ], [ %wavefront.sroa.69.4, %if.then.i69 ]
+  store i32 16677218, i32* %arrayidx13, align 4, !tbaa !23
+  %.pre = load i32, i32* %y, align 4, !tbaa !54
+  %.pre179 = load i32, i32* %x, align 4, !tbaa !56
+  br label %if.end
+
+lpad20.loopexit:                                  ; No predecessors!
+  %lpad.loopexit = landingpad { i8*, i32 }
+          cleanup
+  br label %ehcleanup
+
+lpad20.loopexit.split-lp:                         ; No predecessors!
+  %lpad.loopexit.split-lp = landingpad { i8*, i32 }
+          cleanup
+  br label %ehcleanup
+
+if.end:                                           ; preds = %invoke.cont21, %for.body
+  %wavefront.sroa.0.9 = phi i64 [ %wavefront.sroa.0.8, %invoke.cont21 ], [ %wavefront.sroa.0.5, %for.body ]
+  %wavefront.sroa.15.9 = phi i64 [ %wavefront.sroa.15.8, %invoke.cont21 ], [ %wavefront.sroa.15.5, %for.body ]
+  %wavefront.sroa.26.8 = phi i32* [ %wavefront.sroa.26.7, %invoke.cont21 ], [ %wavefront.sroa.26.5, %for.body ]
+  %wavefront.sroa.31.8 = phi i32* [ %wavefront.sroa.31.7, %invoke.cont21 ], [ %wavefront.sroa.31.5, %for.body ]
+  %wavefront.sroa.36.8 = phi i32** [ %wavefront.sroa.36.7, %invoke.cont21 ], [ %wavefront.sroa.36.5, %for.body ]
+  %wavefront.sroa.47.5 = phi i64 [ %wavefront.sroa.47.4, %invoke.cont21 ], [ %wavefront.sroa.47.3, %for.body ]
+  %wavefront.sroa.62.5 = phi i32* [ %wavefront.sroa.62.4, %invoke.cont21 ], [ %wavefront.sroa.62.3, %for.body ]
+  %wavefront.sroa.69.7 = phi i64 [ %wavefront.sroa.69.6, %invoke.cont21 ], [ %wavefront.sroa.69.4, %for.body ]
+  %tmp79 = phi i32 [ %.pre179, %invoke.cont21 ], [ %tmp51, %for.body ]
+  %tmp80 = phi i32 [ %.pre, %invoke.cont21 ], [ %tmp52, %for.body ]
+  %indvars.iv.next = add nsw i64 %indvars.iv, 1
+  %add = add nsw i32 %tmp79, %tmp80
+  %tmp81 = sext i32 %add to i64
+  %cmp = icmp slt i64 %indvars.iv.next, %tmp81
+  br i1 %cmp, label %for.body, label %for.cond.cleanup.loopexit
+
+while.end:                                        ; preds = %for.cond.cleanup, %invoke.cont
+  %wavefront.sroa.0.10 = phi i64 [ %wavefront.sroa.0.2, %invoke.cont ], [ %wavefront.sroa.0.4, %for.cond.cleanup ]
+  %wavefront.sroa.36.9 = phi i32** [ %wavefront.sroa.36.1, %invoke.cont ], [ %wavefront.sroa.36.4, %for.cond.cleanup ]
+  %wavefront.sroa.69.8 = phi i64 [ %wavefront.sroa.69.1, %invoke.cont ], [ %wavefront.sroa.69.3, %for.cond.cleanup ]
+  %tmp82 = inttoptr i64 %wavefront.sroa.0.10 to i32**
+  %tobool.i.i = icmp eq i32** %tmp82, null
+  br i1 %tobool.i.i, label %_ZNSt5dequeIiSaIiEED2Ev.exit, label %if.then.i.i
+
+if.then.i.i:                                      ; preds = %while.end
+  %tmp83 = bitcast i32** %tmp82 to i8*
+  %tmp84 = inttoptr i64 %wavefront.sroa.69.8 to i32**
+  %add.ptr.i.i151 = getelementptr inbounds i32*, i32** %tmp84, i64 1
+  %cmp5.i.i.i = icmp ult i32** %wavefront.sroa.36.9, %add.ptr.i.i151
+  br i1 %cmp5.i.i.i, label %for.body.i.i.i, label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i
+
+for.body.i.i.i:                                   ; preds = %for.body.i.i.i, %if.then.i.i
+  %__n.06.i.i.i = phi i32** [ %incdec.ptr.i.i.i, %for.body.i.i.i ], [ %wavefront.sroa.36.9, %if.then.i.i ]
+  %tmp85 = bitcast i32** %__n.06.i.i.i to i8**
+  %tmp86 = load i8*, i8** %tmp85, align 8, !tbaa !26
+  call void @_ZdlPv(i8* %tmp86) #3
+  %incdec.ptr.i.i.i = getelementptr inbounds i32*, i32** %__n.06.i.i.i, i64 1
+  %cmp.i.i.i152 = icmp ult i32** %__n.06.i.i.i, %tmp84
+  br i1 %cmp.i.i.i152, label %for.body.i.i.i, label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i
+
+_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i: ; preds = %for.body.i.i.i
+  %tmp87 = inttoptr i64 %wavefront.sroa.0.10 to i8*
+  br label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i
+
+_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i: ; preds = %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i, %if.then.i.i
+  %tmp88 = phi i8* [ %tmp87, %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i ], [ %tmp83, %if.then.i.i ]
+  call void @_ZdlPv(i8* %tmp88) #3
+  br label %_ZNSt5dequeIiSaIiEED2Ev.exit
+
+_ZNSt5dequeIiSaIiEED2Ev.exit:                     ; preds = %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i, %while.end
   ret void
 
-terminate.lpad:                                   ; No predecessors!
-  %tmp23 = landingpad { i8*, i32 }
-          catch i8* null
-  %tmp24 = extractvalue { i8*, i32 } %tmp23, 0
-  tail call void @__clang_call_terminate(i8* %tmp24) #19
-  unreachable
+ehcleanup:                                        ; preds = %lpad20.loopexit.split-lp, %lpad20.loopexit, %lpad
+  %lpad.phi.sink181 = phi { i8*, i32 } [ %tmp50, %lpad ], [ %lpad.loopexit, %lpad20.loopexit ], [ %lpad.loopexit.split-lp, %lpad20.loopexit.split-lp ]
+  %wavefront.sroa.0.0.load = load i64, i64* undef
+  %tmp89 = inttoptr i64 %wavefront.sroa.0.0.load to i32**
+  %tobool.i.i154 = icmp eq i32** %tmp89, null
+  br i1 %tobool.i.i154, label %_ZNSt5dequeIiSaIiEED2Ev.exit168, label %if.then.i.i159
 
-unreachable:                                      ; preds = %lpad.body
-  unreachable
+if.then.i.i159:                                   ; preds = %ehcleanup
+  %tmp90 = bitcast i32** %tmp89 to i8*
+  %wavefront.sroa.36.0.wavefront.sroa.36.40. = load i32**, i32*** undef, !tbaa !59
+  %wavefront.sroa.69.72.54 = load i64, i64* undef, !tbaa !63
+  %tmp91 = inttoptr i64 %wavefront.sroa.69.72.54 to i32**
+  %add.ptr.i.i157 = getelementptr inbounds i32*, i32** %tmp91, i64 1
+  %cmp5.i.i.i158 = icmp ult i32** %wavefront.sroa.36.0.wavefront.sroa.36.40., %add.ptr.i.i157
+  br i1 %cmp5.i.i.i158, label %for.body.i.i.i163, label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i167
+
+for.body.i.i.i163:                                ; preds = %for.body.i.i.i163, %if.then.i.i159
+  %__n.06.i.i.i160 = phi i32** [ %incdec.ptr.i.i.i161, %for.body.i.i.i163 ], [ %wavefront.sroa.36.0.wavefront.sroa.36.40., %if.then.i.i159 ]
+  %tmp92 = bitcast i32** %__n.06.i.i.i160 to i8**
+  %tmp93 = load i8*, i8** %tmp92, align 8, !tbaa !26
+  call void @_ZdlPv(i8* %tmp93) #3
+  %incdec.ptr.i.i.i161 = getelementptr inbounds i32*, i32** %__n.06.i.i.i160, i64 1
+  %cmp.i.i.i162 = icmp ult i32** %__n.06.i.i.i160, %tmp91
+  br i1 %cmp.i.i.i162, label %for.body.i.i.i163, label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i166
+
+_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i166: ; preds = %for.body.i.i.i163
+  %wavefront.sroa.0.0.load87 = load i64, i64* undef
+  %tmp94 = inttoptr i64 %wavefront.sroa.0.0.load87 to i8*
+  br label %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i167
+
+_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i167: ; preds = %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i166, %if.then.i.i159
+  %tmp95 = phi i8* [ %tmp94, %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.loopexit.i.i166 ], [ %tmp90, %if.then.i.i159 ]
+  call void @_ZdlPv(i8* %tmp95) #3
+  br label %_ZNSt5dequeIiSaIiEED2Ev.exit168
+
+_ZNSt5dequeIiSaIiEED2Ev.exit168:                  ; preds = %_ZNSt11_Deque_baseIiSaIiEE16_M_destroy_nodesEPPiS3_.exit.i.i167, %ehcleanup
+  resume { i8*, i32 } %lpad.phi.sink181
 }
-
-; Function Attrs: noreturn
-declare dso_local void @_ZSt17__throw_bad_allocv() local_unnamed_addr #13
-
-declare dso_local i8* @__cxa_begin_catch(i8*) local_unnamed_addr
-
-declare dso_local void @__cxa_rethrow() local_unnamed_addr
-
-declare dso_local void @__cxa_end_catch() local_unnamed_addr
-
-; Function Attrs: noinline noreturn nounwind
-define linkonce_odr hidden void @__clang_call_terminate(i8* %arg) local_unnamed_addr #16 comdat {
-bb:
-  %tmp = tail call i8* @__cxa_begin_catch(i8* %arg) #3
-  tail call void @_ZSt9terminatev() #19
-  unreachable
-}
-
-declare dso_local void @_ZSt9terminatev() local_unnamed_addr
 
 ; Function Attrs: norecurse uwtable
-define dso_local i32 @main(i32 %argc, i8** %argv) local_unnamed_addr #17 {
+define dso_local i32 @main(i32 %argc, i8** %argv) local_unnamed_addr #20 {
 entry:
   store i32 0, i32* @no_of_nodes, align 4, !tbaa !23
   store i32 0, i32* @edge_list_size, align 4, !tbaa !23
@@ -6357,10 +7994,14 @@ entry:
   %argc.addr = alloca i32, align 4
   %timers = alloca %struct.pb_TimerSet, align 8
   %source = alloca i32, align 4
+  %h_graph_nodes = alloca %struct.timezone*, align 8
+  %color = alloca i32*, align 8
   %start = alloca i32, align 4
   %edgeno = alloca i32, align 4
   %id = alloca i32, align 4
   %cost = alloca i32, align 4
+  %h_graph_edges = alloca %struct.timezone*, align 8
+  %h_cost = alloca i32*, align 8
   store i32 %argc, i32* %argc.addr, align 4, !tbaa !23
   %tmp = bitcast %struct.pb_TimerSet* %timers to i8*
   call void @llvm.lifetime.start.p0i8(i64 288, i8* nonnull %tmp) #3
@@ -6380,15 +8021,15 @@ lor.lhs.false:                                    ; preds = %entry
 
 if.then:                                          ; preds = %lor.lhs.false, %entry
   %tmp4 = load %struct._IO_FILE*, %struct._IO_FILE** @stderr, align 8, !tbaa !26
-  %tmp5 = call i64 @fwrite(i8* getelementptr inbounds ([30 x i8], [30 x i8]* @.str.12.34, i64 0, i64 0), i64 29, i64 1, %struct._IO_FILE* %tmp4) #22
-  call void @exit(i32 -1) #19
+  %tmp5 = call i64 @fwrite(i8* getelementptr inbounds ([30 x i8], [30 x i8]* @.str.1.13, i64 0, i64 0), i64 29, i64 1, %struct._IO_FILE* %tmp4) #26
+  call void @exit(i32 -1) #23
   unreachable
 
 if.end:                                           ; preds = %lor.lhs.false
   call void @pb_SwitchToTimer(%struct.pb_TimerSet* nonnull %timers, i32 1)
   %tmp6 = load i8**, i8*** %inpFiles, align 8, !tbaa !29
   %tmp7 = load i8*, i8** %tmp6, align 8, !tbaa !26
-  %call7 = call %struct._IO_FILE* @fopen(i8* %tmp7, i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str.1.13, i64 0, i64 0))
+  %call7 = call %struct._IO_FILE* @fopen(i8* %tmp7, i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str.2.14, i64 0, i64 0))
   store %struct._IO_FILE* %call7, %struct._IO_FILE** @fp, align 8, !tbaa !26
   %tobool = icmp eq %struct._IO_FILE* %call7, null
   br i1 %tobool, label %if.then8, label %if.end10
@@ -6400,130 +8041,143 @@ if.then8:                                         ; preds = %if.end
 if.end10:                                         ; preds = %if.end
   %tmp8 = bitcast i32* %source to i8*
   call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %tmp8) #3
-  %call11 = call i32 (%struct._IO_FILE*, i8*, ...) @fscanf(%struct._IO_FILE* nonnull %call7, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.3.14, i64 0, i64 0), i32* nonnull @no_of_nodes)
-  %tmp9 = load i32, i32* @no_of_nodes, align 4, !tbaa !23
-  %conv = sext i32 %tmp9 to i64
+  %call11 = call i32 (%struct._IO_FILE*, i8*, ...) @fscanf(%struct._IO_FILE* nonnull %call7, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.4.15, i64 0, i64 0), i32* nonnull @no_of_nodes)
+  %tmp9 = bitcast %struct.timezone** %h_graph_nodes to i8*
+  call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %tmp9) #3
+  %tmp10 = load i32, i32* @no_of_nodes, align 4, !tbaa !23
+  %conv = sext i32 %tmp10 to i64
   %mul = shl nsw i64 %conv, 3
   %call12 = call noalias i8* @malloc(i64 %mul) #3
-  %tmp10 = bitcast i8* %call12 to %struct.timezone*
+  %tmp11 = bitcast %struct.timezone** %h_graph_nodes to i8**
+  store i8* %call12, i8** %tmp11, align 8, !tbaa !26
+  %tmp12 = bitcast i32** %color to i8*
+  call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %tmp12) #3
   %mul14 = shl nsw i64 %conv, 2
   %call15 = call noalias i8* @malloc(i64 %mul14) #3
-  %tmp11 = bitcast i8* %call15 to i32*
-  %tmp12 = bitcast i32* %start to i8*
-  call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %tmp12) #3
-  %tmp13 = bitcast i32* %edgeno to i8*
-  call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %tmp13) #3
-  %cmp16132 = icmp eq i32 %tmp9, 0
-  %tmp14 = load %struct._IO_FILE*, %struct._IO_FILE** @fp, align 8, !tbaa !26
-  br i1 %cmp16132, label %for.cond.cleanup, label %for.body
+  %tmp13 = bitcast i32** %color to i8**
+  store i8* %call15, i8** %tmp13, align 8, !tbaa !26
+  %tmp14 = bitcast i32* %start to i8*
+  call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %tmp14) #3
+  %tmp15 = bitcast i32* %edgeno to i8*
+  call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %tmp15) #3
+  %cmp16118 = icmp eq i32 %tmp10, 0
+  %tmp16 = load %struct._IO_FILE*, %struct._IO_FILE** @fp, align 8, !tbaa !26
+  br i1 %cmp16118, label %for.cond.cleanup, label %for.body
 
 for.cond.cleanup:                                 ; preds = %for.body, %if.end10
-  %.lcssa125 = phi %struct._IO_FILE* [ %tmp14, %if.end10 ], [ %tmp26, %for.body ]
-  %call23 = call i32 (%struct._IO_FILE*, i8*, ...) @fscanf(%struct._IO_FILE* %.lcssa125, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.3.14, i64 0, i64 0), i32* nonnull %source)
-  %tmp15 = load %struct._IO_FILE*, %struct._IO_FILE** @fp, align 8, !tbaa !26
-  %call24 = call i32 (%struct._IO_FILE*, i8*, ...) @fscanf(%struct._IO_FILE* %tmp15, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.3.14, i64 0, i64 0), i32* nonnull @edge_list_size)
-  %tmp16 = bitcast i32* %id to i8*
-  call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %tmp16) #3
-  %tmp17 = bitcast i32* %cost to i8*
-  call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %tmp17) #3
-  %tmp18 = load i32, i32* @edge_list_size, align 4, !tbaa !23
-  %conv25 = sext i32 %tmp18 to i64
+  %.lcssa110 = phi %struct._IO_FILE* [ %tmp16, %if.end10 ], [ %tmp31, %for.body ]
+  %call23 = call i32 (%struct._IO_FILE*, i8*, ...) @fscanf(%struct._IO_FILE* %.lcssa110, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.4.15, i64 0, i64 0), i32* nonnull %source)
+  %tmp17 = load %struct._IO_FILE*, %struct._IO_FILE** @fp, align 8, !tbaa !26
+  %call24 = call i32 (%struct._IO_FILE*, i8*, ...) @fscanf(%struct._IO_FILE* %tmp17, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.4.15, i64 0, i64 0), i32* nonnull @edge_list_size)
+  %tmp18 = bitcast i32* %id to i8*
+  call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %tmp18) #3
+  %tmp19 = bitcast i32* %cost to i8*
+  call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %tmp19) #3
+  %tmp20 = bitcast %struct.timezone** %h_graph_edges to i8*
+  call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %tmp20) #3
+  %tmp21 = load i32, i32* @edge_list_size, align 4, !tbaa !23
+  %conv25 = sext i32 %tmp21 to i64
   %mul26 = shl nsw i64 %conv25, 3
   %call27 = call noalias i8* @malloc(i64 %mul26) #3
-  %tmp19 = bitcast i8* %call27 to %struct.timezone*
-  %cmp30130 = icmp sgt i32 %tmp18, 0
-  %tmp20 = load %struct._IO_FILE*, %struct._IO_FILE** @fp, align 8, !tbaa !26
-  br i1 %cmp30130, label %for.body32, label %for.cond.cleanup31
+  %tmp22 = bitcast %struct.timezone** %h_graph_edges to i8**
+  store i8* %call27, i8** %tmp22, align 8, !tbaa !26
+  %cmp30115 = icmp sgt i32 %tmp21, 0
+  %tmp23 = load %struct._IO_FILE*, %struct._IO_FILE** @fp, align 8, !tbaa !26
+  br i1 %cmp30115, label %for.body32, label %for.cond.cleanup31
 
 for.body:                                         ; preds = %for.body, %if.end10
-  %indvars.iv141 = phi i64 [ %indvars.iv.next142, %for.body ], [ 0, %if.end10 ]
-  %tmp21 = phi %struct._IO_FILE* [ %tmp26, %for.body ], [ %tmp14, %if.end10 ]
-  %call17 = call i32 (%struct._IO_FILE*, i8*, ...) @fscanf(%struct._IO_FILE* %tmp21, i8* getelementptr inbounds ([6 x i8], [6 x i8]* @.str.4.15, i64 0, i64 0), i32* nonnull %start, i32* nonnull %edgeno)
-  %tmp22 = load i32, i32* %start, align 4, !tbaa !23
-  %x = getelementptr inbounds %struct.timezone, %struct.timezone* %tmp10, i64 %indvars.iv141, i32 0
-  store i32 %tmp22, i32* %x, align 4, !tbaa !70
-  %tmp23 = load i32, i32* %edgeno, align 4, !tbaa !23
-  %y = getelementptr inbounds %struct.timezone, %struct.timezone* %tmp10, i64 %indvars.iv141, i32 1
-  store i32 %tmp23, i32* %y, align 4, !tbaa !68
-  %arrayidx22 = getelementptr inbounds i32, i32* %tmp11, i64 %indvars.iv141
+  %indvars.iv127 = phi i64 [ %indvars.iv.next128, %for.body ], [ 0, %if.end10 ]
+  %tmp24 = phi %struct._IO_FILE* [ %tmp31, %for.body ], [ %tmp16, %if.end10 ]
+  %call17 = call i32 (%struct._IO_FILE*, i8*, ...) @fscanf(%struct._IO_FILE* %tmp24, i8* getelementptr inbounds ([6 x i8], [6 x i8]* @.str.5.16, i64 0, i64 0), i32* nonnull %start, i32* nonnull %edgeno)
+  %tmp25 = load i32, i32* %start, align 4, !tbaa !23
+  %tmp26 = load %struct.timezone*, %struct.timezone** %h_graph_nodes, align 8, !tbaa !26
+  %x = getelementptr inbounds %struct.timezone, %struct.timezone* %tmp26, i64 %indvars.iv127, i32 0
+  store i32 %tmp25, i32* %x, align 4, !tbaa !56
+  %tmp27 = load i32, i32* %edgeno, align 4, !tbaa !23
+  %y = getelementptr inbounds %struct.timezone, %struct.timezone* %tmp26, i64 %indvars.iv127, i32 1
+  store i32 %tmp27, i32* %y, align 4, !tbaa !54
+  %tmp28 = load i32*, i32** %color, align 8, !tbaa !26
+  %arrayidx22 = getelementptr inbounds i32, i32* %tmp28, i64 %indvars.iv127
   store i32 16677217, i32* %arrayidx22, align 4, !tbaa !23
-  %indvars.iv.next142 = add nuw nsw i64 %indvars.iv141, 1
-  %tmp24 = load i32, i32* @no_of_nodes, align 4, !tbaa !23
-  %tmp25 = zext i32 %tmp24 to i64
-  %cmp16 = icmp ult i64 %indvars.iv.next142, %tmp25
-  %tmp26 = load %struct._IO_FILE*, %struct._IO_FILE** @fp, align 8, !tbaa !26
+  %indvars.iv.next128 = add nuw nsw i64 %indvars.iv127, 1
+  %tmp29 = load i32, i32* @no_of_nodes, align 4, !tbaa !23
+  %tmp30 = zext i32 %tmp29 to i64
+  %cmp16 = icmp ult i64 %indvars.iv.next128, %tmp30
+  %tmp31 = load %struct._IO_FILE*, %struct._IO_FILE** @fp, align 8, !tbaa !26
   br i1 %cmp16, label %for.body, label %for.cond.cleanup
 
 for.cond.cleanup31:                               ; preds = %for.body32, %for.cond.cleanup
-  %.lcssa = phi %struct._IO_FILE* [ %tmp20, %for.cond.cleanup ], [ %tmp33, %for.body32 ]
-  %tobool44 = icmp eq %struct._IO_FILE* %.lcssa, null
+  %.lcssa109 = phi %struct._IO_FILE* [ %tmp23, %for.cond.cleanup ], [ %tmp39, %for.body32 ]
+  %tobool44 = icmp eq %struct._IO_FILE* %.lcssa109, null
   br i1 %tobool44, label %if.end47, label %if.then45
 
 for.body32:                                       ; preds = %for.body32, %for.cond.cleanup
-  %indvars.iv139 = phi i64 [ %indvars.iv.next140, %for.body32 ], [ 0, %for.cond.cleanup ]
-  %tmp27 = phi %struct._IO_FILE* [ %tmp33, %for.body32 ], [ %tmp20, %for.cond.cleanup ]
-  %call33 = call i32 (%struct._IO_FILE*, i8*, ...) @fscanf(%struct._IO_FILE* %tmp27, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.3.14, i64 0, i64 0), i32* nonnull %id)
-  %tmp28 = load %struct._IO_FILE*, %struct._IO_FILE** @fp, align 8, !tbaa !26
-  %call34 = call i32 (%struct._IO_FILE*, i8*, ...) @fscanf(%struct._IO_FILE* %tmp28, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.3.14, i64 0, i64 0), i32* nonnull %cost)
-  %tmp29 = load i32, i32* %id, align 4, !tbaa !23
-  %x37 = getelementptr inbounds %struct.timezone, %struct.timezone* %tmp19, i64 %indvars.iv139, i32 0
-  store i32 %tmp29, i32* %x37, align 4, !tbaa !71
-  %tmp30 = load i32, i32* %cost, align 4, !tbaa !23
-  %y40 = getelementptr inbounds %struct.timezone, %struct.timezone* %tmp19, i64 %indvars.iv139, i32 1
-  store i32 %tmp30, i32* %y40, align 4, !tbaa !73
-  %indvars.iv.next140 = add nuw nsw i64 %indvars.iv139, 1
-  %tmp31 = load i32, i32* @edge_list_size, align 4, !tbaa !23
-  %tmp32 = sext i32 %tmp31 to i64
-  %cmp30 = icmp slt i64 %indvars.iv.next140, %tmp32
+  %indvars.iv125 = phi i64 [ %indvars.iv.next126, %for.body32 ], [ 0, %for.cond.cleanup ]
+  %tmp32 = phi %struct._IO_FILE* [ %tmp39, %for.body32 ], [ %tmp23, %for.cond.cleanup ]
+  %call33 = call i32 (%struct._IO_FILE*, i8*, ...) @fscanf(%struct._IO_FILE* %tmp32, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.4.15, i64 0, i64 0), i32* nonnull %id)
   %tmp33 = load %struct._IO_FILE*, %struct._IO_FILE** @fp, align 8, !tbaa !26
+  %call34 = call i32 (%struct._IO_FILE*, i8*, ...) @fscanf(%struct._IO_FILE* %tmp33, i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.4.15, i64 0, i64 0), i32* nonnull %cost)
+  %tmp34 = load i32, i32* %id, align 4, !tbaa !23
+  %tmp35 = load %struct.timezone*, %struct.timezone** %h_graph_edges, align 8, !tbaa !26
+  %x37 = getelementptr inbounds %struct.timezone, %struct.timezone* %tmp35, i64 %indvars.iv125, i32 0
+  store i32 %tmp34, i32* %x37, align 4, !tbaa !57
+  %tmp36 = load i32, i32* %cost, align 4, !tbaa !23
+  %y40 = getelementptr inbounds %struct.timezone, %struct.timezone* %tmp35, i64 %indvars.iv125, i32 1
+  store i32 %tmp36, i32* %y40, align 4, !tbaa !64
+  %indvars.iv.next126 = add nuw nsw i64 %indvars.iv125, 1
+  %tmp37 = load i32, i32* @edge_list_size, align 4, !tbaa !23
+  %tmp38 = sext i32 %tmp37 to i64
+  %cmp30 = icmp slt i64 %indvars.iv.next126, %tmp38
+  %tmp39 = load %struct._IO_FILE*, %struct._IO_FILE** @fp, align 8, !tbaa !26
   br i1 %cmp30, label %for.body32, label %for.cond.cleanup31
 
 if.then45:                                        ; preds = %for.cond.cleanup31
-  %call46 = call i32 @fclose(%struct._IO_FILE* nonnull %.lcssa)
+  %call46 = call i32 @fclose(%struct._IO_FILE* nonnull %.lcssa109)
   br label %if.end47
 
 if.end47:                                         ; preds = %if.then45, %for.cond.cleanup31
-  %tmp34 = load i32, i32* @no_of_nodes, align 4, !tbaa !23
-  %conv48 = sext i32 %tmp34 to i64
+  %tmp40 = bitcast i32** %h_cost to i8*
+  call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %tmp40) #3
+  %tmp41 = load i32, i32* @no_of_nodes, align 4, !tbaa !23
+  %conv48 = sext i32 %tmp41 to i64
   %mul49 = shl nsw i64 %conv48, 2
   %call50 = call noalias i8* @malloc(i64 %mul49) #3
-  %tmp35 = bitcast i8* %call50 to i32*
-  %cmp53128 = icmp sgt i32 %tmp34, 0
-  br i1 %cmp53128, label %for.body55.preheader, label %for.cond.cleanup54
-
-for.body55.preheader:                             ; preds = %if.end47
-  %wide.trip.count = zext i32 %tmp34 to i64
-  br label %for.body55
+  %tmp42 = bitcast i32** %h_cost to i8**
+  store i8* %call50, i8** %tmp42, align 8, !tbaa !26
+  %cmp53113 = icmp sgt i32 %tmp41, 0
+  %.cast = bitcast i8* %call50 to i32*
+  br i1 %cmp53113, label %for.body55, label %for.cond.cleanup54
 
 for.cond.cleanup54:                               ; preds = %for.body55, %if.end47
-  %tmp36 = load i32, i32* %source, align 4, !tbaa !23
-  %idxprom61 = sext i32 %tmp36 to i64
-  %arrayidx62 = getelementptr inbounds i32, i32* %tmp35, i64 %idxprom61
+  %tmp43 = load i32, i32* %source, align 4, !tbaa !23
+  %idxprom61 = sext i32 %tmp43 to i64
+  %arrayidx62 = getelementptr inbounds i32, i32* %.cast, i64 %idxprom61
   store i32 0, i32* %arrayidx62, align 4, !tbaa !23
   call void @pb_SwitchToTimer(%struct.pb_TimerSet* nonnull %timers, i32 6)
-  %tmp37 = load i32, i32* %source, align 4, !tbaa !23
-  call void @_Z7BFS_CPUP4NodeP4EdgePiS3_i(%struct.timezone* %tmp10, %struct.timezone* %tmp19, i32* %tmp11, i32* %tmp35, i32 %tmp37)
+  call void @omp_set_dynamic(i32 0)
+  call void @omp_set_num_threads(i32 1)
+  call void (%struct.ident_t*, i32, void (i32*, i32*, ...)*, ...) @__kmpc_fork_call(%struct.ident_t* nonnull @0, i32 5, void (i32*, i32*, ...)* bitcast (void (i32*, i32*, %struct.timezone**, %struct.timezone**, i32**, i32**, i32*)* @.omp_outlined. to void (i32*, i32*, ...)*), %struct.timezone** nonnull %h_graph_nodes, %struct.timezone** nonnull %h_graph_edges, i32** nonnull %color, i32** nonnull %h_cost, i32* nonnull %source)
   call void @pb_SwitchToTimer(%struct.pb_TimerSet* nonnull %timers, i32 1)
   %outFile = getelementptr inbounds %struct.pb_Parameters, %struct.pb_Parameters* %call, i64 0, i32 0
-  %tmp38 = load i8*, i8** %outFile, align 8, !tbaa !27
-  %cmp63 = icmp eq i8* %tmp38, null
+  %tmp44 = load i8*, i8** %outFile, align 8, !tbaa !27
+  %cmp63 = icmp eq i8* %tmp44, null
   br i1 %cmp63, label %if.end80, label %if.then64
 
-for.body55:                                       ; preds = %for.body55, %for.body55.preheader
-  %indvars.iv137 = phi i64 [ 0, %for.body55.preheader ], [ %indvars.iv.next138, %for.body55 ]
-  %arrayidx57 = getelementptr inbounds i32, i32* %tmp35, i64 %indvars.iv137
+for.body55:                                       ; preds = %for.body55, %if.end47
+  %indvars.iv123 = phi i64 [ %indvars.iv.next124, %for.body55 ], [ 0, %if.end47 ]
+  %arrayidx57 = getelementptr inbounds i32, i32* %.cast, i64 %indvars.iv123
   store i32 2147483647, i32* %arrayidx57, align 4, !tbaa !23
-  %indvars.iv.next138 = add nuw nsw i64 %indvars.iv137, 1
-  %exitcond = icmp eq i64 %indvars.iv.next138, %wide.trip.count
-  br i1 %exitcond, label %for.cond.cleanup54, label %for.body55
+  %indvars.iv.next124 = add nuw nsw i64 %indvars.iv123, 1
+  %cmp53 = icmp slt i64 %indvars.iv.next124, %conv48
+  br i1 %cmp53, label %for.body55, label %for.cond.cleanup54
 
 if.then64:                                        ; preds = %for.cond.cleanup54
-  %call66 = call %struct._IO_FILE* @fopen(i8* nonnull %tmp38, i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str.5.16, i64 0, i64 0))
-  %tmp39 = load i32, i32* @no_of_nodes, align 4, !tbaa !23
-  %call67 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %call66, i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.6.17, i64 0, i64 0), i32 %tmp39)
-  %tmp40 = load i32, i32* @no_of_nodes, align 4, !tbaa !23
-  %cmp70126 = icmp sgt i32 %tmp40, 0
-  br i1 %cmp70126, label %for.body72, label %for.cond.cleanup71
+  %call66 = call %struct._IO_FILE* @fopen(i8* nonnull %tmp44, i8* getelementptr inbounds ([2 x i8], [2 x i8]* @.str.6.17, i64 0, i64 0))
+  %tmp45 = load i32, i32* @no_of_nodes, align 4, !tbaa !23
+  %call67 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %call66, i8* getelementptr inbounds ([4 x i8], [4 x i8]* @.str.7.18, i64 0, i64 0), i32 %tmp45)
+  %tmp46 = load i32, i32* @no_of_nodes, align 4, !tbaa !23
+  %cmp70111 = icmp sgt i32 %tmp46, 0
+  br i1 %cmp70111, label %for.body72, label %for.cond.cleanup71
 
 for.cond.cleanup71:                               ; preds = %for.body72, %if.then64
   %call79 = call i32 @fclose(%struct._IO_FILE* %call66)
@@ -6531,29 +8185,38 @@ for.cond.cleanup71:                               ; preds = %for.body72, %if.the
 
 for.body72:                                       ; preds = %for.body72, %if.then64
   %indvars.iv = phi i64 [ %indvars.iv.next, %for.body72 ], [ 0, %if.then64 ]
-  %arrayidx74 = getelementptr inbounds i32, i32* %tmp35, i64 %indvars.iv
-  %tmp41 = load i32, i32* %arrayidx74, align 4, !tbaa !23
-  %tmp42 = trunc i64 %indvars.iv to i32
-  %call75 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %call66, i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str.7.18, i64 0, i64 0), i32 %tmp42, i32 %tmp41)
+  %tmp47 = load i32*, i32** %h_cost, align 8, !tbaa !26
+  %arrayidx74 = getelementptr inbounds i32, i32* %tmp47, i64 %indvars.iv
+  %tmp48 = load i32, i32* %arrayidx74, align 4, !tbaa !23
+  %tmp49 = trunc i64 %indvars.iv to i32
+  %call75 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %call66, i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str.8.19, i64 0, i64 0), i32 %tmp49, i32 %tmp48)
   %indvars.iv.next = add nuw nsw i64 %indvars.iv, 1
-  %tmp43 = load i32, i32* @no_of_nodes, align 4, !tbaa !23
-  %tmp44 = sext i32 %tmp43 to i64
-  %cmp70 = icmp slt i64 %indvars.iv.next, %tmp44
+  %tmp50 = load i32, i32* @no_of_nodes, align 4, !tbaa !23
+  %tmp51 = sext i32 %tmp50 to i64
+  %cmp70 = icmp slt i64 %indvars.iv.next, %tmp51
   br i1 %cmp70, label %for.body72, label %for.cond.cleanup71
 
 if.end80:                                         ; preds = %for.cond.cleanup71, %for.cond.cleanup54
   call void @pb_SwitchToTimer(%struct.pb_TimerSet* nonnull %timers, i32 6)
-  call void @free(i8* %call12) #3
-  call void @free(i8* %call27) #3
-  call void @free(i8* %call15) #3
-  call void @free(i8* nonnull %call50) #3
+  %tmp52 = load i8*, i8** %tmp11, align 8, !tbaa !26
+  call void @free(i8* %tmp52) #3
+  %tmp53 = load i8*, i8** %tmp22, align 8, !tbaa !26
+  call void @free(i8* %tmp53) #3
+  %tmp54 = load i8*, i8** %tmp13, align 8, !tbaa !26
+  call void @free(i8* %tmp54) #3
+  %tmp55 = load i8*, i8** %tmp42, align 8, !tbaa !26
+  call void @free(i8* %tmp55) #3
   call void @pb_SwitchToTimer(%struct.pb_TimerSet* nonnull %timers, i32 0)
   call void @pb_PrintTimerSet(%struct.pb_TimerSet* nonnull %timers)
   call void @pb_FreeParameters(%struct.pb_Parameters* %call)
-  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %tmp17) #3
-  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %tmp16) #3
-  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %tmp13) #3
-  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %tmp12) #3
+  call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %tmp40) #3
+  call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %tmp20) #3
+  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %tmp19) #3
+  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %tmp18) #3
+  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %tmp15) #3
+  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %tmp14) #3
+  call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %tmp12) #3
+  call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %tmp9) #3
   call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %tmp8) #3
   br label %cleanup
 
@@ -6577,8 +8240,48 @@ declare dso_local i32 @fscanf(%struct._IO_FILE* nocapture, i8* nocapture readonl
 ; Function Attrs: nounwind
 declare dso_local i32 @fclose(%struct._IO_FILE* nocapture) local_unnamed_addr #2
 
+declare dso_local void @omp_set_dynamic(i32) local_unnamed_addr #1
+
+declare dso_local void @omp_set_num_threads(i32) local_unnamed_addr #1
+
+; Function Attrs: norecurse nounwind uwtable
+define internal void @.omp_outlined.(i32* noalias nocapture readnone %.global_tid., i32* noalias nocapture readnone %.bound_tid., %struct.timezone** nocapture readonly dereferenceable(8) %h_graph_nodes, %struct.timezone** nocapture readonly dereferenceable(8) %h_graph_edges, i32** nocapture readonly dereferenceable(8) %color, i32** nocapture readonly dereferenceable(8) %h_cost, i32* nocapture readonly dereferenceable(4) %source) #21 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+entry:
+  %call = call i32 @omp_get_thread_num()
+  br label %invoke.cont
+
+invoke.cont:                                      ; preds = %entry
+  %tmp = load %struct.timezone*, %struct.timezone** %h_graph_nodes, align 8, !tbaa !26
+  %tmp1 = load %struct.timezone*, %struct.timezone** %h_graph_edges, align 8, !tbaa !26
+  %tmp2 = load i32*, i32** %color, align 8, !tbaa !26
+  %tmp3 = load i32*, i32** %h_cost, align 8, !tbaa !26
+  %tmp4 = load i32, i32* %source, align 4, !tbaa !23
+  call void @_Z15_kernel_computeP4NodeP4EdgePiS3_iii(%struct.timezone* %tmp, %struct.timezone* %tmp1, i32* %tmp2, i32* %tmp3, i32 %tmp4, i32 undef, i32 undef)
+  br label %invoke.cont1
+
+invoke.cont1:                                     ; preds = %invoke.cont
+  ret void
+
+lpad:                                             ; No predecessors!
+  %tmp5 = landingpad { i8*, i32 }
+          catch i8* null
+  %tmp6 = extractvalue { i8*, i32 } %tmp5, 0
+  %tmp7 = tail call i8* @__cxa_begin_catch(i8* %tmp6) #3
+  tail call void @_ZSt9terminatev() #23
+  unreachable
+
+__clang_call_terminate.exit:                      ; No predecessors!
+  unreachable
+}
+
+declare !callback !65 dso_local void @__kmpc_fork_call(%struct.ident_t*, i32, void (i32*, i32*, ...)*, ...) local_unnamed_addr
+
 ; Function Attrs: nounwind
 declare dso_local i32 @fprintf(%struct._IO_FILE* nocapture, i8* nocapture readonly, ...) local_unnamed_addr #2
+
+declare dso_local i8* @__cxa_begin_catch(i8*) local_unnamed_addr
+
+declare dso_local void @_ZSt9terminatev() local_unnamed_addr
 
 attributes #0 = { uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
 attributes #1 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
@@ -6596,13 +8299,17 @@ attributes #12 = { nobuiltin nounwind "correctly-rounded-divide-sqrt-fp-math"="f
 attributes #13 = { noreturn "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
 attributes #14 = { norecurse nounwind readonly uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
 attributes #15 = { norecurse nounwind uwtable writeonly "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #16 = { noinline noreturn nounwind }
-attributes #17 = { norecurse uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #18 = { nounwind readonly }
-attributes #19 = { noreturn nounwind }
-attributes #20 = { noreturn }
-attributes #21 = { cold nounwind }
-attributes #22 = { cold }
+attributes #16 = { noinline norecurse nounwind uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #17 = { noinline nounwind uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #18 = { noinline uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #19 = { uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #20 = { norecurse uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #21 = { norecurse nounwind uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="false" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #22 = { nounwind readonly }
+attributes #23 = { noreturn nounwind }
+attributes #24 = { noreturn }
+attributes #25 = { cold nounwind }
+attributes #26 = { cold }
 
 !llvm.ident = !{!0, !0, !0}
 !llvm.module.flags = !{!1}
@@ -6659,25 +8366,18 @@ attributes #22 = { cold }
 !49 = !{!50, !13, i64 8}
 !50 = !{!"_ZTS15pb_SubTimerList", !13, i64 0, !13, i64 8}
 !51 = !{!50, !13, i64 0}
-!52 = !{!53, !13, i64 48}
-!53 = !{!"_ZTSSt11_Deque_baseIiSaIiEE", !54, i64 0}
-!54 = !{!"_ZTSNSt11_Deque_baseIiSaIiEE11_Deque_implE", !13, i64 0, !10, i64 8, !55, i64 16, !55, i64 48}
-!55 = !{!"_ZTSSt15_Deque_iteratorIiRiPiE", !13, i64 0, !13, i64 8, !13, i64 16, !13, i64 24}
-!56 = !{!53, !13, i64 64}
-!57 = !{!53, !10, i64 8}
-!58 = !{!53, !13, i64 72}
-!59 = !{!53, !13, i64 0}
-!60 = !{!53, !13, i64 40}
-!61 = !{!55, !13, i64 24}
-!62 = !{!55, !13, i64 8}
-!63 = !{!55, !13, i64 16}
-!64 = !{!55, !13, i64 0}
-!65 = !{!53, !13, i64 32}
-!66 = !{!53, !13, i64 16}
-!67 = !{!53, !13, i64 24}
-!68 = !{!69, !15, i64 4}
-!69 = !{!"_ZTS4Node", !15, i64 0, !15, i64 4}
-!70 = !{!69, !15, i64 0}
-!71 = !{!72, !15, i64 0}
-!72 = !{!"_ZTS4Edge", !15, i64 0, !15, i64 4}
-!73 = !{!72, !15, i64 4}
+!52 = !{!53, !53, i64 0}
+!53 = !{!"float", !4, i64 0}
+!54 = !{!55, !15, i64 4}
+!55 = !{!"_ZTS4Node", !15, i64 0, !15, i64 4}
+!56 = !{!55, !15, i64 0}
+!57 = !{!58, !15, i64 0}
+!58 = !{!"_ZTS4Edge", !15, i64 0, !15, i64 4}
+!59 = !{!60, !13, i64 40}
+!60 = !{!"_ZTSSt11_Deque_baseIiSaIiEE", !61, i64 0}
+!61 = !{!"_ZTSNSt11_Deque_baseIiSaIiEE11_Deque_implE", !13, i64 0, !10, i64 8, !62, i64 16, !62, i64 48}
+!62 = !{!"_ZTSSt15_Deque_iteratorIiRiPiE", !13, i64 0, !13, i64 8, !13, i64 16, !13, i64 24}
+!63 = !{!60, !13, i64 72}
+!64 = !{!58, !15, i64 4}
+!65 = !{!66}
+!66 = !{i64 2, i64 -1, i64 -1, i1 true}

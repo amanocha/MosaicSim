@@ -2,3 +2,6 @@
 */.DS_Store
 parboil/datasets/*
 *.pyc
+**/build
+**/run
+**/decades_base

@@ -6,6 +6,7 @@
  *
  ***************************************************************************/
 
+#include "DECADES/DECADES.h"
 #include <parboil.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,7 +14,7 @@
 
 #include "util.h"
 
-#define UINT8_MAX 255
+#define MY_UINT8_MAX 255
 
 /******************************************************************************
 * Implementation: Reference
@@ -22,6 +23,20 @@
 * optimization, which reduces the number of pointer chasing operations is the 
 * use of a temporary pointer for each row.
 ******************************************************************************/
+
+void _kernel_(unsigned char* histo, unsigned int histo_height, unsigned int histo_width, unsigned int* img, unsigned int img_height, unsigned int img_width, int numIterations, int tid, int num_threads) {
+  int iter;
+  for (iter = tid; iter < numIterations; iter+=num_threads){
+    memset(histo,0,histo_height*histo_width*sizeof(unsigned char));
+    unsigned int i;
+    for (i = 0; i < img_width*img_height; ++i) {
+      const unsigned int value = img[i];
+      if (histo[value] < MY_UINT8_MAX) {
+        ++histo[value];
+      }
+    }
+  }
+}
 
 int main(int argc, char* argv[]) {
   struct pb_TimerSet timers;
@@ -39,13 +54,13 @@ int main(int argc, char* argv[]) {
     return -1;
   }
 
-  int numIterations;
-  if (argc >= 2){
+  int numIterations = 100;
+  /*if (argc >= 2){
     numIterations = atoi(argv[1]);
   } else {
     fputs("Expected at least one command line argument\n", stderr);
     return -1;
-  }
+  }*/
 
   pb_InitializeTimerSet(&timers);
   
@@ -89,17 +104,7 @@ int main(int argc, char* argv[]) {
 
   pb_SwitchToTimer(&timers, pb_TimerID_COMPUTE);
 
-  int iter;
-  for (iter = 0; iter < numIterations; iter++){
-    memset(histo,0,histo_height*histo_width*sizeof(unsigned char));
-    unsigned int i;
-    for (i = 0; i < img_width*img_height; ++i) {
-      const unsigned int value = img[i];
-      if (histo[value] < UINT8_MAX) {
-        ++histo[value];
-      }
-    }
-  }
+  _kernel_(histo, histo_height, histo_width, img, img_height, img_width, numIterations, 0, 1);
 
 //  pb_SwitchToTimer(&timers, pb_TimerID_IO);
   pb_SwitchToSubTimer(&timers, outputStr, pb_TimerID_IO);

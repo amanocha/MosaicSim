@@ -2,6 +2,7 @@
 
 /*############################################################################*/
 
+#include "DECADES/DECADES.h"
 #include "main.h"
 #include "lbm.h"
 #include <stdio.h>
@@ -23,13 +24,27 @@ static LBM_GridPtr srcGrid, dstGrid;
 /*############################################################################*/
 
 struct pb_TimerSet timers;
+
+void _kernel_(MAIN_Param param, int tid, int num_threads) {
+  int t;
+  for(t = 1 + tid; t <= param.nTimeSteps; t+= num_threads) {
+    if( param.simType == CHANNEL ) {
+      LBM_handleInOutFlow( *srcGrid );
+    }
+
+    LBM_performStreamCollide( *srcGrid, *dstGrid );
+    LBM_swapGrids( &srcGrid, &dstGrid );
+
+    //printf( "timestep: %i\n", t );
+    //LBM_showGridStatistics( *srcGrid );
+  }
+}
+
 int main( int nArgs, char* arg[] ) {
 	MAIN_Param param;
 #if !defined(SPEC_CPU)
 	MAIN_Time time;
 #endif
-	int t;
-
         pb_InitializeTimerSet(&timers);
         pb_SwitchToTimer(&timers, pb_TimerID_COMPUTE);
         struct pb_Parameters* params;
@@ -42,19 +57,7 @@ int main( int nArgs, char* arg[] ) {
 	MAIN_startClock( &time );
 #endif
 
-	for( t = 1; t <= param.nTimeSteps; t++ ) {
-		if( param.simType == CHANNEL ) {
-			LBM_handleInOutFlow( *srcGrid );
-		}
-
-		LBM_performStreamCollide( *srcGrid, *dstGrid );
-		LBM_swapGrids( &srcGrid, &dstGrid );
-
-		if( (t & 63) == 0 ) {
-			printf( "timestep: %i\n", t );
-			//LBM_showGridStatistics( *srcGrid );
-		}
-	}
+        _kernel_(param, 0, 1);
 
 #if !defined(SPEC_CPU)
 	MAIN_stopClock( &time, &param );
@@ -74,11 +77,12 @@ void MAIN_parseCommandLine( int nArgs, char* arg[], MAIN_Param* param, struct pb
 	struct stat fileStat;
 	
 	if( nArgs < 2 ) {
-		printf( "syntax: lbm <time steps>\n" );
-		exit( 1 );
-	}
-
-	param->nTimeSteps     = atoi( arg[1] );
+                param->nTimeSteps     = 1;
+		//printf( "syntax: lbm <time steps>\n" );
+		//exit( 1 );
+	} else {
+	        param->nTimeSteps     = atoi( arg[1] );
+        }
 
 	if( params->inpFiles[0] != NULL ) {
 		param->obstacleFilename = params->inpFiles[0];

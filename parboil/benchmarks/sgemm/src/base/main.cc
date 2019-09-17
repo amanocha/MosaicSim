@@ -10,6 +10,7 @@
  * Main entry of dense matrix-matrix multiplication kernel
  */
 
+#include "DECADES/DECADES.h"
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
@@ -19,14 +20,37 @@
 #include <vector>
 #include <parboil.h>
 #include <iostream>
-#include "sgemm_kernel.cc"
 
 // I/O routines
 extern bool readColMajorMatrixFile(const char *fn, int &nr_row, int &nr_col, std::vector<float>&v);
 extern bool writeColMajorMatrixFile(const char *fn, int, int, std::vector<float>&);
 
-int
-main (int argc, char *argv[]) {
+void _kernel_( char transa, char transb, int m, int n, int k, float alpha, const float *A, int lda, const float *B, int ldb, float beta, float *C, int ldc, int tid, int num_threads)
+{
+  if ((transa != 'N') && (transa != 'n')) {
+    std::cerr << "unsupported value of 'transa' in regtileSgemm()" << std::endl;
+    return;
+  }
+  
+  if ((transb != 'T') && (transb != 't')) {
+    std::cerr << "unsupported value of 'transb' in regtileSgemm()" << std::endl;
+    return;
+  }
+  
+  for (int mm = tid; mm < m; mm+=num_threads) {
+    for (int nn = 0; nn < n; ++nn) {
+      float c = 0.0f;
+      for (int i = 0; i < k; ++i) {
+        float a = A[mm + i * lda]; 
+        float b = B[nn + i * ldb];
+        c += a * b;
+      }
+      C[mm+nn*ldc] = C[mm+nn*ldc] * beta + alpha * c;
+    }
+  }
+}
+
+int main (int argc, char *argv[]) {
 
   struct pb_Parameters *params;
   struct pb_TimerSet timers;
@@ -66,9 +90,7 @@ main (int argc, char *argv[]) {
   std::vector<float> matC(matArow*matBcol);
 
   // Use standard sgemm interface
-  basicSgemm('N', 'T', matArow, matBcol, matAcol, 1.0f,
-      &matA.front(), matArow, &matBT.front(), matBcol, 0.0f, &matC.front(),
-      matArow);
+  _kernel_('N', 'T', matArow, matBcol, matAcol, 1.0f, &matA.front(), matArow, &matBT.front(), matBcol, 0.0f, &matC.front(), matArow, 0, 1);
 
   if (params->outFile) {
     /* Write C to file */

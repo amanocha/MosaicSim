@@ -6,6 +6,7 @@
  *cr
  ***************************************************************************/
 
+#include "DECADES/DECADES.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -22,7 +23,6 @@
 #define CUTOFF6              32
 #define CUTOFF6OVERLAP       64
 #define CUTOFFCPU         16384
-
 
 int appenddata(const char *filename, int size, double time) {
   FILE *fp;
@@ -85,6 +85,23 @@ destroy_lattice(Lattice *lat)
   }
 }
 
+void _kernel_(Lattice* cpu_lattice, float cutoff, float exclcutoff, Atoms* atom, int tid, int num_threads) {
+
+  if (cpu_compute_cutoff_potential_lattice(cpu_lattice, cutoff, atom)) {
+    //fprintf(stderr, "Computation failed\n");
+    exit(1);
+  }
+
+  /*
+   * Zero the lattice points that are too close to an atom.  This is
+   * necessary for numerical stability.
+   */
+  if (remove_exclusions(cpu_lattice, exclcutoff, atom)) {
+    //fprintf(stderr, "remove_exclusions() failed for cpu lattice\n");
+    exit(1);
+  }
+}
+
 int main(int argc, char *argv[]) {
   Atoms *atom;
 
@@ -144,22 +161,7 @@ int main(int argc, char *argv[]) {
   cpu_lattice = create_lattice(lattice_dim);
   printf("\n");
 
-  /*
-   * CPU kernel
-   */
-  if (cpu_compute_cutoff_potential_lattice(cpu_lattice, cutoff, atom)) {
-    fprintf(stderr, "Computation failed\n");
-    exit(1);
-  }
-
-  /*
-   * Zero the lattice points that are too close to an atom.  This is
-   * necessary for numerical stability.
-   */
-  if (remove_exclusions(cpu_lattice, exclcutoff, atom)) {
-    fprintf(stderr, "remove_exclusions() failed for cpu lattice\n");
-    exit(1);
-  }
+  _kernel_(cpu_lattice, cutoff, exclcutoff, atom, 0, 1);
 
   /* Print output */
   pb_SwitchToTimer(&timers, pb_TimerID_IO);

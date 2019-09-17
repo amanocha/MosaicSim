@@ -58,9 +58,28 @@ def compile():
     else:
         compile_mode = mode
 
-    cmd_args = ["PDEC++", "-I", "../../../../common/include/", "-m", compile_mode, "-t", str(threads), "../../../../common/src/parboil.c", filename]
+    include = "../../../../common/include/"
+    if app_name == "spmv":
+      include = include + " ../../common_src/convert-dataset/"
+
+    cmd_args = ["PDEC++", "-I", include, "-m", compile_mode, "-t", str(threads), "../../../../common/src/parboil.c", filename]
+
     if app_name == "cutcp":
-      cmd_args += ["-x", "-c", "readatom.c", "output.c", "excl.c", "cutcpu.c"]
+      cmd_args += ["readatom.c", "output.c", "excl.c", "cutcpu.c"]
+    elif app_name == "histo":
+      cmd_args += ["util.c"]
+    elif app_name == "lbm":
+      cmd_args += ["lbm.c"]
+    elif app_name == "mri-q":
+      cmd_args += ["file.cc"]
+    elif app_name == "sad":
+      cmd_args += ["file.c", "image.c"]
+    elif app_name == "sgemm":
+      cmd_args += ["io.cc"]
+    elif app_name == "spmv":
+      cmd_args += ["file.c", "../../common_src/convert-dataset/convert-dataset.c", "../../common_src/convert-dataset/mmio.c"]
+    elif app_name == "stencil":
+      cmd_args += ["file.c"]
 
     #cmd_args += [">", output + "compiler_output.txt", "2>", output + "compiler_err.txt"]
     cmd = " ".join(cmd_args)
@@ -69,18 +88,42 @@ def compile():
 
 def execute():
     print("Executing application...")
-    if (True): #TODO: CHANGE LATER
-        input_path = os.path.relpath(data, new_dir)
-    else:
-        input_path = data
+    if app_name == "bfs":
+      datafiles = ["graph_input.dat"]
+    elif app_name == "cutcp":
+      datafiles = ["watbox.sl40.pqr"]
+    elif app_name == "histo":
+      datafiles = ["img.bin"]
+    elif app_name == "lbm":
+      datafiles = ["120_120_150_ldc.of"]
+    elif app_name == "mri-gridding":
+      datafiles = ["small.uks"]
+    elif app_name == "mri-q":
+      datafiles = ["32_32_32_dataset.bin"]
+    elif app_name == "sad":
+      datafiles = ["frame.bin", "reference.bin"]
+    elif app_name == "sgemm":
+      datafiles = ["matrix1.txt", "matrix2.txt", "matrix2t.txt"]
+    elif app_name == "spmv":
+      datafiles = ["1138_bus.mtx", "vector.bin"]
+    elif app_name == "stencil":
+      datafiles = ["128x128x32.bin"]
 
-    if (epoch == -1 and compute_nodes == -1):
-        #cmd = "./" + compile_dir + "/" + compile_dir + " -i " + input_path + " " + " > " + output + "app_output.txt"
-        cmd = "./" + compile_dir + "/" + compile_dir + " -i " + input_path
-    elif (compute_nodes == -1):
-        cmd = "./" + compile_dir + "/" + compile_dir + " " + input_path + " " + str(epoch) + " > " + output + "app_output.txt"
-    else:
-        cmd = "./" + compile_dir + "/" + compile_dir + " " + input_path + " " + str(epoch) + " " + str(compute_nodes) + " > " + output + "app_output.txt"
+    input_path = ""
+    for d in datafiles:
+      input_path = input_path + os.path.relpath(data + d, new_dir)
+      if d != datafiles[len(datafiles)-1]:
+        input_path = input_path + ","
+
+    #cmd = "./" + compile_dir + "/" + compile_dir + " -i " + input_path + " " + " > " + output + "app_output.txt"
+    cmd = "./" + compile_dir + "/" + compile_dir + " -i " + input_path
+    
+    output_path = input_path.split("/")[0:7]
+    output_path = "/".join(output_path)
+    #if app_name == "lbm":
+    #  cmd += " -o " + output_path + "/result.dat"
+    cmd += " -o " + output_path + "/result"
+    
     print(cmd)
     os.system(cmd)
     #cmd1 = "export LD_LIBRARY_PATH=\"/opt/rh/llvm-toolset-7/root/usr/lib64/\"; echo $LD_LIBRARY_PATH"
@@ -374,18 +417,19 @@ def main():
 
     if not os.path.isfile(args.source):
         print("Invalid source file path entered!\n")
-    elif not os.path.isfile(args.data):
-        print("Invalid data file path entered!\n")
+    #elif not os.path.isfile(args.data):
+    #    print("Invalid data file path entered!\n")
     else:
         source = args.source
-        data = args.data
+        #data = args.data
         filename = os.path.basename(source)
         new_dir = os.path.dirname(source)
         app_name = source.split("/")[1]
-        app_input = os.path.basename(data).split(".")[0]
+        data = "datasets/" + app_name + "/default/input/"
+        #app_input = os.path.basename(data).split(".")[0]
         
         print("Application: " + app_name)
-        print("Application input: " + app_input)
+        #print("Application input: " + app_input)
 
         # compiler args
         mode = args.mode
@@ -404,7 +448,7 @@ def main():
         if args.output:
             output = args.output
         else:
-            output = "/home/ts20/share/results/ispass/test1/" + app_name + "_" + app_input + "_" + config + "/"
+            output = "/home/ts20/share/results/ispass/test1/" + app_name + "_" + config + "/"
 
         if (not os.path.isdir(output)):
           os.mkdir(output)

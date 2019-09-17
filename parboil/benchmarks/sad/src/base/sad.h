@@ -65,19 +65,3 @@
         (SAD_TYPE_7_CT \
 	 )))))))
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-void sad4_cpu(unsigned short *blk_sad,
-	      unsigned short *frame,
-	      unsigned short *ref,
-	      int mb_width,
-	      int mb_height);
-
-void larger_sads(unsigned short *sads,
-		 int mbs);
-
-#ifdef __cplusplus
-}
-#endif

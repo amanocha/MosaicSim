@@ -22,6 +22,7 @@
 
   Author: Lijiuan Luo (lluo3@uiuc.edu)
 */
+#include "DECADES/DECADES.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -72,8 +73,9 @@ void runGPU(int argc, char** argv);
 //the cpu version of bfs for speed comparison
 //the text book version ("Introduction to Algorithms")
 ////////////////////////////////////////////////////////////////////
-void  BFS_CPU( Node * h_graph_nodes,Edge * h_graph_edges,
-	int * color, int * h_cost, int source){
+void _kernel_( Node * h_graph_nodes,Edge * h_graph_edges,
+	int * color, int * h_cost, int source,
+        int tid, int num_threads) {
 	std::deque<int> wavefront;	
 	wavefront.push_back(source);
 	color[source] = GRAY;
@@ -183,8 +185,7 @@ void runCPU( int argc, char** argv)
 	//printf("start cpu version\n");
 	unsigned int cpu_timer = 0;
     pb_SwitchToTimer(&timers, pb_TimerID_COMPUTE);
-	BFS_CPU( h_graph_nodes, h_graph_edges, color, h_cost,  source 
-		 );
+	_kernel_( h_graph_nodes, h_graph_edges, color, h_cost,  source, 0, 1);
     pb_SwitchToTimer(&timers, pb_TimerID_IO);
     if(params->outFile!=NULL)
     {
