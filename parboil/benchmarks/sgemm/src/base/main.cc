@@ -20,6 +20,7 @@
 #include <vector>
 #include <parboil.h>
 #include <iostream>
+#include "assert.h"
 
 // I/O routines
 extern bool readColMajorMatrixFile(const char *fn, int &nr_row, int &nr_col, std::vector<float>&v);
@@ -28,13 +29,15 @@ extern bool writeColMajorMatrixFile(const char *fn, int, int, std::vector<float>
 void _kernel_( char transa, char transb, int m, int n, int k, float alpha, const float *A, int lda, const float *B, int ldb, float beta, float *C, int ldc, int tid, int num_threads)
 {
   if ((transa != 'N') && (transa != 'n')) {
-    std::cerr << "unsupported value of 'transa' in regtileSgemm()" << std::endl;
-    return;
+    //std::cerr << "unsupported value of 'transa' in regtileSgemm()" << std::endl;
+    //return;
+    assert(0);
   }
   
   if ((transb != 'T') && (transb != 't')) {
-    std::cerr << "unsupported value of 'transb' in regtileSgemm()" << std::endl;
-    return;
+    //std::cerr << "unsupported value of 'transb' in regtileSgemm()" << std::endl;
+    //return;
+    assert(0);
   }
   
   for (int mm = tid; mm < m; mm+=num_threads) {
