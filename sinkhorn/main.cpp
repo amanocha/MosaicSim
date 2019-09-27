@@ -1,6 +1,7 @@
 #include "DECADES/DECADES.h"
 #include "stdio.h"
 #include "stdlib.h"
+#include <math.h>
 #include "assert.h"
 #include <iostream>
 #include <string>
@@ -111,7 +112,7 @@ dense invert(dense Q){
 
 
 
-dense dot_dense_sparse(dense B, csr_sparse A){
+dense dot_dense_sparse(dense B, csr_sparse A, int tid, int num_threads){
   dense C;
   C.shape[0] = B.shape[0];
   C.shape[1] = A.shape[1];
@@ -123,7 +124,7 @@ dense dot_dense_sparse(dense B, csr_sparse A){
       tmp = 0.0;
       for (int k=A.indptr[j]; k < A.indptr[j+1]; k++){
 	tmp += B[i*B.shape[1]+A.indices[k]] * A.data[k];
-	C.data[i*C.shape[1]+j] = tmp;	
+      C.data[i*C.shape[1]+j] = tmp;
       }
     }
   }
@@ -132,16 +133,20 @@ dense dot_dense_sparse(dense B, csr_sparse A){
 
 csr_sparse elementwise_sparse_dense_div(csr_sparse A, dense B, int tid, int num_threads){
   csr_sparse C;
-  
-    for (int i = tid; i < C.shape[0]; i += num_threads) {
-      int offset = A.indptr[i+1]-A.indptr[i];
-      for (int j = 0; j < offset; j ++) {
-        pointer = A.indptr[i] + j;
-        col = A.indices[pointer];
-        C.data[pointer] = A.data[pointer] / B.data[i*A.shape[1]+col];
-        C.indices[pointer] = col;
-      }
+  C.shape = A.shape;
+  C.size = A.size;
+  C.data = (double*) malloc(sizeof(double) * (C.size));
+  for (int i = tid; i < C.shape[0]; i += num_threads) {
+    int offset = A.indptr[i+1]-A.indptr[i];
+    for (int j = 0; j < offset; j ++) {
+      pointer = A.indptr[i] + j;
+      col = A.indices[pointer];
+      C.data[pointer] = A.data[pointer] / B.data[i*A.shape[1]+col];
+      C.indices[pointer] = col;
     }
+  }
+  return C;
+}
 
 
 
@@ -192,89 +197,132 @@ csr_sparse parse_csr_sparse(char *fname) {
 }
 
 
+//   _kernel_(M, K, KM, P, S, x, inv_x, u, inv_r, v, z, scores, max_iter, 0, 1);
+void _kernel_(dense M, csr_sparse G, dense K, dense KM, dense P, dense S, dense x, dense inv_x, dense u, dense inv_r, csr_sparse v, dense Z, float * scores, int max_iter, int tid, int num_threads) {
 
-void _kernel_(csr_sparse G, double * M, csr_sparse result, int tid, int num_threads) {
   int col = 0;
   unsigned int pointer = 0;
   int outerloop = 0;
-  dense inv_x;
   dense K_trans;
-
-  while (outerloop < 10){
+  
+  while (outerloop < max_iter){
     outerloop++;
 
     inv_x = invert(x); 
     K_trans = transpose(K);
-    decadesTF_matmul(K_trans.shape[0], K_trans.shape[1], inv_x.shape[0], inv_x.shape[1], K_trans, inv_x, u, tid. num_threads);
+    decadesTF_matmul(K_trans.shape[0], K_trans.shape[1], inv_x.shape[0], inv_x.shape[1], 1, K_trans.data, inv_x.data, u.data, tid, num_threads);
 
-    v = elementwise_sparse_dense_div(c,u);
-    
-    inv_r = invert(r);
-    y = inv_r * K; 
+    v = elementwise_sparse_dense_div(G, u, tid, num_threads);
     v_csc = csr_to_csc(v);
-
-    x = dot_dense_sparse(y, v_csc);
+    
+    for (int i = 0; i< K.shape[0]; i++){
+      decadesTF_mul(inv_r.size, K.shape[1], inv_r, K.data + i*K.shape[1], Z.data + i*K.shape[1], tid, num_threads);
+    }
+    x = dot_dense_sparse(Z, v_csc, tid, num_threads);
     
   }
   
   inv_x = invert(x); 
   K_trans = transpose(K);
-  decadesTF_matmul(K_trans.shape[0], K_trans.shape[1], inv_x.shape[0], inv_x.shape[1], K_trans, inv_x, u, tid. num_threads);
+  decadesTF_matmul(K_trans.shape[0], K_trans.shape[1], inv_x.shape[0], inv_x.shape[1], 1, K_trans.data, inv_x.data, u.data, tid, num_threads);
 
-  v = elementwise_sparse_dense_div(c,u);
+  elementwise_sparse_dense_div(G, u, v, tid, num_threads);
   v_csc = csr_to_csc(v);
-  KM  = elementwise_dense_dense(K,M);
-  P = dot_dense_sparse(KM, v_csc);
-  // there should be an accelerator for this:
-  R = elementwise_dense_dense(inv_X,P);
+  decadesTF_mul(K.data, M.data, KM.data);
+  dot_dense_sparse(KM, v_csc, P, tid, num_threads);
+  decadesTF_mul(inv_X.data, P.data, S.data);
 
   for (int i =0; i < inv_x.shape[1]; i++){
     scores[i]=0;
     for (int j = 0; j < inv_x.shape[0]; j++){ 
-      scores[i] += R[i*inv_x.shape[1]+j];
+      scores[i] += S.data[i*inv_x.shape[1]+j];
     }
   }
-
 }
 
 int main(int argc, char** argv) {
 
+  //int m=100000;
+  //int n = 5000;
+
   char *sparse_fname, *dense_fname;
   csr_sparse G;
-  int m=100000;
-  int n = 5000;
+  dense M;
   
-  // assert(argc == 3);
-  assert(argc == 2);
+  csr_sparse v;
+  v.shape = G.shape;
+  v.size = G.size;
+  v.data = (unsigned float*) malloc(sizeof(float) * v.size);
+    
+  assert(argc == 3);
+  // assert(argc == 2);
   sparse_fname = argv[1];
-  // dense_fname = argv[2];
+  dense_fname = argv[2];  
   
-
+  M = parse_dense_matrix(dense_fname);
   G = parse_csr_sparse(sparse_fname);
-  //M = parse_dense_matrix(dense_fname);
-  srand(SEED);
-  double* M = (double*) malloc(sizeof(double) * m * n) ;
-  
-  for (unsigned int i = 0; i < m; i++) {
-    for (unsigned int j = 0; j < n; j++) {
-      M[i*n + j] = ((double) rand() / (RAND_MAX));
-    }
+
+  dense K;
+  K.shape = M.shape;
+  K.size = M.size;
+  K.data = (unsigned float*) malloc(sizeof(float) * K.size);
+  for (int i=0; i< K.size; i++){
+    K.data[i] = exp(M.data[i]);
   }
 
+  dense x;
+  x.shape[0] = K.shape[0];
+  x.shape[0] = G.shape[1];
+  x.size = K.shape[0]* G.shape[1];
+  x.data = (unsigned float*) malloc(sizeof(float) * x.size);
+  for (int i=0; i<x.size; i++){
+    x.data[i] = 1/r.shape[0];
+  }
+
+  dense inv_x;
+  inv_x.shape[0] = K.shape[0];
+  inv_x.shape[0] = G.shape[1];
+  inv_x.size = K.shape[0]* G.shape[1];
+  inv_x.data = (unsigned float*) malloc(sizeof(float) * inv_x.size);
+
+  dense KM;
+  KM.shape = K.shape;
+  KM.size = K.size;
+  KM.data = (unsigned float*) malloc(sizeof(float) * KM.size);
+
+  dense Z;
+  Z.shape = K.shape;
+  Z.size = K.size;
+  Z.data = (unsigned float*) malloc(sizeof(float) * Z.size);
+
   
-  csr_sparse result;
-  result.shape = G.shape;  
-  result.size = G.size;
-  result.indptr = G.indptr;
-  result.indices = (unsigned int*) malloc(sizeof(unsigned int) * (result.size));
-  result.data = (double*) malloc(sizeof(double) * (result.size));
-  result.indptr[0] = 0;
+  dense P;
+  P.shape[0] = K.shape[0];
+  P.shape[1] = G.shape[1];
+  P.size = K.shape[0]*G.shape[1] ;
+  P.data = (unsigned float*) malloc(sizeof(float) * P.size);
 
+  dense S;
+  S.shape = P.shape;
+  S.size = P.size;
+  S.data = (unsigned float*) malloc(sizeof(float) * S.size);
 
+  dense u;
+  u.shape = G.shape;
+  u.size = u.shape[0] * u.shape[1];
+  u.data = (unsigned float*) malloc(sizeof(float) * u.size);
+
+  dense scores;
+  scores.shape[0] = x.shape[1];
+  scores.shape[1] = 1;
+  scores.size = x.shape[1];
+  scores.data = (unsigned float*) malloc(sizeof(float) * u.size);
+  
   printf("\n\nstarting kernel\n");
   auto start = chrono::system_clock::now();
 
-  _kernel_(G, M, result, 0, 1);
+//   _kernel_(M, G, K, KM, P, S, x, inv_x, u, v, Z, scores, max_iter, 0, 1);
+  _kernel_(M, G, K, KM, P, S, x, inv_x, u, v, Z, scores, max_iter, 0, 1);
 
   double res = 0;
   for (int i = 0; i < result.size; i ++){
