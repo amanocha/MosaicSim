@@ -1,3 +1,4 @@
+
 /***************************************************************************
  *cr
  *cr            (C) Copyright 2008-2010 The Board of Trustees of the
@@ -19,8 +20,8 @@
 extern int remove_exclusions(
     Lattice *lattice,                  /* the lattice */
     float cutoff,                      /* exclusion cutoff distance */
-    Atoms *atoms                       /* array of atoms */
-    )
+    Atoms *atoms,                       /* array of atoms */
+    int tid, int num_threads)
 {
   int nx = lattice->dim.nx;
   int ny = lattice->dim.ny;
@@ -88,8 +89,12 @@ extern int remove_exclusions(
     first[gindex] = n;
   }
 
+  int total = ncell;
+  int per_th = total / num_threads;
+  int init = tid*per_th;
+  int last = (tid < num_threads-1) ? (tid+1)*per_th : total;
   /* traverse the grid cells */
-  for (gindex = 0;  gindex < ncell;  gindex++) {
+  for (gindex = init;  gindex < last;  gindex++) {
     for (n = first[gindex];  n != -1;  n = next[n]) {
       x = atom[n].x - xlo;
       y = atom[n].y - ylo;
@@ -139,6 +144,9 @@ extern int remove_exclusions(
 
 	    /* If atom and lattice point are too close, set the lattice value
 	     * to zero */
+
+//All threads are writing the same value
+//No need for an atomic update
             if (r2 < a2) *pg = 0;
           }
         }

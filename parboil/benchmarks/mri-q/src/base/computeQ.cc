@@ -58,10 +58,9 @@ ComputeQCPU(int numK, int numX,
   }
 }
 
-void createDataStructsCPU(int numK, int numX, float** phiMag,
+void createDataStructsCPU(int numK, int numX,
 	 float** Qr, float** Qi)
 {
-  *phiMag = (float* ) memalign(16, numK * sizeof(float));
   *Qr = (float*) memalign(16, numX * sizeof (float));
   memset((void *)*Qr, 0, numX * sizeof(float));
   *Qi = (float*) memalign(16, numX * sizeof (float));

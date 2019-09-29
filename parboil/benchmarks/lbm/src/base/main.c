@@ -35,7 +35,7 @@ void _kernel_(MAIN_Param param, int tid, int num_threads) {
     LBM_performStreamCollide( *srcGrid, *dstGrid );
     LBM_swapGrids( &srcGrid, &dstGrid );
 
-    //printf( "timestep: %i\n", t );
+    printf( "timestep: %i\n", t );
     //LBM_showGridStatistics( *srcGrid );
   }
 }

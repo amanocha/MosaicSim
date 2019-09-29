@@ -26,14 +26,25 @@
 
 void _kernel_(unsigned char* histo, unsigned int histo_height, unsigned int histo_width, unsigned int* img, unsigned int img_height, unsigned int img_width, int numIterations, int tid, int num_threads) {
   int iter;
-  for (iter = tid; iter < numIterations; iter+=num_threads){
-    memset(histo,0,histo_height*histo_width*sizeof(unsigned char));
+
+  int total_img = img_width*img_height;
+  int per_th_img = total_img / num_threads;
+  int init_img = tid*per_th_img;
+  int last_img = (tid < num_threads-1) ? (tid+1)*per_th_img : total_img;
+
+  int total_hist = histo_width*histo_height;
+  int per_th_hist = total_hist / num_threads;
+  int init_hist = tid*per_th_hist;
+  int last_hist = (tid < num_threads-1) ? (tid+1)*per_th_hist : total_hist;
+
+  for (iter = 0; iter < numIterations; iter++){
+    memset(histo+init_hist,0,(last_hist-init_hist)*sizeof(unsigned char));
+    DECADES_BARRIER();
     unsigned int i;
-    for (i = 0; i < img_width*img_height; ++i) {
+    for (i = init_img; i < last_img; ++i) {
       const unsigned int value = img[i];
-      if (histo[value] < MY_UINT8_MAX) {
-        ++histo[value];
-      }
+      int * p = (int * ) &histo[value];
+      DECADES_FETCH_ADD_BOUNDED(p,MY_UINT8_MAX,1);
     }
   }
 }
@@ -54,7 +65,7 @@ int main(int argc, char* argv[]) {
     return -1;
   }
 
-  int numIterations = 100;
+  int numIterations = 16;
   /*if (argc >= 2){
     numIterations = atoi(argv[1]);
   } else {

@@ -87,7 +87,7 @@ destroy_lattice(Lattice *lat)
 
 void _kernel_(Lattice* cpu_lattice, float cutoff, float exclcutoff, Atoms* atom, int tid, int num_threads) {
 
-  if (cpu_compute_cutoff_potential_lattice(cpu_lattice, cutoff, atom)) {
+  if (cpu_compute_cutoff_potential_lattice(cpu_lattice, cutoff, atom, tid, num_threads)) {
     //fprintf(stderr, "Computation failed\n");
     exit(1);
   }
@@ -96,7 +96,7 @@ void _kernel_(Lattice* cpu_lattice, float cutoff, float exclcutoff, Atoms* atom,
    * Zero the lattice points that are too close to an atom.  This is
    * necessary for numerical stability.
    */
-  if (remove_exclusions(cpu_lattice, exclcutoff, atom)) {
+  if (remove_exclusions(cpu_lattice, exclcutoff, atom, tid, num_threads)) {
     //fprintf(stderr, "remove_exclusions() failed for cpu lattice\n");
     exit(1);
   }

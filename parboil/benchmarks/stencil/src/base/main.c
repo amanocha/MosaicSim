@@ -89,7 +89,7 @@ int main(int argc, char** argv) {
 	//declaration
 	int nx,ny,nz;
 	int size;
-    int iteration;
+  int iteration;
 	float c0=1.0f/6.0f;
 	float c1=1.0f/6.0f/6.0f;
 
@@ -106,7 +106,7 @@ int main(int argc, char** argv) {
         nx = 128;
         ny = 128;
         nz = 32;
-        iteration = 100;
+        iteration = 16;
 
 	/*nx = atoi(argv[1]);
 	if (nx<1)
