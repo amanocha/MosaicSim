@@ -44,7 +44,9 @@
 void _kernel_(int numK, int numX, float * phiR, float * phiI, float * x, float * y, float * z, 
               float * kx, float * ky, float * kz, float * Qr, float * Qi, float ** QrK, float ** QiK, int tid, int num_threads) {
   int k, indexX;
-  #pragma omp parallel for
+  //omp_set_dynamic(0);
+  //omp_set_num_threads(4);
+  #pragma omp parallel for private (k, indexX)
   for (k = 0; k < numK; k++) {
     float real = phiR[k];
     float imag = phiI[k];
