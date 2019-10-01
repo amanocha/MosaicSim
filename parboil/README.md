@@ -8,11 +8,11 @@
 
 [o] lbm -> kernelized, incorrect parallelism, might need to downsize (mem trace is 2.8GB), difficult
 
-[x] mri-gridding -> DONE
+[?] mri-gridding -> DONE, need to check parallelism
 
 [x] mri-q -> DONE, very well parallelized
 
-[o] sad -> kernelized, need to parallelize, difficult
+[x] sad -> kernelized, but cannot be parallelized
 
 [ ] sgemm -> need to look into compilation TYLER said he was looking into it
 
