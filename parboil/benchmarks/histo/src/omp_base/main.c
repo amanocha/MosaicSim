@@ -28,6 +28,8 @@
 
 void _kernel_(unsigned char* histo, unsigned int histo_height, unsigned int histo_width, unsigned int* img, unsigned int img_height, unsigned int img_width, int numIterations, int tid, int num_threads) {
   int iter;
+  //omp_set_dynamic(0);     // Explicitly disable dynamic teams
+  //omp_set_num_threads(1);
   for (iter = tid; iter < numIterations; iter+=num_threads){
     memset(histo,0,histo_height*histo_width*sizeof(unsigned char));
     unsigned int i;
@@ -46,7 +48,7 @@ int main(int argc, char* argv[]) {
   struct pb_TimerSet timers;
   struct pb_Parameters *parameters;
 
-  printf("Base implementation of histogramming.\n");
+  printf("OMP Base implementation of histogramming.\n");
   printf("Maintained by Nady Obeid <obeid1@ece.uiuc.edu>\n");
 
   parameters = pb_ReadParameters(&argc, argv);
@@ -58,6 +60,7 @@ int main(int argc, char* argv[]) {
     return -1;
   }
 
+  printf("%s\n",parameters->outFile);
   int numIterations = 16;
   /*if (argc >= 2){
     numIterations = atoi(argv[1]);

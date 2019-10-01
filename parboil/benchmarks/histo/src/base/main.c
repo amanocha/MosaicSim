@@ -27,24 +27,31 @@
 void _kernel_(unsigned char* histo, unsigned int histo_height, unsigned int histo_width, unsigned int* img, unsigned int img_height, unsigned int img_width, int numIterations, int tid, int num_threads) {
   int iter;
 
+  // Chunks of work to do the job
   int total_img = img_width*img_height;
   int per_th_img = total_img / num_threads;
   int init_img = tid*per_th_img;
   int last_img = (tid < num_threads-1) ? (tid+1)*per_th_img : total_img;
 
+  // Chunks of work to initialize the histo mem
   int total_hist = histo_width*histo_height;
   int per_th_hist = total_hist / num_threads;
   int init_hist = tid*per_th_hist;
   int last_hist = (tid < num_threads-1) ? (tid+1)*per_th_hist : total_hist;
 
   for (iter = 0; iter < numIterations; iter++){
-    memset(histo+init_hist,0,(last_hist-init_hist)*sizeof(unsigned char));
     DECADES_BARRIER();
+
+    // If we make each thread to initialize a part
+    memset(histo+init_hist,0,(last_hist-init_hist)*sizeof(unsigned char));
+    // If we want to do it by a single thread
+    //if (tid  == 0){ memset(histo,0,total_hist*sizeof(unsigned char));}
+    DECADES_BARRIER();
+
     unsigned int i;
     for (i = init_img; i < last_img; ++i) {
       const unsigned int value = img[i];
-      int * p = (int * ) &histo[value];
-      DECADES_FETCH_ADD_BOUNDED(p,MY_UINT8_MAX,1);
+      DECADES_FETCH_ADD_BOUNDED(&histo[value],MY_UINT8_MAX,1);
     }
   }
 }
@@ -64,7 +71,7 @@ int main(int argc, char* argv[]) {
     fputs("Input file expected\n", stderr);
     return -1;
   }
-
+  printf("%s\n",parameters->outFile);
   int numIterations = 16;
   /*if (argc >= 2){
     numIterations = atoi(argv[1]);
