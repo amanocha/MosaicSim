@@ -12,12 +12,12 @@
 
 [x] mri-q -> DONE, very well parallelized
 
-[x] sad -> kernelized, but cannot be parallelized
+[o] sad -> kernelized, need to check if can be parallelized
 
-[ ] sgemm -> need to look into compilation TYLER said he was looking into it
+[x] sgemm -> DONE
 
 [ ] spmv
 
-[?] stencil -> DONE, questionable parallelization
+[?] stencil -> kernelized and downsampled, need to check parallelization
 
 [ ] tpacf -> need to look into kernelization (has a mix of IO and compute)
