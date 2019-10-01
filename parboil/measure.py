@@ -120,7 +120,7 @@ def execute():
     
     output_path = input_path.split("/")[0:7] + ["output"]
     output_path = "/".join(output_path)
-    cmd += " -o " + output_path + "/result"
+    cmd += " -o result"
     
     print(cmd)
     os.system(cmd)

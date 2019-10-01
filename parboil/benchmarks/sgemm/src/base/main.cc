@@ -23,7 +23,7 @@
 #include "assert.h"
 
 // I/O routines
-extern bool readColMajorMatrixFile(const char *fn, int &nr_row, int &nr_col, std::vector<float>&v);
+extern bool readColMajorMatrixFile(const char *fn, int *nr_row, int *nr_col, std::vector<float>&v);
 extern bool writeColMajorMatrixFile(const char *fn, int, int, std::vector<float>&);
 
 void _kernel_( char transa, char transb, int m, int n, int k, float alpha, const float *A, int lda, const float *B, int ldb, float beta, float *C, int ldc, int tid, int num_threads)
@@ -58,8 +58,7 @@ int main (int argc, char *argv[]) {
   struct pb_Parameters *params;
   struct pb_TimerSet timers;
 
-  int matArow, matAcol;
-  int matBrow, matBcol;
+  int* matArow, matAcol,  matBrow, matBcol;
   std::vector<float> matA, matBT;
 
   pb_InitializeTimerSet(&timers);
@@ -75,17 +74,17 @@ int main (int argc, char *argv[]) {
       fprintf(stderr, "Expecting three input filenames\n");
       exit(-1);
     }
- 
+
   /* Read in data */
   pb_SwitchToTimer(&timers, pb_TimerID_IO);
 
   // load A
-  readColMajorMatrixFile(params->inpFiles[0],
-      matArow, matAcol, matA);
+  readColMajorMatrixFile(params->inpFiles[0], matArow, matAcol, matA);
+  std::cerr << "matArow " << *matArow << std::endl;
+  std::cerr << "matAcol " << *matAcol << std::endl;
 
   // load B^T
-  readColMajorMatrixFile(params->inpFiles[2],
-      matBcol, matBrow, matBT);
+  readColMajorMatrixFile(params->inpFiles[2], matBcol, matBrow, matBT);
 
   pb_SwitchToTimer( &timers, pb_TimerID_COMPUTE );
 
@@ -93,12 +92,13 @@ int main (int argc, char *argv[]) {
   std::vector<float> matC(matArow*matBcol);
 
   // Use standard sgemm interface
+  std::cout<< "Starting kernel" << std::endl;
   _kernel_('N', 'T', matArow, matBcol, matAcol, 1.0f, &matA.front(), matArow, &matBT.front(), matBcol, 0.0f, &matC.front(), matArow, 0, 1);
 
   if (params->outFile) {
     /* Write C to file */
     pb_SwitchToTimer(&timers, pb_TimerID_IO);
-    writeColMajorMatrixFile(params->outFile, matArow, matBcol, matC); 
+    //writeColMajorMatrixFile(params->outFile, matArow, matBcol, matC); 
   }
 
   pb_SwitchToTimer(&timers, pb_TimerID_NONE);

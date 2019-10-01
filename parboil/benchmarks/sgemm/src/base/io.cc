@@ -14,7 +14,7 @@
 #include<iostream>
 #include<vector>
 
-bool readColMajorMatrixFile(const char *fn, int &nr_row, int &nr_col, std::vector<float>&v)
+bool readColMajorMatrixFile(const char *fn, int *nr_row, int *nr_col, std::vector<float>&v)
 {
   std::cerr << "Opening file:"<< fn << std::endl;
   std::fstream f(fn, std::fstream::in);
@@ -23,17 +23,17 @@ bool readColMajorMatrixFile(const char *fn, int &nr_row, int &nr_col, std::vecto
   }
 
   // Read # of rows and cols
-  f >> nr_row;
-  f >> nr_col;
+  f >> *nr_row;
+  f >> *nr_col;
 
   float data;
-  std::cerr << "Matrix dimension: "<<nr_row<<"x"<<nr_col<<std::endl;
-  while (f.good() ) {
+  std::cerr << "Matrix dimension: " << *nr_row << "x" << *nr_col<< std::endl;
+  while (f.good()) {
     f >> data;
     v.push_back(data);
   }
   v.pop_back(); // remove the duplicated last element
-
+  std::cerr << "Finished reading file!" << std::endl;
 }
 
 bool writeColMajorMatrixFile(const char *fn, int nr_row, int nr_col, std::vector<float>&v)
