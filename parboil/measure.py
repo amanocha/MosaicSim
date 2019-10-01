@@ -91,7 +91,7 @@ def execute():
     if app_name == "bfs":
       datafiles = ["graph_input.dat"]
     elif app_name == "cutcp":
-      datafiles = ["watbox.sl40.pqr"]
+      datafiles = ["watbox.sl40_mod.pqr"]
     elif app_name == "histo":
       datafiles = ["img.bin"]
     elif app_name == "lbm":
@@ -240,19 +240,6 @@ def measure():
             else:
               node_counts[node_id] = 1
 
-            index = 0
-            if str(cacheline) in evict_cl_counts and return_cycle > evict_cl_counts[str(cacheline)][1][index] and result == "Miss": # eviction caused a miss
-              if cacheline in reaccess_counts:
-                reaccess_counts[cacheline][0] = reaccess_counts[cacheline][0] + 1
-                reaccess_counts[cacheline][1] = node_id # overwrite with most recent node ID
-              else:
-                reaccess_counts[cacheline] = [1, node_id]
-
-              if node_id in node_reaccess_counts:
-                node_reaccess_counts[node_id] = node_reaccess_counts[node_id] + 1
-              else:
-                node_reaccess_counts[node_id] = 1
-
             if node_id in load_counts:
                 load_counts[node_id][0] = load_counts[node_id][0] + 1
                 if (load_latency < L1_LATENCY): # L1 and L2 hit
@@ -384,10 +371,10 @@ def main():
         compile()
         execute()
         one = time.time()
-        simulate()
+        #simulate()
         two = time.time()
         print("Simulation Time = " + str(round(two - one)) + " seconds.\n")
-        measure()
+        #measure()
         three = time.time()
         print("Measurement Time = " + str(round(three - two)) + " seconds.\n")
 

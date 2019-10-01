@@ -30,6 +30,7 @@
 #include <parboil.h>
 #include <deque>
 #include <iostream>
+#include <chrono>
 
 #define MAX_THREADS_PER_BLOCK 512
 #define NUM_SM 30//the number of Streaming Multiprocessors; may change in the future archs 
@@ -211,7 +212,11 @@ void runCPU( int argc, char** argv)
 	//printf("start cpu version\n");
 	unsigned int cpu_timer = 0;
         pb_SwitchToTimer(&timers, pb_TimerID_COMPUTE);
+        auto start_time = std::chrono::system_clock::now();
 	_kernel_(wavefront_in, wavefront_out, in_idx, out_idx, h_graph_nodes, h_graph_edges, color, h_cost, source, 0, 1);
+        auto end_time = std::chrono::system_clock::now();
+        std::chrono::duration<double> elapsed_seconds = end_time-start_time;
+        std::cout << "\nkernel computation time: " << elapsed_seconds.count() << "s\n";
         pb_SwitchToTimer(&timers, pb_TimerID_IO);
     if(params->outFile!=NULL)
     {
