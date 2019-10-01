@@ -156,8 +156,7 @@ int main (int argc, char* argv[]){
 
   if (params.useLUT){
     printf("Generating Look-Up Table\n");
-    float beta = PI * sqrt(4*params.kernelWidth*params.kernelWidth/(params.oversample*params.oversample) * (params.oversample-.5)*(params.oversample-.5)-.8);
-    calculateLUT(beta, params.kernelWidth, &LUT, &sizeLUT);
+    calculateLUT(params.kernelWidth, &LUT, &sizeLUT);
   }
 
   pb_SwitchToTimer(&timers, pb_TimerID_COMPUTE);
@@ -173,7 +172,7 @@ int main (int argc, char* argv[]){
   {
         printf("Cannot open output file!\n");
   } else {
-        fwrite(&passed,sizeof(int),1,outfile);
+        fwrite(sampleDensity, params.gridSize[0]*params.gridSize[1]*sizeof(float),1,outfile);
         fclose(outfile);
   }
 

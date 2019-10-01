@@ -113,28 +113,16 @@ float kernel_value_CPU(float v){
   return rValue;
 }
 
-void calculateLUT(float beta, float width, float** LUT, unsigned int* sizeLUT){
+void calculateLUT(float width, float** LUT, unsigned int* sizeLUT){
   float v;
-  float cutoff2 = (width*width)/4.0;
-
   unsigned int size;
 
   if(width > 0){
     // compute size of LUT based on kernel width
     size = (unsigned int)(10000*width);
-
     // allocate memory
     (*LUT) = (float*) malloc (size*sizeof(float));
 
-    unsigned int k;
-    for(k=0; k<size; ++k){
-      // compute value to evaluate kernel at
-      // v in the range 0:(_width/2)^2
-      v = (((float)k)/((float)size))*cutoff2;
-
-      // compute kernel value and store
-      (*LUT)[k] = kernel_value_CPU(beta*sqrt(1.0-(v/cutoff2)));
-    }
     (*sizeLUT) = size;
   }
 }
@@ -186,7 +174,18 @@ void _kernel_(unsigned int n, parameters params, ReconstructionSample* sample, f
   float _1overCutoff2 = 1/cutoff2;                  // 1 over square of cutoff radius
 
   float beta = PI * sqrt(4*params.kernelWidth*params.kernelWidth/(params.oversample*params.oversample) * (params.oversample-.5)*(params.oversample-.5)-.8);
+  unsigned int k;
 
+  if ((params.kernelWidth) > 0 && params.useLUT){
+    for(k=tid; k<sizeLUT; k+=num_threads){
+      // compute value to evaluate kernel at
+      // v in the range 0:(_width/2)^2
+      v = (((float)k)/((float)sizeLUT))*cutoff2;
+      // compute kernel value and store
+      LUT[k] = kernel_value_CPU(beta*sqrt(1.0-(v/cutoff2)));
+    }
+  }
+  DECADES_BARRIER();
   int i;
   for (i=tid; i < n; i+=num_threads){
     ReconstructionSample pt = sample[i];
@@ -260,11 +259,12 @@ void _kernel_(unsigned int n, parameters params, ReconstructionSample* sample, f
 		          }
 
                   /* grid data */
-                  gridData[idx].real += (w*pt.real);
-                  gridData[idx].imag += (w*pt.imag);
-
+                  //gridData[idx].real += (w*pt.real);
+                  DECADES_FETCH_ADD_FLOAT(&gridData[idx].real, (w*pt.real) );
+                  //gridData[idx].imag += (w*pt.imag);
+                  DECADES_FETCH_ADD_FLOAT(&gridData[idx].imag, (w*pt.imag) );
                   /* estimate sample density */
-                  sampleDensity[idx] += 1.0;
+                  DECADES_FETCH_ADD_FLOAT(&sampleDensity[idx], 1.0);
                 }
               }
             }
@@ -344,8 +344,7 @@ int main (int argc, char* argv[]){
 
   if (params.useLUT){
     printf("Generating Look-Up Table\n");
-    float beta = PI * sqrt(4*params.kernelWidth*params.kernelWidth/(params.oversample*params.oversample) * (params.oversample-.5)*(params.oversample-.5)-.8);
-    calculateLUT(beta, params.kernelWidth, &LUT, &sizeLUT);
+    calculateLUT(params.kernelWidth, &LUT, &sizeLUT);
   }
 
   pb_SwitchToTimer(&timers, pb_TimerID_COMPUTE);
@@ -361,7 +360,8 @@ int main (int argc, char* argv[]){
   {
         printf("Cannot open output file!\n");
   } else {
-        fwrite(&passed,sizeof(int),1,outfile);
+        //fwrite(&passed,sizeof(int),1,outfile);
+        fwrite(sampleDensity, params.gridSize[0]*params.gridSize[1]*sizeof(float),1,outfile);
         fclose(outfile);
   }
 

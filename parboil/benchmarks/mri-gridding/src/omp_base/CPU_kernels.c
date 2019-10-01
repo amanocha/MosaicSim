@@ -42,30 +42,15 @@ float kernel_value_CPU(float v){
   return rValue;
 }
 
-void calculateLUT(float beta, float width, float** LUT, unsigned int* sizeLUT){
+void calculateLUT(float width, float** LUT, unsigned int* sizeLUT){
   float v;
-  float cutoff2 = (width*width)/4.0;
-
   unsigned int size;
 
   if(width > 0){
     // compute size of LUT based on kernel width
     size = (unsigned int)(10000*width);
-
     // allocate memory
     (*LUT) = (float*) malloc (size*sizeof(float));
-
-    unsigned int k;
-
-#pragma omp parallel for private(v)
-    for(k=0; k<size; ++k){
-      // compute value to evaluate kernel at
-      // v in the range 0:(_width/2)^2
-      v = (((float)k)/((float)size))*cutoff2;
-
-      // compute kernel value and store
-      (*LUT)[k] = kernel_value_CPU(beta*sqrt(1.0-(v/cutoff2)));
-    }
     (*sizeLUT) = size;
   }
 }
@@ -82,6 +67,8 @@ float kernel_value_LUT(float v, float* LUT, int sizeLUT, float _1overCutoff2)
 }
 
 int gridding_Gold(unsigned int n, parameters params, ReconstructionSample* sample, float* LUT, unsigned int sizeLUT, cmplx* gridData, float* sampleDensity){
+  omp_set_dynamic(0);
+  omp_set_num_threads(4);
 
   unsigned int NxL, NxH;
   unsigned int NyL, NyH;
@@ -118,6 +105,17 @@ int gridding_Gold(unsigned int n, parameters params, ReconstructionSample* sampl
 
   float beta = PI * sqrt(4*params.kernelWidth*params.kernelWidth/(params.oversample*params.oversample) * (params.oversample-.5)*(params.oversample-.5)-.8);
 
+  unsigned int k;
+  if ((params.kernelWidth) > 0 && params.useLUT){
+  #pragma omp parallel for private(v)
+    for(k=0; k<sizeLUT; ++k){
+      // compute value to evaluate kernel at
+      // v in the range 0:(_width/2)^2
+      v = (((float)k)/((float)sizeLUT))*cutoff2;
+      // compute kernel value and store
+      LUT[k] = kernel_value_CPU(beta*sqrt(1.0-(v/cutoff2)));
+    }
+  }
   int i;
 
 #pragma omp parallel for private(NxL, NxH, NyL, NyH, NzL, NzH, dz2, nz, dx2,         \
