@@ -14,7 +14,7 @@
 
 [o] sad -> kernelized, need to check if can be parallelized
 
-[ ] sgemm -> need to look into compilation TYLER said he was looking into it
+[x] sgemm -> DONE
 
 [ ] spmv
 
