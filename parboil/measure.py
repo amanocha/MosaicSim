@@ -111,17 +111,15 @@ def execute():
 
     input_path = ""
     for d in datafiles:
-      input_path = input_path + os.path.relpath(data + d, new_dir)
+      input_path = input_path + data + d
       if d != datafiles[len(datafiles)-1]:
         input_path = input_path + ","
 
     #cmd = "./" + compile_dir + "/" + compile_dir + " -i " + input_path + " " + " > " + output + "app_output.txt"
     cmd = "./" + compile_dir + "/" + compile_dir + " -i " + input_path
     
-    output_path = input_path.split("/")[0:7]
+    output_path = input_path.split("/")[0:7] + ["output"]
     output_path = "/".join(output_path)
-    #if app_name == "lbm":
-    #  cmd += " -o " + output_path + "/result.dat"
     cmd += " -o " + output_path + "/result"
     
     print(cmd)
@@ -138,15 +136,8 @@ def simulate():
     threads = max(out_files) + 1
 
     cmd_args = ["pythiarun", "-n", str(threads), flags, "."]
-    cmd_sim = ["-o", output]
-    if mode == "PC" and config == "IO":
-        cmd_config = ["-cc", "core_inorder_perfcache"]
-    elif mode == "PC":
-        cmd_config = ["-cc", "core_ooo_perfcache"]
-    elif config == "OOO":
-        cmd_config = ["-cc", "core_ooo"]
-    else:
-        cmd_config = []
+    cmd_sim = ["-sc", "sim_cafe", "-o", output]
+    cmd_config = ["-cc", "core_cafe"]
     cmd = " ".join(cmd_args + cmd_sim + cmd_config)
     print(cmd)
     os.system("pwd")
@@ -155,9 +146,6 @@ def simulate():
 def measure():
     print("Gathering measurements...")
     measurements = open(output + "measurements.txt", "w+")
-    addresses = open(output + "evict_addresses.txt", "w+")
-    reaccesses = open(output + "addr_reaccesses.txt", "w+")
-    nodes = open(output + "node_reaccesses.txt", "w+")
 
     # Read genStats
     measurements.write("GENERAL STATS\n")
@@ -191,30 +179,6 @@ def measure():
     measurements.write("Percent of Memory Instructions Spent on Stores: " + str(round(ST*100.0/(LD+ST),3)) + "\n")
     measurements.write("\n")
 
-    # Read evictStats
-    evict_stats = open(output + "evictStats")
-    evict_stats.readline()
-    evict_cl_counts = {}
-    evict_node_counts = {}
-    for line in evict_stats:
-      match = re.match("(\d+)\s+(\d+)\s+((-)?\d+)", line)
-      address = match.group(1)
-      eviction_cycle = int(match.group(2))
-      node_id = match.group(3)
-
-      if address in evict_cl_counts and node_id != "-1":
-        evict_cl_counts[address][0] = evict_cl_counts[address][0] + 1
-        evict_cl_counts[address][1].append(eviction_cycle)
-      else:
-        evict_cl_counts[address] = [1, [eviction_cycle]]
-
-      if node_id in evict_node_counts and node_id != "-1":
-        evict_node_counts[node_id][0] = evict_node_counts[node_id][0] + 1
-        evict_node_counts[node_id][1].append(eviction_cycle)
-      else:
-        evict_node_counts[node_id] = [1, [eviction_cycle]]
-    print("Finished reading evictStats!\n")
-
     # Read memStats
     measurements.write("MEMORY ACCESS STATS\n")
     measurements.write("-------------------\n\n")
@@ -239,7 +203,7 @@ def measure():
 
         for line in load_stats:
             num_accesses = num_accesses + 1
-            match = re.match("(\w+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\w+)", line)
+            match = re.match("(\w+)\s+(\d+)\s+(\d+)\s+(-?\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\w+)", line)
             if (match == None):
               data = ""
               for i in range(6):
@@ -255,9 +219,10 @@ def measure():
 
             address = int(match.group(2))
             node_id = match.group(3)
-            return_cycle = int(match.group(5))
-            load_latency = int(match.group(6))
-            result = match.group(7)
+            graph_node_id = match.group(4)
+            return_cycle = int(match.group(6))
+            load_latency = int(match.group(7))
+            result = match.group(8)
 
             if address in address_counts:
               address_counts[address][0] = address_counts[address][0] + 1
@@ -356,40 +321,6 @@ def measure():
         measurements.write("Percent of Memory Latency Spent on Long-Latency Access: " + str(round(max_load*100.0/total_mem,3)) + "\n")
         measurements.write("\n")
 
-    measurements.write("CACHE EVICTIONS\n")
-    measurements.write("---------------\n\n")
-    measurements.write("Node ID\t\t# Evictions\n")
-    for node in evict_node_counts:
-      measurements.write(node + "\t\t" + str(evict_node_counts[node][0]) + "\n")
-    measurements.write("\n")
-
-    # Look at cache evictions
-    #addresses.write("Address\t\t\t# Accesses\n")
-    #for addr in address_counts:
-    #  addresses.write(str(addr) + "\t\t" + str(address_counts[addr]) + "\n")
-    #addresses.write("\n")
-
-    #addresses.write("Cache Line\t\t\t# Accesses\n")
-    #for cl in cacheline_counts:
-    #  addresses.write(str(cl) + "\t\t" + str(cacheline_counts[cl][0]) + "\n")
-    #addresses.write("\n")
-
-    addresses.write("Cache Line\t\t# Accesses\t# Evictions\n")
-    for cl in evict_cl_counts:
-      if cacheline_counts[int(cl)][0] > 1:
-        addresses.write(cl + "\t\t" + str(cacheline_counts[int(cl)][0]) + "\t\t" + str(evict_cl_counts[cl][0]) + "\n")
-    addresses.write("\n")
-
-    reaccesses.write("Cache Line\t\t# Accesses\t# Evictions\t# Reaccesses\tMost Recent Node ID\n")
-    for access in reaccess_counts:
-      reaccesses.write(str(access) + "\t\t" + str(cacheline_counts[access][0]) + "\t\t" + str(evict_cl_counts[str(access)][0]) + "\t\t" + str(reaccess_counts[access][0]) + "\t\t" + reaccess_counts[access][1] + "\n")
-    reaccesses.write("\n")
-
-    nodes.write("Node ID\t\t# Accesses\t# Evictions\t# Reaccesses\n")
-    for node in node_reaccess_counts:
-      nodes.write(node + "\t\t" + str(node_counts[node]) + "\t\t" + str(evict_node_counts[node][0]) + "\t\t" + str(node_reaccess_counts[node]) + "\n")
-    nodes.write("\n")
-
     if mode == "di":
         measurements.write("DECOUPLING STATS\n")
         measurements.write("----------------\n\n")
@@ -404,8 +335,6 @@ def measure():
 
     load_stats.close()
     measurements.close()
-    addresses.close()
-    reaccesses.close()
 
 def main():
     global source, data
@@ -417,19 +346,14 @@ def main():
 
     if not os.path.isfile(args.source):
         print("Invalid source file path entered!\n")
-    #elif not os.path.isfile(args.data):
-    #    print("Invalid data file path entered!\n")
     else:
         source = args.source
-        #data = args.data
         filename = os.path.basename(source)
         new_dir = os.path.dirname(source)
         app_name = source.split("/")[1]
-        data = "datasets/" + app_name + "/default/input/"
-        #app_input = os.path.basename(data).split(".")[0]
+        data = "/home/ts20/share/datasets/" + app_name + "/default/input/"
         
         print("Application: " + app_name)
-        #print("Application input: " + app_input)
 
         # compiler args
         mode = args.mode
@@ -448,7 +372,7 @@ def main():
         if args.output:
             output = args.output
         else:
-            output = "/home/ts20/share/results/ispass/test1/" + app_name + "_" + config + "/"
+            output = "/home/ts20/share/results/ispass/test1/" + app_name + "_" + str(threads) + "/"
 
         if (not os.path.isdir(output)):
           os.mkdir(output)
@@ -460,13 +384,12 @@ def main():
         compile()
         execute()
         one = time.time()
-        if not args.compile_only:
-            #simulate()
-            two = time.time()
-            print("Simulation Time = " + str(round(two - one)) + " seconds.\n")
-            #measure()
-            three = time.time()
-            print("Measurement Time = " + str(round(three - two)) + " seconds.\n")
+        simulate()
+        two = time.time()
+        print("Simulation Time = " + str(round(two - one)) + " seconds.\n")
+        measure()
+        three = time.time()
+        print("Measurement Time = " + str(round(three - two)) + " seconds.\n")
 
 if __name__ == "__main__":
     main()

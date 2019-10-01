@@ -11,8 +11,8 @@ else
 	APP_CXXFLAGS += -ffast-math
 endif
 
-APP_CFLAGS += -fopenmp
-APP_CXXFLAGS += -fopenmp
+APP_CFLAGS += -fopenmp -DDEBUG -g
+APP_CXXFLAGS += -fopenmp -DDEBUG -g
 
 APP_LDFLAGS = -lm -lstdc++ -lgomp
 

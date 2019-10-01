@@ -22,7 +22,6 @@
 
   Author: Lijiuan Luo (lluo3@uiuc.edu)
 */
-#include "DECADES/DECADES.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -73,33 +72,51 @@ void runGPU(int argc, char** argv);
 //the cpu version of bfs for speed comparison
 //the text book version ("Introduction to Algorithms")
 ////////////////////////////////////////////////////////////////////
-void _kernel_( Node * h_graph_nodes,Edge * h_graph_edges,
-	int * color, int * h_cost, int source,
-        int tid, int num_threads) {
-	std::deque<int> wavefront;	
-	wavefront.push_back(source);
-	color[source] = GRAY;
-	int index;
-	while(!wavefront.empty()){
-		index = wavefront.front();
-		wavefront.pop_front();
-		for(int i=h_graph_nodes[index].x; 
-			i<(h_graph_nodes[index].y + 
-				h_graph_nodes[index].x); i++)
-			{
-			int id = h_graph_edges[i].x;
-			if(color[id] == WHITE){
-				h_cost[id]=h_cost[index]+1;
-				wavefront.push_back(id);
-				color[id] = GRAY;
-			}
-		}
-		color[index] = BLACK;
-		
-		
-	}
-	
+void _kernel_(int * wavefront_in, int * wavefront_out, int * in_idx, int * out_idx, Node * h_graph_nodes, Edge * h_graph_edges, int * color, int * h_cost, int source, int tid, int num_threads) {
+  //std::deque<int> wavefront;	
+  //wavefront.push_back(source);
+  //int index;
+  //while(!wavefront.empty()) {  
+    //index = wavefront.front();
+    //wavefront.pop_front();
+
+  // Initialization
+  wavefront_in[*in_idx] = source;
+  *in_idx = *in_idx + 1;
+  color[source] = GRAY;
+
+  // Iteration
+  while(*in_idx > 0){
+//#pragma omp parallel for
+    for(int n = tid; n < *in_idx; n+=num_threads) {
+      int node = wavefront_in[n];
+      const int start = h_graph_nodes[node].x;
+      const int end = h_graph_nodes[node].x + h_graph_nodes[node].y;
+      for(int i = start; i < end; i++) {
+        int id = h_graph_edges[i].x;
+        int n_color = color[id];
+        if(n_color == WHITE) {
+          h_cost[id]=h_cost[node]+1;
+          int index = *out_idx;
+          *out_idx = *out_idx + 1;
+//#pragma omp critical
+          color[id] = GRAY;
+          wavefront_out[index] = id;
+        }
+      }
+    }
+
+    int *tmp = wavefront_out;
+    wavefront_out = wavefront_in;
+    wavefront_in = tmp;
+    //color[node] = BLACK;		
+    if (tid == 0) {
+      *in_idx = *out_idx;
+      *out_idx = 0;
+    }
+  }	
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 // Main Program
 ////////////////////////////////////////////////////////////////////////////////
@@ -182,11 +199,18 @@ void runCPU( int argc, char** argv)
 		h_cost[i] = INF;
 	}
 	h_cost[source] = 0;
+
+        int* wavefront_in = (int*) malloc( sizeof(int)*no_of_nodes);
+        int* wavefront_out = (int*) malloc( sizeof(int)*no_of_nodes);
+        int* in_idx = (int*) malloc( sizeof(int));
+        int* out_idx = (int*) malloc( sizeof(int));
+        *in_idx = 0;
+        *out_idx = 0;
 	//printf("start cpu version\n");
 	unsigned int cpu_timer = 0;
-    pb_SwitchToTimer(&timers, pb_TimerID_COMPUTE);
-	_kernel_( h_graph_nodes, h_graph_edges, color, h_cost,  source, 0, 1);
-    pb_SwitchToTimer(&timers, pb_TimerID_IO);
+        pb_SwitchToTimer(&timers, pb_TimerID_COMPUTE);
+	_kernel_(wavefront_in, wavefront_out, in_idx, out_idx, h_graph_nodes, h_graph_edges, color, h_cost, source, 0, 1);
+        pb_SwitchToTimer(&timers, pb_TimerID_IO);
     if(params->outFile!=NULL)
     {
         //printf("Result stored in %s\n", params->outFile);
