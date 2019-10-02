@@ -25,19 +25,22 @@ int doCompute(struct cartesian *data1, int n1, struct cartesian *data2,
   
   for (i = 0; i < ((doSelf) ? n1-1 : n1); i++)
     {
-      const register float xi = data1[i].x;
-      const register float yi = data1[i].y;
-      const register float zi = data1[i].z;
+      float xi = data1[i].x;
+      float yi = data1[i].y;
+      float zi = data1[i].z;
       
+      if (i == 0) {
+        printf("xi = %f, yi = %f, zi = %f\n", xi, yi, zi);
+      }
       for (j = ((doSelf) ? i+1 : 0); j < n2; j++)
         {
-	  register float dot = xi * data2[j].x + yi * data2[j].y + 
+	  float dot = xi * data2[j].x + yi * data2[j].y + 
 	    zi * data2[j].z;
 	  
 	  // run binary search
-	  register int min = 0;
-	  register int max = nbins;
-	  register int k, indx;
+	  int min = 0;
+	  int max = nbins;
+	  int k, indx;
 	  
 	  while (max > min+1)
             {

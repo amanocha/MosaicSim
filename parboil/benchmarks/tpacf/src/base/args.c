@@ -25,8 +25,8 @@ void parse_args(int argc, char **argv, options* args)
 
   args->data_name = NULL;
   args->random_name = NULL;
-  args->random_count = 0;
-  args->npoints = 0;
+  args->random_count = 100;
+  args->npoints = 487;
   args->output_name = NULL;
   
   while ((c = getopt(argc, argv, "d:n:r:p:o:")) != EOF)

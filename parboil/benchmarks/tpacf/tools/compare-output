@@ -46,7 +46,7 @@ def compare_histograms(ref, cmp):
 	
 	fulldiff = sum(ref) - sum(cmp)
 	if ( fulldiff > 0.0001 * sum(ref) ):
-		print fulldiff
+		print(fulldiff)
 		return False
 	return True
 		

@@ -76,6 +76,8 @@ def compile():
       cmd_args += ["file.c", "convert-dataset/convert_dataset.c", "convert-dataset/mmio.c"]
     elif app_name == "stencil":
       cmd_args += ["file.c"]
+    elif app_name == "tpacf":
+      cmd_args += ["args.c", "model_io.c"]
 
     #cmd_args += [">", output + "compiler_output.txt", "2>", output + "compiler_err.txt"]
     cmd = " ".join(cmd_args)
@@ -104,6 +106,10 @@ def execute():
       datafiles = ["1138_bus.mtx", "vector.bin"]
     elif app_name == "stencil":
       datafiles = ["128x128x32.bin"]
+    elif app_name == "tpacf":
+      datafiles = ["Datapnts.1"]
+      for i in range(100):
+        datafiles.append("Randompnts." + str(i+1))
 
     input_path = ""
     for d in datafiles:

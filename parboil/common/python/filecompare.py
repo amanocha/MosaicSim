@@ -8,7 +8,7 @@ import sys
 class CompareMonad(object):
 	def checkType(x):
 		if not isinstance(x, CompareMonad):
-			raise TypeError, "Not a CompareMonad instance"
+			raise TypeError("Not a CompareMonad instance")
 	checkType = staticmethod(checkType)
 
 	def run(self, ref_file, out_file):
@@ -134,7 +134,7 @@ class Compare(CompareMonad):
 	def run(self, ref_file, out_file):
 		try:
 			x = self.read(ref_file)
-		except ValueError, e:
+		except ValueError(e):
 			sys.stderr.write("Malformed reference file!\n")
 			return (False, None)
 		except EOFError:
@@ -142,7 +142,7 @@ class Compare(CompareMonad):
 			return (False, None)
 		try:
 			y = self.read(out_file)
-		except ValueError, e:
+		except ValueError(e):
 			sys.stderr.write("Malformed output file;\n")
 			sys.stderr.write(str(e))
 			sys.stderr.write('\n')
