@@ -8,7 +8,7 @@
 
 [o] lbm -> kernelized, incorrect parallelism, might need to downsize (mem trace is 2.8GB), difficult
 
-[?] mri-gridding -> DONE, need to check parallelism
+[x] mri-gridding -> DONE
 
 [x] mri-q -> DONE, very well parallelized
 
@@ -16,8 +16,8 @@
 
 [x] sgemm -> DONE
 
-[ ] spmv
+[x] spmv -> DONE
 
-[?] stencil -> kernelized and downsampled, need to check parallelization
+[x] stencil -> DONE
 
 [ ] tpacf -> need to look into kernelization (has a mix of IO and compute)
