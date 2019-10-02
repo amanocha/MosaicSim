@@ -25,7 +25,7 @@ void parse_args(int argc, char **argv, options* args)
 
   args->data_name = NULL;
   args->random_name = NULL;
-  args->random_count = 100;
+  args->random_count = 20;
   args->npoints = 487;
   args->output_name = NULL;
   
