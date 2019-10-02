@@ -12,7 +12,7 @@
 
 [x] mri-q -> DONE
 
-[o] sad -> kernelized, need to check if can be parallelized
+[x] sad -> DONE
 
 [x] sgemm -> DONE
 
@@ -20,4 +20,4 @@
 
 [x] stencil -> DONE
 
-[ ] tpacf -> need to look into kernelization (has a mix of IO and compute)
+[?] tpacf -> DONE, but parallelism and kernel should be checked
