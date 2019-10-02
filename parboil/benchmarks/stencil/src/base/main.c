@@ -34,42 +34,29 @@ static int read_data(float *A0, int nx,int ny,int nz,FILE *fp)
 	return 0;
 }
 
-void cpu_stencil(float c0,float c1, float *A0,float * Anext,const int nx, const int ny, const int nz)
-{
+void _kernel_(int iteration, float c0, float c1, float *h_A0, float *h_Anext, const int nx, const int ny, const int nz, int tid, int num_threads) {
+  int t, i, j, k;
+  float* tmp;
+  for(t=0;t<iteration;t++) {
+    for(i=1+tid;i<nx-1;i+=num_threads) {
+      for(j=1;j<ny-1;j++) {
+        for(k=1;k<nz-1;k++) {
+          h_Anext[Index3D (nx, ny, i, j, k)] = (h_A0[Index3D (nx, ny, i, j, k + 1)] + h_A0[Index3D (nx, ny, i, j, k - 1)] + 
+						h_A0[Index3D (nx, ny, i, j + 1, k)] + h_A0[Index3D (nx, ny, i, j - 1, k)] + 
+						h_A0[Index3D (nx, ny, i + 1, j, k)] + h_A0[Index3D (nx, ny, i - 1, j, k)])*c1 - 
+						h_A0[Index3D (nx, ny, i, j, k)]*c0;
+        }
+      }
+    }
 
-  int i, j, k;
-	for(i=1;i<nx-1;i++)
-	{
-		for(j=1;j<ny-1;j++)
-		{
-			for(k=1;k<nz-1;k++)
-			{
-				Anext[Index3D (nx, ny, i, j, k)] = 
-				(A0[Index3D (nx, ny, i, j, k + 1)] +
-				A0[Index3D (nx, ny, i, j, k - 1)] +
-				A0[Index3D (nx, ny, i, j + 1, k)] +
-				A0[Index3D (nx, ny, i, j - 1, k)] +
-				A0[Index3D (nx, ny, i + 1, j, k)] +
-				A0[Index3D (nx, ny, i - 1, j, k)])*c1
-				- A0[Index3D (nx, ny, i, j, k)]*c0;
-			}
-		}
-	}
-
-}
-
-void _kernel_(int iteration, float c0,float c1, float *h_A0,float * h_Anext,const int nx, const int ny, const int nz, int tid, int num_threads) {
-  int t;
-  for(t=tid;t<iteration;t+=num_threads) {
-    cpu_stencil(c0,c1, h_A0, h_Anext, nx, ny,  nz);
-    float *temp=h_A0;
+    tmp=h_A0;
     h_A0 = h_Anext;
-    h_Anext = temp;
+    h_Anext = tmp;
   }
 
-  float *temp=h_A0;
+  tmp=h_A0;
   h_A0 = h_Anext;
-  h_Anext = temp;
+  h_Anext = tmp;
 }
 
 int main(int argc, char** argv) {
