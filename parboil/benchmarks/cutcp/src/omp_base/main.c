@@ -127,6 +127,8 @@ int main(int argc, char *argv[]) {
     }
     printf("read %d atoms from file '%s'\n", atom->size, pqrfilename);
   }
+
+  // timer counting
   pb_SwitchToTimer(&timers, pb_TimerID_COMPUTE);
 
   /* find extent of domain */
@@ -143,11 +145,15 @@ int main(int argc, char *argv[]) {
   lattice_dim = lattice_from_bounding_box(lo, hi, h);
   cpu_lattice = create_lattice(lattice_dim);
   printf("\n");
-
+  
+  // set number of threads
+  int num_threads = 4;
+  omp_set_dynamic(0);
+  omp_set_num_threads(num_threads);
   /*
    * CPU kernel
    */
-  if (cpu_compute_cutoff_potential_lattice(cpu_lattice, cutoff, atom)) {
+  if (cpu_compute_cutoff_potential_lattice(cpu_lattice, cutoff, atom, num_threads)) {
     fprintf(stderr, "Computation failed\n");
     exit(1);
   }

@@ -5,7 +5,7 @@
  *cr                         All Rights Reserved
  *cr
  ***************************************************************************/
-#include "DECADES/DECADES.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
@@ -271,8 +271,8 @@ sad4_one_macroblock(unsigned short *macroblock_sad,
 
 	      b = ref[ref_y * width + ref_x];
 	      a = frame[(blky * 4 + y) * width + (blkx * 4 + x)];
-        if ( a > b) sad += (a - b);
-        else sad+= (b - a);
+
+	      sad += abs(a - b);
 	    }
 	  }
 
@@ -284,42 +284,16 @@ sad4_one_macroblock(unsigned short *macroblock_sad,
     }
   }
 }
-/* MAIN */
-void _kernel_(unsigned short *blk_sad,
-              unsigned short *frame,
-              unsigned short *ref,
-              int mb_width,
-              int mb_height,
-              int mbs,
-              int tid, int num_threads) {
 
-  unsigned short * sads = blk_sad;
-  int mb_x, mb_y, bk_x, bk_y;
-
-  /* Go to the starting offset in blk_sad */
-  blk_sad += SAD_TYPE_7_IX(mb_width * mb_height);
-
-  for (mb_y = tid; mb_y < mb_height; mb_y+=num_threads){
-      for (mb_x = 0; mb_x < mb_width; mb_x++){
-	      sad4_one_macroblock
-	        (blk_sad + (mb_y * mb_width + mb_x) * (SAD_TYPE_7_CT * MAX_POS_PADDED),
-	         frame + (256*mb_width*mb_y) + mb_x * 16,
-	         ref,
-	         mb_y * 16,
-	         mb_x * 16,
-	         mb_width,
-	         mb_height);
-	    }
-    }
-   DECADES_BARRIER();
-
-  // Second function
+void larger_sads(unsigned short *sads, int mbs)
+{
   int macroblock;
   int block_x, block_y;
   unsigned short *x, *y;	/* inputs to vector addition */
   unsigned short *z;		/* output of vector addition */
   int count;
-  for (macroblock = tid; macroblock < mbs; macroblock+=num_threads)
+  #pragma omp parallel for private (macroblock, block_x, block_y, count, x, y, z)
+  for (macroblock = 0; macroblock < mbs; macroblock++)
     {
       /* Block type 6 */
       for (block_y = 0; block_y < 2; block_y++)
@@ -415,6 +389,43 @@ void _kernel_(unsigned short *blk_sad,
     }
 }
 
+/* MAIN */
+void _kernel_(unsigned short *blk_sad,
+              unsigned short *frame,
+              unsigned short *ref,
+              int mb_width,
+              int mb_height,
+              int mbs,
+              int tid, int num_threads) {
+
+  unsigned short * orig_blk = blk_sad;
+
+   omp_set_dynamic(0);     // Explicitly disable dynamic teams
+   omp_set_num_threads(4);
+
+  int mb_x, mb_y, bk_x, bk_y;
+
+  /* Go to the starting offset in blk_sad */
+  blk_sad += SAD_TYPE_7_IX(mb_width * mb_height);
+  #pragma omp parallel for private (mb_y, mb_x)
+  for (mb_y = 0; mb_y < mb_height; mb_y++){
+      for (mb_x = 0; mb_x < mb_width; mb_x++)
+	    {
+	      sad4_one_macroblock
+	        (blk_sad + (mb_y * mb_width + mb_x) * (SAD_TYPE_7_CT * MAX_POS_PADDED),
+	         frame + (256*mb_width*mb_y) + mb_x * 16,
+	         ref,
+	         mb_y * 16,
+	         mb_x * 16,
+	         mb_width,
+	         mb_height);
+	    }
+    }
+  // Second function
+  larger_sads(orig_blk, mbs);
+
+}
+
 int
 main(int argc, char **argv)
 {
@@ -498,4 +509,3 @@ main(int argc, char **argv)
 
   return 0;
 }
-

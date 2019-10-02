@@ -22,7 +22,8 @@
 extern int cpu_compute_cutoff_potential_lattice(
     Lattice *lattice,                  /* the lattice */
     float cutoff,                      /* cutoff distance */
-    Atoms *atoms                       /* array of atoms */
+    Atoms *atoms,                       /* array of atoms */
+    int num_threads
     )
 {
   int nx = lattice->dim.nx;
@@ -63,8 +64,6 @@ extern int cpu_compute_cutoff_potential_lattice(
   int *first, *next;
   float inv_cellen = INV_CELLEN;
   Vec3 minext, maxext;		/* Extent of atom bounding box */
-  float xmin, ymin, zmin;
-  float xmax, ymax, zmax;
 
 #if DEBUG_PASS_RATE
   unsigned long long pass_count = 0;
@@ -82,10 +81,12 @@ extern int cpu_compute_cutoff_potential_lattice(
 
   /* allocate for cursor link list implementation */
   first = (int *) malloc(ncell * sizeof(int));
+  #pragma omp parallel for
   for (gindex = 0;  gindex < ncell;  gindex++) {
     first[gindex] = -1;
   }
   next = (int *) malloc(natoms * sizeof(int));
+  #pragma omp parallel for
   for (n = 0;  n < natoms;  n++) {
     next[n] = -1;
   }
@@ -101,7 +102,10 @@ extern int cpu_compute_cutoff_potential_lattice(
     first[gindex] = n;
   }
 
-#pragma omp parallel for private (n, q, x, y, z, ic, jc, kc, ia, ib, ja, jb, ka, kb, \
+  int size = ((nx * ny * nz) + 7) & ~7;
+  float *private_lattice = (float *)calloc(num_threads*size, sizeof(float));
+
+ #pragma omp parallel for private (n, q, x, y, z, ic, jc, kc, ia, ib, ja, jb, ka, kb, \
 				  xstart, ystart, dz, k, koff, dz2, j, dy, jkoff,    \
 				  dydz2, dx, index, pg, i, r2, s, e		     \
 				 )
@@ -155,14 +159,16 @@ extern int cpu_compute_cutoff_potential_lattice(
           pg = lattice->lattice + index;
 
 #if defined(__INTEL_COMPILER)
-          for (i = ia;  i <= ib;  i++, pg++, dx += gridspacing) {
+          for (i = ia;  i <= ib;  i++, index++, dx += gridspacing) {
             r2 = dx*dx + dydz2;
             s = (1.f - r2 * inv_a2) * (1.f - r2 * inv_a2);
             e = q * (1/sqrtf(r2)) * s;
-            *pg += (r2 < a2 ? e : 0);  /* LOOP VECTORIZED!! */
+
+	     int tid = omp_get_thread_num();
+	     private_lattice[tid*size+index] += e;
           }
 #else
-          for (i = ia;  i <= ib;  i++, pg++, dx += gridspacing) {
+          for (i = ia;  i <= ib;  i++, index++, dx += gridspacing) {
             r2 = dx*dx + dydz2;
             if (r2 >= a2)
 		{
@@ -177,8 +183,8 @@ extern int cpu_compute_cutoff_potential_lattice(
             s = (1.f - r2 * inv_a2);
             e = q * (1/sqrtf(r2)) * s * s;
 
-#pragma omp atomic
-            *pg += e;
+	     int tid = omp_get_thread_num();
+	     private_lattice[tid*size+index] += e;
           }
 #endif
         }
@@ -187,9 +193,17 @@ extern int cpu_compute_cutoff_potential_lattice(
     } /* end loop over atoms in a gridcell */
   } /* end loop over gridcells */
 
+  #pragma omp parallel for private(i, j)
+  for(j=0; j<size; j++) {
+    for(i=0; i<num_threads; i++) {
+      lattice->lattice[j] += private_lattice[i*size+j];
+    }
+  }
+
   /* free memory */
   free(next);
   free(first);
+  free(private_lattice);
 
   /* For debugging: print the number of times that the test passed/failed */
 #ifdef DEBUG_PASS_RATE
