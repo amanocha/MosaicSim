@@ -311,6 +311,7 @@ void _kernel_(unsigned short *blk_sad,
 	         mb_height);
 	    }
     }
+   DECADES_BARRIER();
 
   // Second function
   int macroblock;
