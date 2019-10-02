@@ -18,6 +18,6 @@
 
 [x] spmv -> DONE
 
-[?] stencil -> kernelized and downsampled, need to check parallelization
+[x] stencil -> DONE
 
 [ ] tpacf -> need to look into kernelization (has a mix of IO and compute)
