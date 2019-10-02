@@ -47,7 +47,8 @@ extern "C" {
   int cpu_compute_cutoff_potential_lattice(
       Lattice *lattice,                  /* the lattice */
       float cutoff,                      /* cutoff distance */
-      Atoms *atoms                       /* array of atoms */
+      Atoms *atoms,                       /* array of atoms */
+      int num_threads
     );
 
   int remove_exclusions(

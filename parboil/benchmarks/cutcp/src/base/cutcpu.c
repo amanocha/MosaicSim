@@ -22,8 +22,8 @@
 extern int cpu_compute_cutoff_potential_lattice(
     Lattice *lattice,                  /* the lattice */
     float cutoff,                      /* cutoff distance */
-    Atoms *atoms,                      /* array of atoms */
-    int tid, int num_threads)
+    Atoms *atoms                       /* array of atoms */
+    )
 {
   int nx = lattice->dim.nx;
   int ny = lattice->dim.ny;
@@ -63,8 +63,6 @@ extern int cpu_compute_cutoff_potential_lattice(
   int *first, *next;
   float inv_cellen = INV_CELLEN;
   Vec3 minext, maxext;		/* Extent of atom bounding box */
-  float xmin, ymin, zmin;
-  float xmax, ymax, zmax;
 
 #if DEBUG_PASS_RATE
   unsigned long long pass_count = 0;
@@ -101,14 +99,8 @@ extern int cpu_compute_cutoff_potential_lattice(
     first[gindex] = n;
   }
 
-  int total = ncell;
-  int per_th = total / num_threads;
-  int init = tid*per_th;
-  int last = (tid < num_threads-1) ? (tid+1)*per_th : total;
-  
-  printf("init %d, last %d\n",init,last);
   /* traverse the grid cells */
-  for (gindex = init;  gindex < last;  gindex++) {
+  for (gindex = 0;  gindex < ncell;  gindex++) {
     for (n = first[gindex];  n != -1;  n = next[n]) {
       x = atom[n].x - xlo;
       y = atom[n].y - ylo;
@@ -177,7 +169,7 @@ extern int cpu_compute_cutoff_potential_lattice(
 #endif
             s = (1.f - r2 * inv_a2);
             e = q * (1/sqrtf(r2)) * s * s;
-            *pg += e; //DECADES_FETCH_ADD_FLOAT(pg,e);
+            *pg += e;
           }
 #endif
         }
@@ -198,4 +190,3 @@ extern int cpu_compute_cutoff_potential_lattice(
 
   return 0;
 }
-
