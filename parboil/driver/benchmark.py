@@ -54,8 +54,7 @@ class Benchmark(object):
                      for impl in process.scan_for_benchmark_versions(bmkdir)]
             
             # Scan data sets of the benchmark
-            datas = [BenchDataset.createFromDir(data)
-                     for data in process.scan_for_benchmark_datasets(datadir)]
+            datas = [BenchDataset.createFromDir(data) for data in process.scan_for_benchmark_datasets(datadir)]
 
             # If no exception occurred, the benchmark is valid
             return Benchmark(name, bmkdir.getPath(), impls, datas, descr)

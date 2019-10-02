@@ -59,8 +59,6 @@ def compile():
         compile_mode = mode
 
     include = "../../../../common/include/"
-    if app_name == "spmv":
-      include = include + " ../../common_src/convert-dataset/"
 
     cmd_args = ["PDEC++", "-I", include, "-m", compile_mode, "-t", str(threads), "../../../../common/src/parboil.c", filename]
 
@@ -74,10 +72,8 @@ def compile():
       cmd_args += ["file.cc"]
     elif app_name == "sad":
       cmd_args += ["file.c", "image.c"]
-    elif app_name == "sgemm":
-      cmd_args += ["io.cc"]
     elif app_name == "spmv":
-      cmd_args += ["file.c", "../../common_src/convert-dataset/convert-dataset.c", "../../common_src/convert-dataset/mmio.c"]
+      cmd_args += ["file.c", "convert-dataset/convert_dataset.c", "convert-dataset/mmio.c"]
     elif app_name == "stencil":
       cmd_args += ["file.c"]
 

@@ -20,13 +20,52 @@
 #include <vector>
 #include <parboil.h>
 #include <iostream>
+#include <fstream>
 #include "assert.h"
 
-// I/O routines
-extern bool readColMajorMatrixFile(const char *fn, int *nr_row, int *nr_col, std::vector<float>&v);
-extern bool writeColMajorMatrixFile(const char *fn, int, int, std::vector<float>&);
+bool readColMajorMatrixFile(const char *fn, int *nr_row, int *nr_col, std::vector<float>&v)
+{
+  std::cerr << "Opening file:"<< fn << std::endl;
+  std::fstream f(fn, std::fstream::in);
+  if ( !f.good() ) {
+    return false;
+  }
 
-void _kernel_( char transa, char transb, int m, int n, int k, float alpha, const float *A, int lda, const float *B, int ldb, float beta, float *C, int ldc, int tid, int num_threads)
+  // Read # of rows and cols
+  f >> *nr_row;
+  f >> *nr_col;
+
+  float data;
+  std::cerr << "Matrix dimension: " << *nr_row << "x" << *nr_col<< std::endl;
+  while (f.good()) {
+    f >> data;
+    v.push_back(data);
+  }
+  v.pop_back(); // remove the duplicated last element
+  return true;
+}
+
+bool writeColMajorMatrixFile(const char *fn, int *nr_row, int *nr_col, std::vector<float>&v)
+{
+  std::cerr << "Opening file:"<< fn << " for write." << std::endl;
+  std::fstream f(fn, std::fstream::out);
+  if ( !f.good() ) {
+    return false;
+  }
+
+  // Read # of rows and cols
+  f << *nr_row << " " << *nr_col << " ";
+
+  float data;
+  std::cerr << "Matrix dimension: " << *nr_row << "x" << *nr_col << std::endl;
+  for (int i = 0; i < v.size(); ++i) {
+    f << v[i] << ' ';
+  }
+  f << "\n";
+  return true;
+}
+
+void _kernel_( char transa, char transb, int m, int n, int k, float alpha, const float *A, const float *B, float beta, float *C, int tid, int num_threads)
 {
   if ((transa != 'N') && (transa != 'n')) {
     //std::cerr << "unsupported value of 'transa' in regtileSgemm()" << std::endl;
@@ -44,11 +83,11 @@ void _kernel_( char transa, char transb, int m, int n, int k, float alpha, const
     for (int nn = 0; nn < n; ++nn) {
       float c = 0.0f;
       for (int i = 0; i < k; ++i) {
-        float a = A[mm + i * lda]; 
-        float b = B[nn + i * ldb];
+        float a = A[mm + i * m]; 
+        float b = B[nn + i * n];
         c += a * b;
       }
-      C[mm+nn*ldc] = C[mm+nn*ldc] * beta + alpha * c;
+      C[mm+nn*m] = C[mm+nn*m] * beta + alpha * c;
     }
   }
 }
@@ -58,7 +97,10 @@ int main (int argc, char *argv[]) {
   struct pb_Parameters *params;
   struct pb_TimerSet timers;
 
-  int* matArow, matAcol,  matBrow, matBcol;
+  int* matArow = (int*) malloc(sizeof(int)); 
+  int* matAcol = (int*) malloc(sizeof(int)); 
+  int* matBrow = (int*) malloc(sizeof(int)); 
+  int* matBcol = (int*) malloc(sizeof(int));
   std::vector<float> matA, matBT;
 
   pb_InitializeTimerSet(&timers);
@@ -89,22 +131,22 @@ int main (int argc, char *argv[]) {
   pb_SwitchToTimer( &timers, pb_TimerID_COMPUTE );
 
   // allocate space for C
-  std::vector<float> matC(matArow*matBcol);
+  std::vector<float> matC(*matArow * *matBcol);
 
   // Use standard sgemm interface
   std::cout<< "Starting kernel" << std::endl;
-  _kernel_('N', 'T', matArow, matBcol, matAcol, 1.0f, &matA.front(), matArow, &matBT.front(), matBcol, 0.0f, &matC.front(), matArow, 0, 1);
+  _kernel_('N', 'T', *matArow, *matBcol, *matAcol, 1.0f, &matA.front(), &matBT.front(), 0.0f, &matC.front(), 0, 1);
 
   if (params->outFile) {
     /* Write C to file */
     pb_SwitchToTimer(&timers, pb_TimerID_IO);
-    //writeColMajorMatrixFile(params->outFile, matArow, matBcol, matC); 
+    writeColMajorMatrixFile(params->outFile, matArow, matBcol, matC); 
   }
 
   pb_SwitchToTimer(&timers, pb_TimerID_NONE);
 
   double CPUtime = pb_GetElapsedTime(&(timers.timers[pb_TimerID_COMPUTE]));
-  std::cout<< "GFLOPs = " << 2.* matArow * matBcol * matAcol/CPUtime/1e9 << std::endl;
+  std::cout<< "GFLOPs = " << 2.* *matArow * *matBcol * *matAcol/CPUtime/1e9 << std::endl;
   pb_PrintTimerSet(&timers);
   pb_FreeParameters(params);
   return 0;
