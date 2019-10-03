@@ -42,7 +42,14 @@ int main( int nArgs, char* arg[] ) {
 	MAIN_startClock( &time );
 #endif
 
+  //omp_set_dynamic(0);     // Explicitly disable dynamic teams
+  //omp_set_num_threads(1);
+
+	//printf( "timestep: %d\n", param.nTimeSteps);
+	//printf( "simType channel: %d\n", param.simType == CHANNEL );
+
 	for( t = 1; t <= param.nTimeSteps; t++ ) {
+    // this is not true so this code is never executed
 		if( param.simType == CHANNEL ) {
 			LBM_handleInOutFlow( *srcGrid );
 		}
@@ -50,10 +57,9 @@ int main( int nArgs, char* arg[] ) {
 		LBM_performStreamCollide( *srcGrid, *dstGrid );
 		LBM_swapGrids( &srcGrid, &dstGrid );
 
-		if( (t & 63) == 0 ) {
-			printf( "timestep: %i\n", t );
+		//if( (t & 63) == 0 ) {
 			//LBM_showGridStatistics( *srcGrid );
-		}
+		//}
 	}
 
 #if !defined(SPEC_CPU)

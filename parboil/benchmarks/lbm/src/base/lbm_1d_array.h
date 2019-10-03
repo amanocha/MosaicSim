@@ -30,6 +30,11 @@ typedef LBM_Grid* LBM_GridPtr;
        i < CALC_INDEX(x2, y2, z2, 0); \
        i += N_CELL_ENTRIES ) {
 
+#define SWEEP_START_DECADES(x1,y1,z1,x2,y2,z2, tid, num_threads) \
+  for( i = CALC_INDEX(x1, y1, z1, 0) + N_CELL_ENTRIES*num_threads; \
+       i < CALC_INDEX(x2, y2, z2, 0); \
+       i += N_CELL_ENTRIES*num_threads ) {
+
 #define SWEEP_END }
 
 #define SWEEP_X  ((i / N_CELL_ENTRIES) % SIZE_X)

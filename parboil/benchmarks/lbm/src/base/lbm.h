@@ -35,7 +35,7 @@ void LBM_initializeSpecialCellsForLDC( LBM_Grid grid );
 void LBM_loadObstacleFile( LBM_Grid grid, const char* filename );
 void LBM_initializeSpecialCellsForChannel( LBM_Grid grid );
 void LBM_swapGrids( LBM_GridPtr* grid1, LBM_GridPtr* grid2 );
-void LBM_performStreamCollide( LBM_Grid srcGrid, LBM_Grid dstGrid );
+void LBM_performStreamCollide( LBM_Grid srcGrid, LBM_Grid dstGrid, int tid, int num_threads );
 void LBM_handleInOutFlow( LBM_Grid srcGrid );
 void LBM_showGridStatistics( LBM_Grid Grid );
 void LBM_storeVelocityField( LBM_Grid grid, const char* filename,

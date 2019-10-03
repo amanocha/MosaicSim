@@ -172,7 +172,7 @@ void LBM_initializeSpecialCellsForChannel( LBM_Grid grid ) {
 
 /*############################################################################*/
 
-void LBM_performStreamCollide( LBM_Grid srcGrid, LBM_Grid dstGrid ) {
+void LBM_performStreamCollide( LBM_Grid srcGrid, LBM_Grid dstGrid, int tid, int num_threads) {
 	SWEEP_VAR
 
 	float ux, uy, uz, u2, rho;
@@ -183,7 +183,7 @@ void LBM_performStreamCollide( LBM_Grid srcGrid, LBM_Grid dstGrid ) {
 #pragma omp parallel for private( ux, uy, uz, u2, rho )
 #endif
 #endif
-	SWEEP_START( 0, 0, 0, 0, 0, SIZE_Z )
+	SWEEP_START_DECADES( 0, 0, 0, 0, 0, SIZE_Z, tid, num_threads )
 		if( TEST_FLAG_SWEEP( srcGrid, OBSTACLE )) {
 			DST_C ( dstGrid ) = SRC_C ( srcGrid );
 			DST_S ( dstGrid ) = SRC_N ( srcGrid );

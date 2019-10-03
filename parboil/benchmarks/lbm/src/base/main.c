@@ -27,16 +27,26 @@ struct pb_TimerSet timers;
 
 void _kernel_(MAIN_Param param, int tid, int num_threads) {
   int t;
-  for(t = 1 + tid; t <= param.nTimeSteps; t+= num_threads) {
+
+	//printf( "timestep: %d\n", param.nTimeSteps);
+	//printf( "simType channel: %d\n", param.simType == CHANNEL );
+
+  for(t = 1; t <= param.nTimeSteps; t++) {
+    // this is not true so this code is never executed
     if( param.simType == CHANNEL ) {
       LBM_handleInOutFlow( *srcGrid );
     }
 
-    LBM_performStreamCollide( *srcGrid, *dstGrid );
-    LBM_swapGrids( &srcGrid, &dstGrid );
+    LBM_performStreamCollide( *srcGrid, *dstGrid, tid, num_threads);
 
-    printf( "timestep: %i\n", t );
-    //LBM_showGridStatistics( *srcGrid );
+    DECADES_BARRIER();
+    if (tid == 0){
+      LBM_swapGrids( &srcGrid, &dstGrid );
+      //printf( "timestep: %i\n", t );
+      //LBM_showGridStatistics( *srcGrid );
+    }
+    DECADES_BARRIER();
+
   }
 }
 
