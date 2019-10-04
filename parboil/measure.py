@@ -7,30 +7,24 @@ import time
 
 # EXPERIMENT INFO
 output = ""
-config = ""
 
 # FILE INFO
+app = ""
 source = ""
 data = ""
 
 # COMPILER INFO
 filename = ""
-mode = ""
-compile_dir = ""
-flags = ""
+compile_dir = "decades_base"
 threads = 1
 
 # EXECUTION INFO
-app_name = ""
 app_input = ""
 new_dir = ""
-epoch = -1
-compute_nodes = -1
 
 # METRICS
-gen_metrics = ["Average BW", "cycles", "LD", "ST", "total_instructions", "global_energy", "global_avg_power"]
+gen_metrics = ["Average BW", "cycles", "ATOMIC_ADD", "ATOMIC_CAS", "ATOMIC_FADD", "ATOMIC_MIN", "LD", "ST", "total_instructions", "l1_load_hits", "l1_load_misses", "l2_load_hits", "l2_load_misses", "L1 Miss Rate", "L2 Miss Rate", "cache_access", "dram_accesses", "global_energy", "global_avg_power", "Average Global Simulation Speed"]
 load_metrics = ["Total Mem Access Latency", "Avg Mem Access Latency", "Mean # DRAM Accesses Per 1024-cycle Epoch", "Median # DRAM Accesses Per 1024-cycle Epoch", "Max # DRAM Accesses Per 1024-cycle Epoch"]
-decoupling_metrics = ["Total Recv Latency", "Avg Recv Latency", "Total Runahead Distance", "Number of Receive_Instructions", "Average Runahead Distance"]
 
 L1_LATENCY = 10
 L2_LATENCY = 100
@@ -38,45 +32,40 @@ CACHELINE_SIZE = 64
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-s", "--source", type=str, help="Path to source code file")
-    parser.add_argument("-d", "--data", type=str, help="Path to data file")
-    parser.add_argument("-e", "--epoch", type=int, default=-1, help="Epoch used for sampling")
-    parser.add_argument("-n", "--compute_nodes", type=int, default=-1, help="Number of compute nodes to sample with")
-    parser.add_argument("-c", "--config", type=str, default="IO", help="Core configuration (IO or OOO)")
+    parser.add_argument("-a", "--app", type=str, help="Name of benchmark")
+    parser.add_argument("-s", "--source", type=str, default="", help="Path to source code file")
     parser.add_argument("-t", "--num_threads", type=int, default=1, help="Number of threads")
-    parser.add_argument("-m", "--mode", type=str, default="db", help="Compilation variant: decades_base (db) or decades_decoupled_implicit (di) or perfect cache (PC)")
+    parser.add_argument("-r", "--real", type=int, default=0, help="Run on real machine in addition to simulation")
     parser.add_argument("-o", "--output", type=str, help="Output path")
-    parser.add_argument("-co", "--compile_only", type=int, default=0, help="Only compile and execute")
     args = parser.parse_args()
     return args
 
-def compile():
+def compile(real):
     print("Compiling application...\n")
-    #cmd_args = ["PDEC++", "-m", mode, "-t", str(threads), filename, ">", output + "compiler_output.txt"]
-    if mode == "PC":
-        compile_mode = "db"
+    if real:
+        compile_mode = "DEC++"
     else:
-        compile_mode = mode
+        compile_mode = "PDEC++"
 
     include = "../../../../common/include/"
 
-    cmd_args = ["PDEC++", "-I", include, "-m", compile_mode, "-t", str(threads), "../../../../common/src/parboil.c", filename]
+    cmd_args = [compile_mode, "-I", include, "-t", str(threads), "../../../../common/src/parboil.c", filename]
 
-    if app_name == "cutcp":
+    if app == "cutcp":
       cmd_args += ["readatom.c", "output.c", "excl.c", "cutcpu.c"]
-    elif app_name == "histo":
+    elif app == "histo":
       cmd_args += ["util.c"]
-    elif app_name == "lbm":
+    elif app == "lbm":
       cmd_args += ["lbm.c"]
-    elif app_name == "mri-q":
+    elif app == "mri-q":
       cmd_args += ["file.cc"]
-    elif app_name == "sad":
+    elif app == "sad":
       cmd_args += ["file.c", "image.c"]
-    elif app_name == "spmv":
+    elif app == "spmv":
       cmd_args += ["file.c", "convert-dataset/convert_dataset.c", "convert-dataset/mmio.c"]
-    elif app_name == "stencil":
+    elif app == "stencil":
       cmd_args += ["file.c"]
-    elif app_name == "tpacf":
+    elif app == "tpacf":
       cmd_args += ["args.c", "model_io.c"]
 
     #cmd_args += [">", output + "compiler_output.txt", "2>", output + "compiler_err.txt"]
@@ -84,29 +73,29 @@ def compile():
     print(cmd)
     os.system(cmd)
 
-def execute():
+def execute(real):
     print("Executing application...")
-    if app_name == "bfs":
+    if app == "bfs":
       datafiles = ["graph_input.dat"]
-    elif app_name == "cutcp":
+    elif app == "cutcp":
       datafiles = ["watbox.sl40_mod.pqr"]
-    elif app_name == "histo":
+    elif app == "histo":
       datafiles = ["img.bin"]
-    elif app_name == "lbm":
+    elif app == "lbm":
       datafiles = ["120_120_150_ldc.of"]
-    elif app_name == "mri-gridding":
+    elif app == "mri-gridding":
       datafiles = ["small.uks"]
-    elif app_name == "mri-q":
+    elif app == "mri-q":
       datafiles = ["32_32_32_dataset.bin"]
-    elif app_name == "sad":
+    elif app == "sad":
       datafiles = ["frame.bin", "reference.bin"]
-    elif app_name == "sgemm":
+    elif app == "sgemm":
       datafiles = ["matrix1.txt", "matrix2.txt", "matrix2t.txt"]
-    elif app_name == "spmv":
+    elif app == "spmv":
       datafiles = ["1138_bus.mtx", "vector.bin"]
-    elif app_name == "stencil":
+    elif app == "stencil":
       datafiles = ["128x128x32.bin"]
-    elif app_name == "tpacf":
+    elif app == "tpacf":
       datafiles = ["Datapnts.1"]
       for i in range(100):
         datafiles.append("Randompnts." + str(i+1))
@@ -117,8 +106,13 @@ def execute():
       if d != datafiles[len(datafiles)-1]:
         input_path = input_path + ","
 
-    #cmd = "./" + compile_dir + "/" + compile_dir + " -i " + input_path + " " + " > " + output + "app_output.txt"
-    cmd = "./" + compile_dir + "/" + compile_dir + " -i " + input_path
+    if (real):
+      output_name = "app_output_real.txt"
+    else:
+      output_name = "app_output.txt"
+
+    cmd = "./" + compile_dir + "/" + compile_dir + " 1 -i " + input_path + " " + " > " + output + output_name
+    #cmd = "./" + compile_dir + "/" + compile_dir + " 1 -i " + input_path
     
     output_path = input_path.split("/")[0:7] + ["output"]
     output_path = "/".join(output_path)
@@ -137,7 +131,7 @@ def simulate():
     out_files = [int(f.split("_")[2]) for f in files if "output_compute" in f]
     threads = max(out_files) + 1
 
-    cmd_args = ["pythiarun", "-n", str(threads), flags, "."]
+    cmd_args = ["pythiarun", "-n", str(threads), "."]
     cmd_sim = ["-sc", "sim_cafe", "-o", output]
     cmd_config = ["-cc", "core_cafe"]
     cmd = " ".join(cmd_args + cmd_sim + cmd_config)
@@ -156,7 +150,7 @@ def measure():
     data = gen_stats.read()
     gen_stats.close()
     for gen_metric in gen_metrics:
-        metrics = re.findall("^" + gen_metric + " : .*$", data, re.MULTILINE)
+        metrics = re.findall("^" + gen_metric + "\s*: .*$", data, re.MULTILINE)
         measurements.write(metrics[len(metrics)-1])
         measurements.write("\n")
         if gen_metric == "cycles":
@@ -168,17 +162,52 @@ def measure():
         elif gen_metric == "ST":
             match = re.match("ST\s*:\s*(\d+)", metrics[len(metrics)-1])
             ST = int(match.group(1))
+        elif gen_metric == "ATOMIC_ADD":
+            match = re.match("ATOMIC_ADD\s*:\s*(\d+)", metrics[len(metrics)-1])
+            ATOMIC_ADD = int(match.group(1))
+        elif gen_metric == "ATOMIC_CAS":
+            match = re.match("ATOMIC_CAS\s*:\s*(\d+)", metrics[len(metrics)-1])
+            ATOMIC_CAS = int(match.group(1))
+        elif gen_metric == "ATOMIC_FADD":
+            match = re.match("ATOMIC_FADD\s*:\s*(\d+)", metrics[len(metrics)-1])
+            ATOMIC_FADD = int(match.group(1))
+        elif gen_metric == "ATOMIC_MIN":
+            match = re.match("ATOMIC_MIN\s*:\s*(\d+)", metrics[len(metrics)-1])
+            ATOMIC_MIN = int(match.group(1))
         elif gen_metric == "total_instructions":
             match = re.match("total_instructions\s*:\s*(\d+)", metrics[len(metrics)-1])
             total_instructions = int(match.group(1))
-    measurements.write("\n")
+        elif gen_metric == "l1_load_hits":
+            match = re.match("l1_load_hits\s*:\s*(\d+)", metrics[len(metrics)-1])
+            l1_load_hits = int(match.group(1))
+        elif gen_metric == "l1_load_misses":
+            match = re.match("l1_load_misses\s*:\s*(\d+)", metrics[len(metrics)-1])
+            l1_load_misses = int(match.group(1))
+        elif gen_metric == "l2_load_hits":
+            match = re.match("l2_load_hits\s*:\s*(\d+)", metrics[len(metrics)-1])
+            l2_load_hits = int(match.group(1))
+        elif gen_metric == "l2_load_misses":
+            match = re.match("l2_load_misses\s*:\s*(\d+)", metrics[len(metrics)-1])
+            l2_load_misses = int(match.group(1))
+        elif gen_metric == "dram_accesses":
+            match = re.match("dram_accesses\s*:\s*(\d+)", metrics[len(metrics)-1])
+            dram_accesses = int(match.group(1))
 
-    measurements.write("Total Number of Memory Instructions: " + str(round((LD+ST),3)) + "\n")
+    measurements.write("\n")
+    mem_ops = LD+ST+ATOMIC_ADD+ATOMIC_CAS+ATOMIC_FADD+ATOMIC_MIN
+    compute_ops = total_instructions - mem_ops
+    measurements.write("Total Number of Compute Instructions: " + str(compute_ops) + "\n")
+    measurements.write("Total Number of Memory Instructions: " + str(mem_ops) + "\n")
     measurements.write("Percent of Instructions Spent on Memory: " + str(round((LD+ST)*100.0/total_instructions,3)) + "\n")
     measurements.write("Percent of Instructions Spent on Loads: " + str(round(LD*100.0/total_instructions,3)) + "\n")
     measurements.write("Percent of Instructions Spent on Stores: " + str(round(ST*100.0/total_instructions,3)) + "\n")
     measurements.write("Percent of Memory Instructions Spent on Loads: " + str(round(LD*100.0/(LD+ST),3)) + "\n")
     measurements.write("Percent of Memory Instructions Spent on Stores: " + str(round(ST*100.0/(LD+ST),3)) + "\n")
+    measurements.write("\n")
+    measurements.write("Calculated L1 Miss Rate: " + str(round(l1_load_misses*100.0/(l1_load_misses+l1_load_hits),3)) + "\n")
+    measurements.write("Calculated LLC Miss Rate: " + str(round(l2_load_misses*100.0/(l1_load_misses+l1_load_hits),3)) + "\n")
+    measurements.write("Calculated Compute to Memory Ratio: " + str(round(compute_ops/float(mem_ops),3)) + "\n")
+    measurements.write("Calculated IPC: " + str(round(total_instructions/float(cycles),3)) + "\n")
     measurements.write("\n")
 
     # Read memStats
@@ -205,7 +234,7 @@ def measure():
 
         for line in load_stats:
             num_accesses = num_accesses + 1
-            match = re.match("(\w+)\s+(\d+)\s+(\d+)\s+(-?\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\w+)", line)
+            match = re.match("(\w+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\w+)", line)
             if (match == None):
               data = ""
               for i in range(6):
@@ -221,26 +250,8 @@ def measure():
 
             address = int(match.group(2))
             node_id = match.group(3)
-            graph_node_id = match.group(4)
-            return_cycle = int(match.group(6))
-            load_latency = int(match.group(7))
-            result = match.group(8)
-
-            if address in address_counts:
-              address_counts[address][0] = address_counts[address][0] + 1
-            else:
-              address_counts[address] = [1, return_cycle]
-
-            cacheline = int(address/CACHELINE_SIZE) * CACHELINE_SIZE
-            if cacheline in cacheline_counts:
-              cacheline_counts[cacheline][0] = cacheline_counts[cacheline][0] + 1
-            else:
-              cacheline_counts[cacheline] = [1, return_cycle]
-            
-            if node_id in node_counts:
-              node_counts[node_id] = node_counts[node_id] + 1
-            else:
-              node_counts[node_id] = 1
+            load_latency = int(match.group(6))
+            result = match.group(7)
 
             if node_id in load_counts:
                 load_counts[node_id][0] = load_counts[node_id][0] + 1
@@ -310,73 +321,69 @@ def measure():
         measurements.write("Percent of Memory Latency Spent on Long-Latency Access: " + str(round(max_load*100.0/total_mem,3)) + "\n")
         measurements.write("\n")
 
-    if mode == "di":
-        measurements.write("DECOUPLING STATS\n")
-        measurements.write("----------------\n\n")
-        decoupling_stats = open(output + "decouplingStats")
-        data = decoupling_stats.read()
-        decoupling_stats.close()
-        for decoupling_metric in decoupling_metrics:
-            metrics = re.findall("^" + decoupling_metric + ".*:\s*.*$", data, re.MULTILINE)
-            print(decoupling_metric, metrics)
-            measurements.write(metrics[0])
-            measurements.write("\n")
-
     load_stats.close()
     measurements.close()
 
 def main():
-    global source, data
-    global config, output
-    global filename, mode, compile_dir, flags, threads
-    global app_name, app_input, new_dir, epoch, compute_nodes
+    global source, data, output, real
+    global filename, threads
+    global app, app_input, new_dir
 
     args = parse_args()
 
-    if not os.path.isfile(args.source):
-        print("Invalid source file path entered!\n")
+    if not (os.path.isfile(args.source) or args.app):
+        print("Please enter either a benchmark name or source file path!\n")
     else:
-        source = args.source
+        if (args.app):
+          if (args.source != "" and args.source.split("/")[1] != args.app):
+            print("Conflicting benchmark information entered: benchmark name does not match source file path!\n")
+            sys.exit(1)
+          else:
+            app = args.app
+            source = "benchmarks/" + app + "/src/base/main.cc" 
+            if not (os.path.isfile(source)):
+              print("Benchmark name does not exist!\n")
+              sys.exit(1)
+        else:
+          source = args.source
+          app = source.split("/")[1]
+
         filename = os.path.basename(source)
         new_dir = os.path.dirname(source)
-        app_name = source.split("/")[1]
-        data = "/home/ts20/share/datasets/" + app_name + "/default/input/"
+        data = "/home/ts20/share/datasets/" + app + "/default/input/"
         
-        print("Application: " + app_name)
+        print("Application: " + app)
 
         # compiler args
-        mode = args.mode
         threads = args.num_threads
-
-        if mode == "di":
-            compile_dir = "decades_decoupled_implicit"
-            flags = flags + "-d"
-        else:
-            compile_dir = "decades_base"
-
-        epoch = args.epoch
-        compute_nodes = args.compute_nodes
-        config = args.config
 
         if args.output:
             output = args.output
         else:
-            output = "/home/ts20/share/results/ispass/test1/" + app_name + "_" + str(threads) + "/"
+            output = "/home/ts20/share/results/ispass/accuracy/" + app + "_" + str(threads) + "/"
 
         if (not os.path.isdir(output)):
           os.mkdir(output)
 
         print("Output directory: " + output)
 
+        if args.real:
+            real = args.real
+        else:
+            real = 0
+
         print("------------------------------------------------------------\n")
         os.chdir(new_dir)
-        compile()
-        execute()
+        if (real):
+          compile(real)
+          execute(real)
+        compile(0)
+        execute(0)
         one = time.time()
-        #simulate()
+        simulate()
         two = time.time()
         print("Simulation Time = " + str(round(two - one)) + " seconds.\n")
-        #measure()
+        measure()
         three = time.time()
         print("Measurement Time = " + str(round(three - two)) + " seconds.\n")
 

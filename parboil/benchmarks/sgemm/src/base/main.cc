@@ -21,6 +21,7 @@
 #include <parboil.h>
 #include <iostream>
 #include <fstream>
+#include <chrono>
 #include "assert.h"
 
 bool readColMajorMatrixFile(const char *fn, int *nr_row, int *nr_col, std::vector<float>&v)
@@ -93,6 +94,7 @@ void _kernel_( char transa, char transb, int m, int n, int k, float alpha, const
 }
 
 int main (int argc, char *argv[]) {
+  int exec_kernel = atoi(argv[1]);
 
   struct pb_Parameters *params;
   struct pb_TimerSet timers;
@@ -134,8 +136,13 @@ int main (int argc, char *argv[]) {
   std::vector<float> matC(*matArow * *matBcol);
 
   // Use standard sgemm interface
-  std::cout<< "Starting kernel" << std::endl;
-  _kernel_('N', 'T', *matArow, *matBcol, *matAcol, 1.0f, &matA.front(), &matBT.front(), 0.0f, &matC.front(), 0, 1);
+  auto start_time = std::chrono::system_clock::now();
+  if (exec_kernel) {
+    _kernel_('N', 'T', *matArow, *matBcol, *matAcol, 1.0f, &matA.front(), &matBT.front(), 0.0f, &matC.front(), 0, 1);
+  }
+  auto end_time = std::chrono::system_clock::now();
+  std::chrono::duration<double> elapsed_seconds = end_time-start_time;
+  std::cout << "\nkernel computation time: " << elapsed_seconds.count() << "s\n";
 
   if (params->outFile) {
     /* Write C to file */

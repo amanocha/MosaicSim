@@ -142,7 +142,7 @@ int main( int argc, char** argv)
 ////////////////////////////////////////////
 void runCPU( int argc, char** argv) 
 {
-
+    int exec_kernel = atoi(argv[1]);
     struct pb_Parameters *params;
     struct pb_TimerSet timers;
 
@@ -213,7 +213,9 @@ void runCPU( int argc, char** argv)
 	unsigned int cpu_timer = 0;
         pb_SwitchToTimer(&timers, pb_TimerID_COMPUTE);
         auto start_time = std::chrono::system_clock::now();
-	_kernel_(wavefront_in, wavefront_out, in_idx, out_idx, h_graph_nodes, h_graph_edges, color, h_cost, source, 0, 1);
+        if (exec_kernel) {
+	  _kernel_(wavefront_in, wavefront_out, in_idx, out_idx, h_graph_nodes, h_graph_edges, color, h_cost, source, 0, 1);
+        }
         auto end_time = std::chrono::system_clock::now();
         std::chrono::duration<double> elapsed_seconds = end_time-start_time;
         std::cout << "\nkernel computation time: " << elapsed_seconds.count() << "s\n";
