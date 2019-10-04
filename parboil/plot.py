@@ -1,4 +1,6 @@
 from go import *
+import matplotlib.pyplot as plt
+import numpy as np
 import re
 
 exp_dir = "/home/ts20/share/results/ispass/accuracy/"
@@ -36,20 +38,21 @@ def scaling(stats, a):
   
   labels = []
   for i in x:
-    label = str(int(math.pow(2,i+2)))
+    label = str(int(math.pow(2,i)))
     labels.append(label)
 
   fig = plt.figure()
   ax1 = fig.add_subplot(111)
-  ax1.plot(x, y1, label='Total Number of Hits for First ' + str(MAX) + ' Nodes')
-  ax1.plot(x, y, label='Total Number of Hits')
+  ax1.plot(x, y, label='Pythia')
+  #ax1.plot(x, y1, label='Perf')
+  ax1.plot(x, y2, label='Kernel Timing')
   ax1.set_xticks(x)
   ax1.set_xticklabels(labels)
-  ax1.set_xlabel("Cache Line Size (Bytes)")
-  ax1.set_ylabel("Number of Hits")
+  ax1.set_xlabel("Number of Threads")
+  ax1.set_ylabel("Performance Speedup")
   plt.legend(loc=2)
-  plt.show()
-  #plt.savefig(outdir + apps[a] + "_scaling.pdf", bbox_inches='tight')
+  #plt.show()
+  plt.savefig(outdir + apps[a] + "_scaling.pdf", bbox_inches='tight')
 
 def cacheline(stats, avgs, outdir):
   N = CL_MAX-2
@@ -197,8 +200,11 @@ def main():
   if not os.path.isdir(outdir):
     os.mkdir(outdir)
  
-  parse_info()
- 
+  characterization, speedups, averages = parse_info()
+  
+  for a in range(len(apps)):
+    scaling(speedups, a)
+
   print("\nDone!")
 
 if __name__ == "__main__":
