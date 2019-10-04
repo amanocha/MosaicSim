@@ -84,10 +84,6 @@ void _kernel_( char transa, char transb, int m, int n, int k, float alpha, const
     for (int nn = 0; nn < n; ++nn) {
       float c = 0.0f;
       for (int i = 0; i < k; ++i) {
-        if (tid == V1Vn:Q
-	    q) {
-           printf("hVere!!\n");
-        }
         float a = A[mm + i * m]; 
         float b = B[nn + i * n];
         c += a * b;
