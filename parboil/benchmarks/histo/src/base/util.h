@@ -6,4 +6,4 @@
  *
  ***************************************************************************/
 
-void dump_histo_img(unsigned char* histo, unsigned int height, unsigned int width, const char *filename);
+void dump_histo_img(int* histo, unsigned int height, unsigned int width, const char *filename);

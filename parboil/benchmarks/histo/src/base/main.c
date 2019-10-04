@@ -24,7 +24,7 @@
 * use of a temporary pointer for each row.
 ******************************************************************************/
 
-void _kernel_(unsigned char* histo, unsigned int histo_height, unsigned int histo_width, unsigned int* img, unsigned int img_height, unsigned int img_width, int numIterations, int tid, int num_threads) {
+void _kernel_(int* histo, unsigned int histo_height, unsigned int histo_width, unsigned int* img, unsigned int img_height, unsigned int img_width, int numIterations, int tid, int num_threads) {
   int iter;
 
   // Chunks of work to do the job
@@ -43,15 +43,16 @@ void _kernel_(unsigned char* histo, unsigned int histo_height, unsigned int hist
     DECADES_BARRIER();
 
     // If we make each thread to initialize a part
-    memset(histo+init_hist,0,(last_hist-init_hist)*sizeof(unsigned char));
+    memset(histo+init_hist,0,(last_hist-init_hist)*sizeof(int));
     // If we want to do it by a single thread
-    //if (tid  == 0){ memset(histo,0,total_hist*sizeof(unsigned char));}
+    //if (tid  == 0){ memset(histo,0,total_hist*sizeof(int));}
     DECADES_BARRIER();
 
     unsigned int i;
     for (i = init_img; i < last_img; ++i) {
       const unsigned int value = img[i];
-      DECADES_FETCH_ADD_BOUNDED(&histo[value],MY_UINT8_MAX,1);
+      //DECADES_FETCH_ADD_BOUNDED(&histo[value],MY_UINT8_MAX,1);
+      wrapper_FETCH_ADD_MAX((int *) &histo[value], MY_UINT8_MAX);
     }
   }
 }
@@ -107,7 +108,7 @@ int main(int argc, char* argv[]) {
   }
 
   unsigned int* img = (unsigned int*) malloc (img_width*img_height*sizeof(unsigned int));
-  unsigned char* histo = (unsigned char*) calloc (histo_width*histo_height, sizeof(unsigned char));
+  int* histo = (int*) calloc (histo_width*histo_height, sizeof(int));
   
   pb_SwitchToSubTimer(&timers, "Input", pb_TimerID_IO);
 

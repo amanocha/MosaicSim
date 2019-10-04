@@ -65,7 +65,7 @@ RGB HSVtoRGB( float h, float s, float v )
     return value;
 }
 
-void dump_histo_img(unsigned char* histo, unsigned int height, unsigned int width, const char *filename)
+void dump_histo_img(int* histo, unsigned int height, unsigned int width, const char *filename)
 {
     RGB* pixel_map = (RGB*) malloc (height*width*sizeof(RGB));
 
@@ -74,7 +74,7 @@ void dump_histo_img(unsigned char* histo, unsigned int height, unsigned int widt
     {
         for (x = 0; x < width; ++x)
         {
-            unsigned char value = histo[y * width + x];
+            int value = histo[y * width + x];
 
             if (value == 0){
                 pixel_map[y*width+x].R = 0;
