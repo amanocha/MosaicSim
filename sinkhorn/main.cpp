@@ -150,14 +150,15 @@ csc_sparse csr_to_csc(csr_sparse A){
   B.size = A.size;
 
   // enter number of elements per column:
-  
   for (int i=0; i< A.size; i++){
     B.indptr[A.indices[i]+1] += 1;
   }
+  
   // cumsum number of elements per column:
   for (int i = 1; i < n_cols+1; i++) {
     B.indptr[i] += B.indptr[i-1];
   }
+  
 
   // fill indices of rows into index array and
   // fill columnwise stacked data into data array                                                                                                                                                                                                    
@@ -169,12 +170,9 @@ csc_sparse csr_to_csc(csr_sparse A){
       B.indices[b_j] = row;
       B.data[b_j] = A.data[j];
       B.indptr[col] += 1;
-      if (b_j<100){
-	cout << "got here: B.data[" << b_j << "]:" << B.data[b_j] << "\n";
-      }
     }
   }
-  
+
   last = 0;
   for (int col=0; col<n_cols+1; col++){
     temp = B.indptr[col];
@@ -278,8 +276,6 @@ void dot_dense_sparse(dense B, csc_sparse A, dense C, int tid, int num_threads){
   n_cols=A.shape[1];
   n_rows = B.shape[0];
 
-  cout << "printing first 10 elements of dot_dense_sparse_output\n";
-  int tt=0;
   for (int i = 0; i < n_rows; i++){
     for (int j = tid; j < n_cols; j+=num_threads){
       tmp = 0.0;
@@ -296,13 +292,7 @@ void dot_dense_sparse(dense B, csc_sparse A, dense C, int tid, int num_threads){
 void elementwise_sparse_dense_div(csr_sparse A, dense B, csr_sparse C, int tid, int num_threads){
   unsigned int pointer, col;
   unsigned int offset;
-  cout << "first 5000:5010 elements of B in the while loop:\n";
-  for (int i= 5000 ; i< 5010; i++){
-    cout << B.data[i] << "\n" ;
-  }
 
-  cout << "Sparse mat shape and size: " << A.shape[0] << " x " << A.shape[1] << " , " << A.size << "\n";
-  cout << "dense mat shape and size: " << B.shape[0] << " x " << B.shape[1] << " , " << B.size << "\n";
   int tmp=0;
   for (int i = tid; i < A.shape[0]; i += num_threads) {
     offset = A.indptr[i+1]-A.indptr[i];
@@ -313,20 +303,6 @@ void elementwise_sparse_dense_div(csr_sparse A, dense B, csr_sparse C, int tid, 
       if (B.data[i*A.shape[1]+col]!=0){
 	C.data[pointer] = A.data[pointer] / B.data[i*A.shape[1]+col];
       }
-      /*
-      if (tmp <20){
-	if (B.data[i*A.shape[1]+col]==0 || B.data[i*A.shape[1]+col]==INFINITY){
-	  cout << "dense[" << i << ", "<< col << "]=" << B.data[i*A.shape[1]+col] << "\n";
-	  cout << "i*A.shape[1]+col:" << i*A.shape[1]+col << "\n";
-	}
-	tmp++;
-      }
-      */
-      /*if (C.data[pointer]==0){
-	cout << "["<< i << ", " << col << "]:\n";
-	cout << "v.data[" << pointer << "] is zero.. from: A.data[" << pointer << " ]: " << A.data[pointer] << "division with B.data[" << i*A.shape[1]+col <<"]:" << B.data[i*A.shape[1]+col] << "\n"; 
-	}*/
-      
     }
   }
 }
@@ -348,7 +324,8 @@ dense densify_vector(csr_sparse r, int * cols, int l, int m){
 
 
 csr_sparse slice_sparse(csr_sparse B, dense_int idx){
-  //row-wise slices the matrix)
+  //column-wise slices the matrix
+  
   int new_size, index;
   csc_sparse A = csr_to_csc(B);
   new_size = 0;
@@ -435,7 +412,6 @@ dense cdist(dense vecs, unsigned int * sel, int len){
 	M.data[i*m+j] += (tmp_dist*tmp_dist);
       }
       M.data[i*m+j] = sqrt(M.data[i*m+j]);
-      //cout << M.data[i*m+j] << "\n";
     }
   }
   
@@ -452,61 +428,15 @@ void _kernel_(dense M, csr_sparse G, dense K, dense KM,
   int outerloop = 0;
   dense K_trans;
   csc_sparse v_csc;
-  csr_sparse A;
-  float data[5] = {1, 2, 3, 4, 5};
-  unsigned int indices[5] = {3,1,3,2,3};
-  unsigned int indptr[5] = {0, 1,3,5};
-  unsigned int shape[2] = {3,4};
-  
-  A.data= data;
-  A.indices = indices;
-  A.indptr = indptr;
-  A.shape = shape;
-  A.size = 5;
-  
-  csc_sparse B = csr_to_csc(A);
-  cout << "\nB.indptr:";
-  for (int i=0;i<5;i++){
-    cout << B.indptr[i] << ",";
-  }
-  cout << "\nB.indices:";
-  for (int i=0;i<5;i++){
-    cout << B.indices[i] << ",";
-  }
-  cout << "\nB.data:";
-  for (int i=0;i<5;i++){
-    cout << B.data[i] << ",";
-  }
-  cout << "\n";
-  
   
   while (outerloop < max_iter){
     cout << "outerloop # : " << outerloop <<"\n";
     outerloop++;
-    cout << "first 10 elements of x in the while loop:\n";
-    for (int i= 0 ; i< 10; i++){
-      cout << x.data[i] << "\n" ;
-    }
 
     invert(x, inv_x, tid, num_threads);
-    cout << "first 10 elements of inv_x in the while loop:\n";
-    for (int i= 0 ; i< 10; i++){
-      cout << inv_x.data[i] << "\n" ;
-    }
-
-    cout << "first 10 elements of K in the while loop:\n";
-    for (int i= 0 ; i< 10; i++){
-      cout << K.data[i] << "\n" ;
-    }
-
      
     K_trans = transpose(K);
     DECADES_BARRIER();
-    cout << "first 10 elements of K.T in the while loop:\n";
-    for (int i= 0 ; i< 10; i++){
-      cout << K_trans.data[i] << "\n" ;
-    }
-
 
     if (tid==0){
       decadesTF_matmul(K_trans.shape[0], K_trans.shape[1],
@@ -514,87 +444,31 @@ void _kernel_(dense M, csr_sparse G, dense K, dense KM,
 		       1, K_trans.data, inv_x.data,
 		       u.data, tid, num_threads);
     }
-
-    cout << "first 5000:5010 elements of u in the while loop:\n";
-    for (int i= 5000 ; i< 5010; i++){
-      cout << u.data[i] << "\n" ;
-    }
-    cout << "first 10 elements of u[:10,:0] in the while loop:\n";
-    for (int i= 0 ; i< 10; i++){
-      cout << u.data[1*u.shape[1]+i] << "\n" ;
-    }
-    
-    
     
     DECADES_BARRIER();
-
-    cout << "printing u[5000:5010]\n";
-    for (int i=5000 ; i<5010 ; i++){
-      cout << u.data[i] << "\n";
-    }
 
     elementwise_sparse_dense_div(G, u, v, tid, num_threads);
 
-    int curr_row =0;
-    /*
-    for (int i= 0; i< G.size ; i+=1913){
-      while (G.indptr[curr_row]<=i){
-	curr_row++;
-      }
-      cout << "[i,j], idx: [" << curr_row-1 << "," << G.indices[i] <<"], "<< (curr_row-1)*G.shape[1]+G.indices[i] << "\n";
-      //cout << "[i,j]: ["<< curr_row-1 << "," << G.indices[i] << "]\n"; 
-      cout << "G.data[" << i << "]:" << G.data[i] << "\n";
-      cout << "u.data[" << curr_row-1 << " , " << G.indices[i] << "]:" << u.data[(curr_row-1)*G.shape[1]+G.indices[i]] << "\n";
-      cout << "v.data[" << i << "]:" << v.data[i] << "\n";
-    }
-    */
-    
 
-    //cout << "first 10 elements of v in the while loop:\n";
-    cout << "v.size:" << v.size <<"\n";
-    for (int i= 0 ; i< v.size; i++){
-      if (v.data[i]==0){
-	cout  << "v.data[" << i << "]:"<< v.data[i] << "\n" ;
-    }
-
-    } 
     v_csc = csr_to_csc(v);
-    cout << "first 20 elements of v_csc in the while loop:\n";
-    for (int i= 0 ; i< 20; i++){
-      cout << v_csc.data[i] << "\n" ;
-    }
-
     
     DECADES_BARRIER();
     
-    if (tid==0){
-      for (int i = 0; i< K.shape[0]; i++){
-	decadesTF_mul(inv_r.size, K.shape[1], inv_r.data,
-		      K.data + i*K.shape[1], Z.data + i*K.shape[1],
-		      tid, num_threads);
+    for (int i = tid; i< K.shape[0]; i+=num_threads){
+      for (int j=0; j< K.shape[1] ; j++){
+	Z.data[i*Z.shape[1]+j] = K.data[i*K.shape[1]+j]*inv_r.data[i];
+	/*decadesTF_mul(inv_r.size, K.shape[1], inv_r.data,
+	  K.data + i*K.shape[1], Z.data + i*K.shape[1],
+	  tid, num_threads);*/
       }
     }
-
     
-    cout << "first 10 elements of Z[:,0] in the while loop:\n";
-    for (int i= 0 ; i< 10; i++){
-      cout << Z.data[i*Z.shape[1]] << "\n" ;
-    }
-
-    cout << "first 10 elements of Z[0,:] in the while loop:\n";
-    for (int i= 0 ; i< 10; i++){
-      cout << Z.data[i] << "\n" ;
-    }
-
     
     DECADES_BARRIER();
+
     dot_dense_sparse(Z, v_csc, x, tid, num_threads);
+
     DECADES_BARRIER();
-    cout << "first 10 elements of x at the end of the while loop\n";
-    for (int i= 0; i< 10; i++){
-      cout << x.data[i] << "\n";
-    }
-    
   }
 
   
@@ -618,16 +492,19 @@ void _kernel_(dense M, csr_sparse G, dense K, dense KM,
   if (tid==0){
     decadesTF_mul(K.size, M.size, K.data, M.data, KM.data, tid, num_threads);
   }
+
+  
   DECADES_BARRIER();
   dot_dense_sparse(KM, v_csc, P, tid, num_threads);
   if (tid==0){
     decadesTF_mul(inv_x.size, P.size, inv_x.data, P.data, S.data, tid, num_threads);
   }
+
   DECADES_BARRIER();
   for (int i =tid; i < inv_x.shape[1]; i+=num_threads){
     scores.data[i]=0;
     for (int j = 0; j < inv_x.shape[0]; j++){ 
-      scores.data[i] += S.data[i*inv_x.shape[1]+j];
+      scores.data[i] += S.data[j*inv_x.shape[1]+i];
     }
   }
 }
@@ -662,32 +539,25 @@ int main(int argc, char** argv) {
   doc_idx.shape[0] = query_idx;
   doc_idx.shape[1] = 1;  
 
-  cout << "Got here 1!!...\n\n";
-
-
   //csr_sparse G = slice_sparse(mat, doc_idx);
   csr_sparse G = mat;
   csr_sparse r = slice_sparse(mat, query_idx);
   cout << "shape of G:" << G.shape[0]<< " x " << G.shape[1] << "   size: " << G.size << " \n";
   cout << "shape of r:" << r.shape[0]<< " x " << r.shape[1] << "   size: " << r.size << " \n";
-  cout << "Got here 1.5!!...\n\n";
+
   dense M = cdist(vec, r.indices, r.size);
   cout << "shape of M:" << M.shape[0]<< " x " << M.shape[1] << "   size: " << M.size << " \n";
 
+  
   csr_sparse inv_r = invert(r);
-
-  cout << "Got here 2!!...\n\n";
 
     
   csr_sparse v;
   v.shape = G.shape;
   v.size = G.size;
   v.data = (float*) calloc(v.size, sizeof(float));
-  v.indptr = (unsigned int*) calloc((v.shape[0]+1), sizeof(unsigned int));
-  v.indices = (unsigned int*) calloc(v.size, sizeof(unsigned int));
-
-  cout << "Got here 3!!...\n\n";
-      
+  v.indptr = G.indptr;
+  v.indices = G.indices;
 
   dense K;
   K.shape = M.shape;
@@ -696,7 +566,6 @@ int main(int argc, char** argv) {
   for (int i=0; i< K.size; i++){
     K.data[i] = exp(-M.data[i]);
   }
-  cout << "Got here 4!!...\n\n";
 
   dense x;
   x.shape = (unsigned int*) calloc(2, sizeof(unsigned int) );
@@ -704,16 +573,10 @@ int main(int argc, char** argv) {
   x.shape[1] = G.shape[1];
   x.size = r.size* G.shape[1];
   x.data = (float*) calloc(x.size, sizeof(float) );
-  cout <<"r.size:"  << r.size << "\n";
-  cout <<"r.size:"  << 1.0/r.size << "\n";
+
   for (int i=0; i<x.size; i++){
     x.data[i] = 1.0/r.size;
   }
-  cout << "first 10 elements of x after initializing:\n";
-  for (int i= 0 ; i< 10; i++){
-    cout << x.data[i] << "\n" ;
-  }
-
   
 
   dense inv_x;
@@ -757,10 +620,9 @@ int main(int argc, char** argv) {
   scores.shape[1] = 1;
   scores.size = x.shape[1];
   scores.data = (float*) calloc(scores.size, sizeof(float));
-  cout << "\n\nlength of Scores: " << scores.size << "\n";
   
   printf("\n\nstarting kernel\n");
-  auto start = chrono::system_clock::now();
+  auto start_time = chrono::system_clock::now();
   _kernel_(M, G, K, KM, P, S, x, inv_x, u, inv_r, v, Z, scores, max_iter, 0, 1);
     
   float res = 0;
@@ -776,8 +638,8 @@ int main(int argc, char** argv) {
   cout << "RESULT HASH: " << res << "\n";
 
   printf("\nending kernel");
-  auto end = std::chrono::system_clock::now();
-  chrono::duration<float> elapsed_seconds = end-start;
+  auto time_end = std::chrono::system_clock::now();
+  chrono::duration<float> elapsed_seconds = time_end-start_time;
   cout << "\nkernel computation time: " << elapsed_seconds.count() << "s\n";
   
   /*
@@ -807,6 +669,7 @@ int main(int argc, char** argv) {
 
   #endif
   */
+  /*
   free((void*)(M.data));
   free((void*)(G.data));
   free((void*)(G.indptr));
@@ -826,7 +689,7 @@ int main(int argc, char** argv) {
   free((void*)(inv_r.indices));
   free((void*)(Z.data));
   free((void*)(scores.data));
-  
+  */
   //delete M.data,G.data, G.indices, G.indptr, v.data, v.indices, v.indptr, inv_r.data, inv_r.indices, inv_r.indptr, K.data, KM.data, P.data, S.data, x.data, inv_x.data, u.data, Z.data, scores.data ;
 
   //delete M,G,v, KM, K, P,S,x, inv_x, inv_r, scores, u, Z;
