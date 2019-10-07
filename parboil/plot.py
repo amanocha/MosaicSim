@@ -21,7 +21,7 @@ def create_apps_axis(ax1, ind, yticks, ylabel):
 
   ax1.set_xlim([0.5, num_apps+0.5])
   ax1.set_xticks(ind)
-  ax1.set_xticklabels(apps, fontsize=scale*AXIS_FONTSIZE)
+  ax1.set_xticklabels(apps, fontsize=scale*INPUTS_FONTSIZE)
   ax1.set_ylim([0, yticks[len(yticks)-1]])
   ax1.set_yticks(yticks)
   ax1.set_yticklabels(yticks, fontsize=scale*TICK_FONTSIZE)
@@ -56,7 +56,10 @@ def characterize(stats, metric):
 
   MAX = max(stats[0] + stats[1])
   if (MAX > 1):
-    yticks = np.arange(round(MAX)+1)
+    if (MAX > 10):
+      yticks = np.arange(0, round(MAX)+1, math.floor(round(MAX)/10))
+    else:
+      yticks = np.arange(round(MAX)+1)
   else:
     yticks = np.round(np.arange(0, 1.2*MAX, 0.1), 2)
 
@@ -64,10 +67,11 @@ def characterize(stats, metric):
   create_apps_axis(ax1, ind, yticks, ylabel)
 
   chartBox = ax1.get_position()
-  ax1.set_position([chartBox.x0, chartBox.y0, chartBox.width, chartBox.height*0.8])
-  ax1.legend(legend_boxes, legend, bbox_to_anchor=(0.,1.01,1.,0.101), ncol=N, mode="expand", fontsize=INPUTS_FONTSIZE)
+  #ax1.set_position([chartBox.x0, chartBox.y0, chartBox.width, chartBox.height*0.8])
+  #ax1.legend(legend_boxes, legend, bbox_to_anchor=(0.,1.01,1.,0.101), ncol=N, mode="expand", fontsize=INPUTS_FONTSIZE)
+  plt.legend(legend_boxes, legend, loc=2, fontsize=INPUTS_FONTSIZE)
   #plt.show()
-  plt.savefig(outdir + metric.lower() + ".pdf", bbox_inches='tight')
+  plt.savefig(outdir + metric.replace(" ", "").lower() + ".pdf", bbox_inches='tight')
  
 def scaling(stats, a):
   print("\nCREATING SCALING GRAPH FOR " + scaling_apps[a] + "...\n----------")

@@ -80,7 +80,7 @@ def compile(real):
 def execute(real):
     print("Executing application...")
     if app == "bfs":
-      datafiles = ["Kronecker_21.el"] #["graph_input.dat"]
+      datafiles = ["Kronecker_24.el"] #["graph_input.dat"]
     elif app == "cutcp":
       datafiles = ["watbox.sl40_mod.pqr"]
     elif app == "histo":
