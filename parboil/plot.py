@@ -205,7 +205,7 @@ def main():
     os.mkdir(outdir)
  
   parse_characterization()
-  #parse_scaling()  
+  parse_scaling()  
 
   print("\nDone!")
 
