@@ -51,7 +51,7 @@ def scaling(stats, a):
   ax1.set_ylabel("Performance Speedup")
   plt.legend(loc=2)
   #plt.show()
-  plt.savefig(outdir + apps[a] + "_scaling.pdf", bbox_inches='tight')
+  plt.savefig(outdir + scaling_apps[a] + "_scaling.pdf", bbox_inches='tight')
 
 def cacheline(stats, avgs, outdir):
   N = CL_MAX-2
