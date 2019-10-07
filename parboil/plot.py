@@ -6,11 +6,15 @@ import re
 exp_dir = "/home/ts20/share/results/ispass/accuracy/"
 outdir = "../results/accuracy/"
 fill = 1e20
+width = 0.9
+num_apps = len(apps)
+ind = np.arange(1, num_apps+1)
+
+AXIS_FONTSIZE = 44
+TICK_FONTSIZE = 40
+INPUTS_FONTSIZE = 32
 
 def create_apps_axis(ax1, ind, yticks, ylabel):
-  num_apps = 11
-  ind = np.arange(1, num_apps+1)
-
   ax2 = ax1.twinx()
 
   scale = 1.5
@@ -29,6 +33,42 @@ def create_apps_axis(ax1, ind, yticks, ylabel):
   ax2.set_yticklabels([])
   ax2.tick_params(direction='inout', length=20, width=1, labelleft=False, labelright=True)
 
+def characterize(stats, metric):
+  print("\nCREATING CHARACTERIZATION GRAPH FOR " + metric + "...\n----------")
+
+  N = 2 # number of bars per application
+
+  fig = plt.figure(figsize=(36.0,24.0))
+  fig.subplots_adjust(bottom=0.1)
+  ax1 = fig.add_subplot(111)
+
+  colors = ['tab:blue', 'tab:orange'] #NEED TO CHANGE COLORS BASED ON N
+  psbs = []
+  legend_boxes = []
+  legend = ['Pythia', 'x86']
+  for i in range(N):
+    if N % 2 == 0:
+      pos = i-N/2+0.5
+    else:
+      pos = i-(N-1)/2
+    psbs.append(ax1.bar(ind+pos*width/N, stats[i], width/N, color=colors[i], linewidth=1, edgecolor=['black']))
+    legend_boxes.append(psbs[i][0])
+
+  MAX = max(stats[0] + stats[1])
+  if (MAX > 1):
+    yticks = np.arange(round(MAX)+1)
+  else:
+    yticks = np.round(np.arange(0, 1.2*MAX, 0.1), 2)
+
+  ylabel = metric
+  create_apps_axis(ax1, ind, yticks, ylabel)
+
+  chartBox = ax1.get_position()
+  ax1.set_position([chartBox.x0, chartBox.y0, chartBox.width, chartBox.height*0.8])
+  ax1.legend(legend_boxes, legend, bbox_to_anchor=(0.,1.01,1.,0.101), ncol=N, mode="expand", fontsize=INPUTS_FONTSIZE)
+  #plt.show()
+  plt.savefig(outdir + metric.lower() + ".pdf", bbox_inches='tight')
+ 
 def scaling(stats, a):
   print("\nCREATING SCALING GRAPH FOR " + scaling_apps[a] + "...\n----------")
 
@@ -53,37 +93,6 @@ def scaling(stats, a):
   #plt.show()
   plt.savefig(outdir + scaling_apps[a] + "_scaling.pdf", bbox_inches='tight')
 
-def cacheline(stats, avgs, outdir):
-  N = CL_MAX-2
-  ind = np.arange(1, 4)
-
-  fig = plt.figure(figsize=(36.0,24.0))
-  fig.subplots_adjust(bottom=0.1)
-  ax1 = fig.add_subplot(111)
-
-  colors = ['black', 'dimgrey', 'grey', 'darkgray', 'darkgrey', 'silver', 'lightgrey', 'whitesmoke', 'white'] #NEED TO CHANGE COLORS BASED ON N
-  psbs = []
-  legend_boxes = []
-  legend = []
-  for i in range(N):
-    if N % 2 == 0:
-      pos = i-N/2+0.5
-    else:
-      pos = i-(N-1)/2
-    psbs.append(ax1.bar(ind+pos*width/N, stats[0][i], width/N, color=colors[i], linewidth=1, edgecolor=['black']))
-    legend_boxes.append(psbs[i][0])
-    legend.append(str(int(math.pow(2, i+2))) + "B")
-
-  yticks = np.round(np.arange(0, 1.5, 0.1), 2)
-  ylabel = 'Speedup'
-  create_apps_axis(ax1, ind, yticks, ylabel)
-
-  chartBox = ax1.get_position()
-  ax1.set_position([chartBox.x0, chartBox.y0, chartBox.width, chartBox.height*0.8])
-  ax1.legend(legend_boxes, legend, bbox_to_anchor=(0.,1.01,1.,0.101), ncol=N, mode="expand", fontsize=INPUTS_FONTSIZE)
-  #plt.show()
-  plt.savefig(outdir + "performance.pdf", bbox_inches='tight')
- 
 def parse_characterization():
   print("\nPARSING CHARACTERIZATION INFORMATION...\n----------")
   
@@ -125,10 +134,17 @@ def parse_characterization():
         for m in range(len(metrics)):
           characterization[a][f].append(fill)
       
- 
   for a in range(len(characterization)): #apps
     for c in range(len(characterization[a])): #configs
       print(apps[a], c, characterization[a][c])
+
+  metrics = [m.replace("Calculated ", "") for m in metrics] 
+  for m in range(len(metrics)):
+    stats1 = [s[0][m] for s in characterization]
+    stats2 = [s[1][m] for s in characterization]
+    stats = [stats1, stats2]
+    metric = metrics[m]
+    characterize(stats, metric)
 
 def parse_scaling():
   print("\nPARSING SCALING INFORMATION...\n----------")
@@ -205,7 +221,7 @@ def main():
     os.mkdir(outdir)
  
   parse_characterization()
-  parse_scaling()  
+  #parse_scaling()  
 
   print("\nDone!")
 

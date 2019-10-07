@@ -8,7 +8,7 @@
 #include <fstream>
 #include <chrono>
 
-#define OUTPUT_RET
+//#define OUTPUT_RET
 #define SEEDS 1
 
 using namespace std;
