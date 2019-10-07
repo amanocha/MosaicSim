@@ -30,7 +30,8 @@ def parse_args():
     parser.add_argument("-a", "--app", type=str, help="Name of benchmark")
     parser.add_argument("-s", "--source", type=str, default="", help="Path to source code file")
     parser.add_argument("-t", "--num_threads", type=int, default=1, help="Number of threads")
-    parser.add_argument("-n", "--num_samples", type=int, default=10, help="Number of sample points to average")
+    parser.add_argument("-n", "--num_samples", type=int, default=5, help="Number of sample points to average")
+    parser.add_argument("-x", "--scale", type=int, default=0, help="Run scaling version")
     parser.add_argument("-o", "--output", type=str, help="Output path")
     args = parser.parse_args()
     return args
@@ -59,7 +60,7 @@ def compile():
     elif app == "tpacf":
       cmd_args += ["args.c", "model_io.c"]
 
-    cmd_args += [">", output + "compiler_output.txt", "2>", output + "compiler_err.txt"]
+    #cmd_args += [">", output + "compiler_output.txt", "2>", output + "compiler_err.txt"]
     cmd = " ".join(cmd_args)
     print(cmd)
     os.system(cmd)
@@ -67,7 +68,7 @@ def compile():
 def execute(exec_kernel):
     print("Executing application...")
     if app == "bfs":
-      datafiles = ["graph_input.dat"]
+      datafiles = ["Kronecker_21.el"] #["graph_input.dat"]
     elif app == "cutcp":
       datafiles = ["watbox.sl40_mod.pqr"]
     elif app == "histo":
@@ -83,7 +84,7 @@ def execute(exec_kernel):
     elif app == "sgemm":
       datafiles = ["matrix1.txt", "matrix2.txt", "matrix2t.txt"]
     elif app == "spmv":
-      datafiles = ["1138_bus.mtx", "vector.bin"]
+      datafiles = ["Dubcova3.mtx.bin", "vector.bin"]
     elif app == "stencil":
       datafiles = ["128x128x32.bin"]
     elif app == "tpacf":
@@ -97,7 +98,7 @@ def execute(exec_kernel):
       if d != datafiles[len(datafiles)-1]:
         input_path = input_path + ","
 
-    cmd = "perf stat -B -d -v -e cache-references,cache-misses,cycles,instructions,L1-dcache-stores -o "
+    cmd = "perf stat -B -d -v -e cache-references,cache-misses,cycles,instructions,L1-dcache-stores,node-loads,node-stores -o "
     if (exec_kernel):
       cmd = cmd + output + "perf1.txt ./" + compile_dir + "/" + compile_dir + " 1 -i " + input_path + " " + " > " + output + "app_output1.txt"
     else:
@@ -126,11 +127,13 @@ def measure():
         metric1 = match1.group(2)
       else:
         metric1 = ""
+        value1 = 0
       if match2 != None:
         value2 = int(match2.group(1))
         metric2 = match2.group(2)
       else:
-        metric2 = ""
+        metric2 = metric1
+        value2 = 0
 
       if metric1 == metric2 and metric1 != "":
         value = value1 - value2
@@ -163,11 +166,14 @@ def avg():
     L1miss_rate = L1misses*100.0/L1references
     LLCmiss_rate = LLCmisses*100.0/L1references
     ratio = compute_ops/memory_ops
-    avg_bw = LLCmisses*4/(cycles/3.2)
-    measurements.write("L1 Miss Rate: " + str(L1miss_rate) + "\n")
-    measurements.write("LLC Miss Rate: " + str(LLCmiss_rate) + "\n")
-    measurements.write("Comp to Mem Ratio: " + str(ratio) + "\n")
-    measurements.write("Average Bandwidth: " + str(avg_bw) + "\n")
+    avg_bw = LLCmisses*64*4/(1024*1024*1024)/(cycles/3.2e9)
+    ipc = float(instructions)/cycles
+
+    measurements.write("Calculated L1 Miss Rate: " + str(L1miss_rate) + "\n")
+    measurements.write("Calculated LLC Miss Rate: " + str(LLCmiss_rate) + "\n")
+    measurements.write("Calculated Compute to Memory Ratio: " + str(ratio) + "\n")
+    measurements.write("Average BW: " + str(avg_bw) + "\n")
+    measurements.write("Calculated IPC: " + str(ipc) + "\n")
 
     measurements.close()
 
@@ -188,7 +194,11 @@ def main():
             sys.exit(1)
           else:
             app = args.app
-            source = "benchmarks/" + app + "/src/base/main.cc" 
+            if (args.scale):
+              main_name = "main.cc"
+            else:
+              main_name = "main_seq.cc"
+            source = "benchmarks/" + app + "/src/base/" + main_name 
             if not (os.path.isfile(source)):
               print("Benchmark name does not exist!\n")
               sys.exit(1)
@@ -208,15 +218,14 @@ def main():
         if args.output:
             output = args.output
         else:
-            output = "/home/ts20/share/results/ispass/accuracy/" + app + "_" + str(threads) + "/"
+            output = "/home/ts20/share/results/ispass/accuracy/characterization/" + app + "/"
 
         if (not os.path.isdir(output)):
           os.mkdir(output)
 
         print("Output directory: " + output)
 
-        if args.num_samples:
-          num_samples = args.num_samples
+        num_samples = args.num_samples
 
         print("------------------------------------------------------------\n")
         os.chdir(new_dir)

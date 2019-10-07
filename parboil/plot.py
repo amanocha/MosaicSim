@@ -5,6 +5,7 @@ import re
 
 exp_dir = "/home/ts20/share/results/ispass/accuracy/"
 outdir = "../results/accuracy/"
+fill = 1e20
 
 def create_apps_axis(ax1, ind, yticks, ylabel):
   num_apps = 11
@@ -29,12 +30,11 @@ def create_apps_axis(ax1, ind, yticks, ylabel):
   ax2.tick_params(direction='inout', length=20, width=1, labelleft=False, labelright=True)
 
 def scaling(stats, a):
-  print("\nCREATING SCALING GRAPH for " + apps[a] + "...\n----------")
+  print("\nCREATING SCALING GRAPH FOR " + scaling_apps[a] + "...\n----------")
 
-  x = np.arange(6)
-  y = stats[a][0]
-  y1 = stats[a][1]
-  y2 = stats[a][2]
+  x = np.arange(num_threads)
+  y1 = stats[a][0]
+  y2 = stats[a][1]
   
   labels = []
   for i in x:
@@ -43,9 +43,8 @@ def scaling(stats, a):
 
   fig = plt.figure()
   ax1 = fig.add_subplot(111)
-  ax1.plot(x, y, label='Pythia')
-  #ax1.plot(x, y1, label='Perf')
-  ax1.plot(x, y2, label='Kernel Timing')
+  ax1.plot(x, y1, label='Pythia')
+  ax1.plot(x, y2, label='x86')
   ax1.set_xticks(x)
   ax1.set_xticklabels(labels)
   ax1.set_xlabel("Number of Threads")
@@ -84,53 +83,71 @@ def cacheline(stats, avgs, outdir):
   ax1.legend(legend_boxes, legend, bbox_to_anchor=(0.,1.01,1.,0.101), ncol=N, mode="expand", fontsize=INPUTS_FONTSIZE)
   #plt.show()
   plt.savefig(outdir + "performance.pdf", bbox_inches='tight')
+ 
+def parse_characterization():
+  print("\nPARSING CHARACTERIZATION INFORMATION...\n----------")
   
-def mm(y1, y2, y3, y4):
-  N = 4
-
-  fig = plt.figure(figsize=(40.0, 18.0))
-  fig.subplots_adjust(bottom=0.1)
-  ax1 = fig.add_subplot(111)
-
-  c = 'gainsboro'
-  c_avg = 'black'
-  scale = 0.9
-
-  psb1 = ax1.bar(ind-3*width/N/2, y1, scale*width/N, color=c, linewidth=1, edgecolor=['black'])
-  psb2 = ax1.bar(ind-width/N/2, y2, scale*width/N, color=c, linewidth=1, edgecolor=['black'])
-  psb3 = ax1.bar(ind+width/N/2, y3, scale*width/N, color=c, linewidth=1, edgecolor=['black'])
-  psb4 = ax1.bar(ind+3*width/N/2, y4, scale*width/N, color=c, hatch='.', linewidth=1, edgecolor=['black'])
-
-  yticks  = np.round(np.arange(0, 1.1, 0.1),1)
-  ylabel = 'LLC Miss Rate'
-  create_x_axis_avg(ax1, ind, yticks, ylabel)
-
-  legend = ('LLC Miss Rate', 'LLC Miss Rate (Avg)')
-  chartBox = ax1.get_position()
-  ax1.set_position([chartBox.x0, chartBox.y0, chartBox.width, chartBox.height*0.8])
-  ax1.legend((psb1[0], psb4[0]), legend, bbox_to_anchor=(0.,1.01,1.,0.101), ncol=3, mode="expand", fontsize=1.5*INPUTS_FONTSIZE)
-  #plt.show()
-  plt.savefig("../results/smart_cache/motivation_dram.pdf", bbox_inches='tight')
-
-def parse_info():
-  print("\nPARSING INFORMATION...\n----------")
-
+  # L1, LLC, compute2mem, BW, IPC 
   characterization = []
+  metrics = ["Calculated L1 Miss Rate", "Calculated LLC Miss Rate", "Calculated Compute to Memory Ratio", "Calculated IPC"]
+  filenames = ["/measurements.txt", "/perf.txt"]
+
+  exp_dir_characterization = exp_dir + "characterization/"
+  for a in range(len(apps)):
+    app = apps[a]
+    if len(characterization) <= a:
+      characterization.append([[],[]])
+    for f in range(len(filenames)):    
+      filename = exp_dir_characterization + app + filenames[f]
+      if os.path.isfile(filename):
+        print("READING: " + filename)
+        measurements = open(filename)
+        data = measurements.read()
+        measurements.close()
+        for m in range(len(metrics)):
+          matches = re.findall("^" + metrics[m] + "\s*: .*$", data, re.MULTILINE)
+          match = re.match(".+:\s*(\d+\.*\d+)", matches[0])
+          value = float(match.group(1))
+          characterization[a][f].append(value)
+        if (f == 0):
+          matches = re.findall("^cycles\s*: .*$", data, re.MULTILINE)
+          match = re.match(".+:\s*(\d+\.*\d+)", matches[0])
+          runtime = int(match.group(1))
+        else:
+          measurements = open(exp_dir_characterization + app + "/app_output_real.txt")
+          data = measurements.read()
+          measurements.close()
+          matches = re.findall("^.*kernel computation time: .*$", data, re.MULTILINE)
+          match = re.match(".+:\s*(\d+\.*\d+)", matches[0])
+          runtime = round(float(match.group(1))*3.2e9)
+        characterization[a][f].append(runtime)
+      else:
+        for m in range(len(metrics)):
+          characterization[a][f].append(fill)
+      
+ 
+  for a in range(len(characterization)): #apps
+    for c in range(len(characterization[a])): #configs
+      print(apps[a], c, characterization[a][c])
+
+def parse_scaling():
+  print("\nPARSING SCALING INFORMATION...\n----------")
+
   runtimes = []
   speedups = []
   averages = []
 
   # cycles
-  for a in range(len(apps)):
-    app = apps[a]
-    for i in range(6):
+  exp_dir_scaling = exp_dir + "scaling/"
+  for a in range(len(scaling_apps)):
+    app = scaling_apps[a]
+    for i in range(num_threads):
       threads = str(int(math.pow(2, i)))
       if len(runtimes) <= a:
-        runtimes.append([[],[],[]])
-      fill = 1e20
+        runtimes.append([[],[]])
 
       # pythia
-      filename = exp_dir + app + "_" + threads + "/measurements.txt"
+      filename = exp_dir_scaling + app + "_" + threads + "/measurements.txt"
       if os.path.isfile(filename):
         print("READING: " + filename)
         measurements = open(filename)
@@ -143,22 +160,8 @@ def parse_info():
       else:
         runtimes[a][0].append(fill)
  
-      # perf
-      filename = exp_dir + app + "_" + threads + "/perf.txt"
-      if os.path.isfile(filename):
-        print("READING: " + filename)
-        measurements = open(filename)
-        data = measurements.read()
-        measurements.close()
-        matches = re.findall("^cycles: .*$", data, re.MULTILINE)
-        match = re.match(".+:\s*(\d+\.*\d+)", matches[0])
-        runtime = float(match.group(1))
-        runtimes[a][1].append(runtime)
-      else:
-        runtimes[a][1].append(fill)
-
       # raw execution time
-      filename = exp_dir + app + "_" + threads + "/app_output_real.txt"
+      filename = exp_dir_scaling + app + "_" + threads + "/app_output_real.txt"
       if os.path.isfile(filename):
         print("READING: " + filename)
         measurements = open(filename)
@@ -168,13 +171,13 @@ def parse_info():
         print(matches)
         match = re.match(".+:\s*(\d+\.*\d+)", matches[0])
         runtime = float(match.group(1))
-        runtimes[a][2].append(runtime)
+        runtimes[a][1].append(runtime)
       else:
-        runtimes[a][2].append(fill)
+        runtimes[a][1].append(fill)
 
   for a in range(len(runtimes)): #apps
     if len(speedups) <= a:
-      speedups.append([[],[],[]])
+      speedups.append([[],[]])
     for c in range(len(runtimes[a])): #configs
       for t in range(len(runtimes[a][c])): #threads
         speedups[a][c].append(runtimes[a][c][0]/runtimes[a][c][t])
@@ -182,7 +185,7 @@ def parse_info():
   print("\nCALCULATING SPEEDUPS...\n----------")
   for a in range(len(runtimes)): #apps
     for c in range(len(runtimes[a])): #configs
-      print(apps[a], c, runtimes[a][c][0], speedups[a][c])
+      print(scaling_apps[a], c, runtimes[a][c][0], speedups[a][c])
     print()
 
   print("\nCALCULATING AVERAGE SPEEDUPS...\n----------")
@@ -194,16 +197,15 @@ def parse_info():
       averages[t][c] = averages[t][c] ** (1./len(speedups))
       print(int(math.pow(2,t)), averages[t][c])
 
-  return characterization, speedups, averages
+  for a in range(len(scaling_apps)):
+    scaling(speedups, a)
 
 def main():  
   if not os.path.isdir(outdir):
     os.mkdir(outdir)
  
-  characterization, speedups, averages = parse_info()
-  
-  for a in range(len(apps)):
-    scaling(speedups, a)
+  parse_characterization()
+  #parse_scaling()  
 
   print("\nDone!")
 

@@ -66,43 +66,31 @@ bool writeColMajorMatrixFile(const char *fn, int *nr_row, int *nr_col, std::vect
   return true;
 }
 
-void _kernel_(int Arows, int Bcols, int Acols, float alpha, const float *A, const float *B, float beta, float *C, int tid, int num_threads)
+void _kernel_( char transa, char transb, int m, int n, int k, float alpha, const float *A, const float *B, float beta, float *C, int tid, int num_threads)
 {
-  // m = A rows, n = B cols, k = A cols 
-  for (int row = tid; row < Arows; row+=num_threads) {
-    int curr_Arow = row * Acols;
-    for (int bb = 0; bb < Bcols; bb++) {
-      int curr_Brow = bb * Acols; 
+  if ((transa != 'N') && (transa != 'n')) {
+    //std::cerr << "unsupported value of 'transa' in regtileSgemm()" << std::endl;
+    //return;
+    assert(0);
+  }
+  
+  if ((transb != 'T') && (transb != 't')) {
+    //std::cerr << "unsupported value of 'transb' in regtileSgemm()" << std::endl;
+    //return;
+    assert(0);
+  }
+  
+  for (int mm = tid; mm < m; mm+=num_threads) {
+    for (int nn = 0; nn < n; ++nn) {
       float c = 0.0f;
-      for (int col = 0; col < Acols; col++) {
-        float a = A[col + curr_Arow]; 
-        float b = B[col + curr_Brow];
+      for (int i = 0; i < k; ++i) {
+        float a = A[mm + i * m]; 
+        float b = B[nn + i * n];
         c += a * b;
       }
-      C[bb+row*Bcols] = C[bb+row*Bcols] * beta + alpha * c;
+      C[mm+nn*m] = C[mm+nn*m] * beta + alpha * c;
     }
   }
-}
-
-void matmul(int Arows, int Bcols, int Acols, float alpha, const float *A, const float *B, float beta, float *C, int tid, int num_threads)
-{
-  // m = A rows, n = B cols, k = A cols 
-  for (int i = 0; i < 200; i++) {
-    for (int row = tid; row < Arows; row+=num_threads) {
-      int curr_Arow = row * Acols;
-      for (int bb = 0; bb < Bcols; bb++) {
-        int curr_Brow = bb * Acols; 
-        float c = 0.0f;
-        for (int col = 0; col < Acols; col++) {
-          float a = A[col + curr_Arow]; 
-          float b = B[col + curr_Brow];
-          c += a * b;
-        }
-        C[bb+row*Bcols] = C[bb+row*Bcols] * beta + alpha * c;
-      }
-    }
-  }
-  _kernel_(Arows, Bcols, Acols, 1.0f, A, B, 0.0f, C, tid, num_threads);
 }
 
 int main (int argc, char *argv[]) {
@@ -111,13 +99,11 @@ int main (int argc, char *argv[]) {
   struct pb_Parameters *params;
   struct pb_TimerSet timers;
 
-  int matArow = 300;
-  int matAcol = 150;
-  int matBrow = matAcol;
-  int matBcol = 100;
-
-  std::vector<float> matA(matArow * matAcol);
-  std::vector<float> matBT(matBrow * matBcol);
+  int* matArow = (int*) malloc(sizeof(int)); 
+  int* matAcol = (int*) malloc(sizeof(int)); 
+  int* matBrow = (int*) malloc(sizeof(int)); 
+  int* matBcol = (int*) malloc(sizeof(int));
+  std::vector<float> matA, matBT;
 
   pb_InitializeTimerSet(&timers);
 
@@ -137,38 +123,22 @@ int main (int argc, char *argv[]) {
   pb_SwitchToTimer(&timers, pb_TimerID_IO);
 
   // load A
-  readColMajorMatrixFile(params->inpFiles[0], &matArow, &matAcol, matA);
-  /*for (int row = 0; row < matArow; row++) {
-    for (int col = 0; col < matAcol; col++) {
-      matA[row*matAcol + col] = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-    }
-  }*/
-  std::cerr << "matArow " << matArow << std::endl;
-  std::cerr << "matAcol " << matAcol << std::endl;
+  readColMajorMatrixFile(params->inpFiles[0], matArow, matAcol, matA);
+  std::cerr << "matArow " << *matArow << std::endl;
+  std::cerr << "matAcol " << *matAcol << std::endl;
 
   // load B^T
-  readColMajorMatrixFile(params->inpFiles[2], &matBcol, &matBrow, matBT);
-  /*for (int row = 0; row < matBcol; row++) {
-    for (int col = 0; col < matBrow; col++) {
-      matBT[row*matBrow + col] = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-    }
-  }*/
-  std::cerr << "matBrow " << matBrow << std::endl;
-  std::cerr << "matBcol " << matBcol << std::endl;
+  readColMajorMatrixFile(params->inpFiles[2], matBcol, matBrow, matBT);
 
   pb_SwitchToTimer( &timers, pb_TimerID_COMPUTE );
 
   // allocate space for C
-  std::vector<float> matC(matArow * matBcol);
-
-  char transa = 'N';
-  char transb = 'T';
-  assert((transa == 'N' || transa == 'n') && (transb == 'T' || transb == 't'));
+  std::vector<float> matC(*matArow * *matBcol);
 
   // Use standard sgemm interface
   auto start_time = std::chrono::system_clock::now();
   if (exec_kernel) {
-    _kernel_(matArow, matBcol, matAcol, 1.0f, &matA.front(), &matBT.front(), 0.0f, &matC.front(), 0, 1);
+    _kernel_('N', 'T', *matArow, *matBcol, *matAcol, 1.0f, &matA.front(), &matBT.front(), 0.0f, &matC.front(), 0, 1);
   }
   auto end_time = std::chrono::system_clock::now();
   std::chrono::duration<double> elapsed_seconds = end_time-start_time;
@@ -177,13 +147,13 @@ int main (int argc, char *argv[]) {
   if (params->outFile) {
     /* Write C to file */
     pb_SwitchToTimer(&timers, pb_TimerID_IO);
-    writeColMajorMatrixFile(params->outFile, &matArow, &matBcol, matC); 
+    writeColMajorMatrixFile(params->outFile, matArow, matBcol, matC); 
   }
 
   pb_SwitchToTimer(&timers, pb_TimerID_NONE);
 
   double CPUtime = pb_GetElapsedTime(&(timers.timers[pb_TimerID_COMPUTE]));
-  std::cout<< "GFLOPs = " << 2.* matArow * matBcol * matAcol/CPUtime/1e9 << std::endl;
+  std::cout<< "GFLOPs = " << 2.* *matArow * *matBcol * *matAcol/CPUtime/1e9 << std::endl;
   pb_PrintTimerSet(&timers);
   pb_FreeParameters(params);
   return 0;

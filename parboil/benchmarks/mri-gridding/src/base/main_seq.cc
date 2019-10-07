@@ -186,7 +186,8 @@ void _kernel_(unsigned int n, parameters params, ReconstructionSample* sample, f
       LUT[k] = kernel_value_CPU(beta*sqrt(1.0-(v/cutoff2)));
     }
   }
-  int i;
+  int i, iter;
+  for (iter = 0; iter < 1; iter++) {
   for (i=tid; i < n; i+=num_threads){
     ReconstructionSample pt = sample[i];
 
@@ -270,6 +271,7 @@ void _kernel_(unsigned int n, parameters params, ReconstructionSample* sample, f
         }
       }
     }
+  }
   }
 }
 

@@ -69,25 +69,7 @@ bool writeColMajorMatrixFile(const char *fn, int *nr_row, int *nr_col, std::vect
 void _kernel_(int Arows, int Bcols, int Acols, float alpha, const float *A, const float *B, float beta, float *C, int tid, int num_threads)
 {
   // m = A rows, n = B cols, k = A cols 
-  for (int row = tid; row < Arows; row+=num_threads) {
-    int curr_Arow = row * Acols;
-    for (int bb = 0; bb < Bcols; bb++) {
-      int curr_Brow = bb * Acols; 
-      float c = 0.0f;
-      for (int col = 0; col < Acols; col++) {
-        float a = A[col + curr_Arow]; 
-        float b = B[col + curr_Brow];
-        c += a * b;
-      }
-      C[bb+row*Bcols] = C[bb+row*Bcols] * beta + alpha * c;
-    }
-  }
-}
-
-void matmul(int Arows, int Bcols, int Acols, float alpha, const float *A, const float *B, float beta, float *C, int tid, int num_threads)
-{
-  // m = A rows, n = B cols, k = A cols 
-  for (int i = 0; i < 200; i++) {
+  for (int i = 0; i < 10000; i++) {
     for (int row = tid; row < Arows; row+=num_threads) {
       int curr_Arow = row * Acols;
       for (int bb = 0; bb < Bcols; bb++) {
@@ -102,7 +84,6 @@ void matmul(int Arows, int Bcols, int Acols, float alpha, const float *A, const 
       }
     }
   }
-  _kernel_(Arows, Bcols, Acols, 1.0f, A, B, 0.0f, C, tid, num_threads);
 }
 
 int main (int argc, char *argv[]) {

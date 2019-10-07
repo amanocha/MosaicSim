@@ -36,6 +36,7 @@ def parse_args():
     parser.add_argument("-s", "--source", type=str, default="", help="Path to source code file")
     parser.add_argument("-t", "--num_threads", type=int, default=1, help="Number of threads")
     parser.add_argument("-r", "--real", type=int, default=0, help="Run on real machine in addition to simulation")
+    parser.add_argument("-x", "--scale", type=int, default=0, help="Run scaling version")
     parser.add_argument("-o", "--output", type=str, help="Output path")
     args = parser.parse_args()
     return args
@@ -49,7 +50,10 @@ def compile(real):
 
     include = "../../../../common/include/"
 
-    cmd_args = [compile_mode, "-I", include, "-t", str(threads), "../../../../common/src/parboil.c", filename]
+    if app != "bfs":
+      cmd_args = [compile_mode, "-I", include, "-t", str(threads), "../../../../common/src/parboil.c", filename]
+    else:
+      cmd_args = [compile_mode, "-t", str(threads), filename]
 
     if app == "cutcp":
       cmd_args += ["readatom.c", "output.c", "excl.c", "cutcpu.c"]
@@ -76,7 +80,7 @@ def compile(real):
 def execute(real):
     print("Executing application...")
     if app == "bfs":
-      datafiles = ["graph_input.dat"]
+      datafiles = ["Kronecker_21.el"] #["graph_input.dat"]
     elif app == "cutcp":
       datafiles = ["watbox.sl40_mod.pqr"]
     elif app == "histo":
@@ -92,7 +96,7 @@ def execute(real):
     elif app == "sgemm":
       datafiles = ["matrix1.txt", "matrix2.txt", "matrix2t.txt"]
     elif app == "spmv":
-      datafiles = ["1138_bus.mtx", "vector.bin"]
+      datafiles = ["Dubcova3.mtx.bin", "vector.bin"]
     elif app == "stencil":
       datafiles = ["128x128x32.bin"]
     elif app == "tpacf":
@@ -111,7 +115,11 @@ def execute(real):
     else:
       output_name = "app_output.txt"
 
-    cmd = "./" + compile_dir + "/" + compile_dir + " 1 -i " + input_path + " " + " > " + output + output_name
+    if app != "bfs":
+      cmd = "./" + compile_dir + "/" + compile_dir + " 1 -i " + input_path + " " + " > " + output + output_name
+    else:
+      cmd = "./" + compile_dir + "/" + compile_dir + " 1 " + input_path + " " + " > " + output + output_name
+
     #cmd = "./" + compile_dir + "/" + compile_dir + " 1 -i " + input_path
     
     output_path = input_path.split("/")[0:7] + ["output"]
@@ -334,13 +342,22 @@ def main():
     if not (os.path.isfile(args.source) or args.app):
         print("Please enter either a benchmark name or source file path!\n")
     else:
+        real = args.real
+
         if (args.app):
           if (args.source != "" and args.source.split("/")[1] != args.app):
             print("Conflicting benchmark information entered: benchmark name does not match source file path!\n")
             sys.exit(1)
           else:
             app = args.app
-            source = "benchmarks/" + app + "/src/base/main.cc" 
+            if (args.scale):
+              if (args.real):
+                main_name = "main_big.cc" # scaling on cafe
+              else:
+                main_name = "main.cc" # scaling on pythia
+            else:
+              main_name = "main_seq.cc" # sequential on cafe and pythia
+            source = "benchmarks/" + app + "/src/base/" + main_name
             if not (os.path.isfile(source)):
               print("Benchmark name does not exist!\n")
               sys.exit(1)
@@ -367,25 +384,21 @@ def main():
 
         print("Output directory: " + output)
 
-        if args.real:
-            real = args.real
-        else:
-            real = 0
-
         print("------------------------------------------------------------\n")
         os.chdir(new_dir)
         if (real):
           compile(real)
           execute(real)
-        compile(0)
-        execute(0)
-        one = time.time()
-        simulate()
-        two = time.time()
-        print("Simulation Time = " + str(round(two - one)) + " seconds.\n")
-        measure()
-        three = time.time()
-        print("Measurement Time = " + str(round(three - two)) + " seconds.\n")
+        else:
+          compile(0)
+          execute(0)
+          one = time.time()
+          simulate()
+          two = time.time()
+          print("Simulation Time = " + str(round(two - one)) + " seconds.\n")
+          measure()
+          three = time.time()
+          print("Measurement Time = " + str(round(three - two)) + " seconds.\n")
 
 if __name__ == "__main__":
     main()

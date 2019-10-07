@@ -17,19 +17,19 @@
 
 void _kernel_(int dim, int* h_nzcnt, int* h_ptr, int* h_indices, int* h_perm, float* h_data, float* h_x_vector, float* h_Ax_vector, int tid, int num_threads) {
   int p, i, k;
-  for(p=0;p<1;p++) {
+  for(p=0;p<2400;p++) {
     for (i = tid; i < dim; i+=num_threads) {
       float sum = 0.0f;
       //int  bound = h_nzcnt[i / 32];
       int  bound = h_nzcnt[i];
       for(k=0;k<bound;k++ ) {
         int j = h_ptr[k] + i;
-	int in = h_indices[j];
+	      int in = h_indices[j];
 
-        float d = h_data[j];
-	float t = h_x_vector[in];
+	      float d = h_data[j];
+	      float t = h_x_vector[in];
 
-	sum += d*t;
+	      sum += d*t;
       }
       h_Ax_vector[h_perm[i]] = sum;
     }

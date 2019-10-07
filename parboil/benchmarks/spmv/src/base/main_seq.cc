@@ -17,7 +17,7 @@
 
 void _kernel_(int dim, int* h_nzcnt, int* h_ptr, int* h_indices, int* h_perm, float* h_data, float* h_x_vector, float* h_Ax_vector, int tid, int num_threads) {
   int p, i, k;
-  for(p=0;p<50;p++) {
+  for(p=0;p<1;p++) {
     for (i = tid; i < dim; i+=num_threads) {
       float sum = 0.0f;
       //int  bound = h_nzcnt[i / 32];
