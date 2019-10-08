@@ -38,7 +38,7 @@ def characterize(stats, metric):
 
   N = 2 # number of bars per application
 
-  fig = plt.figure(figsize=(40.0,20.0))
+  fig = plt.figure(figsize=(45.0,20.0))
   fig.subplots_adjust(bottom=0.1)
   ax1 = fig.add_subplot(111)
 
@@ -69,7 +69,7 @@ def characterize(stats, metric):
   chartBox = ax1.get_position()
   #ax1.set_position([chartBox.x0, chartBox.y0, chartBox.width, chartBox.height*0.8])
   #ax1.legend(legend_boxes, legend, bbox_to_anchor=(0.,1.01,1.,0.101), ncol=N, mode="expand", fontsize=INPUTS_FONTSIZE)
-  plt.legend(legend_boxes, legend, loc=2, fontsize=scale*INPUTS_FONTSIZE)
+  plt.legend(legend_boxes, legend, loc=2, fontsize=scale*TICK_FONTSIZE)
   #plt.show()
   plt.savefig(outdir + metric.replace(" ", "").lower() + ".pdf", bbox_inches='tight')
  
