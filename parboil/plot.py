@@ -76,7 +76,7 @@ def characterize(stats, metric):
 def scaling(stats, a):
   print("\nCREATING SCALING GRAPH FOR " + scaling_apps[a] + "...\n----------")
   
-  fig = plt.figure(figsize=(16.0,6.0))
+  fig = plt.figure(figsize=(16.0,4.0))
   fig.subplots_adjust(bottom=0.1)
   ax1 = fig.add_subplot(111)
 

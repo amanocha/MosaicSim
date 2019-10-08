@@ -96,7 +96,7 @@ int main(int argc, char** argv) {
   assert(argc >= 3);
   int exec_kernel = atoi(argv[1]);
   graph_fname = argv[2];
-  int epoch = 3;
+  int epoch = 4;
   int compute_nodes = -1;
   
   G = parse_csr_graph(graph_fname);
@@ -114,7 +114,7 @@ int main(int argc, char** argv) {
   int * in_wl = (int *) malloc(sizeof(int) * G.nodes * 2);
   int * out_wl = (int *) malloc(sizeof(int) * G.nodes * 2);
 
-  int start_seed = 0;
+  int start_seed = 3;
   for (int i = start_seed; i < start_seed + SEEDS; i++) {
     int index = *in_index;
     *in_index = index + 1;

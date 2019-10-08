@@ -4,7 +4,7 @@ import os
 import sys
 
 # APPS
-apps = ["cutcp", "histo", "lbm", "mri-gridding", "mri-q", "sad", "sgemm", "spmv", "stencil", "tpacf"]
+apps = ["bfs", "cutcp", "histo", "lbm", "mri-gridding", "mri-q", "sad", "sgemm", "spmv", "stencil", "tpacf"]
 scaling_apps = ["bfs", "sgemm", "spmv"]
 
 # CONFIGS
@@ -87,7 +87,7 @@ def run_four():
     for i in range(num_threads):
       threads = str(int(math.pow(2, i)))
       output = app + "_" + threads + "/"
-      if not os.path.isdir(exp_dir + output + "measurements.txt"):
+      if not os.path.isfile(exp_dir + output + "measurements.txt"):
         tmp_output = exp_dir + "tmp_" + output
         cmd_args = ["time python measure.py", "-a", app, "-t", threads, "-x", "1", "-o", tmp_output]
         cmd = " ".join(cmd_args)
