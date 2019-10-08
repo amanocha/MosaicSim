@@ -38,7 +38,7 @@ def characterize(stats, metric):
 
   N = 2 # number of bars per application
 
-  fig = plt.figure(figsize=(45.0,20.0))
+  fig = plt.figure(figsize=(48.0,20.0))
   fig.subplots_adjust(bottom=0.1)
   ax1 = fig.add_subplot(111)
 
@@ -90,10 +90,10 @@ def scaling(stats, a):
   ax1.plot(x, y1, label='Pythia')
   ax1.plot(x, y2, label='x86')
   ax1.set_xticks(x)
-  ax1.set_xticklabels(labels)
-  ax1.set_xlabel("Number of Threads")
-  ax1.set_ylabel("Performance Speedup")
-  plt.legend(loc=2)
+  ax1.set_xticklabels(labels, fontsize=scale*TICK_FONTSIZE)
+  ax1.set_xlabel("Number of Threads", fontsize=scale*AXIS_FONTSIZE)
+  ax1.set_ylabel("Performance Speedup", fontsize=scale*AXIS_FONTSIZE)
+  plt.legend(loc=2, fontsize=scale*TICK_FONTSIZE)
   #plt.show()
   plt.savefig(outdir + scaling_apps[a] + "_scaling.pdf", bbox_inches='tight')
 
@@ -225,7 +225,7 @@ def main():
     os.mkdir(outdir)
  
   parse_characterization()
-  #parse_scaling()  
+  parse_scaling()  
 
   print("\nDone!")
 

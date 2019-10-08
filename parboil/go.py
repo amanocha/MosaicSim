@@ -10,7 +10,7 @@ scaling_apps = ["bfs", "sgemm", "spmv"]
 # CONFIGS
 modes = ["db", "di"]
 configs = ["IO", "OOO"]
-num_threads = 5
+num_threads = 4
 
 def parse_args():
   parser = argparse.ArgumentParser()
