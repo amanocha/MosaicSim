@@ -76,7 +76,7 @@ def characterize(stats, metric):
 def scaling(stats, a):
   print("\nCREATING SCALING GRAPH FOR " + scaling_apps[a] + "...\n----------")
   
-  fig = plt.figure(figsize=(48.0,20.0))
+  fig = plt.figure(figsize=(32.0,16.0))
   fig.subplots_adjust(bottom=0.1)
   ax1 = fig.add_subplot(111)
 
@@ -88,16 +88,18 @@ def scaling(stats, a):
   for i in x:
     label = str(int(math.pow(2,i)))
     labels.append(label)
-  yticks = np.arange(round(max(y1+y2)+1))
+  cap = round(max(y1+y2)+1)
+  yticks = np.arange(cap)
+  print(cap)
 
   ax1.plot(x, y1, label='Pythia')
   ax1.plot(x, y2, label='x86')
   ax1.set_xticks(x)
-  ax1.set_xticklabels(labels, fontsize=scale*TICK_FONTSIZE)
-  ax1.set_yticklabels(yticks, fontsize=scale*TICK_FONTSIZE)
-  ax1.set_xlabel("Number of Threads", fontsize=scale*AXIS_FONTSIZE)
-  ax1.set_ylabel("Performance Speedup", fontsize=scale*AXIS_FONTSIZE)
-  plt.legend(loc=2, fontsize=scale*TICK_FONTSIZE)
+  ax1.set_xticklabels(labels, fontsize=TICK_FONTSIZE)
+  ax1.set_yticklabels(yticks, fontsize=TICK_FONTSIZE)
+  ax1.set_xlabel("Number of Threads", fontsize=AXIS_FONTSIZE)
+  ax1.set_ylabel("Performance Speedup", fontsize=AXIS_FONTSIZE)
+  plt.legend(loc=2, fontsize=TICK_FONTSIZE)
   #plt.show()
   plt.savefig(outdir + scaling_apps[a] + "_scaling.pdf", bbox_inches='tight')
 
