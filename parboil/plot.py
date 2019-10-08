@@ -139,15 +139,23 @@ def parse_characterization():
           measurements.close()
           matches = re.findall("^.*kernel computation time: .*$", data, re.MULTILINE)
           match = re.match(".+:\s*(\d+\.*\d+)", matches[0])
-          runtime = round(float(match.group(1))*3.2e9)
+          runtime = round((float(match.group(1))-0.000001)*3.2e9)
         characterization[a][f].append(runtime)
       else:
-        for m in range(len(metrics)):
+        for m in range(len(metrics)+1):
           characterization[a][f].append(fill)
       
   for a in range(len(characterization)): #apps
     for c in range(len(characterization[a])): #configs
       print(apps[a], c, characterization[a][c])
+
+  print("\nPRINTING ACCURACIES...\n----------")
+  for a in range(len(characterization)): #apps
+    sim = characterization[a][0][4]
+    real = characterization[a][1][4]
+    error = float(real-sim)*100/real
+    mod_error = round((error), 2)
+    print(apps[a], mod_error)
 
   metrics = [m.replace("Calculated ", "") for m in metrics] 
   for m in range(len(metrics)):
@@ -231,8 +239,8 @@ def main():
   if not os.path.isdir(outdir):
     os.mkdir(outdir)
  
-  #parse_characterization()
-  parse_scaling()  
+  parse_characterization()
+  #parse_scaling()  
 
   print("\nDone!")
 

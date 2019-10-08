@@ -41,7 +41,10 @@ def compile():
     
     include = "../../../../common/include/"
 
-    cmd_args = ["DEC++", "-I", include, "-t", str(threads), "../../../../common/src/parboil.c", filename]
+    if (app != "bfs"):
+      cmd_args = ["DEC++", "-I", include, "-t", str(threads), "../../../../common/src/parboil.c", filename]
+    else:
+      cmd_args = ["DEC++", "-t", str(threads), filename]
 
     if app == "cutcp":
       cmd_args += ["readatom.c", "output.c", "excl.c", "cutcpu.c"]
@@ -68,7 +71,7 @@ def compile():
 def execute(exec_kernel):
     print("Executing application...")
     if app == "bfs":
-      datafiles = ["Kronecker_21.el"] #["graph_input.dat"]
+      datafiles = ["Kronecker_24.el"] #["graph_input.dat"]
     elif app == "cutcp":
       datafiles = ["watbox.sl40_mod.pqr"]
     elif app == "histo":
@@ -100,10 +103,16 @@ def execute(exec_kernel):
 
     cmd = "perf stat -B -d -v -e cache-references,cache-misses,cycles,instructions,L1-dcache-stores,node-loads,node-stores -o "
     if (exec_kernel):
-      cmd = cmd + output + "perf1.txt ./" + compile_dir + "/" + compile_dir + " 1 -i " + input_path + " " + " > " + output + "app_output1.txt"
+      if (app != "bfs"):
+        cmd = cmd + output + "perf1.txt ./" + compile_dir + "/" + compile_dir + " 1 -i " + input_path + " " + " > " + output + "app_output1.txt"
+      else:
+        cmd = cmd + output + "perf1.txt ./" + compile_dir + "/" + compile_dir + " 1 " + input_path + " " + " > " + output + "app_output1.txt"
     else:
-      cmd = cmd + output + "perf2.txt ./" + compile_dir + "/" + compile_dir + " -i " + input_path + " " + " > " + output + "app_output2.txt"
-    
+      if (app != "bfs"):
+        cmd = cmd + output + "perf2.txt ./" + compile_dir + "/" + compile_dir + " -i " + input_path + " " + " > " + output + "app_output2.txt"
+      else:
+        cmd = cmd + output + "perf2.txt ./" + compile_dir + "/" + compile_dir + " " + input_path + " " + " > " + output + "app_output2.txt"
+
     output_path = input_path.split("/")[0:7] + ["output"]
     output_path = "/".join(output_path)
     cmd += " -o result"

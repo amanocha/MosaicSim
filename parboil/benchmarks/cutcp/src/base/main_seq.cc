@@ -130,6 +130,7 @@ void _kernel_(Lattice* lattice, float **private_lattice, float cutoff, float exc
     *private_lattice = plattice;
   }
 
+  for (int iter = 0; iter < 1; iter++) {
   /* traverse the grid cells */
   for (gindex = tid;  gindex < ncell;  gindex+=num_threads) {
     for (n = first[gindex];  n != -1;  n = next[n]) {
@@ -203,7 +204,7 @@ void _kernel_(Lattice* lattice, float **private_lattice, float cutoff, float exc
 
     } /* end loop over atoms in a gridcell */
   } /* end loop over gridcells */
-
+  }
 
   for(j=tid; j<size; j+=num_threads) {
     for(i=0; i<num_threads; i++) {
