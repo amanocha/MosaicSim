@@ -75,6 +75,10 @@ def characterize(stats, metric):
  
 def scaling(stats, a):
   print("\nCREATING SCALING GRAPH FOR " + scaling_apps[a] + "...\n----------")
+  
+  fig = plt.figure(figsize=(48.0,20.0))
+  fig.subplots_adjust(bottom=0.1)
+  ax1 = fig.add_subplot(111)
 
   x = np.arange(num_threads)
   y1 = stats[a][0]
@@ -84,13 +88,13 @@ def scaling(stats, a):
   for i in x:
     label = str(int(math.pow(2,i)))
     labels.append(label)
+  yticks = np.arange(round(max(y1+y2)+1))
 
-  fig = plt.figure()
-  ax1 = fig.add_subplot(111)
   ax1.plot(x, y1, label='Pythia')
   ax1.plot(x, y2, label='x86')
   ax1.set_xticks(x)
   ax1.set_xticklabels(labels, fontsize=scale*TICK_FONTSIZE)
+  ax1.set_yticklabels(yticks, fontsize=scale*TICK_FONTSIZE)
   ax1.set_xlabel("Number of Threads", fontsize=scale*AXIS_FONTSIZE)
   ax1.set_ylabel("Performance Speedup", fontsize=scale*AXIS_FONTSIZE)
   plt.legend(loc=2, fontsize=scale*TICK_FONTSIZE)
@@ -224,7 +228,7 @@ def main():
   if not os.path.isdir(outdir):
     os.mkdir(outdir)
  
-  parse_characterization()
+  #parse_characterization()
   parse_scaling()  
 
   print("\nDone!")
