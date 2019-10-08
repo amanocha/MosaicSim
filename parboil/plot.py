@@ -90,7 +90,7 @@ def scaling(stats, a):
     labels.append(label)
   cap = math.ceil(max(y1+y2)+2)
   yticks = np.arange(cap)
-  smallscale = 1
+  smallscale = 0.75
 
   ax1.plot(x, y1, linewidth=3, label='Pythia')
   ax1.plot(x, y2, linewidth=3, label='x86')
@@ -98,7 +98,7 @@ def scaling(stats, a):
   ax1.set_xticklabels(labels, fontsize=smallscale*TICK_FONTSIZE)
   ax1.set_yticklabels(yticks, fontsize=smallscale*TICK_FONTSIZE)
   ax1.set_xlabel("Number of Threads", fontsize=smallscale*AXIS_FONTSIZE)
-  ax1.set_ylabel("Performance Speedup", fontsize=smallscale*AXIS_FONTSIZE)
+  ax1.set_ylabel("Speedup", fontsize=smallscale*AXIS_FONTSIZE)
   ax1.set_ylim([0, yticks[len(yticks)-1]])
   plt.legend(loc=2, fontsize=smallscale*TICK_FONTSIZE)
   #plt.show()
