@@ -6,7 +6,9 @@ import re
 exp_dir = "/home/ts20/share/results/ispass/accuracy/"
 outdir = "../results/accuracy/"
 fill = 1e20
+
 width = 0.9
+scale = 1.5
 num_apps = len(apps)
 ind = np.arange(1, num_apps+1)
 
@@ -16,8 +18,6 @@ INPUTS_FONTSIZE = 32
 
 def create_apps_axis(ax1, ind, yticks, ylabel):
   ax2 = ax1.twinx()
-
-  scale = 1.5
 
   ax1.set_xlim([0.5, num_apps+0.5])
   ax1.set_xticks(ind)
@@ -38,7 +38,7 @@ def characterize(stats, metric):
 
   N = 2 # number of bars per application
 
-  fig = plt.figure(figsize=(36.0,24.0))
+  fig = plt.figure(figsize=(40.0,20.0))
   fig.subplots_adjust(bottom=0.1)
   ax1 = fig.add_subplot(111)
 
@@ -69,7 +69,7 @@ def characterize(stats, metric):
   chartBox = ax1.get_position()
   #ax1.set_position([chartBox.x0, chartBox.y0, chartBox.width, chartBox.height*0.8])
   #ax1.legend(legend_boxes, legend, bbox_to_anchor=(0.,1.01,1.,0.101), ncol=N, mode="expand", fontsize=INPUTS_FONTSIZE)
-  plt.legend(legend_boxes, legend, loc=2, fontsize=INPUTS_FONTSIZE)
+  plt.legend(legend_boxes, legend, loc=2, fontsize=scale*INPUTS_FONTSIZE)
   #plt.show()
   plt.savefig(outdir + metric.replace(" ", "").lower() + ".pdf", bbox_inches='tight')
  
