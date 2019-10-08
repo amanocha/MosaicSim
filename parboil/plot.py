@@ -88,7 +88,7 @@ def scaling(stats, a):
   for i in x:
     label = str(int(math.pow(2,i)))
     labels.append(label)
-  cap = math.ceil(max(y1+y2)+1)
+  cap = math.ceil(max(y1+y2)+2)
   yticks = np.arange(cap)
   smallscale = 0.5
   print(cap, y1, y2)
