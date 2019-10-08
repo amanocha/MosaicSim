@@ -76,7 +76,7 @@ def characterize(stats, metric):
 def scaling(stats, a):
   print("\nCREATING SCALING GRAPH FOR " + scaling_apps[a] + "...\n----------")
   
-  fig = plt.figure(figsize=(32.0,16.0))
+  fig = plt.figure(figsize=(16.0,6.0))
   fig.subplots_adjust(bottom=0.1)
   ax1 = fig.add_subplot(111)
 
@@ -88,7 +88,7 @@ def scaling(stats, a):
   for i in x:
     label = str(int(math.pow(2,i)))
     labels.append(label)
-  cap = round(max(y1+y2)+1)
+  cap = math.ceil(max(y1+y2)+1)
   yticks = np.arange(cap)
   print(cap)
 
