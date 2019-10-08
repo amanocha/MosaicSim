@@ -4,7 +4,7 @@ import os
 import sys
 
 # APPS
-apps = ["bfs", "cutcp", "histo", "lbm", "mri-gridding", "mri-q", "sad", "sgemm", "spmv", "stencil", "tpacf"]
+apps = ["cutcp", "histo", "lbm", "mri-gridding", "mri-q", "sad", "sgemm", "spmv", "stencil", "tpacf"]
 scaling_apps = ["bfs", "sgemm", "spmv"]
 
 # CONFIGS
