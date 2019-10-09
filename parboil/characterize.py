@@ -149,16 +149,19 @@ def measure():
         if metric1 in metrics:
           metrics[metric1] = metrics[metric1] + value
         else:
-          metrics[metric1] = value
+          metrics[metric1] = value          
+        print(metric1, metrics[metric1])
+      else:
+        print(line1)
 
     with_kernel.close()
     without_kernel.close()
 
-def avg():
+def avg(N):
     measurements = open(output + "perf.txt", "w+")
     
     for metric in metrics:
-      metrics[metric] = round(metrics[metric]/10.0)
+      metrics[metric] = round(metrics[metric]/N)
       measurements.write(metric + ": " + str(metrics[metric]) + "\n")
       print(metric, metrics[metric])
     measurements.write("\nRESULTS:\n")
@@ -244,7 +247,7 @@ def main():
           execute(1)
           execute(0)
           measure()
-        avg()
+        avg(num_samples)
         two = time.time()
         print("Measurement Time = " + str(round(two-one)) + " seconds.\n")
 

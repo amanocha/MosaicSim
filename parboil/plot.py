@@ -157,7 +157,31 @@ def parse_characterization():
     real = characterization[a][1][4]
     error = float(real-sim)*100/real
     mod_error = round((error), 2)
-    print(apps[a], mod_error)
+    print(apps[a], sim, real, mod_error)
+
+  print("\nPRINTING L1 MISS RATES...\n----------")
+  for a in range(len(characterization)): #apps
+    sim = characterization[a][0][0]
+    real = characterization[a][1][0]
+    error = float(real-sim)*100/real
+    mod_error = round((error), 2)
+    print(apps[a], sim, real, mod_error)
+
+  print("\nPRINTING LLC MISS RATES...\n----------")
+  for a in range(len(characterization)): #apps
+    sim = characterization[a][0][1]
+    real = characterization[a][1][1]
+    error = float(real-sim)*100/real
+    mod_error = round((error), 2)
+    print(apps[a], sim, real, mod_error)
+
+  print("\nPRINTING IPCS...\n----------")
+  for a in range(len(characterization)): #apps
+    sim = characterization[a][0][3]
+    real = characterization[a][1][3]
+    error = float(real-sim)*100/real
+    mod_error = round((error), 2)
+    print(apps[a], sim, real, mod_error)
 
   metrics = [m.replace("Calculated ", "") for m in metrics] 
   for m in range(len(metrics)):
