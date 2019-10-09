@@ -33,6 +33,33 @@ def create_apps_axis(ax1, ind, yticks, ylabel):
   ax2.set_yticklabels([])
   ax2.tick_params(direction='inout', length=20, width=1, labelleft=False, labelright=True)
 
+def accuracy(stats):
+  print(stats)
+  print("\nCREATING ACCURACY GRAPH\n----------")
+
+  N = 1 # number of bars per application
+
+  fig = plt.figure(figsize=(48.0,20.0))
+  fig.subplots_adjust(bottom=0.1)
+  ax1 = fig.add_subplot(111)
+
+  colors = ['tab:blue'] #NEED TO CHANGE COLORS BASED ON N
+  psbs = []
+  for i in range(N):
+    if N % 2 == 0:
+      pos = i-N/2+0.5
+    else:
+      pos = i-(N-1)/2
+    psbs.append(ax1.bar(ind+pos*width/N, stats, width/N, color=colors[i], linewidth=1, edgecolor=['black']))
+
+  yticks = np.arange(-20, 110, 10)
+
+  ylabel = "Percent Error"
+  create_apps_axis(ax1, ind, yticks, ylabel)
+
+  #plt.show()
+  plt.savefig(outdir + "accuracy.pdf", bbox_inches='tight')
+ 
 def characterize(stats, metric):
   print("\nCREATING CHARACTERIZATION GRAPH FOR " + metric + "...\n----------")
 
@@ -109,7 +136,7 @@ def parse_characterization():
   
   # L1, LLC, compute2mem, BW, IPC 
   characterization = []
-  metrics = ["Calculated L1 Miss Rate", "Calculated LLC Miss Rate", "Calculated Compute to Memory Ratio", "Calculated IPC"]
+  metrics = ["Calculated L1 Miss Rate", "Calculated LLC Miss Rate", "Calculated Compute to Memory Ratio", "Calculated IPC", "cycles"]
   filenames = ["/measurements.txt", "/perf.txt"]
 
   exp_dir_characterization = exp_dir + "characterization/"
@@ -129,11 +156,6 @@ def parse_characterization():
           match = re.match(".+:\s*(\d+\.*\d+)", matches[0])
           value = float(match.group(1))
           characterization[a][f].append(value)
-        matches = re.findall("^cycles\s*: .*$", data, re.MULTILINE)
-        match = re.match(".+:\s*(\d+\.*\d+)", matches[0])
-        runtime = int(match.group(1))
-        if (f == 1):
-          runtime = runtime #- round(4.87e-07*3.2e9) 
           '''
           measurements = open(exp_dir_characterization + app + "/app_output_real.txt")
           data = measurements.read()
@@ -142,7 +164,6 @@ def parse_characterization():
           match = re.match(".+:\s*(\d+\.*\d+)", matches[0])
           runtime = float(match.group(1))
           '''
-        characterization[a][f].append(runtime)
       else:
         for m in range(len(metrics)+1):
           characterization[a][f].append(fill)
@@ -152,12 +173,15 @@ def parse_characterization():
       print(apps[a], c, characterization[a][c])
 
   print("\nPRINTING ACCURACIES...\n----------")
+  errors = []
   for a in range(len(characterization)): #apps
-    sim = characterization[a][0][4]
-    real = characterization[a][1][4]
+    sim = float(characterization[a][0][4])
+    real = float(characterization[a][1][4])
     error = float(real-sim)*100/real
     mod_error = round((error), 2)
+    errors.append(mod_error)
     print(apps[a], sim, real, mod_error)
+  accuracy(errors)
 
   print("\nPRINTING L1 MISS RATES...\n----------")
   for a in range(len(characterization)): #apps
