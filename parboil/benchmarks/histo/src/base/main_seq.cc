@@ -73,7 +73,7 @@ int main(int argc, char* argv[]) {
     return -1;
   }
   printf("%s\n",parameters->outFile);
-  int numIterations = 16;
+  int numIterations = 32;
   /*if (argc >= 2){
     numIterations = atoi(argv[1]);
   } else {

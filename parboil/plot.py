@@ -129,17 +129,19 @@ def parse_characterization():
           match = re.match(".+:\s*(\d+\.*\d+)", matches[0])
           value = float(match.group(1))
           characterization[a][f].append(value)
-        if (f == 0):
-          matches = re.findall("^cycles\s*: .*$", data, re.MULTILINE)
-          match = re.match(".+:\s*(\d+\.*\d+)", matches[0])
-          runtime = int(match.group(1))
-        else:
+        matches = re.findall("^cycles\s*: .*$", data, re.MULTILINE)
+        match = re.match(".+:\s*(\d+\.*\d+)", matches[0])
+        runtime = int(match.group(1))
+        if (f == 1):
+          runtime = runtime #- round(4.87e-07*3.2e9) 
+          '''
           measurements = open(exp_dir_characterization + app + "/app_output_real.txt")
           data = measurements.read()
           measurements.close()
           matches = re.findall("^.*kernel computation time: .*$", data, re.MULTILINE)
           match = re.match(".+:\s*(\d+\.*\d+)", matches[0])
-          runtime = round((float(match.group(1))-0.000001)*3.2e9)
+          runtime = float(match.group(1))
+          '''
         characterization[a][f].append(runtime)
       else:
         for m in range(len(metrics)+1):

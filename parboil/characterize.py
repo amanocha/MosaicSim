@@ -30,7 +30,7 @@ def parse_args():
     parser.add_argument("-a", "--app", type=str, help="Name of benchmark")
     parser.add_argument("-s", "--source", type=str, default="", help="Path to source code file")
     parser.add_argument("-t", "--num_threads", type=int, default=1, help="Number of threads")
-    parser.add_argument("-n", "--num_samples", type=int, default=5, help="Number of sample points to average")
+    parser.add_argument("-n", "--num_samples", type=int, default=30, help="Number of sample points to average")
     parser.add_argument("-x", "--scale", type=int, default=0, help="Run scaling version")
     parser.add_argument("-o", "--output", type=str, help="Output path")
     args = parser.parse_args()
