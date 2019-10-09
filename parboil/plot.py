@@ -16,12 +16,12 @@ AXIS_FONTSIZE = 44
 TICK_FONTSIZE = 40
 INPUTS_FONTSIZE = 32
 
-def create_apps_axis(ax1, ind, yticks, ylabel):
+def create_apps_axis(ax1, ind, xticks, yticks, ylabel):
   ax2 = ax1.twinx()
 
   ax1.set_xlim([0.5, num_apps+0.5])
   ax1.set_xticks(ind)
-  ax1.set_xticklabels(apps, fontsize=scale*INPUTS_FONTSIZE)
+  ax1.set_xticklabels(xticks, fontsize=scale*INPUTS_FONTSIZE)
   ax1.set_ylim([0, yticks[len(yticks)-1]])
   ax1.set_yticks(yticks)
   ax1.set_yticklabels(yticks, fontsize=scale*TICK_FONTSIZE)
@@ -34,7 +34,6 @@ def create_apps_axis(ax1, ind, yticks, ylabel):
   ax2.tick_params(direction='inout', length=20, width=1, labelleft=False, labelright=True)
 
 def accuracy(stats):
-  print(stats)
   print("\nCREATING ACCURACY GRAPH\n----------")
 
   N = 1 # number of bars per application
@@ -43,6 +42,8 @@ def accuracy(stats):
   fig.subplots_adjust(bottom=0.1)
   ax1 = fig.add_subplot(111)
 
+  stats = sorted(stats, key=lambda x: x[1])
+  print("STATS", stats)
   colors = ['tab:blue'] #NEED TO CHANGE COLORS BASED ON N
   psbs = []
   for i in range(N):
@@ -50,12 +51,14 @@ def accuracy(stats):
       pos = i-N/2+0.5
     else:
       pos = i-(N-1)/2
-    psbs.append(ax1.bar(ind+pos*width/N, stats, width/N, color=colors[i], linewidth=1, edgecolor=['black']))
+    psbs.append(ax1.bar(ind+pos*width/N, [stat[2] for stat in stats], width/N, color=colors[i], linewidth=1, edgecolor=['black']))
 
+  xticks = [stat[0] for stat in stats]
+  print(xticks)
   yticks = np.arange(-20, 110, 10)
 
-  ylabel = "Percent Error"
-  create_apps_axis(ax1, ind, yticks, ylabel)
+  ylabel = "Difference"
+  create_apps_axis(ax1, ind, xticks, yticks, ylabel)
 
   #plt.show()
   plt.savefig(outdir + "accuracy.pdf", bbox_inches='tight')
@@ -91,7 +94,7 @@ def characterize(stats, metric):
     yticks = np.round(np.arange(0, 1.2*MAX, 0.1), 2)
 
   ylabel = metric
-  create_apps_axis(ax1, ind, yticks, ylabel)
+  create_apps_axis(ax1, ind, apps, yticks, ylabel)
 
   chartBox = ax1.get_position()
   #ax1.set_position([chartBox.x0, chartBox.y0, chartBox.width, chartBox.height*0.8])
@@ -178,8 +181,8 @@ def parse_characterization():
     sim = float(characterization[a][0][4])
     real = float(characterization[a][1][4])
     error = float(real-sim)*100/real
-    mod_error = round((error), 2)
-    errors.append(mod_error)
+    mod_error = real/sim #round((error), 2)
+    errors.append((apps[a], sim, mod_error))
     print(apps[a], sim, real, mod_error)
   accuracy(errors)
 
@@ -200,12 +203,15 @@ def parse_characterization():
     print(apps[a], sim, real, mod_error)
 
   print("\nPRINTING IPCS...\n----------")
+  errors = []
   for a in range(len(characterization)): #apps
     sim = characterization[a][0][3]
     real = characterization[a][1][3]
     error = float(real-sim)*100/real
-    mod_error = round((error), 2)
+    mod_error = real/sim #round((error), 2)
+    errors.append((apps[a], sim, mod_error))
     print(apps[a], sim, real, mod_error)
+  accuracy(errors)
 
   metrics = [m.replace("Calculated ", "") for m in metrics] 
   for m in range(len(metrics)):
