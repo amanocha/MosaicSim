@@ -33,10 +33,13 @@ def create_apps_axis(ax1, ind, xticks, yticks, ylabel):
   ax2.set_yticklabels([])
   ax2.tick_params(direction='inout', length=20, width=1, labelleft=False, labelright=True)
 
-def label_bars(ax1, bars):
+def label_bars(ax1, bars, max):
   for bar in bars:
-    height = bar.get_height()
-    ax1.text(bar.get_x() + bar.get_width()/2., 1.05*height, height, ha='center', va='bottom')
+    if (bar.get_height() < max):
+      height = bar.get_height()
+    else:
+      height = max
+    ax1.annotate('{}'.format(round(bar.get_height(), 2)),xy = (bar.get_x() + bar.get_width()/2., height), xytext = (0, 3), size = scale*INPUTS_FONTSIZE, textcoords = "offset points", ha='center', va='bottom')
 
 def accuracy(title, stats, yticks):
   print("\nCREATING ACCURACY GRAPH\n----------")
@@ -56,7 +59,7 @@ def accuracy(title, stats, yticks):
     else:
       pos = i-(N-1)/2
     psbs.append(ax1.bar(ind+pos*width/N, data, width/N, color=colors[i], linewidth=1, edgecolor=['black']))
-    label_bars(ax1, psbs[i])
+    label_bars(ax1, psbs[i], yticks[len(yticks) - 1])
 
   xticks = [stat[0] for stat in stats]
   ylabel = "Accuracy Factor"
