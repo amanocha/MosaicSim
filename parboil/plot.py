@@ -228,7 +228,7 @@ def parse_characterization():
     if (m == 3):
       stats = sorted(stats1)
       stats = [(apps[s], 0, stats[s]) for s in range(len(stats))]
-      accuracy("real_ipc", stats, np.round(np.arange(0, 6, 0.5), 2), "IPC")
+      accuracy("real_ipc", stats, np.round(np.arange(0, 5.5, 0.5), 2), "IPC")
 
 def parse_scaling():
   print("\nPARSING SCALING INFORMATION...\n----------")
