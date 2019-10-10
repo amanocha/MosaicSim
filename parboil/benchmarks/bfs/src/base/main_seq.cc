@@ -96,8 +96,8 @@ int main(int argc, char** argv) {
   assert(argc >= 3);
   int exec_kernel = atoi(argv[1]);
   graph_fname = argv[2];
-  int epoch = 4;
-  int compute_nodes = 5000;
+  int epoch = 3;
+  int compute_nodes = -1;
   
   G = parse_csr_graph(graph_fname);
   int * ret = (int *) malloc(sizeof(int) * G.nodes);

@@ -33,7 +33,7 @@ def create_apps_axis(ax1, ind, xticks, yticks, ylabel):
   ax2.set_yticklabels([])
   ax2.tick_params(direction='inout', length=20, width=1, labelleft=False, labelright=True)
 
-def accuracy(stats):
+def accuracy(stats, yticks):
   print("\nCREATING ACCURACY GRAPH\n----------")
 
   N = 1 # number of bars per application
@@ -42,8 +42,7 @@ def accuracy(stats):
   fig.subplots_adjust(bottom=0.1)
   ax1 = fig.add_subplot(111)
 
-  stats = sorted(stats, key=lambda x: x[1])
-  print("STATS", stats)
+  data = [stat[2] for stat in stats]
   colors = ['tab:blue'] #NEED TO CHANGE COLORS BASED ON N
   psbs = []
   for i in range(N):
@@ -51,12 +50,9 @@ def accuracy(stats):
       pos = i-N/2+0.5
     else:
       pos = i-(N-1)/2
-    psbs.append(ax1.bar(ind+pos*width/N, [stat[2] for stat in stats], width/N, color=colors[i], linewidth=1, edgecolor=['black']))
+    psbs.append(ax1.bar(ind+pos*width/N, data, width/N, color=colors[i], linewidth=1, edgecolor=['black']))
 
   xticks = [stat[0] for stat in stats]
-  print(xticks)
-  yticks = np.arange(-20, 110, 10)
-
   ylabel = "Difference"
   create_apps_axis(ax1, ind, xticks, yticks, ylabel)
 
@@ -184,7 +180,7 @@ def parse_characterization():
     mod_error = real/sim #round((error), 2)
     errors.append((apps[a], sim, mod_error))
     print(apps[a], sim, real, mod_error)
-  accuracy(errors)
+  accuracy(errors, np.arange(9))
 
   print("\nPRINTING L1 MISS RATES...\n----------")
   for a in range(len(characterization)): #apps
@@ -210,8 +206,9 @@ def parse_characterization():
     error = float(real-sim)*100/real
     mod_error = real/sim #round((error), 2)
     errors.append((apps[a], sim, mod_error))
+    errors = sorted(errors, key=lambda x: x[1])
     print(apps[a], sim, real, mod_error)
-  accuracy(errors)
+  accuracy(errors, np.round(np.arange(0, 3, 0.5), 2))
 
   metrics = [m.replace("Calculated ", "") for m in metrics] 
   for m in range(len(metrics)):
