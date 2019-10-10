@@ -41,7 +41,7 @@ def label_bars(ax1, bars, max):
       height = max
     ax1.annotate('{}'.format(round(bar.get_height(), 2)),xy = (bar.get_x() + bar.get_width()/2., height), xytext = (0, 3), size = scale*INPUTS_FONTSIZE, textcoords = "offset points", ha='center', va='bottom')
 
-def accuracy(title, stats, yticks):
+def accuracy(title, stats, yticks, ylabel):
   print("\nCREATING ACCURACY GRAPH\n----------")
 
   N = 1 # number of bars per application
@@ -62,7 +62,6 @@ def accuracy(title, stats, yticks):
     label_bars(ax1, psbs[i], yticks[len(yticks) - 1])
 
   xticks = [stat[0] for stat in stats]
-  ylabel = "Accuracy Factor"
   create_apps_axis(ax1, ind, xticks, yticks, ylabel)
 
   #plt.show()
@@ -189,7 +188,7 @@ def parse_characterization():
     mod_error = real/sim #round((error), 2)
     errors.append((apps[a], sim, mod_error))
     print(apps[a], sim, real, mod_error)
-  accuracy("runtime", errors, np.arange(9))
+  accuracy("runtime", errors, np.arange(9), "Accuracy Factor")
 
   print("\nPRINTING L1 MISS RATES...\n----------")
   for a in range(len(characterization)): #apps
@@ -217,7 +216,7 @@ def parse_characterization():
     errors.append((apps[a], sim, mod_error))
     errors = sorted(errors, key=lambda x: x[1])
     print(apps[a], sim, real, mod_error)
-  accuracy("ipc", errors, np.round(np.arange(0, 3, 0.5), 2))
+  accuracy("ipc", errors, np.round(np.arange(0, 3, 0.5), 2), "Accuracy Factor")
 
   metrics = [m.replace("Calculated ", "") for m in metrics] 
   for m in range(len(metrics)):
@@ -226,6 +225,10 @@ def parse_characterization():
     stats = [stats1, stats2]
     metric = metrics[m]
     characterize(stats, metric)
+    if (m == 3):
+      stats = sorted(stats1)
+      stats = [(apps[s], stats[s]) for s in range(len(stats))]
+      accuracy("real_ipc", stats, np.round(np.arange(0, 6, 0.5), 2), "IPC")
 
 def parse_scaling():
   print("\nPARSING SCALING INFORMATION...\n----------")
