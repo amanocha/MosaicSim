@@ -144,7 +144,8 @@ def parse_characterization():
   # L1, LLC, compute2mem, BW, IPC 
   characterization = []
   metrics = ["Calculated L1 Miss Rate", "Calculated LLC Miss Rate", "Calculated Compute to Memory Ratio", "Calculated IPC", "cycles"]
-  filenames = ["/measurements.txt", "/perf.txt"]
+  metrics = ["Calculated IPC", "cycles"]
+  filenames = ["/measurements.txt", "/prof.txt"]
 
   exp_dir_characterization = exp_dir + "characterization/"
   for a in range(len(apps)):
@@ -163,16 +164,8 @@ def parse_characterization():
           match = re.match(".+:\s*(\d+\.*\d+)", matches[0])
           value = float(match.group(1))
           characterization[a][f].append(value)
-          '''
-          measurements = open(exp_dir_characterization + app + "/app_output_real.txt")
-          data = measurements.read()
-          measurements.close()
-          matches = re.findall("^.*kernel computation time: .*$", data, re.MULTILINE)
-          match = re.match(".+:\s*(\d+\.*\d+)", matches[0])
-          runtime = float(match.group(1))
-          '''
       else:
-        for m in range(len(metrics)+1):
+        for m in range(len(metrics)):
           characterization[a][f].append(fill)
       
   for a in range(len(characterization)): #apps
@@ -182,14 +175,15 @@ def parse_characterization():
   print("\nPRINTING ACCURACIES...\n----------")
   errors = []
   for a in range(len(characterization)): #apps
-    sim = float(characterization[a][0][4])
-    real = float(characterization[a][1][4])
+    sim = float(characterization[a][0][1]) #4
+    real = float(characterization[a][1][1]) #4
     error = float(real-sim)*100/real
     mod_error = real/sim #round((error), 2)
     errors.append((apps[a], sim, mod_error))
     print(apps[a], sim, real, mod_error)
   accuracy("runtime", errors, np.arange(9), "Accuracy Factor")
 
+  '''
   print("\nPRINTING L1 MISS RATES...\n----------")
   for a in range(len(characterization)): #apps
     sim = characterization[a][0][0]
@@ -205,12 +199,13 @@ def parse_characterization():
     error = float(real-sim)*100/real
     mod_error = round((error), 2)
     print(apps[a], sim, real, mod_error)
+  '''
 
   print("\nPRINTING IPCS...\n----------")
   errors = []
   for a in range(len(characterization)): #apps
-    sim = characterization[a][0][3]
-    real = characterization[a][1][3]
+    sim = characterization[a][0][0]
+    real = characterization[a][1][0]
     error = float(real-sim)*100/real
     mod_error = real/sim #round((error), 2)
     errors.append((apps[a], sim, mod_error))

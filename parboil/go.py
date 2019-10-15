@@ -93,13 +93,26 @@ def run_four():
         cmd = " ".join(cmd_args)
         run(cmd, tmp_output, exp_dir + output)
 
+# Experiment 5
+def run_five():
+  exp_dir = "/home/ts20/share/results/ispass/accuracy/characterization/"
+  for app in apps:
+    output = exp_dir + app + "/"
+    if not os.path.isfile(output + "vtune.txt"):
+      cmd_args = ["time python vtune.py", "-a", app, "-o", output]
+      cmd = " ".join(cmd_args)
+      print(cmd)
+      os.system(cmd)
+      print("Done! Navigate to " + output + "vtune.txt to see the results!")
+
 # EXPERIMENTS
 experiments = {
                 0: run_zero,
                 1: run_one,
                 2: run_two,
                 3: run_three,
-                4: run_four
+                4: run_four,
+                5: run_five
               }
 
 def main():

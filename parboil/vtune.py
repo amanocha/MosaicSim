@@ -2,6 +2,7 @@ import argparse
 import numpy as np
 import os
 import re
+import shutil
 import sys
 import time
 
@@ -42,9 +43,9 @@ def compile():
     include = "../../../../common/include/"
 
     if (app != "bfs"):
-      cmd_args = ["DEC++", "-I", include, "-t", str(threads), "../../../../common/src/parboil.c", filename]
+      cmd_args = ["DEC++", "-I", include, "-g", "1", "-t", str(threads), "../../../../common/src/parboil.c", filename]
     else:
-      cmd_args = ["DEC++", "-t", str(threads), filename]
+      cmd_args = ["DEC++", "-g", "1", "-t", str(threads), filename]
 
     if app == "cutcp":
       cmd_args += ["readatom.c", "output.c", "excl.c", "cutcpu.c"]
@@ -68,7 +69,7 @@ def compile():
     print(cmd)
     os.system(cmd)
 
-def execute(exec_kernel):
+def execute():
     print("Executing application...")
     if app == "bfs":
       datafiles = ["Kronecker_21.el"] #["graph_input.dat"]
@@ -101,17 +102,15 @@ def execute(exec_kernel):
       if d != datafiles[len(datafiles)-1]:
         input_path = input_path + ","
 
-    cmd = "perf stat -B -d -v -e cache-references,cache-misses,cycles,instructions,L1-dcache-stores,node-loads,node-stores -o "
-    if (exec_kernel):
-      if (app != "bfs"):
-        cmd = cmd + output + "perf1.txt ./" + compile_dir + "/" + compile_dir + " 1 -i " + input_path + " " + " > " + output + "app_output1.txt"
-      else:
-        cmd = cmd + output + "perf1.txt ./" + compile_dir + "/" + compile_dir + " 1 " + input_path + " " + " > " + output + "app_output1.txt"
+    dirname = "vtune"
+    if os.path.isdir(dirname):
+      shutil.rmtree(dirname)
+
+    cmd = "amplxe-cl -r " + dirname + " -collect general-exploration -knob sampling-interval=0.1 "
+    if (app != "bfs"):
+      cmd = cmd + "./" + compile_dir + "/" + compile_dir + " 1 -i " + input_path + " > " + output + "vtune.txt"
     else:
-      if (app != "bfs"):
-        cmd = cmd + output + "perf2.txt ./" + compile_dir + "/" + compile_dir + " -i " + input_path + " " + " > " + output + "app_output2.txt"
-      else:
-        cmd = cmd + output + "perf2.txt ./" + compile_dir + "/" + compile_dir + " " + input_path + " " + " > " + output + "app_output2.txt"
+      cmd = cmd + "./" + compile_dir + "/" + compile_dir + " 1 " + input_path + " > " + output + "vtune.txt"
 
     output_path = input_path.split("/")[0:7] + ["output"]
     output_path = "/".join(output_path)
@@ -242,11 +241,7 @@ def main():
         os.chdir(new_dir)
         compile()
         one = time.time()
-        for i in range(num_samples):
-          execute(1)
-          execute(0)
-          measure()
-        avg(num_samples)
+        execute()
         two = time.time()
         print("Measurement Time = " + str(round(two-one)) + " seconds.\n")
 

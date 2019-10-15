@@ -72,8 +72,8 @@ int main(int argc, char* argv[]) {
     fputs("Input file expected\n", stderr);
     return -1;
   }
-  printf("%s\n",parameters->outFile);
-  int numIterations = 32;
+  //printf("%s\n",parameters->outFile);
+  int numIterations = 16;
   /*if (argc >= 2){
     numIterations = atoi(argv[1]);
   } else {
