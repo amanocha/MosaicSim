@@ -72,9 +72,7 @@ void _kernel_(int npoints, int count, struct cartesian *all_data, int *nps, int 
   int npd = nps[0];
 
   if (tid == 0) {
-    //printf("DD: %lld %lld %lld\n", DD[0], DD[1], DD[2]);
     compute(data, npd, NULL, 0, 1, DD, nbins, binb);
-    //printf("DD: %lld %lld %lld\n", DD[0], DD[1], DD[2]);
   }
 
   int rf;

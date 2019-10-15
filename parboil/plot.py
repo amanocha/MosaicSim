@@ -181,7 +181,7 @@ def parse_characterization():
     mod_error = real/sim #round((error), 2)
     errors.append((apps[a], sim, mod_error))
     print(apps[a], sim, real, mod_error)
-  accuracy("runtime", errors, np.arange(9), "Accuracy Factor")
+  accuracy("runtime", errors, np.arange(5), "Accuracy Factor")
 
   '''
   print("\nPRINTING L1 MISS RATES...\n----------")
