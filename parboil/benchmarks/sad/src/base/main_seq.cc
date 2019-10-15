@@ -319,7 +319,6 @@ void _kernel_(unsigned short *blk_sad,
   unsigned short *x, *y;	/* inputs to vector addition */
   unsigned short *z;		/* output of vector addition */
   int count;
-  for (int iter = 0; iter < 20; iter++) {
   for (macroblock = tid; macroblock < mbs; macroblock+=num_threads)
     {
       /* Block type 6 */
@@ -414,7 +413,6 @@ void _kernel_(unsigned short *blk_sad,
 
       for (count = 0; count < MAX_POS; count++) *z++ = *x++ + *y++;
     }
-  }
 }
 
 int main(int argc, char **argv)

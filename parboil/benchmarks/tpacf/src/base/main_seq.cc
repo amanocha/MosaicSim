@@ -17,7 +17,7 @@
 #include "args.h"
 #include "model.h"
 
-int compute(struct cartesian *data1, int n1, struct cartesian *data2, int n2, int doSelf, int *data_bins, int nbins, float *binb)
+void compute(struct cartesian *data1, int n1, struct cartesian *data2, int n2, int doSelf, int *data_bins, int nbins, float *binb)
 {
   int i, j, k;
   if (doSelf)
@@ -62,8 +62,6 @@ int compute(struct cartesian *data1, int n1, struct cartesian *data2, int n2, in
 	  }
         }
     }
-
-    return 0;
 }
 
 void _kernel_(int npoints, int count, struct cartesian *all_data, int *nps, int *DD, int *RRS, int *DRS, int nbins, float *binb, int tid, int num_threads) {
@@ -71,9 +69,7 @@ void _kernel_(int npoints, int count, struct cartesian *all_data, int *nps, int 
   struct cartesian *data = &all_data[0];
   int npd = nps[0];
 
-  if (tid == 0) {
-    compute(data, npd, NULL, 0, 1, DD, nbins, binb);
-  }
+  compute(data, npd, NULL, 0, 1, DD, nbins, binb);
 
   int rf;
   for (rf = 1+tid; rf < count; rf += num_threads) {
