@@ -51,7 +51,7 @@ def accuracy(title, stats, yticks, ylabel):
   ax1 = fig.add_subplot(111)
 
   data = [stat[2] for stat in stats]
-  colors = ['blue'] #NEED TO CHANGE COLORS BASED ON N
+  colors = ['royalblue'] #NEED TO CHANGE COLORS BASED ON N
   psbs = []
   for i in range(N):
     if N % 2 == 0:
@@ -110,7 +110,7 @@ def characterize(stats, metric):
 def scaling(stats, a):
   print("\nCREATING SCALING GRAPH FOR " + scaling_apps[a] + "...\n----------")
   
-  fig = plt.figure(figsize=(10.0,6.0))
+  fig = plt.figure(figsize=(10.0,4.0))
   fig.subplots_adjust(bottom=0.1)
   ax1 = fig.add_subplot(111)
 
@@ -126,8 +126,8 @@ def scaling(stats, a):
   yticks = np.arange(cap)
   smallscale = 0.75
 
-  ax1.plot(x, y1, linewidth=3, label='Pythia')
-  ax1.plot(x, y2, linewidth=3, label='x86')
+  ax1.plot(x, y1, color='royalblue', linewidth=5, label='MosaicSim')
+  ax1.plot(x, y2, color='tab:orange', linewidth=5, label='x86')
   ax1.set_xticks(x)
   ax1.set_xticklabels(labels, fontsize=smallscale*TICK_FONTSIZE)
   ax1.set_yticklabels(yticks, fontsize=smallscale*TICK_FONTSIZE)
@@ -303,7 +303,7 @@ def main():
     os.mkdir(outdir)
  
   parse_characterization()
-  #parse_scaling()  
+  parse_scaling()  
 
   print("\nDone!")
 
