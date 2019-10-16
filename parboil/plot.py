@@ -46,12 +46,12 @@ def accuracy(title, stats, yticks, ylabel):
 
   N = 1 # number of bars per application
 
-  fig = plt.figure(figsize=(48.0,20.0))
+  fig = plt.figure(figsize=(48.0,16.0))
   fig.subplots_adjust(bottom=0.1)
   ax1 = fig.add_subplot(111)
 
   data = [stat[2] for stat in stats]
-  colors = ['tab:blue'] #NEED TO CHANGE COLORS BASED ON N
+  colors = ['blue'] #NEED TO CHANGE COLORS BASED ON N
   psbs = []
   for i in range(N):
     if N % 2 == 0:
