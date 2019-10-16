@@ -124,10 +124,10 @@ def scaling(stats, a):
     labels.append(label)
   cap = math.ceil(max(y1+y2)+2)
   yticks = np.arange(cap)
-  smallscale = 0.75
+  smallscale = 0.65
 
-  ax1.plot(x, y1, color='royalblue', linewidth=5, label='MosaicSim')
   ax1.plot(x, y2, color='tab:orange', linewidth=5, label='x86')
+  ax1.plot(x, y1, color='royalblue', linewidth=5, label='MosaicSim')
   ax1.set_xticks(x)
   ax1.set_xticklabels(labels, fontsize=smallscale*TICK_FONTSIZE)
   ax1.set_yticklabels(yticks, fontsize=smallscale*TICK_FONTSIZE)
@@ -143,7 +143,7 @@ def parse_characterization():
   
   # L1, LLC, compute2mem, BW, IPC 
   characterization = []
-  metrics = ["Calculated L1 Miss Rate", "Calculated LLC Miss Rate", "Calculated Compute to Memory Ratio", "Calculated IPC", "cycles"]
+  #metrics = ["Calculated L1 Miss Rate", "Calculated LLC Miss Rate", "Calculated Compute to Memory Ratio", "Calculated IPC", "cycles"]
   metrics = ["Calculated IPC", "cycles"]
   filenames = ["/measurements.txt", "/prof.txt"]
 
