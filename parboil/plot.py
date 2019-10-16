@@ -182,7 +182,7 @@ def parse_characterization():
     #mod_error = round((error), 2)
     errors.append((apps[a], sim, mod_error))
     print(apps[a], sim, real, mod_error)
-  accuracy("runtime", errors, np.arange(5), "Accuracy Factor")
+  accuracy("runtime", errors, np.round(np.arange(0, 1.3, 0.1), 2), "Accuracy Factor")
 
   '''
   print("\nPRINTING L1 MISS RATES...\n----------")
@@ -213,7 +213,7 @@ def parse_characterization():
     errors.append((apps[a], sim, mod_error))
     errors = sorted(errors, key=lambda x: x[1])
     print(apps[a], sim, real, mod_error)
-  accuracy("ipc", errors, np.round(np.arange(0, 1.2, 0.1), 2), "Accuracy Factor")
+  accuracy("ipc", errors, np.round(np.arange(0, 2.1, 0.1), 2), "Accuracy Factor")
 
   metrics = [m.replace("Calculated ", "") for m in metrics] 
   for m in range(len(metrics)):
@@ -222,11 +222,11 @@ def parse_characterization():
     stats = [stats1, stats2]
     metric = metrics[m]
     characterize(stats, metric)
-    if (m == 3):
+    if (m == 0):
       stats = [(apps[s], 0, stats1[s]) for s in range(len(stats1))]
       stats = sorted(stats, key=lambda x: x[2])
       print(stats)
-      accuracy("real_ipc", stats, np.round(np.arange(0, 2.1, 0.1), 2), "IPC")
+      accuracy("real_ipc", stats, np.round(np.arange(0, 5.5, 0.5), 2), "IPC")
 
 def parse_scaling():
   print("\nPARSING SCALING INFORMATION...\n----------")
