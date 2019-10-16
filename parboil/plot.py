@@ -225,7 +225,7 @@ def parse_characterization():
     if (m == 0):
       stats = [(apps[s], 0, stats1[s]) for s in range(len(stats1))]
       stats = sorted(stats, key=lambda x: x[2])
-      print(stats)
+      print("STATS", stats)
       accuracy("real_ipc", stats, np.round(np.arange(0, 5.5, 0.5), 2), "IPC")
 
 def parse_scaling():
