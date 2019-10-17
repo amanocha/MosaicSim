@@ -5,7 +5,7 @@ import sys
 
 # APPS
 apps = ["bfs", "cutcp", "histo", "lbm", "mri-gridding", "mri-q", "sad", "sgemm", "spmv", "stencil", "tpacf"]
-scaling_apps = ["bfs", "sgemm", "spmv"]
+scaling_apps = ["bfs", "cutcp", "histo", "lbm", "mri-gridding", "mri-q", "sad", "sgemm", "spmv", "stencil", "tpacf"]
 
 # CONFIGS
 modes = ["db", "di"]
@@ -105,6 +105,20 @@ def run_five():
       os.system(cmd)
       print("Done! Navigate to " + output + "vtune.txt to see the results!")
 
+# Experiment 6
+def run_six():
+  exp_dir = "/home/ts20/share/results/ispass/accuracy/scaling/"
+  for app in scaling_apps:
+    for i in range(num_threads):
+      threads = str(int(math.pow(2, i)))
+      output = exp_dir + app + "_" + threads + "/"
+      if not os.path.isfile(output + "vtune.txt"):
+        cmd_args = ["time python vtune.py", "-a", app, "-t", threads, "-x", "1", "-o", output]
+        cmd = " ".join(cmd_args)
+        print(cmd)
+        os.system(cmd)
+        print("Done! Navigate to " + output + "vtune.txt to see the results!")
+
 # EXPERIMENTS
 experiments = {
                 0: run_zero,
@@ -112,7 +126,8 @@ experiments = {
                 2: run_two,
                 3: run_three,
                 4: run_four,
-                5: run_five
+                5: run_five,
+                6: run_six
               }
 
 def main():

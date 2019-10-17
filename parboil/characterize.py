@@ -206,7 +206,7 @@ def main():
           else:
             app = args.app
             if (args.scale):
-              main_name = "main.cc"
+              main_name = "main_big.cc"
             else:
               main_name = "main_seq.cc"
             source = "benchmarks/" + app + "/src/base/" + main_name 

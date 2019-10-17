@@ -22,7 +22,6 @@ threads = 1
 # EXECUTION INFO
 app_input = ""
 new_dir = ""
-num_samples = 10
 
 metrics = {}
 
@@ -30,8 +29,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("-a", "--app", type=str, help="Name of benchmark")
     parser.add_argument("-s", "--source", type=str, default="", help="Path to source code file")
-    parser.add_argument("-t", "--num_threads", type=int, default=1, help="Number of threads")
-    parser.add_argument("-n", "--num_samples", type=int, default=30, help="Number of sample points to average")
+    parser.add_argument("-t", "--num_threads", type=int, default=0, help="Number of threads")
     parser.add_argument("-x", "--scale", type=int, default=0, help="Run scaling version")
     parser.add_argument("-o", "--output", type=str, help="Output path")
     args = parser.parse_args()
@@ -69,7 +67,7 @@ def compile():
     print(cmd)
     os.system(cmd)
 
-def execute():
+def execute(thread_str):
     print("Executing application...")
     if app == "bfs":
       datafiles = ["Kronecker_21.el"] #["graph_input.dat"]
@@ -102,7 +100,7 @@ def execute():
       if d != datafiles[len(datafiles)-1]:
         input_path = input_path + ","
 
-    dirname = "vtune"
+    dirname = "vtune" + thread_str
     if os.path.isdir(dirname):
       shutil.rmtree(dirname)
 
@@ -118,80 +116,10 @@ def execute():
     print(cmd)
     os.system(cmd)
 
-def measure():
-    print("Gathering measurements...")
-    with_kernel = open(output + "perf1.txt", "r+")
-    without_kernel = open(output + "perf2.txt", "r+")
-
-    L1misses, L1references, LLCmisses, LLCreferences = 0, 0, 0, 0
-    for line1 in with_kernel:
-      line1 = line1.replace(",","").replace("-", "")
-      line2 = without_kernel.readline().replace(",","").replace("-", "")
-      match1 = re.match("\s*(\d+)\s+(\w+)", line1)
-      match2 = re.match("\s*(\d+)\s+(\w+)", line2)
-      if match1 != None:
-        value1 = int(match1.group(1))
-        metric1 = match1.group(2)
-      else:
-        metric1 = ""
-        value1 = 0
-      if match2 != None:
-        value2 = int(match2.group(1))
-        metric2 = match2.group(2)
-      else:
-        metric2 = metric1
-        value2 = 0
-
-      if metric1 == metric2 and metric1 != "":
-        value = value1 - value2
-        if metric1 in metrics:
-          metrics[metric1] = metrics[metric1] + value
-        else:
-          metrics[metric1] = value          
-        print(metric1, metrics[metric1])
-      else:
-        print(line1)
-
-    with_kernel.close()
-    without_kernel.close()
-
-def avg(N):
-    measurements = open(output + "perf.txt", "w+")
-    
-    for metric in metrics:
-      metrics[metric] = round(metrics[metric]/N)
-      measurements.write(metric + ": " + str(metrics[metric]) + "\n")
-      print(metric, metrics[metric])
-    measurements.write("\nRESULTS:\n")
-    measurements.write("----------\n")
-
-    L1misses = metrics["L1dcacheloadmisses"]
-    L1references = metrics["L1dcacheloads"]
-    LLCmisses = metrics["LLCloadmisses"]
-    cycles = metrics["cycles"]
-    instructions = metrics["instructions"]
-    memory_ops = L1references + metrics["L1dcachestores"]
-    compute_ops = instructions - memory_ops
-    
-    L1miss_rate = L1misses*100.0/L1references
-    LLCmiss_rate = LLCmisses*100.0/L1references
-    ratio = compute_ops/memory_ops
-    avg_bw = LLCmisses*64*4/(1024*1024*1024)/(cycles/3.2e9)
-    ipc = float(instructions)/cycles
-
-    measurements.write("Calculated L1 Miss Rate: " + str(L1miss_rate) + "\n")
-    measurements.write("Calculated LLC Miss Rate: " + str(LLCmiss_rate) + "\n")
-    measurements.write("Calculated Compute to Memory Ratio: " + str(ratio) + "\n")
-    measurements.write("Average BW: " + str(avg_bw) + "\n")
-    measurements.write("Calculated IPC: " + str(ipc) + "\n")
-
-    measurements.close()
-
 def main():
     global source, data, output
     global filename, threads
     global app, app_input, new_dir
-    global num_samples
 
     args = parse_args()
 
@@ -205,7 +133,7 @@ def main():
           else:
             app = args.app
             if (args.scale):
-              main_name = "main.cc"
+              main_name = "main_big.cc"
             else:
               main_name = "main_seq.cc"
             source = "benchmarks/" + app + "/src/base/" + main_name 
@@ -222,9 +150,6 @@ def main():
         
         print("Application: " + app)
 
-        # compiler args
-        threads = args.num_threads
-
         if args.output:
             output = args.output
         else:
@@ -235,13 +160,15 @@ def main():
 
         print("Output directory: " + output)
 
-        num_samples = args.num_samples
-
         print("------------------------------------------------------------\n")
         os.chdir(new_dir)
         compile()
         one = time.time()
-        execute()
+        if args.num_threads != 0:
+          threads = args.num_threads
+          execute(str(threads))
+        else:
+          execute("")
         two = time.time()
         print("Measurement Time = " + str(round(two-one)) + " seconds.\n")
 

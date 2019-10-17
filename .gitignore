@@ -5,6 +5,6 @@ parboil/datasets/*
 **/build
 **/run
 **/decades_base
-**/vtune
+**/vtune*
 **/result
 **/epochStats
