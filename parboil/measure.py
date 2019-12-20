@@ -139,7 +139,7 @@ def simulate():
     out_files = [int(f.split("_")[2]) for f in files if "output_compute" in f]
     threads = max(out_files) + 1
 
-    cmd_args = ["mosaicrun", "-n", str(threads), "."]
+    cmd_args = ["pythiarun", "-n", str(threads), "."]
     cmd_sim = ["-sc", "sim_cafe", "-o", output]
     cmd_config = ["-cc", "core_cafe"]
     cmd = " ".join(cmd_args + cmd_sim + cmd_config)

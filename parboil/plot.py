@@ -298,10 +298,36 @@ def parse_scaling():
   for a in range(len(scaling_apps)):
     scaling(speedups, a)
 
+def parse_speed():
+  print("\nPARSING SIMULATION SPEED...\n----------")
+
+  speeds = []
+
+  exp_dir_characterization = exp_dir + "characterization/"
+  for a in range(len(apps)):
+    app = apps[a]
+    if len(apps) <= a:
+      speeds.append([])
+
+    filename = exp_dir_characterization + app + "/measurements.txt"
+    if os.path.isfile(filename):
+      print("READING: " + filename)
+      measurements = open(filename)
+      data = measurements.read()
+      measurements.close()
+      matches = re.findall("Average Global Simulation Speed: (\d+) Instructions per sec", data, re.MULTILINE)
+      print(matches)
+      speed = float(matches[0])/1e6
+      speeds.append((apps[a], 1, speed))
+      print(apps[a], speed)
+
+  accuracy("speed", speeds, np.round(np.arange(0, 1.2, 0.1), 2), "Speed")
+
 def main():  
   if not os.path.isdir(outdir):
     os.mkdir(outdir)
- 
+
+  #parse_speed() 
   parse_characterization()
   parse_scaling()  
 
