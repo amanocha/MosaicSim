@@ -119,6 +119,16 @@ def run_six():
         os.system(cmd)
         print("Done! Navigate to " + output + "vtune.txt to see the results!")
 
+# Experiment 7: Graphfire
+def run_seven():
+  exp_dir = "/home/ts20/share/results/smart_cache/micro/io/gp_workloads/"
+  for app in apps:
+    output = app + "/"
+    if not os.path.isfile(exp_dir + output + "measurements.txt"):
+      tmp_output = exp_dir + "tmp_" + output
+      cmd_args = ["time python measure.py", "-a", app, "-o", tmp_output]
+      cmd = " ".join(cmd_args)
+      run(cmd, tmp_output, exp_dir + output)
 # EXPERIMENTS
 experiments = {
                 0: run_zero,

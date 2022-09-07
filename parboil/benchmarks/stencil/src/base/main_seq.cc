@@ -96,7 +96,7 @@ int main(int argc, char** argv) {
         nx = 128;
         ny = 128;
         nz = 32;
-        iteration = 16;
+        iteration = 1;
 
 	/*nx = atoi(argv[1]);
 	if (nx<1)

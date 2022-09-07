@@ -72,7 +72,7 @@ void _kernel_(int npoints, int count, struct cartesian *all_data, int *nps, int 
   compute(data, npd, NULL, 0, 1, DD, nbins, binb);
 
   int rf;
-  for (rf = 1+tid; rf < count; rf += num_threads) {
+  for (rf = 1+tid; rf < 2; rf += num_threads) {
     struct cartesian *random = &all_data[rf*npoints];
 
     // compute RR
