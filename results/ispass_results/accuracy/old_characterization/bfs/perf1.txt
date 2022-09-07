@@ -1,0 +1,30 @@
+# started on Tue Oct  8 22:48:26 2019
+
+cache-references: 447470651 158491094826 57626941432
+cache-misses: 163828732 158492093674 57620908761
+cycles: 557751677896 158493092699 72029060027
+instructions: 1442426596368 158494091708 86436439913
+L1-dcache-stores: 220139262179 158495091145 86435370006
+node-loads: 160033819 158496084142 57638505988
+node-stores: 1933498 158496084142 28824677256
+L1-dcache-loads: 417557440213 158495091145 28824405606
+L1-dcache-load-misses: 672311176 158488097998 28824936523
+LLC-loads: 422795135 158489097174 28820359021
+LLC-load-misses: 162305225 158490096248 43222933640
+
+ Performance counter stats for './decades_base/decades_base 1 /home/ts20/share/datasets/bfs/default/input/Kronecker_24.el -o result':
+
+       447,470,651      cache-references                                              (36.36%)
+       163,828,732      cache-misses              #   36.612 % of all cache refs      (36.36%)
+   557,751,677,896      cycles                                                        (45.45%)
+ 1,442,426,596,368      instructions              #    2.59  insn per cycle           (54.54%)
+   220,139,262,179      L1-dcache-stores                                              (54.54%)
+       160,033,819      node-loads                                                    (36.37%)
+         1,933,498      node-stores                                                   (18.19%)
+   417,557,440,213      L1-dcache-loads                                               (18.19%)
+       672,311,176      L1-dcache-load-misses     #    0.16% of all L1-dcache hits    (18.19%)
+       422,795,135      LLC-loads                                                     (18.18%)
+       162,305,225      LLC-load-misses           #   38.39% of all LL-cache hits     (27.27%)
+
+     158.496193180 seconds time elapsed
+

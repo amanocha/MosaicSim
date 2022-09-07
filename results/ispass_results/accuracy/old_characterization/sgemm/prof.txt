@@ -1,0 +1,4 @@
+Calculated IPC: 2.00
+cycles: 5120000
+tmp_calculated IPC: 2.336
+tmp_cycles: 19840000

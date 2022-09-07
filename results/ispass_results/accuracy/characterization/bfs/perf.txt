@@ -1,0 +1,7 @@
+instructions: 4.0
+cachereferences: -58.0
+cachemisses: -1.0
+cycles: -996.0
+
+RESULTS:
+----------

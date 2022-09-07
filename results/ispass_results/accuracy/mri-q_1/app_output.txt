@@ -1,0 +1,6 @@
+32768 pixels in output; 3072 samples in trajectory; using 128 samples
+
+kernel computation time: 8.864428s
+IO        : 0.085541
+Compute   : 8.905014
+Timer Wall Time: 8.990612

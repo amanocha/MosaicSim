@@ -1,0 +1,17 @@
+GENERAL STATS
+-------------
+
+Average BW : 0 GB/s 
+cycles : 15000000
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+LD : 1
+ST : 0
+total_instructions : 8
+l1_load_hits : 0
+l1_load_misses : 1
+l2_load_hits : 0
+l2_load_misses : 0
+L1 Miss Rate: 100%

@@ -1,0 +1,120 @@
+
+kernel computation time: 0.0249155s
+GFLOPs = 0.157456
+IO        : 0.029734
+Compute   : 0.024973
+Timer Wall Time: 0.054755
+Elapsed Time: 0.060s
+    Clockticks: 73,600,000
+    Instructions Retired: 152,960,000
+    CPI Rate: 0.481
+    Front-End Bound: 0.0% of Pipeline Slots
+        Front-End Latency: 0.0% of Pipeline Slots
+            ICache Misses: 0.0% of Clockticks
+            ITLB Overhead: 0.0% of Clockticks
+            Branch Resteers: 0.0% of Clockticks
+            DSB Switches: 0.0% of Clockticks
+            Length Changing Prefixes: 0.0% of Clockticks
+            MS Switches: 0.0% of Clockticks
+        Front-End Bandwidth: 0.0% of Pipeline Slots
+            Front-End Bandwidth MITE: 0.0% of Clockticks
+            Front-End Bandwidth DSB: 0.0% of Clockticks
+            Front-End Bandwidth LSD: 0.0% of Clockticks
+            (Info) DSB Coverage: 0.0%
+            (Info) LSD Coverage: 0.0%
+    Bad Speculation: 100.0% of Pipeline Slots
+     | A significant proportion of pipeline slots containing useful work are
+     | being cancelled. This can be caused by mispredicting branches or by
+     | machine clears. Note that this metric value may be highlighted due to
+     | Branch Resteers issue.
+     |
+        Branch Mispredict: 0.0% of Pipeline Slots
+        Machine Clears: 100.0% of Pipeline Slots
+         | Issue: A significant portion of execution time is spent handling
+         | machine clears.
+         | 
+         | Tips: See the "Memory Disambiguation" section in the Intel 64 and
+         | IA-32 Architectures Optimization Reference Manual.
+         |
+    Back-End Bound: 0.0% of Pipeline Slots
+        Memory Bound: 0.0% of Pipeline Slots
+            L1 Bound: 0.0% of Clockticks
+                DTLB Overhead: 0.0% of Clockticks
+                Loads Blocked by Store Forwarding: 0.0% of Clockticks
+                Lock Latency: 0.0% of Clockticks
+                Split Loads: 0.0% of Clockticks
+                4K Aliasing: 100.0% of Clockticks
+                FB Full: 0.0% of Clockticks
+            L2 Bound: N/A with HT on
+            L3 Bound: N/A with HT on
+                Contested Accesses: 0.0% of Clockticks
+                Data Sharing: 0.0% of Clockticks
+                L3 Latency: 0.0% of Clockticks
+                SQ Full: 0.0% of Clockticks
+            DRAM Bound: N/A with HT on
+                Memory Bandwidth: N/A with HT on
+                Memory Latency: N/A with HT on
+                    Local DRAM: 0.0% of Clockticks
+                    Remote DRAM: 0.0% of Clockticks
+                    Remote Cache: 0.0% of Clockticks
+            Store Bound: 0.0% of Clockticks
+                Store Latency: 100.0% of Clockticks
+                False Sharing: 0.0% of Clockticks
+                Split Stores: 0.0% of Clockticks
+                DTLB Store Overhead: 0.0% of Clockticks
+        Core Bound: 0.0% of Pipeline Slots
+            Divider: 0.0% of Clockticks
+            Port Utilization: 100.0% of Clockticks
+                Cycles of 0 Ports Utilized: 100.0% of Clockticks
+                Cycles of 1 Port Utilized: 100.0% of Clockticks
+                Cycles of 2 Ports Utilized: 100.0% of Clockticks
+                Cycles of 3+ Ports Utilized: 100.0% of Clockticks
+                    Port 0: 100.0% of Clockticks
+                    Port 1: 100.0% of Clockticks
+                    Port 2: 100.0% of Clockticks
+                    Port 3: 100.0% of Clockticks
+                    Port 4: 100.0% of Clockticks
+                    Port 5: 100.0% of Clockticks
+                    Port 6: 100.0% of Clockticks
+                    Port 7: 100.0% of Clockticks
+    Retiring: 100.0% of Pipeline Slots
+     | A high fraction of pipeline slots was utilized by useful work. While the
+     | goal is to make this metric value as big as possible, a high Retiring
+     | value for non-vectorized code could prompt you to consider code
+     | vectorization. Vectorization enables doing more computations without
+     | significantly increasing the number of instructions, thus improving the
+     | performance. Note that this metric value may be highlighted due to
+     | Microcode Sequencer (MS) issue, so the performance can be improved by
+     | avoiding using the MS.
+     |
+        General Retirement: 100.0% of Pipeline Slots
+         | This metric represents a fraction of slots during which CPU was
+         | retiring uOps not originated from the Microcode Sequencer. This
+         | correlates with the total number of instructions executed by the
+         | program. A uOps-per-Instruction ratio of 1 is expected. While this is
+         | the most desirable of the top 4 categories, high values may still
+         | indicate areas for improvement. If possible focus on techniques that
+         | reduce instruction count or result in more efficient instructions
+         | generation such as vectorization.
+         |
+        Microcode Sequencer: 0.0% of Pipeline Slots
+            Assists: 0.0% of Pipeline Slots
+    Total Thread Count: 2
+    Paused Time: 0s
+Collection and Platform Info
+    Application Command Line: ./decades_base/decades_base "1" "-i" "/home/ts20/share/datasets/sgemm/default/input/matrix1.txt,/home/ts20/share/datasets/sgemm/default/input/matrix2.txt,/home/ts20/share/datasets/sgemm/default/input/matrix2t.txt" 
+    Operating System: 3.10.0-862.14.4.el7.x86_64 NAME="CentOS Linux" VERSION="7 (Core)" ID="centos" ID_LIKE="rhel fedora" VERSION_ID="7" PRETTY_NAME="CentOS Linux 7 (Core)" ANSI_COLOR="0;31" CPE_NAME="cpe:/o:centos:centos:7" HOME_URL="https://www.centos.org/" BUG_REPORT_URL="https://bugs.centos.org/"  CENTOS_MANTISBT_PROJECT="CentOS-7" CENTOS_MANTISBT_PROJECT_VERSION="7" REDHAT_SUPPORT_PRODUCT="centos" REDHAT_SUPPORT_PRODUCT_VERSION="7" 
+    Computer Name: cafe
+    Result Size: 5 MB 
+    Collection start time: 03:22:07 15/10/2019 UTC
+    Collection stop time: 03:22:07 15/10/2019 UTC
+    Collector Type: Driverless Perf system-wide sampling
+    CPU
+        Name: Intel(R) Xeon(R) E5/E7 v3 Processor code named Haswell
+        Frequency: 3.193 GHz
+        Logical CPU Count: 32
+
+If you want to skip descriptions of detected performance issues in the report,
+enter: amplxe-cl -report summary -report-knob show-issues=false -r
+<my_result_dir>. Alternatively, you may view the report in the csv format:
+amplxe-cl -report <report_name> -format=csv.

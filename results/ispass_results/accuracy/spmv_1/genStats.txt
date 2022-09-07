@@ -1,0 +1,27 @@
+/home/aninda/pythia/bin/../ mosaichome 
+
+[SIM] ----Reading CONFIGURATION file---------
+File: /home/aninda/pythia/sim/config/sim_cafe.txt
+(31) num_accels: 8
+(32) num_IS: 8
+(29) technology_node: 14
+(30) chip_freq: 2000
+(52) use_l2: 0
+(5) ideal_cache: 0
+(6) cache_size: 20971520
+(11) cache_latency: 60
+(12) cache_assoc: 8
+(13) cache_linesize: 64
+(7) cache_load_ports: 8
+(8) cache_store_ports: 8
+(26) SimpleDRAM: 1
+(27) dram_bw: 68
+(28) dram_latency: 200
+(9) mem_read_ports: 4
+(10) mem_write_ports: 4
+(19) SAB_size: 128
+(21) SVB_size: 128
+(16) commBuff_size: 64
+(17) commQ_size: 512
+(18) term_buffer_size: 128
+[ERROR] Can't find config mapping of: desc_latency

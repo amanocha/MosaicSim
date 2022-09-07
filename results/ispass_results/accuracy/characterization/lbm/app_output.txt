@@ -1,0 +1,27 @@
+MAIN_printInfo:
+	grid size      : 120 x 120 x 150 = 2.16 * 10^6 Cells
+	nTimeSteps     : 1
+	result file    : result
+	action         : store
+	simulation type: lid-driven cavity
+	obstacle file  : /home/ts20/share/datasets/lbm/default/input/120_120_150_ldc.of
+
+LBM_allocateGrid: allocated 169.2 MByte
+LBM_allocateGrid: allocated 169.2 MByte
+LBM_showGridStatistics:
+	nObstacleCells:  343321 nAccelCells:   26912 nFluidCells: 1789767
+	minRho:   1.0000 maxRho:   1.0000 mass: 2.160000e+06
+	minU: 0.000000e+00 maxU: 0.000000e+00
+
+
+kernel computation time: 29.711657s
+MAIN_stopClock:
+	usr:   27.30 sys:    2.36 tot:   29.66 wct:   29.71 MLUPS:  0.07
+
+LBM_showGridStatistics:
+	nObstacleCells:  343321 nAccelCells:   26912 nFluidCells: 1789767
+	minRho:   0.9966 maxRho:   1.0034 mass: 2.160000e+06
+	minU: 0.000000e+00 maxU: 7.000713e-03
+
+Compute   : 30.509156
+Timer Wall Time: 30.509157

@@ -1,0 +1,20 @@
+GENERAL STATS
+-------------
+
+Average BW : 89.5249 GB/s 
+cycles : 65678651
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+LD : 73995586
+ST : 41039698
+total_instructions : 792137540
+l1_load_hits : 104075104
+l1_load_misses : 420737122
+l2_load_hits : 0
+l2_load_misses : 21599889
+L1 Miss Rate: 80.4623%
+L2 Miss Rate: 87.5831%
+cache_access : 624170693
+dram_accesses : 45936465

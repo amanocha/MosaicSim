@@ -1,0 +1,6 @@
+
+kernel computation time: 4.53512s
+GFLOPs = 0.000867038
+IO        : 0.032682
+Compute   : 4.535162
+Timer Wall Time: 4.567865

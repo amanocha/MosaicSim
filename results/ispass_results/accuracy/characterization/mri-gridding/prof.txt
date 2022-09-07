@@ -1,0 +1,2 @@
+Calculated IPC: 1.078
+cycles: 37120000

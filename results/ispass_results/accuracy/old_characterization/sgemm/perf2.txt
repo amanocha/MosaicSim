@@ -1,0 +1,30 @@
+# started on Tue Oct  8 21:24:44 2019
+
+cache-references: 102164 41212488 13467016
+cache-misses: 6323 40735650 13921962
+cycles: 48535306 35738484 17909246
+instructions: 112653519 36737356 21832060
+L1-dcache-stores: 19219295 37736622 19827488
+node-loads: 1544 38738521 15853847
+node-stores: 367 39735875 7911781
+L1-dcache-loads: 34539936 40735650 7961695
+L1-dcache-load-misses: 72614 41212488 7472959
+LLC-loads: 32554 41212488 6470302
+LLC-load-misses: 1894 41212488 9463504
+
+ Performance counter stats for './decades_base/decades_base -i /home/ts20/share/datasets/sgemm/default/input/matrix1.txt,/home/ts20/share/datasets/sgemm/default/input/matrix2.txt,/home/ts20/share/datasets/sgemm/default/input/matrix2t.txt -o result':
+
+           102,164      cache-references                                              (32.68%)
+             6,323      cache-misses              #    6.189 % of all cache refs      (34.18%)
+        48,535,306      cycles                                                        (50.11%)
+       112,653,519      instructions              #    2.32  insn per cycle           (59.43%)
+        19,219,295      L1-dcache-stores                                              (52.54%)
+             1,544      node-loads                                                    (40.93%)
+               367      node-stores                                                   (19.91%)
+        34,539,936      L1-dcache-loads                                               (19.54%)
+            72,614      L1-dcache-load-misses     #    0.21% of all L1-dcache hits    (18.13%)
+            32,554      LLC-loads                                                     (15.70%)
+             1,894      LLC-load-misses           #    5.82% of all LL-cache hits     (22.96%)
+
+       0.041829110 seconds time elapsed
+

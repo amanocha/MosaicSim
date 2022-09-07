@@ -1,0 +1,275 @@
+clang-9: warning: treating 'c' input as 'c++' when in C++ mode, this behavior is deprecated [-Wdeprecated]
+clang-9: warning: treating 'c' input as 'c++' when in C++ mode, this behavior is deprecated [-Wdeprecated]
+clang-9: warning: treating 'c' input as 'c++' when in C++ mode, this behavior is deprecated [-Wdeprecated]
+clang-9: warning: treating 'c' input as 'c++' when in C++ mode, this behavior is deprecated [-Wdeprecated]
+convert-dataset/mmio.c:269:22: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    if (((matcode)[2]=='C'))
+         ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:269:22: note: remove extraneous parentheses around the comparison to silence this warning
+    if (((matcode)[2]=='C'))
+        ~            ^    ~
+convert-dataset/mmio.c:269:22: note: use '=' to turn this equality comparison into an assignment
+    if (((matcode)[2]=='C'))
+                     ^~
+                     =
+convert-dataset/mmio.c:275:27: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    else if (((matcode)[2]=='R'))
+              ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:275:27: note: remove extraneous parentheses around the comparison to silence this warning
+    else if (((matcode)[2]=='R'))
+             ~            ^    ~
+convert-dataset/mmio.c:275:27: note: use '=' to turn this equality comparison into an assignment
+    else if (((matcode)[2]=='R'))
+                          ^~
+                          =
+convert-dataset/mmio.c:285:27: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    else if (((matcode)[2]=='P'))
+              ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:285:27: note: remove extraneous parentheses around the comparison to silence this warning
+    else if (((matcode)[2]=='P'))
+             ~            ^    ~
+convert-dataset/mmio.c:285:27: note: use '=' to turn this equality comparison into an assignment
+    else if (((matcode)[2]=='P'))
+                          ^~
+                          =
+convert-dataset/mmio.c:301:22: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    if (((matcode)[2]=='C'))
+         ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:301:22: note: remove extraneous parentheses around the comparison to silence this warning
+    if (((matcode)[2]=='C'))
+        ~            ^    ~
+convert-dataset/mmio.c:301:22: note: use '=' to turn this equality comparison into an assignment
+    if (((matcode)[2]=='C'))
+                     ^~
+                     =
+convert-dataset/mmio.c:306:27: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    else if (((matcode)[2]=='R'))
+              ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:306:27: note: remove extraneous parentheses around the comparison to silence this warning
+    else if (((matcode)[2]=='R'))
+             ~            ^    ~
+convert-dataset/mmio.c:306:27: note: use '=' to turn this equality comparison into an assignment
+    else if (((matcode)[2]=='R'))
+                          ^~
+                          =
+convert-dataset/mmio.c:313:27: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    else if (((matcode)[2]=='P'))
+              ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:313:27: note: remove extraneous parentheses around the comparison to silence this warning
+    else if (((matcode)[2]=='P'))
+             ~            ^    ~
+convert-dataset/mmio.c:313:27: note: use '=' to turn this equality comparison into an assignment
+    else if (((matcode)[2]=='P'))
+                          ^~
+                          =
+convert-dataset/mmio.c:360:23: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    if (((*matcode)[2]=='C'))
+         ~~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:360:23: note: remove extraneous parentheses around the comparison to silence this warning
+    if (((*matcode)[2]=='C'))
+        ~             ^    ~
+convert-dataset/mmio.c:360:23: note: use '=' to turn this equality comparison into an assignment
+    if (((*matcode)[2]=='C'))
+                      ^~
+                      =
+convert-dataset/mmio.c:367:28: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    else if (((*matcode)[2]=='R'))
+              ~~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:367:28: note: remove extraneous parentheses around the comparison to silence this warning
+    else if (((*matcode)[2]=='R'))
+             ~             ^    ~
+convert-dataset/mmio.c:367:28: note: use '=' to turn this equality comparison into an assignment
+    else if (((*matcode)[2]=='R'))
+                           ^~
+                           =
+convert-dataset/mmio.c:375:28: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    else if (((*matcode)[2]=='P'))
+              ~~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:375:28: note: remove extraneous parentheses around the comparison to silence this warning
+    else if (((*matcode)[2]=='P'))
+             ~             ^    ~
+convert-dataset/mmio.c:375:28: note: use '=' to turn this equality comparison into an assignment
+    else if (((*matcode)[2]=='P'))
+                           ^~
+                           =
+convert-dataset/mmio.c:419:22: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    if (((matcode)[2]=='P'))
+         ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:419:22: note: remove extraneous parentheses around the comparison to silence this warning
+    if (((matcode)[2]=='P'))
+        ~            ^    ~
+convert-dataset/mmio.c:419:22: note: use '=' to turn this equality comparison into an assignment
+    if (((matcode)[2]=='P'))
+                     ^~
+                     =
+convert-dataset/mmio.c:423:22: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    if (((matcode)[2]=='R'))
+         ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:423:22: note: remove extraneous parentheses around the comparison to silence this warning
+    if (((matcode)[2]=='R'))
+        ~            ^    ~
+convert-dataset/mmio.c:423:22: note: use '=' to turn this equality comparison into an assignment
+    if (((matcode)[2]=='R'))
+                     ^~
+                     =
+convert-dataset/mmio.c:427:22: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    if (((matcode)[2]=='C'))
+         ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:427:22: note: remove extraneous parentheses around the comparison to silence this warning
+    if (((matcode)[2]=='C'))
+        ~            ^    ~
+convert-dataset/mmio.c:427:22: note: use '=' to turn this equality comparison into an assignment
+    if (((matcode)[2]=='C'))
+                     ^~
+                     =
+convert-dataset/mmio.c:463:22: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    if (((matcode)[0]=='M'))
+         ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:463:22: note: remove extraneous parentheses around the comparison to silence this warning
+    if (((matcode)[0]=='M'))
+        ~            ^    ~
+convert-dataset/mmio.c:463:22: note: use '=' to turn this equality comparison into an assignment
+    if (((matcode)[0]=='M'))
+                     ^~
+                     =
+convert-dataset/mmio.c:464:20: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        types[0] = "matrix";
+                   ^
+convert-dataset/mmio.c:469:22: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    if (((matcode)[1]=='C'))
+         ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:469:22: note: remove extraneous parentheses around the comparison to silence this warning
+    if (((matcode)[1]=='C'))
+        ~            ^    ~
+convert-dataset/mmio.c:469:22: note: use '=' to turn this equality comparison into an assignment
+    if (((matcode)[1]=='C'))
+                     ^~
+                     =
+convert-dataset/mmio.c:470:20: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        types[1] = "coordinate";
+                   ^
+convert-dataset/mmio.c:472:22: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    if (((matcode)[1]=='A'))
+         ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:472:22: note: remove extraneous parentheses around the comparison to silence this warning
+    if (((matcode)[1]=='A'))
+        ~            ^    ~
+convert-dataset/mmio.c:472:22: note: use '=' to turn this equality comparison into an assignment
+    if (((matcode)[1]=='A'))
+                     ^~
+                     =
+convert-dataset/mmio.c:473:20: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        types[1] = "array";
+                   ^
+convert-dataset/mmio.c:478:22: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    if (((matcode)[2]=='R'))
+         ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:478:22: note: remove extraneous parentheses around the comparison to silence this warning
+    if (((matcode)[2]=='R'))
+        ~            ^    ~
+convert-dataset/mmio.c:478:22: note: use '=' to turn this equality comparison into an assignment
+    if (((matcode)[2]=='R'))
+                     ^~
+                     =
+convert-dataset/mmio.c:479:20: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        types[2] = "real";
+                   ^
+convert-dataset/mmio.c:481:22: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    if (((matcode)[2]=='C'))
+         ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:481:22: note: remove extraneous parentheses around the comparison to silence this warning
+    if (((matcode)[2]=='C'))
+        ~            ^    ~
+convert-dataset/mmio.c:481:22: note: use '=' to turn this equality comparison into an assignment
+    if (((matcode)[2]=='C'))
+                     ^~
+                     =
+convert-dataset/mmio.c:482:20: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        types[2] = "complex";
+                   ^
+convert-dataset/mmio.c:484:22: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    if (((matcode)[2]=='P'))
+         ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:484:22: note: remove extraneous parentheses around the comparison to silence this warning
+    if (((matcode)[2]=='P'))
+        ~            ^    ~
+convert-dataset/mmio.c:484:22: note: use '=' to turn this equality comparison into an assignment
+    if (((matcode)[2]=='P'))
+                     ^~
+                     =
+convert-dataset/mmio.c:485:20: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        types[2] = "pattern";
+                   ^
+convert-dataset/mmio.c:487:22: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    if (((matcode)[2]=='I'))
+         ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:487:22: note: remove extraneous parentheses around the comparison to silence this warning
+    if (((matcode)[2]=='I'))
+        ~            ^    ~
+convert-dataset/mmio.c:487:22: note: use '=' to turn this equality comparison into an assignment
+    if (((matcode)[2]=='I'))
+                     ^~
+                     =
+convert-dataset/mmio.c:488:20: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        types[2] = "integer";
+                   ^
+convert-dataset/mmio.c:494:22: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    if (((matcode)[3]=='G'))
+         ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:494:22: note: remove extraneous parentheses around the comparison to silence this warning
+    if (((matcode)[3]=='G'))
+        ~            ^    ~
+convert-dataset/mmio.c:494:22: note: use '=' to turn this equality comparison into an assignment
+    if (((matcode)[3]=='G'))
+                     ^~
+                     =
+convert-dataset/mmio.c:495:20: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        types[3] = "general";
+                   ^
+convert-dataset/mmio.c:497:22: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    if (((matcode)[3]=='S'))
+         ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:497:22: note: remove extraneous parentheses around the comparison to silence this warning
+    if (((matcode)[3]=='S'))
+        ~            ^    ~
+convert-dataset/mmio.c:497:22: note: use '=' to turn this equality comparison into an assignment
+    if (((matcode)[3]=='S'))
+                     ^~
+                     =
+convert-dataset/mmio.c:498:20: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        types[3] = "symmetric";
+                   ^
+convert-dataset/mmio.c:500:22: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    if (((matcode)[3]=='H'))
+         ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:500:22: note: remove extraneous parentheses around the comparison to silence this warning
+    if (((matcode)[3]=='H'))
+        ~            ^    ~
+convert-dataset/mmio.c:500:22: note: use '=' to turn this equality comparison into an assignment
+    if (((matcode)[3]=='H'))
+                     ^~
+                     =
+convert-dataset/mmio.c:501:20: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        types[3] = "hermitian";
+                   ^
+convert-dataset/mmio.c:503:22: warning: equality comparison with extraneous parentheses [-Wparentheses-equality]
+    if (((matcode)[3]=='K'))
+         ~~~~~~~~~~~~^~~~~
+convert-dataset/mmio.c:503:22: note: remove extraneous parentheses around the comparison to silence this warning
+    if (((matcode)[3]=='K'))
+        ~            ^    ~
+convert-dataset/mmio.c:503:22: note: use '=' to turn this equality comparison into an assignment
+    if (((matcode)[3]=='K'))
+                     ^~
+                     =
+convert-dataset/mmio.c:504:20: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        types[3] = "skew-symmetric";
+                   ^
+34 warnings generated.
+[Print Function Calls Pass Begin]
+[Found Kernel]
+[_Z15_kernel_computeiPiS_S_S_PfS0_S0_ii]
+[Found Kernel]
+[_Z14_kernel_supplyiPiS_S_S_PfS0_S0_ii]
+[functions not inlined]
+[Print Function Calls Pass Finished]

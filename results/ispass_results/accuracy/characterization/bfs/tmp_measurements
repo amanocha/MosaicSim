@@ -1,0 +1,72 @@
+GENERAL STATS
+-------------
+
+Average BW : 0.802734 GB/s 
+cycles : 316261636
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+LD : 45142152
+ST : 2911694
+total_instructions : 228661617
+l1_load_hits : 160879424
+l1_load_misses : 68004708
+l2_load_hits : 22228142
+l2_load_misses : 1846404
+L1 Miss Rate: 29.2955%
+L2 Miss Rate: 7.66868%
+cache_access : 257247727
+dram_accesses : 1983391
+global_energy : 0.615082 Joules
+global_avg_power : 6.22353 Watts
+Average Global Simulation Speed: 249331 Instructions per sec 
+
+Total Number of Compute Instructions: 180607771
+Total Number of Memory Instructions: 48053846
+Percent of Instructions Spent on Memory: 21.015
+Percent of Instructions Spent on Loads: 19.742
+Percent of Instructions Spent on Stores: 1.273
+Percent of Memory Instructions Spent on Loads: 93.941
+Percent of Memory Instructions Spent on Stores: 6.059
+
+Calculated L1 Miss Rate: 29.711
+Calculated LLC Miss Rate: 0.807
+Calculated Compute to Memory Ratio: 3.758
+Calculated IPC: 0.723
+
+MEMORY ACCESS STATS
+-------------------
+
+Node ID		# Executions	L1 Hit Rate	L2 Hit Rate	Total Mem Latency	Average Mem Latency
+3		1		0.0		0.0		1			1.0
+5		1		0.0		0.0		1			1.0
+16		19583		0.533		1.0		925795			47.275
+41		347401		1.0		1.0		1747381			5.03
+19		19583		0.025		0.047		7430520			379.437
+23		19583		0.022		0.042		7429559			379.388
+34		22056418		0.99		0.99		149589993			6.782
+37		22056411		0.005		0.99		2168617493			98.321
+46		970564		0.999		1.0		4967505			5.118
+40		970564		1.0		1.0		4836811			4.984
+43		970564		0.999		1.0		4985024			5.136
+11		1		1.0		1.0		1			1.0
+12		1		1.0		1.0		1			1.0
+
+Node ID of Long-Latency Access: 37
+Long-Latency Access (cycles): 2168617493
+Long-Latency Access L2 Hit Rate: 0.9904469498686846
+
+L1 Hit Rate: 0.532
+L2 Hit Rate: 0.99
+Total Accesses: 47430676
+Total Mem Access Latency (cycles): 2350533654
+Avg Mem Access Latency (cycles): 49
+Mean # DRAM Accesses Per 1024-cycle Epoch: 2
+Median # DRAM Accesses Per 1024-cycle Epoch: 2
+Max # DRAM Accesses Per 1024-cycle Epoch: 36
+
+Percent of Total Latency Spent on Memory: 743.224
+Percent of Total Latency Spent on Long-Latency Access: 685.704
+Percent of Memory Latency Spent on Long-Latency Access: 92.261
+

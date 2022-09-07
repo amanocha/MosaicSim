@@ -1,0 +1,30 @@
+# started on Tue Oct  8 21:19:49 2019
+
+cache-references: 188029 22975373 8996037
+cache-misses: 55469 23749809 9767183
+cycles: 30450526 23749809 11762217
+instructions: 67120002 23749809 13758046
+L1-dcache-stores: 12228765 23749809 10752209
+node-loads: 572 22975373 7987196
+node-stores: 1287 17983326 3996728
+L1-dcache-loads: 16044715 18983565 3997985
+L1-dcache-load-misses: 349347 19982062 3997077
+LLC-loads: 72277 20980576 3993962
+LLC-load-misses: 35980 21977897 5988660
+
+ Performance counter stats for './decades_base/decades_base -i /home/ts20/share/datasets/stencil/default/input/128x128x32.bin -o result':
+
+           188,029      cache-references                                              (39.16%)
+            55,469      cache-misses              #   29.500 % of all cache refs      (41.13%)
+        30,450,526      cycles                                                        (49.53%)
+        67,120,002      instructions              #    2.20  insn per cycle           (57.93%)
+        12,228,765      L1-dcache-stores                                              (45.27%)
+               572      node-loads                                                    (34.76%)
+             1,287      node-stores                                                   (22.22%)
+        16,044,715      L1-dcache-loads                                               (21.06%)
+           349,347      L1-dcache-load-misses     #    2.18% of all L1-dcache hits    (20.00%)
+            72,277      LLC-loads                                                     (19.04%)
+            35,980      LLC-load-misses           #   49.78% of all LL-cache hits     (27.25%)
+
+       0.024178325 seconds time elapsed
+

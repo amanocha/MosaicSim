@@ -1,0 +1,11 @@
+Base implementation of histogramming.
+Maintained by Nady Obeid <obeid1@ece.uiuc.edu>
+result
+
+kernel computation time: 3.045019s
+
+IO        : 0.012547
+ -Input     : 0.002149
+ -Output    : 0.010398
+Compute   : 3.045334
+Timer Wall Time: 3.057897

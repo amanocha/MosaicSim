@@ -1,0 +1,95 @@
+GENERAL STATS
+-------------
+
+Average BW : 0.000173335 GB/s 
+cycles : 1428172226
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+LD : 77894835
+ST : 7228541
+total_instructions : 597932325
+l1_load_hits : 267928991
+l1_load_misses : 13811
+l2_load_hits : 1
+l2_load_misses : 1934
+L1 Miss Rate: 0.00501906%
+L2 Miss Rate: 99.9483%
+cache_access : 275173101
+dram_accesses : 1934
+global_energy : 2.67784 Joules
+global_avg_power : 6.00005 Watts
+Average Global Simulation Speed: 331034 Instructions per sec 
+
+Total Number of Compute Instructions: 512808949
+Total Number of Memory Instructions: 85123376
+Percent of Instructions Spent on Memory: 14.236
+Percent of Instructions Spent on Loads: 13.027
+Percent of Instructions Spent on Stores: 1.209
+Percent of Memory Instructions Spent on Loads: 91.508
+Percent of Memory Instructions Spent on Stores: 8.492
+
+Calculated L1 Miss Rate: 0.005
+Calculated LLC Miss Rate: 0.001
+Calculated Compute to Memory Ratio: 6.024
+Calculated IPC: 0.419
+
+MEMORY ACCESS STATS
+-------------------
+
+Node ID		# Executions	L1 Hit Rate	L2 Hit Rate	Total Mem Latency	Average Mem Latency
+0		1		0.0		0.0		1			1.0
+15		486		0.998		0.998		2426			4.992
+17		486		0.998		0.998		2426			4.992
+19		486		0.998		0.998		1971			4.056
+30		118341		1.0		1.0		592000			5.002
+33		118341		1.0		1.0		473786			4.004
+37		118341		1.0		1.0		355301			3.002
+64		566829		1.0		1.0		2834494			5.001
+73		118341		1.0		1.0		591701			5.0
+43		118325		1.0		1.0		546245			4.616
+51		2127		0.999		0.999		10837			5.095
+53		118341		1.0		1.0		583705			4.932
+115		20		0.95		0.95		487			24.35
+130		9720		1.0		1.0		48596			5.0
+132		9720		1.0		1.0		48558			4.996
+134		9720		1.0		1.0		39465			4.06
+145		2366820		1.0		1.0		11832640			4.999
+148		2366820		1.0		1.0		9449778			3.993
+152		2366820		1.0		1.0		7050442			2.979
+179		10911102		1.0		1.0		54555506			5.0
+188		2366820		1.0		1.0		11834096			5.0
+158		2366817		1.0		1.0		11142046			4.708
+166		60925		1.0		1.0		296691			4.87
+168		2366820		1.0		1.0		11640838			4.918
+218		20		1.0		1.0		96			4.8
+232		9740		1.0		1.0		48673			4.997
+234		9740		1.0		1.0		38973			4.001
+236		9740		1.0		1.0		29234			3.001
+246		4743380		1.0		1.0		23716718			5.0
+249		4743380		1.0		1.0		18961142			3.997
+253		4743380		1.0		1.0		14132870			2.979
+280		22985803		1.0		1.0		114929011			5.0
+289		4743380		1.0		1.0		23716896			5.0
+259		4743375		1.0		1.0		21904809			4.618
+267		123711		1.0		1.0		607917			4.914
+269		4743380		1.0		1.0		23411726			4.936
+
+Node ID of Long-Latency Access: 280
+Long-Latency Access (cycles): 114929011
+Long-Latency Access L2 Hit Rate: 1.0
+
+L1 Hit Rate: 1.0
+L2 Hit Rate: 1.0
+Total Accesses: 78081599
+Total Mem Access Latency (cycles): 365435735
+Avg Mem Access Latency (cycles): 4
+Mean # DRAM Accesses Per 1024-cycle Epoch: 0
+Median # DRAM Accesses Per 1024-cycle Epoch: 0
+Max # DRAM Accesses Per 1024-cycle Epoch: 11
+
+Percent of Total Latency Spent on Memory: 25.588
+Percent of Total Latency Spent on Long-Latency Access: 8.047
+Percent of Memory Latency Spent on Long-Latency Access: 31.45
+

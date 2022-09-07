@@ -1,0 +1,40 @@
+GENERAL STATS
+-------------
+
+Average BW : 0.313346 GB/s 
+cycles : 57243132
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+LD : 60589782
+ST : 4420251
+total_instructions : 826115084
+l1_load_hits : 333092881
+l1_load_misses : 14109064
+l2_load_hits : 170239
+l2_load_misses : 137732
+L1 Miss Rate: 4.01743%
+L2 Miss Rate: 45.1269%
+cache_access : 351980543
+dram_accesses : 140132
+global_energy : 0.430874 Joules
+global_avg_power : 24.0867 Watts
+Average Global Simulation Speed: 382565 Instructions per sec 
+
+Total Number of Compute Instructions: 761105051
+Total Number of Memory Instructions: 65010033
+Percent of Instructions Spent on Memory: 7.869
+Percent of Instructions Spent on Loads: 7.334
+Percent of Instructions Spent on Stores: 0.535
+Percent of Memory Instructions Spent on Loads: 93.201
+Percent of Memory Instructions Spent on Stores: 6.799
+
+Calculated L1 Miss Rate: 4.064
+Calculated LLC Miss Rate: 0.04
+Calculated Compute to Memory Ratio: 11.708
+Calculated IPC: 14.432
+
+MEMORY ACCESS STATS
+-------------------
+

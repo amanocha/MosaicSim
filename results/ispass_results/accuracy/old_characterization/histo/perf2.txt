@@ -1,0 +1,30 @@
+# started on Tue Oct  8 21:21:54 2019
+
+cache-references: 148247 22975564 8997593
+cache-misses: 35369 23791380 9810144
+cycles: 30128724 23791380 11805245
+instructions: 47527236 23791380 13800774
+L1-dcache-stores: 9903283 23791380 10793408
+node-loads: 89025 22975564 7986263
+node-stores: 5818 17983645 3996946
+L1-dcache-loads: 11517672 18983531 3997586
+L1-dcache-load-misses: 304412 19981775 3996389
+LLC-loads: 73303 20979995 3994335
+LLC-load-misses: 5109 21977560 5988167
+
+ Performance counter stats for './decades_base/decades_base -i /home/ts20/share/datasets/histo/default/input/img.bin -o result':
+
+           148,247      cache-references                                              (39.16%)
+            35,369      cache-misses              #   23.858 % of all cache refs      (41.23%)
+        30,128,724      cycles                                                        (49.62%)
+        47,527,236      instructions              #    1.58  insn per cycle           (58.01%)
+         9,903,283      L1-dcache-stores                                              (45.37%)
+            89,025      node-loads                                                    (34.76%)
+             5,818      node-stores                                                   (22.23%)
+        11,517,672      L1-dcache-loads                                               (21.06%)
+           304,412      L1-dcache-load-misses     #    2.64% of all L1-dcache hits    (20.00%)
+            73,303      LLC-loads                                                     (19.04%)
+             5,109      LLC-load-misses           #    6.97% of all LL-cache hits     (27.25%)
+
+       0.024227166 seconds time elapsed
+

@@ -1,0 +1,66 @@
+GENERAL STATS
+-------------
+
+Average BW : 1.07563 GB/s 
+cycles : 58992593
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+LD : 14839974
+ST : 146689
+total_instructions : 67806713
+l1_load_hits : 60985996
+l1_load_misses : 48789454
+l2_load_hits : 43920625
+l2_load_misses : 493278
+L1 Miss Rate: 44.4365%
+L2 Miss Rate: 1.10929%
+cache_access : 154405319
+dram_accesses : 495736
+global_energy : 0.116412 Joules
+global_avg_power : 6.31465 Watts
+Average Global Simulation Speed: 215811 Instructions per sec 
+
+Total Number of Compute Instructions: 52820050
+Total Number of Memory Instructions: 14986663
+Percent of Instructions Spent on Memory: 22.102
+Percent of Instructions Spent on Loads: 21.886
+Percent of Instructions Spent on Stores: 0.216
+Percent of Memory Instructions Spent on Loads: 99.021
+Percent of Memory Instructions Spent on Stores: 0.979
+
+Calculated L1 Miss Rate: 44.445
+Calculated LLC Miss Rate: 0.449
+Calculated Compute to Memory Ratio: 3.524
+Calculated IPC: 1.149
+
+MEMORY ACCESS STATS
+-------------------
+
+Node ID		# Executions	L1 Hit Rate	L2 Hit Rate	Total Mem Latency	Average Mem Latency
+8		146689		0.429		1.0		8357473			56.974
+25		3636649		0.888		1.0		47374346			13.027
+29		3636649		0.48		1.0		190376887			52.35
+31		3636649		0.51		1.0		180424627			49.613
+34		3636649		0.738		0.996		92386457			25.404
+15		146689		0.439		1.0		8214655			56.0
+18		146689		0.619		1.0		5717180			38.975
+
+Node ID of Long-Latency Access: 29
+Long-Latency Access (cycles): 190376887
+Long-Latency Access L2 Hit Rate: 0.9999832263163149
+
+L1 Hit Rate: 0.649
+L2 Hit Rate: 0.999
+Total Accesses: 14986664
+Total Mem Access Latency (cycles): 532854390
+Avg Mem Access Latency (cycles): 35
+Mean # DRAM Accesses Per 1024-cycle Epoch: 4
+Median # DRAM Accesses Per 1024-cycle Epoch: 2
+Max # DRAM Accesses Per 1024-cycle Epoch: 319
+
+Percent of Total Latency Spent on Memory: 903.256
+Percent of Total Latency Spent on Long-Latency Access: 322.713
+Percent of Memory Latency Spent on Long-Latency Access: 35.728
+

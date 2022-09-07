@@ -1,0 +1,16 @@
+CPU-based sparse matrix vector multiplication****
+Original version by Li-Wen Chang <lchang20@illinois.edu> and Shengzhao Wu<wu14@illinois.edu>
+This version maintained by Chris Rodrigues  ***********
+Converting COO to JDS format (1138x1138)
+4054 matrix entries, warp size = 1, row padding align = 1, pack size = 1
+
+Padding data....1138 rows, 1138 groups
+Allocating data space: 4054 entries (0.000000% padding)
+Finished converting.
+JDS format has 1138 columns, 18 rows.
+nz_count_len = 1138
+
+kernel computation time: 0.083780s
+IO        : 0.001760
+Compute   : 0.083791
+Timer Wall Time: 0.085552

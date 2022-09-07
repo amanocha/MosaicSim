@@ -1,0 +1,141 @@
+Base implementation of histogramming.
+Maintained by Nady Obeid <obeid1@ece.uiuc.edu>
+
+kernel computation time: 0.063429s
+
+IO        : 0.004558
+ -Input     : 0.004558
+ -Output    : 0.000000
+Compute   : 0.064321
+Timer Wall Time: 0.068891
+Elapsed Time: 0.073s
+    Clockticks: 114,240,000
+    Instructions Retired: 168,960,000
+    CPI Rate: 0.676
+    Front-End Bound: 0.0% of Pipeline Slots
+        Front-End Latency: 0.0% of Pipeline Slots
+            ICache Misses: 0.0% of Clockticks
+            ITLB Overhead: 0.0% of Clockticks
+            Branch Resteers: 0.0% of Clockticks
+            DSB Switches: 0.0% of Clockticks
+            Length Changing Prefixes: 0.0% of Clockticks
+            MS Switches: 0.0% of Clockticks
+        Front-End Bandwidth: 0.0% of Pipeline Slots
+            Front-End Bandwidth MITE: 0.0% of Clockticks
+            Front-End Bandwidth DSB: 0.0% of Clockticks
+            Front-End Bandwidth LSD: 0.0% of Clockticks
+            (Info) DSB Coverage: 0.0%
+            (Info) LSD Coverage: 0.0%
+    Bad Speculation: 0.0% of Pipeline Slots
+        Branch Mispredict: 0.0% of Pipeline Slots
+        Machine Clears: 0.0% of Pipeline Slots
+    Back-End Bound: 75.6% of Pipeline Slots
+     | A significant portion of pipeline slots are remaining empty. When
+     | operations take too long in the back-end, they introduce bubbles in the
+     | pipeline that ultimately cause fewer pipeline slots containing useful
+     | work to be retired per cycle than the machine is capable to support. This
+     | opportunity cost results in slower execution. Long-latency operations
+     | like divides and memory operations can cause this, as can too many
+     | operations being directed to a single execution port (for example, more
+     | multiply operations arriving in the back-end per cycle than the execution
+     | unit can support).
+     |
+        Memory Bound: 64.8% of Pipeline Slots
+         | The metric value is high. This can indicate that the significant
+         | fraction of execution pipeline slots could be stalled due to demand
+         | memory load and stores. Use Memory Access analysis to have the metric
+         | breakdown by memory hierarchy, memory bandwidth information,
+         | correlation by memory objects.
+         |
+            L1 Bound: 18.1% of Clockticks
+             | This metric shows how often machine was stalled without missing
+             | the L1 data cache. The L1 cache typically has the shortest
+             | latency. However, in certain cases like loads blocked on older
+             | stores, a load might suffer a high latency even though it is
+             | being satisfied by the L1. Note that this metric value may be
+             | highlighted due to DTLB Overhead or Cycles of 1 Port Utilized
+             | issues.
+             |
+                DTLB Overhead: 0.0% of Clockticks
+                Loads Blocked by Store Forwarding: 0.0% of Clockticks
+                Lock Latency: 0.0% of Clockticks
+                 | A significant fraction of CPU cycles spent handling cache
+                 | misses due to lock operations. Due to the microarchitecture
+                 | handling of locks, they are classified as L1 Bound regardless
+                 | of what memory source satisfied them. Note that this metric
+                 | value may be highlighted due to Store Latency issue.
+                 |
+                Split Loads: 0.0% of Clockticks
+                4K Aliasing: 1.3% of Clockticks
+                FB Full: 0.0% of Clockticks
+                 | This metric does a rough estimation of how often L1D Fill
+                 | Buffer unavailability limited additional L1D miss memory
+                 | access requests to proceed. The higher the metric value, the
+                 | deeper the memory hierarchy level the misses are satisfied
+                 | from. Often it hints on approaching bandwidth limits (to L2
+                 | cache, L3 cache or external memory). Avoid adding software
+                 | prefetches if indeed memory BW limited.
+                 |
+            L2 Bound: N/A with HT on
+            L3 Bound: N/A with HT on
+                Contested Accesses: 0.0% of Clockticks
+                Data Sharing: 0.0% of Clockticks
+                L3 Latency: 6.1% of Clockticks
+                SQ Full: 0.0% of Clockticks
+            DRAM Bound: N/A with HT on
+                Memory Bandwidth: N/A with HT on
+                Memory Latency: N/A with HT on
+                    Local DRAM: 0.0% of Clockticks
+                    Remote DRAM: 0.0% of Clockticks
+                    Remote Cache: 0.0% of Clockticks
+            Store Bound: 10.9% of Clockticks
+                Store Latency: 65.2% of Clockticks
+                False Sharing: 0.0% of Clockticks
+                Split Stores: 0.0% of Clockticks
+                DTLB Store Overhead: 0.0% of Clockticks
+        Core Bound: 10.8% of Pipeline Slots
+         | This metric represents how much Core non-memory issues were of a
+         | bottleneck. Shortage in hardware compute resources, or dependencies
+         | software's instructions are both categorized under Core Bound. Hence
+         | it may indicate the machine ran out of an OOO resources, certain
+         | execution units are overloaded or dependencies in program's data- or
+         | instruction- flow are limiting the performance (e.g. FP-chained long-
+         | latency arithmetic operations).
+         |
+            Divider: 0.0% of Clockticks
+            Port Utilization: 7.2% of Clockticks
+                Cycles of 0 Ports Utilized: 36.2% of Clockticks
+                Cycles of 1 Port Utilized: 10.9% of Clockticks
+                Cycles of 2 Ports Utilized: 10.9% of Clockticks
+                Cycles of 3+ Ports Utilized: 14.5% of Clockticks
+                    Port 0: 36.2% of Clockticks
+                    Port 1: 39.8% of Clockticks
+                    Port 2: 47.1% of Clockticks
+                    Port 3: 47.1% of Clockticks
+                    Port 4: 50.7% of Clockticks
+                    Port 5: 25.4% of Clockticks
+                    Port 6: 57.9% of Clockticks
+                    Port 7: 0.0% of Clockticks
+    Retiring: 24.4% of Pipeline Slots
+        General Retirement: 24.4% of Pipeline Slots
+        Microcode Sequencer: 0.0% of Pipeline Slots
+            Assists: 0.0% of Pipeline Slots
+    Total Thread Count: 2
+    Paused Time: 0s
+Collection and Platform Info
+    Application Command Line: ./decades_base/decades_base "1" "-i" "/home/ts20/share/datasets/histo/default/input/img.bin" 
+    Operating System: 3.10.0-862.14.4.el7.x86_64 NAME="CentOS Linux" VERSION="7 (Core)" ID="centos" ID_LIKE="rhel fedora" VERSION_ID="7" PRETTY_NAME="CentOS Linux 7 (Core)" ANSI_COLOR="0;31" CPE_NAME="cpe:/o:centos:centos:7" HOME_URL="https://www.centos.org/" BUG_REPORT_URL="https://bugs.centos.org/"  CENTOS_MANTISBT_PROJECT="CentOS-7" CENTOS_MANTISBT_PROJECT_VERSION="7" REDHAT_SUPPORT_PRODUCT="centos" REDHAT_SUPPORT_PRODUCT_VERSION="7" 
+    Computer Name: cafe
+    Result Size: 5 MB 
+    Collection start time: 18:25:05 19/12/2019 UTC
+    Collection stop time: 18:25:05 19/12/2019 UTC
+    Collector Type: Driverless Perf system-wide sampling
+    CPU
+        Name: Intel(R) Xeon(R) E5/E7 v3 Processor code named Haswell
+        Frequency: 3.193 GHz
+        Logical CPU Count: 32
+
+If you want to skip descriptions of detected performance issues in the report,
+enter: amplxe-cl -report summary -report-knob show-issues=false -r
+<my_result_dir>. Alternatively, you may view the report in the csv format:
+amplxe-cl -report <report_name> -format=csv.

@@ -1,0 +1,12 @@
+read 96603 atoms from file '/home/ts20/share/datasets/cutcp/default/input/watbox.sl100.pqr'
+extent of domain is:
+  minimum -49.998 -49.997 -49.996
+  maximum 50 49.99 49.971
+padding domain by 0.5 Angstroms
+domain lengths are 100.998 by 100.987 by 100.967
+
+
+kernel computation time: 49.318533s
+IO        : 0.194092
+Compute   : 49.321655
+Timer Wall Time: 49.515747

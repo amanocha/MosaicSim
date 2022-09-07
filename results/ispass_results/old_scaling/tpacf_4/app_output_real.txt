@@ -1,0 +1,31 @@
+1.000000
+1.000000
+1.000000
+0.999999
+0.999998
+0.999996
+0.999989
+0.999973
+0.999933
+0.999832
+0.999577
+0.998937
+0.997332
+0.993302
+0.983204
+0.957990
+0.895596
+0.744722
+0.401129
+-0.261508
+-0.973045
+/home/ts20/share/datasets/tpacf/default/input/Datapnts.1
+Min distance: 1.000000 arcmin
+Max distance: 10000.000000 arcmin
+Bins per dec: 5
+Total bins  : 20
+
+kernel computation time: 0.333576s
+IO        : 0.011948
+Compute   : 0.333747
+Timer Wall Time: 0.345934

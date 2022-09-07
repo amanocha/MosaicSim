@@ -1,0 +1,30 @@
+# started on Tue Oct  8 21:23:39 2019
+
+cache-references: 8503822 209431213 75599674
+cache-misses: 513800 209431213 75581056
+cycles: 444916045 209431213 94563379
+instructions: 686302164 209431213 113545198
+L1-dcache-stores: 52962040 209431213 111463353
+node-loads: 449892 208772079 76866101
+node-stores: 20346 205773501 37987588
+L1-dcache-loads: 270055847 206773859 37988896
+L1-dcache-load-misses: 10532366 207772783 37989317
+LLC-loads: 8227198 208772079 37979007
+LLC-load-misses: 500002 209431213 56611936
+
+ Performance counter stats for './decades_base/decades_base 1 -i /home/ts20/share/datasets/mri-q/default/input/32_32_32_dataset.bin -o result':
+
+         8,503,822      cache-references                                              (36.10%)
+           513,800      cache-misses              #    6.042 % of all cache refs      (36.09%)
+       444,916,045      cycles                                                        (45.15%)
+       686,302,164      instructions              #    1.54  insn per cycle           (54.22%)
+        52,962,040      L1-dcache-stores                                              (53.22%)
+           449,892      node-loads                                                    (36.82%)
+            20,346      node-stores                                                   (18.46%)
+       270,055,847      L1-dcache-loads                                               (18.37%)
+        10,532,366      L1-dcache-load-misses     #    3.90% of all L1-dcache hits    (18.28%)
+         8,227,198      LLC-loads                                                     (18.19%)
+           500,002      LLC-load-misses           #    6.08% of all LL-cache hits     (27.03%)
+
+       0.210906011 seconds time elapsed
+

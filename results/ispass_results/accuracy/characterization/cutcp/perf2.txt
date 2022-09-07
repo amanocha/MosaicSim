@@ -1,0 +1,34 @@
+# started on Fri Mar 11 14:02:58 2022
+
+cache-references:u: 1594 523040 390810
+cache-misses:u: 4 523040 523040
+cycles:u: 67809 523040 523040
+instructions:u: 23659 523040 523040
+L1-dcache-stores:u: 0 523040 0
+node-loads:u: 0 523040 0
+node-stores:u: 0 523040 0
+L1-dcache-loads:u: 0 523040 0
+L1-dcache-load-misses:u: 0 523040 0
+LLC-loads:u: 0 523040 0
+LLC-load-misses:u: 0 523040 0
+
+ Performance counter stats for './decades_base/decades_base -i /home/ts20/share/datasets/cutcp/default/input/watbox.sl40_mod.pqr':
+
+             1,594      cache-references:u                                            (74.72%)
+                 4      cache-misses:u            #    0.251 % of all cache refs    
+            67,809      cycles:u                                                    
+            23,659      instructions:u            #    0.35  insn per cycle         
+     <not counted>      L1-dcache-stores:u                                            (0.00%)
+     <not counted>      node-loads:u                                                  (0.00%)
+     <not counted>      node-stores:u                                                 (0.00%)
+     <not counted>      L1-dcache-loads:u                                             (0.00%)
+     <not counted>      L1-dcache-load-misses:u                                       (0.00%)
+     <not counted>      LLC-loads:u                                                   (0.00%)
+     <not counted>      LLC-load-misses:u                                             (0.00%)
+
+       0.000994659 seconds time elapsed
+
+Some events weren't counted. Try disabling the NMI watchdog:
+	echo 0 > /proc/sys/kernel/nmi_watchdog
+	perf stat ...
+	echo 1 > /proc/sys/kernel/nmi_watchdog

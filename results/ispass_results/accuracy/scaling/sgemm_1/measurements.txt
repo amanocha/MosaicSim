@@ -1,0 +1,63 @@
+GENERAL STATS
+-------------
+
+Average BW : 0.0610426 GB/s 
+cycles : 6362102
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+LD : 3952640
+ST : 20480
+total_instructions : 25826192
+l1_load_hits : 31079615
+l1_load_misses : 3838697
+l2_load_hits : 123061
+l2_load_misses : 3034
+L1 Miss Rate: 10.9869%
+L2 Miss Rate: 2.40612%
+cache_access : 35066188
+dram_accesses : 3034
+global_energy : 0.0119634 Joules
+global_avg_power : 6.01732 Watts
+Average Global Simulation Speed: 337628 Instructions per sec 
+
+Total Number of Compute Instructions: 21853072
+Total Number of Memory Instructions: 3973120
+Percent of Instructions Spent on Memory: 15.384
+Percent of Instructions Spent on Loads: 15.305
+Percent of Instructions Spent on Stores: 0.079
+Percent of Memory Instructions Spent on Loads: 99.485
+Percent of Memory Instructions Spent on Stores: 0.515
+
+Calculated L1 Miss Rate: 10.993
+Calculated LLC Miss Rate: 0.009
+Calculated Compute to Memory Ratio: 5.5
+Calculated IPC: 4.059
+
+MEMORY ACCESS STATS
+-------------------
+
+Node ID		# Executions	L1 Hit Rate	L2 Hit Rate	Total Mem Latency	Average Mem Latency
+49		1966080		1.0		1.0		7061859			3.592
+52		1966080		0.999		1.0		7132452			3.628
+37		20480		1.0		1.0		102396			5.0
+41		20480		1.0		1.0		102396			5.0
+
+Node ID of Long-Latency Access: 52
+Long-Latency Access (cycles): 7132452
+Long-Latency Access L2 Hit Rate: 0.9999923706054688
+
+L1 Hit Rate: 1.0
+L2 Hit Rate: 1.0
+Total Accesses: 3973121
+Total Mem Access Latency (cycles): 14400292
+Avg Mem Access Latency (cycles): 3
+Mean # DRAM Accesses Per 1024-cycle Epoch: 0
+Median # DRAM Accesses Per 1024-cycle Epoch: 0
+Max # DRAM Accesses Per 1024-cycle Epoch: 32
+
+Percent of Total Latency Spent on Memory: 226.345
+Percent of Total Latency Spent on Long-Latency Access: 112.108
+Percent of Memory Latency Spent on Long-Latency Access: 49.53
+

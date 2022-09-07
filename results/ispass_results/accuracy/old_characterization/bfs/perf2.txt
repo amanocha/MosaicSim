@@ -1,0 +1,30 @@
+# started on Tue Oct  8 22:51:05 2019
+
+cache-references: 11273 1013180 1013180
+cache-misses: 3743 2009115 2009115
+cycles: 3266097 2766552 2766552
+instructions: 4230283 2766552 2766552
+L1-dcache-stores: 398589 2766552 1753372
+node-loads: 1589 2766552 757437
+node-stores: 0 2009115 0
+L1-dcache-loads: 0 18446744073709214367 0
+L1-dcache-load-misses: 0 18446744073709214367 0
+LLC-loads: 0 18446744073709214367 0
+LLC-load-misses: 0 18446744073709214367 0
+
+ Performance counter stats for './decades_base/decades_base /home/ts20/share/datasets/bfs/default/input/Kronecker_24.el -o result':
+
+            11,273      cache-references                                            
+             3,743      cache-misses              #   33.203 % of all cache refs    
+         3,266,097      cycles                                                      
+         4,230,283      instructions              #    1.30  insn per cycle         
+           398,589      L1-dcache-stores                                              (63.38%)
+             1,589      node-loads                                                    (27.38%)
+     <not counted>      node-stores                                                   (0.00%)
+     <not counted>      L1-dcache-loads                                               (0.00%)
+     <not counted>      L1-dcache-load-misses                                         (0.00%)
+     <not counted>      LLC-loads                                                     (0.00%)
+     <not counted>      LLC-load-misses                                               (0.00%)
+
+       0.003190958 seconds time elapsed
+

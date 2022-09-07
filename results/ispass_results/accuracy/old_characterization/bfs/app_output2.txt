@@ -1,0 +1,13 @@
+graph: -o
+edges: 0
+graph_nodes: 0
+
+reading % 100.00 finished
+Reading graph elapsed time: 6.8848e-05s
+
+
+starting bfs
+-- epoch 1 1
+
+ending bfs
+bfs computation time: 3.632e-06s

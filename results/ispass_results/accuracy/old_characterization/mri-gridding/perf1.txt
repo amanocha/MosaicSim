@@ -1,0 +1,30 @@
+# started on Tue Oct  8 21:23:14 2019
+
+cache-references: 459284 35121162 13008043
+cache-misses: 9828 36120913 14003130
+cycles: 117536853 37120746 17999086
+instructions: 236616822 38120565 21996517
+L1-dcache-stores: 41780820 39121062 19985639
+node-loads: 8865 39148568 16145273
+node-stores: 4943 39148568 7152380
+L1-dcache-loads: 90746201 39121062 6000065
+L1-dcache-load-misses: 2777454 32122448 6000295
+LLC-loads: 385693 33122250 5999209
+LLC-load-misses: 3774 34121752 8997244
+
+ Performance counter stats for './decades_base/decades_base 1 -i /home/ts20/share/datasets/mri-gridding/default/input/small.uks -o result':
+
+           459,284      cache-references                                              (37.04%)
+             9,828      cache-misses              #    2.140 % of all cache refs      (38.77%)
+       117,536,853      cycles                                                        (48.49%)
+       236,616,822      instructions              #    2.01  insn per cycle           (57.70%)
+        41,780,820      L1-dcache-stores                                              (51.09%)
+             8,865      node-loads                                                    (41.24%)
+             4,943      node-stores                                                   (18.27%)
+        90,746,201      L1-dcache-loads                                               (15.34%)
+         2,777,454      L1-dcache-load-misses     #    3.06% of all L1-dcache hits    (18.68%)
+           385,693      LLC-loads                                                     (18.11%)
+             3,774      LLC-load-misses           #    0.98% of all LL-cache hits     (26.37%)
+
+       0.040438059 seconds time elapsed
+

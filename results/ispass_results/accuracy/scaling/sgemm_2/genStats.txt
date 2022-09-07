@@ -1,0 +1,373 @@
+/home/aninda/pythia/bin/../ pythiahome 
+
+[SIM] ----Reading CONFIGURATION file---------
+File: /home/aninda/pythia/sim/config/sim_cafe.txt
+(31) num_accels: 8
+(32) num_IS: 8
+(29) technology_node: 22
+(30) chip_freq: 3200
+(5) ideal_cache: 0
+(6) cache_size_in_kb: 20736
+(11) cache_latency: 90
+(12) cache_assoc: 8
+(13) cache_linesize: 64
+(7) cache_load_ports: 8
+(8) cache_store_ports: 8
+(26) SimpleDRAM: 1
+(27) dram_bw: 68
+(28) dram_latency: 300
+(9) mem_load_ports: 4
+(10) mem_store_ports: 4
+(19) SAB_size: 128
+(21) SVB_size: 128
+(16) commBuff_size: 64
+(17) commQ_size: 512
+(18) term_buffer_size: 128
+(20) desc_latency: 3
+(33) mem_chunk_size: 1024
+------------------------------------
+
+[SIM] NumCores is: 2
+
+[SIM] ----Reading CONFIGURATION file---------
+File: /home/aninda/pythia/sim/config/core_cafe.txt
+(0) lsq_size: 72
+(14) window_size: 192
+(15) issueWidth: 8
+(1) cf_mode: 0
+(2) mem_speculate: 1
+(3) mem_forward: 1
+(4) max_active_contexts_BB: -1
+(22) branch_prediction: 1
+(23) misprediction_penalty: 0
+(5) ideal_cache: 0
+(6) cache_size_in_kb: 32
+(11) cache_latency: 4
+(12) cache_assoc: 8
+(13) cache_linesize: 64
+(7) cache_load_ports: 2
+(8) cache_store_ports: 1
+(24) prefetch_distance: 1
+(25) num_prefetched_lines: 8
+(9) mem_load_ports: 4
+(10) mem_store_ports: 4
+------------------------------------
+
+[SIM] Start reading the Data Dependency Graph (/home/aninda/ispass2020/parboil/benchmarks/sgemm/src/base/decades_base/output_compute_0/graphOutput.txt)...
+[SIM] ...Finished reading the Data Dependency Graph!
+
+[SIM] Start reading the Memory trace (/home/aninda/ispass2020/parboil/benchmarks/sgemm/src/base/decades_base/output_compute_0/mem.txt) | size = 44480 KBytes
+[SIM] Start reading the Control-Flow trace (/home/aninda/ispass2020/parboil/benchmarks/sgemm/src/base/decades_base/output_compute_0/ctrl.txt) | size = 5880 KBytes
+[SIM] ...Finished reading the Control-Flow trace! - Total contexts: 1003652
+
+[SIM] Start reading the Accelerator Invokation trace (/home/aninda/ispass2020/parboil/benchmarks/sgemm/src/base/decades_base/output_compute_0/acc.txt) | size = 0 KBytes
+[SIM] ...Finished reading the Accelerator trace!
+
+Total Num Instructions: 12913104
+
+[SIM] ----Reading CONFIGURATION file---------
+File: /home/aninda/pythia/sim/config/core_cafe.txt
+(0) lsq_size: 72
+(14) window_size: 192
+(15) issueWidth: 8
+(1) cf_mode: 0
+(2) mem_speculate: 1
+(3) mem_forward: 1
+(4) max_active_contexts_BB: -1
+(22) branch_prediction: 1
+(23) misprediction_penalty: 0
+(5) ideal_cache: 0
+(6) cache_size_in_kb: 32
+(11) cache_latency: 4
+(12) cache_assoc: 8
+(13) cache_linesize: 64
+(7) cache_load_ports: 2
+(8) cache_store_ports: 1
+(24) prefetch_distance: 1
+(25) num_prefetched_lines: 8
+(9) mem_load_ports: 4
+(10) mem_store_ports: 4
+------------------------------------
+
+[SIM] Start reading the Data Dependency Graph (/home/aninda/ispass2020/parboil/benchmarks/sgemm/src/base/decades_base/output_compute_1/graphOutput.txt)...
+[SIM] ...Finished reading the Data Dependency Graph!
+
+[SIM] Start reading the Memory trace (/home/aninda/ispass2020/parboil/benchmarks/sgemm/src/base/decades_base/output_compute_1/mem.txt) | size = 44480 KBytes
+[SIM] Start reading the Control-Flow trace (/home/aninda/ispass2020/parboil/benchmarks/sgemm/src/base/decades_base/output_compute_1/ctrl.txt) | size = 5880 KBytes
+[SIM] ...Finished reading the Control-Flow trace! - Total contexts: 1003652
+
+[SIM] Start reading the Accelerator Invokation trace (/home/aninda/ispass2020/parboil/benchmarks/sgemm/src/base/decades_base/output_compute_1/acc.txt) | size = 0 KBytes
+[SIM] ...Finished reading the Accelerator trace!
+
+Total Num Instructions: 25826208
+[SIM] ------- Starting Simulation!!! ------------------------
+[SIM] ...Finished reading the Memory trace!
+
+[SIM] ...Finished reading the Memory trace!
+
+[SIM] ------- End of Simulation!!! ------------------------
+
+------------- Final Pythia Core 0 Stats --------------
+IPC : 4.04182
+Average BW : 0 GB/s 
+L1 Miss Rate: 11.2329%
+ACCELERATOR : 0
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+BARRIER : 0
+BS_DONE : 0
+BS_VECTOR_INC : 0
+BS_WAKE : 0
+CALL_BS : 0
+CAST : 8
+CORE_INTERRUPT : 0
+FP_ADDSUB : 993280
+FP_DIV : 0
+FP_MULT : 1003521
+FP_REM : 0
+GEP : 1976320
+INVALID : 0
+I_ADDSUB : 2969664
+I_DIV : 0
+I_MULT : 10368
+I_REM : 0
+LD : 1976320
+LD_PROD : 0
+LOGICAL : 993347
+PHI : 1976384
+RECV : 0
+SEND : 0
+ST : 10240
+STADDR : 0
+STVAL : 0
+TERMINATOR : 1003652
+TRM_ATOMIC_CAS : 0
+TRM_ATOMIC_FADD : 0
+TRM_ATOMIC_MIN : 0
+bytes_read : 7905280
+bytes_write : 40960
+cache_access : 0
+cache_evicts : 0
+cache_pending : 0
+comp_issue_success : 10926544
+comp_issue_try : 0
+contexts : 1003652
+cycles : 3194876
+dram_accesses : 0
+dram_loads : 0
+forwarded : 0
+l1_hits : 15503484
+l1_hits_non_prefetch : 1985454
+l1_load_hits : 15493244
+l1_load_misses : 1961860
+l1_misses : 1961860
+l1_misses_non_prefetch : 1106
+l2_hits : 0
+l2_hits_non_prefetch : 0
+l2_load_hits : 0
+l2_load_misses : 0
+l2_misses : 0
+l2_misses_non_prefetch : 0
+ld_prod_issue_success : 0
+ld_prod_issue_try : 0
+load_issue_success : 1976320
+load_issue_try : 0
+lsq_insert_fail : 0
+lsq_insert_success : 0
+misspeculated : 0
+recv_issue_success : 0
+recv_issue_try : 0
+send_issue_success : 0
+send_issue_try : 0
+speculated : 0
+speculatively_forwarded : 0
+staddr_issue_success : 0
+staddr_issue_try : 0
+store_issue_success : 10240
+store_issue_try : 0
+stval_issue_success : 0
+stval_issue_try : 0
+total_instructions : 12913104
+total_energy : 0.00599039 Joules
+avg_power : 0 Watts
+------------- Final Pythia Core 1 Stats --------------
+IPC : 4.04182
+Average BW : 0 GB/s 
+L1 Miss Rate: 11.2327%
+ACCELERATOR : 0
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+BARRIER : 0
+BS_DONE : 0
+BS_VECTOR_INC : 0
+BS_WAKE : 0
+CALL_BS : 0
+CAST : 8
+CORE_INTERRUPT : 0
+FP_ADDSUB : 993280
+FP_DIV : 0
+FP_MULT : 1003521
+FP_REM : 0
+GEP : 1976320
+INVALID : 0
+I_ADDSUB : 2969664
+I_DIV : 0
+I_MULT : 10368
+I_REM : 0
+LD : 1976320
+LD_PROD : 0
+LOGICAL : 993347
+PHI : 1976384
+RECV : 0
+SEND : 0
+ST : 10240
+STADDR : 0
+STVAL : 0
+TERMINATOR : 1003652
+TRM_ATOMIC_CAS : 0
+TRM_ATOMIC_FADD : 0
+TRM_ATOMIC_MIN : 0
+bytes_read : 7905280
+bytes_write : 40960
+cache_access : 0
+cache_evicts : 0
+cache_pending : 0
+comp_issue_success : 10926544
+comp_issue_try : 0
+contexts : 1003652
+cycles : 3194876
+dram_accesses : 0
+dram_loads : 0
+forwarded : 0
+l1_hits : 15503491
+l1_hits_non_prefetch : 1985439
+l1_load_hits : 15493251
+l1_load_misses : 1961829
+l1_misses : 1961829
+l1_misses_non_prefetch : 1121
+l2_hits : 0
+l2_hits_non_prefetch : 0
+l2_load_hits : 0
+l2_load_misses : 0
+l2_misses : 0
+l2_misses_non_prefetch : 0
+ld_prod_issue_success : 0
+ld_prod_issue_try : 0
+load_issue_success : 1976320
+load_issue_try : 0
+lsq_insert_fail : 0
+lsq_insert_success : 0
+misspeculated : 0
+recv_issue_success : 0
+recv_issue_try : 0
+send_issue_success : 0
+send_issue_try : 0
+speculated : 0
+speculatively_forwarded : 0
+staddr_issue_success : 0
+staddr_issue_try : 0
+store_issue_success : 10240
+store_issue_try : 0
+stval_issue_success : 0
+stval_issue_try : 0
+total_instructions : 12913104
+total_energy : 0.00599039 Joules
+avg_power : 0 Watts
+
+----------------GLOBAL STATS--------------
+IPC : 8.08363
+Average BW : 0.162186 GB/s 
+L1 Miss Rate: 11.2328%
+L2 Miss Rate: 3.16557%
+ACCELERATOR : 0
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+BARRIER : 0
+BS_DONE : 0
+BS_VECTOR_INC : 0
+BS_WAKE : 0
+CALL_BS : 0
+CAST : 16
+CORE_INTERRUPT : 0
+FP_ADDSUB : 1986560
+FP_DIV : 0
+FP_MULT : 2007042
+FP_REM : 0
+GEP : 3952640
+INVALID : 0
+I_ADDSUB : 5939328
+I_DIV : 0
+I_MULT : 20736
+I_REM : 0
+LD : 3952640
+LD_PROD : 0
+LOGICAL : 1986694
+PHI : 3952768
+RECV : 0
+SEND : 0
+ST : 20480
+STADDR : 0
+STVAL : 0
+TERMINATOR : 2007304
+TRM_ATOMIC_CAS : 0
+TRM_ATOMIC_FADD : 0
+TRM_ATOMIC_MIN : 0
+bytes_read : 15810560
+bytes_write : 81920
+cache_access : 35059836
+cache_evicts : 1270
+cache_pending : 0
+comp_issue_success : 21853088
+comp_issue_try : 0
+contexts : 2007304
+cycles : 3194876
+dram_accesses : 4048
+dram_loads : 0
+forwarded : 0
+l1_hits : 31006975
+l1_hits_non_prefetch : 3970893
+l1_load_hits : 30986495
+l1_load_misses : 3923689
+l1_misses : 3923689
+l1_misses_non_prefetch : 2227
+l2_hits : 123828
+l2_hits_non_prefetch : 189
+l2_load_hits : 123828
+l2_load_misses : 4048
+l2_misses : 4048
+l2_misses_non_prefetch : 69
+ld_prod_issue_success : 0
+ld_prod_issue_try : 0
+load_issue_success : 3952640
+load_issue_try : 0
+lsq_insert_fail : 0
+lsq_insert_success : 1986488
+misspeculated : 0
+recv_issue_success : 0
+recv_issue_try : 0
+send_issue_success : 0
+send_issue_try : 0
+speculated : 0
+speculatively_forwarded : 0
+staddr_issue_success : 0
+staddr_issue_try : 0
+store_issue_success : 20480
+store_issue_try : 0
+stval_issue_success : 0
+stval_issue_try : 0
+total_instructions : 25826208
+Total GFLOPs : 0.0039936
+-------All (2) cores energy (J) : 0.0119808
+-------L2_energy (J) : 9.2773e-07
+-------DRAM_energy (J) : 4.4731e-05
+-------Acc_energy (J) : 0
+global_energy : 0.0120264 Joules
+global_avg_power : 12.0457 Watts
+Total Simulation Time: 67 secs 
+Average Global Simulation Speed: 380166 Instructions per sec 

@@ -1,0 +1,30 @@
+# started on Tue Oct  8 21:28:13 2019
+
+cache-references: 429602 211035381 76944978
+cache-misses: 12252 212034947 77926638
+cycles: 512840376 213035078 97917438
+instructions: 1163372693 214033989 117890616
+L1-dcache-stores: 231967638 214859103 116884743
+node-loads: 6566 214859103 79945245
+node-stores: 1358 214033989 37991131
+L1-dcache-loads: 481747331 207037135 37990174
+L1-dcache-load-misses: 2364432 208037203 37992224
+LLC-loads: 331813 209036826 37981090
+LLC-load-misses: 3824 210036335 56955626
+
+ Performance counter stats for './decades_base/decades_base 1 -i /home/ts20/share/datasets/cutcp/default/input/watbox.sl40_mod.pqr -o result':
+
+           429,602      cache-references                                              (36.46%)
+            12,252      cache-misses              #    2.852 % of all cache refs      (36.75%)
+       512,840,376      cycles                                                        (45.96%)
+     1,163,372,693      instructions              #    2.27  insn per cycle           (55.08%)
+       231,967,638      L1-dcache-stores                                              (54.40%)
+             6,566      node-loads                                                    (37.21%)
+             1,358      node-stores                                                   (17.75%)
+       481,747,331      L1-dcache-loads                                               (18.35%)
+         2,364,432      L1-dcache-load-misses     #    0.49% of all L1-dcache hits    (18.26%)
+           331,813      LLC-loads                                                     (18.17%)
+             3,824      LLC-load-misses           #    1.15% of all LL-cache hits     (27.12%)
+
+       0.216231451 seconds time elapsed
+

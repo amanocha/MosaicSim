@@ -1,0 +1,30 @@
+# started on Tue Oct  8 21:22:56 2019
+
+cache-references: 2212454 451778460 164890010
+cache-misses: 1162544 452778263 165861347
+cycles: 1321263543 453777289 207835985
+instructions: 2356764949 454777078 249811804
+L1-dcache-stores: 528377172 455777268 247828350
+node-loads: 796426 456132265 167286306
+node-stores: 193465 456132265 82342855
+L1-dcache-loads: 624512750 455777268 81988263
+L1-dcache-load-misses: 22948280 448779764 81991225
+LLC-loads: 1576043 449779560 81976956
+LLC-load-misses: 1036921 450778992 122922048
+
+ Performance counter stats for './decades_base/decades_base -i /home/ts20/share/datasets/lbm/default/input/120_120_150_ldc.of -o result':
+
+         2,212,454      cache-references                                              (36.50%)
+         1,162,544      cache-misses              #   52.545 % of all cache refs      (36.63%)
+     1,321,263,543      cycles                                                        (45.80%)
+     2,356,764,949      instructions              #    1.78  insn per cycle           (54.93%)
+       528,377,172      L1-dcache-stores                                              (54.37%)
+           796,426      node-loads                                                    (36.67%)
+           193,465      node-stores                                                   (18.05%)
+       624,512,750      L1-dcache-loads                                               (17.99%)
+        22,948,280      L1-dcache-load-misses     #    3.67% of all L1-dcache hits    (18.27%)
+         1,576,043      LLC-loads                                                     (18.23%)
+         1,036,921      LLC-load-misses           #   65.79% of all LL-cache hits     (27.27%)
+
+       0.456719915 seconds time elapsed
+

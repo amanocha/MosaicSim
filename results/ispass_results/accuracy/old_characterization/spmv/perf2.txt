@@ -1,0 +1,30 @@
+# started on Tue Oct  8 21:19:24 2019
+
+cache-references: 14361168 1573611623 572783652
+cache-misses: 3649435 1574614004 573694812
+cycles: 5059716114 1575610954 717643938
+instructions: 11263480447 1576610358 861594157
+L1-dcache-stores: 1362709554 1577610324 859604904
+node-loads: 3071969 1578610906 575884764
+node-stores: 148531 1579610726 288013376
+L1-dcache-loads: 2435654600 1579846785 287250351
+L1-dcache-load-misses: 38698519 1579846785 286260454
+LLC-loads: 12800985 1579610726 285977506
+LLC-load-misses: 3642318 1572611922 428876662
+
+ Performance counter stats for './decades_base/decades_base -i /home/ts20/share/datasets/spmv/default/input/Dubcova3.mtx.bin,/home/ts20/share/datasets/spmv/default/input/vector.bin -o result':
+
+        14,361,168      cache-references                                              (36.40%)
+         3,649,435      cache-misses              #   25.412 % of all cache refs      (36.43%)
+     5,059,716,114      cycles                                                        (45.55%)
+    11,263,480,447      instructions              #    2.23  insn per cycle           (54.65%)
+     1,362,709,554      L1-dcache-stores                                              (54.49%)
+         3,071,969      node-loads                                                    (36.48%)
+           148,531      node-stores                                                   (18.23%)
+     2,435,654,600      L1-dcache-loads                                               (18.18%)
+        38,698,519      L1-dcache-load-misses     #    1.59% of all L1-dcache hits    (18.12%)
+        12,800,985      LLC-loads                                                     (18.10%)
+         3,642,318      LLC-load-misses           #   28.45% of all LL-cache hits     (27.27%)
+
+       1.580740623 seconds time elapsed
+

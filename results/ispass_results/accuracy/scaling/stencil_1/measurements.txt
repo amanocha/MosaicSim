@@ -1,0 +1,67 @@
+GENERAL STATS
+-------------
+
+Average BW : 0.0336403 GB/s 
+cycles : 249308386
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+LD : 53343360
+ST : 7620480
+total_instructions : 435907714
+l1_load_hits : 19475
+l1_load_misses : 178903941
+l2_load_hits : 141764818
+l2_load_misses : 61742
+L1 Miss Rate: 99.9896%
+L2 Miss Rate: 0.043843%
+cache_access : 335990984
+dram_accesses : 65522
+global_energy : 0.469261 Joules
+global_avg_power : 6.02321 Watts
+Average Global Simulation Speed: 346109 Instructions per sec 
+
+Total Number of Compute Instructions: 374943874
+Total Number of Memory Instructions: 60963840
+Percent of Instructions Spent on Memory: 13.985
+Percent of Instructions Spent on Loads: 12.237
+Percent of Instructions Spent on Stores: 1.748
+Percent of Memory Instructions Spent on Loads: 87.5
+Percent of Memory Instructions Spent on Stores: 12.5
+
+Calculated L1 Miss Rate: 99.989
+Calculated LLC Miss Rate: 0.035
+Calculated Compute to Memory Ratio: 6.15
+Calculated IPC: 1.748
+
+MEMORY ACCESS STATS
+-------------------
+
+Node ID		# Executions	L1 Hit Rate	L2 Hit Rate	Total Mem Latency	Average Mem Latency
+69		7620480		0.0		1.0		410083333			53.813
+74		7620480		0.0		1.0		402896520			52.87
+79		7620480		0.0		1.0		388989642			51.045
+43		7620480		0.0		1.0		249285727			32.713
+36		7620480		0.0		1.0		731649985			96.011
+53		7620480		0.0		1.0		732572184			96.132
+60		7620480		0.0		1.0		731575113			96.001
+83		7620477		0.0		1.0		732699397			96.149
+
+Node ID of Long-Latency Access: 83
+Long-Latency Access (cycles): 732699397
+Long-Latency Access L2 Hit Rate: 0.9995039680586923
+
+L1 Hit Rate: 0.0
+L2 Hit Rate: 1.0
+Total Accesses: 60963838
+Total Mem Access Latency (cycles): 4379755034
+Avg Mem Access Latency (cycles): 71
+Mean # DRAM Accesses Per 1024-cycle Epoch: 0
+Median # DRAM Accesses Per 1024-cycle Epoch: 0
+Max # DRAM Accesses Per 1024-cycle Epoch: 378
+
+Percent of Total Latency Spent on Memory: 1756.762
+Percent of Total Latency Spent on Long-Latency Access: 293.893
+Percent of Memory Latency Spent on Long-Latency Access: 16.729
+

@@ -1,0 +1,34 @@
+# started on Fri Mar 11 14:03:17 2022
+
+cache-references:u: 1424 661857 661857
+cache-misses:u: 17 661857 661857
+cycles:u: 70387 661857 661857
+instructions:u: 23649 661857 661857
+L1-dcache-stores:u: 0 661857 0
+node-loads:u: 0 661857 0
+node-stores:u: 0 661857 0
+L1-dcache-loads:u: 0 661857 0
+L1-dcache-load-misses:u: 0 661857 0
+LLC-loads:u: 0 661857 0
+LLC-load-misses:u: 0 661857 0
+
+ Performance counter stats for './decades_base/decades_base 1 -i /home/ts20/share/datasets/histo/default/input/img.bin':
+
+             1,424      cache-references:u                                          
+                17      cache-misses:u            #    1.194 % of all cache refs    
+            70,387      cycles:u                                                    
+            23,649      instructions:u            #    0.34  insn per cycle         
+     <not counted>      L1-dcache-stores:u                                            (0.00%)
+     <not counted>      node-loads:u                                                  (0.00%)
+     <not counted>      node-stores:u                                                 (0.00%)
+     <not counted>      L1-dcache-loads:u                                             (0.00%)
+     <not counted>      L1-dcache-load-misses:u                                       (0.00%)
+     <not counted>      LLC-loads:u                                                   (0.00%)
+     <not counted>      LLC-load-misses:u                                             (0.00%)
+
+       0.001306676 seconds time elapsed
+
+Some events weren't counted. Try disabling the NMI watchdog:
+	echo 0 > /proc/sys/kernel/nmi_watchdog
+	perf stat ...
+	echo 1 > /proc/sys/kernel/nmi_watchdog

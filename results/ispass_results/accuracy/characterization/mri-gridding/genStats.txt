@@ -1,0 +1,1359 @@
+/home/aninda/pythia/bin/../ pythiahome 
+
+[SIM] ----Reading CONFIGURATION file---------
+File: /home/aninda/pythia/sim/config/sim_cafe.txt
+(31) num_accels: 8
+(32) num_IS: 8
+(29) technology_node: 22
+(30) chip_freq: 3200
+(5) ideal_cache: 0
+(6) cache_size: 20971520
+(11) cache_latency: 60
+(12) cache_assoc: 8
+(13) cache_linesize: 64
+(7) cache_load_ports: 8
+(8) cache_store_ports: 8
+(26) SimpleDRAM: 1
+(27) dram_bw: 68
+(28) dram_latency: 200
+(9) mem_load_ports: 4
+(10) mem_store_ports: 4
+(19) SAB_size: 128
+(21) SVB_size: 128
+(16) commBuff_size: 64
+(17) commQ_size: 512
+(18) term_buffer_size: 128
+(20) desc_latency: 3
+(33) mem_chunk_size: 1024
+------------------------------------
+
+[SIM] NumCores is: 1
+
+[SIM] ----Reading CONFIGURATION file---------
+File: /home/aninda/pythia/sim/config/core_cafe.txt
+(0) lsq_size: 72
+(14) window_size: 192
+(15) issueWidth: 4
+(1) cf_mode: 0
+(2) mem_speculate: 1
+(3) mem_forward: 1
+(4) max_active_contexts_BB: -1
+(22) branch_prediction: 1
+(23) misprediction_penalty: 0
+(5) ideal_cache: 0
+(6) cache_size: 32768
+(11) cache_latency: 4
+(12) cache_assoc: 8
+(13) cache_linesize: 64
+(7) cache_load_ports: 8
+(8) cache_store_ports: 8
+(24) prefetch_distance: 1
+(25) num_prefetched_lines: 2
+(52) use_l2: 1
+(53) l2_ideal_cache: 0
+(55) l2_cache_size: 2097152
+(54) l2_cache_latency: 14
+(56) l2_cache_assoc: 8
+(57) l2_cache_linesize: 64
+(58) l2_cache_load_ports: 8
+(59) l2_cache_store_ports: 8
+(60) l2_prefetch_distance: 1
+(61) l2_num_prefetched_lines: 2
+(9) mem_load_ports: 4
+(10) mem_store_ports: 4
+------------------------------------
+
+[SIM] Start reading the Data Dependency Graph (/home/aninda/MosaicSim/parboil/benchmarks/mri-gridding/src/base/decades_base/output_compute_0/graphOutput.txt)...
+[SIM] ...Finished reading the Data Dependency Graph!
+
+[SIM] Start reading the Memory trace (/home/aninda/MosaicSim/parboil/benchmarks/mri-gridding/src/base/decades_base/output_compute_0/mem.txt) | size = 535254 KBytes
+[SIM] ...big file (>100MB), please, expect some minutes to read it.
+[SIM] Start reading the Control-Flow trace (/home/aninda/MosaicSim/parboil/benchmarks/mri-gridding/src/base/decades_base/output_compute_0/ctrl.txt) | size = 98366 KBytes
+[SIM] ...Finished reading the Control-Flow trace! - Total contexts: 12663078
+
+[SIM] Start reading the Accelerator Invokation trace (/home/aninda/MosaicSim/parboil/benchmarks/mri-gridding/src/base/decades_base/output_compute_0/acc.txt) | size = 0 KBytes
+[SIM] ...Finished reading the Accelerator trace!
+
+Total Num Instructions: 133162240
+[SIM] ------- Starting Simulation!!! ------------------------
+
+--- Pythia Core 0 Simulation Speed: 3.80429e-07 contexts per ms 
+IPC : 1.65834
+Average BW : 0 GB/s 
+Average Bandwidth (PBC) : 0 GB/s 
+L1 Miss Rate: 28.8811%
+ACCELERATOR : 0
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+BARRIER : 0
+BS_DONE : 0
+BS_VECTOR_INC : 0
+BS_WAKE : 0
+CALL_BS : 0
+CAST : 700227
+CORE_INTERRUPT : 0
+FP_ADDSUB : 1719344
+FP_DIV : 337124
+FP_MULT : 1532182
+FP_REM : 0
+GEP : 726943
+INVALID : 56967
+I_ADDSUB : 524784
+I_DIV : 0
+I_MULT : 2313
+I_REM : 0
+LD : 691945
+LD_PROD : 0
+LLAMA : 0
+LOGICAL : 505220
+PHI : 543299
+RECV : 0
+SEND : 0
+ST : 351491
+STADDR : 0
+STVAL : 0
+TERMINATOR : 599885
+TRM_ATOMIC_CAS : 0
+TRM_ATOMIC_FADD : 0
+TRM_ATOMIC_MIN : 0
+bytes_read : 2767780
+bytes_write : 1405964
+cache_access : 0
+cache_evicts : 0
+cache_pending : 0
+comp_issue_success : 7248363
+comp_issue_try : 0
+contexts : 599885
+cycles : 5000000
+dram_access_count : 0
+dram_accesses : 0
+dram_loads : 0
+forwarded : 67000
+l1_hits : 1121114
+l1_hits_non_prefetch : 796604
+l1_load_hits : 765373
+l1_load_misses : 455253
+l1_misses : 455280
+l1_misses_non_prefetch : 179816
+l2_hits : 0
+l2_hits_non_prefetch : 0
+l2_load_hits : 0
+l2_load_misses : 0
+l2_misses : 0
+l2_misses_non_prefetch : 0
+l3_hits : 0
+l3_hits_non_prefetch : 0
+l3_load_hits : 0
+l3_load_misses : 0
+l3_misses : 0
+l3_misses_non_prefetch : 0
+ld_prod_issue_success : 0
+ld_prod_issue_try : 0
+llama_dram_accesses : 0
+load_issue_success : 691960
+load_issue_try : 0
+lsq_insert_fail : 0
+lsq_insert_success : 0
+misspeculated : 0
+recv_issue_success : 0
+recv_issue_try : 0
+send_issue_success : 0
+send_issue_try : 0
+speculated : 0
+speculatively_forwarded : 23
+staddr_issue_success : 0
+staddr_issue_try : 0
+store_issue_success : 351491
+store_issue_try : 0
+stval_issue_success : 0
+stval_issue_try : 0
+total_instructions : 8291724
+
+Global Simulation Speed: 471.014 Instructions per ms 
+Remaining Time: 4 mins 
+Remaining Instructions: 133162240
+
+--- Pythia Core 0 Simulation Speed: 38.6661 contexts per ms 
+IPC : 1.93922
+Average BW : 0 GB/s 
+Average Bandwidth (PBC) : 0 GB/s 
+L1 Miss Rate: 29.9155%
+ACCELERATOR : 0
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+BARRIER : 0
+BS_DONE : 0
+BS_VECTOR_INC : 0
+BS_WAKE : 0
+CALL_BS : 0
+CAST : 1675801
+CORE_INTERRUPT : 0
+FP_ADDSUB : 3219837
+FP_DIV : 702104
+FP_MULT : 2667676
+FP_REM : 0
+GEP : 2047198
+INVALID : 70509
+I_ADDSUB : 1450745
+I_DIV : 0
+I_MULT : 6819
+I_REM : 0
+LD : 2041487
+LD_PROD : 0
+LLAMA : 0
+LOGICAL : 1392921
+PHI : 1505303
+RECV : 0
+SEND : 0
+ST : 939515
+STADDR : 0
+STVAL : 0
+TERMINATOR : 1672290
+TRM_ATOMIC_CAS : 0
+TRM_ATOMIC_FADD : 0
+TRM_ATOMIC_MIN : 0
+bytes_read : 8165948
+bytes_write : 3758060
+cache_access : 0
+cache_evicts : 0
+cache_pending : 0
+comp_issue_success : 16411232
+comp_issue_try : 0
+contexts : 1672290
+cycles : 10000000
+dram_access_count : 0
+dram_accesses : 0
+dram_loads : 0
+forwarded : 197575
+l1_hits : 3080108
+l1_hits_non_prefetch : 2244178
+l1_load_hits : 2129013
+l1_load_misses : 1314711
+l1_misses : 1314738
+l1_misses_non_prefetch : 539144
+l2_hits : 0
+l2_hits_non_prefetch : 0
+l2_load_hits : 0
+l2_load_misses : 0
+l2_misses : 0
+l2_misses_non_prefetch : 0
+l3_hits : 0
+l3_hits_non_prefetch : 0
+l3_load_hits : 0
+l3_load_misses : 0
+l3_misses : 0
+l3_misses_non_prefetch : 0
+ld_prod_issue_success : 0
+ld_prod_issue_try : 0
+llama_dram_accesses : 0
+load_issue_success : 2041492
+load_issue_try : 0
+lsq_insert_fail : 0
+lsq_insert_success : 0
+misspeculated : 0
+recv_issue_success : 0
+recv_issue_try : 0
+send_issue_success : 0
+send_issue_try : 0
+speculated : 0
+speculatively_forwarded : 108
+staddr_issue_success : 0
+staddr_issue_try : 0
+store_issue_success : 939516
+store_issue_try : 0
+stval_issue_success : 0
+stval_issue_try : 0
+total_instructions : 19392205
+
+Global Simulation Speed: 388.89 Instructions per ms 
+Remaining Time: 5 mins 
+Remaining Instructions: 124870516
+
+--- Pythia Core 0 Simulation Speed: 36.0971 contexts per ms 
+IPC : 2.09718
+Average BW : 0 GB/s 
+Average Bandwidth (PBC) : 0 GB/s 
+L1 Miss Rate: 30.1866%
+ACCELERATOR : 0
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+BARRIER : 0
+BS_DONE : 0
+BS_VECTOR_INC : 0
+BS_WAKE : 0
+CALL_BS : 0
+CAST : 2736190
+CORE_INTERRUPT : 0
+FP_ADDSUB : 4850775
+FP_DIV : 1098818
+FP_MULT : 3901882
+FP_REM : 0
+GEP : 3482228
+INVALID : 85233
+I_ADDSUB : 2457191
+I_DIV : 0
+I_MULT : 11715
+I_REM : 0
+LD : 3508362
+LD_PROD : 0
+LLAMA : 0
+LOGICAL : 2357781
+PHI : 2550901
+RECV : 0
+SEND : 0
+ST : 1578650
+STADDR : 0
+STVAL : 0
+TERMINATOR : 2837903
+TRM_ATOMIC_CAS : 0
+TRM_ATOMIC_FADD : 0
+TRM_ATOMIC_MIN : 0
+bytes_read : 14033448
+bytes_write : 6314600
+cache_access : 0
+cache_evicts : 0
+cache_pending : 0
+comp_issue_success : 26370623
+comp_issue_try : 0
+contexts : 2837903
+cycles : 15000000
+dram_access_count : 0
+dram_accesses : 0
+dram_loads : 0
+forwarded : 339407
+l1_hits : 5206133
+l1_hits_non_prefetch : 3815540
+l1_load_hits : 3609235
+l1_load_misses : 2251048
+l1_misses : 2251075
+l1_misses_non_prefetch : 931766
+l2_hits : 0
+l2_hits_non_prefetch : 0
+l2_load_hits : 0
+l2_load_misses : 0
+l2_misses : 0
+l2_misses_non_prefetch : 0
+l3_hits : 0
+l3_hits_non_prefetch : 0
+l3_load_hits : 0
+l3_load_misses : 0
+l3_misses : 0
+l3_misses_non_prefetch : 0
+ld_prod_issue_success : 0
+ld_prod_issue_try : 0
+llama_dram_accesses : 0
+load_issue_success : 3508363
+load_issue_try : 0
+lsq_insert_fail : 0
+lsq_insert_success : 0
+misspeculated : 0
+recv_issue_success : 0
+recv_issue_try : 0
+send_issue_success : 0
+send_issue_try : 0
+speculated : 0
+speculatively_forwarded : 299
+staddr_issue_success : 0
+staddr_issue_try : 0
+store_issue_success : 1578650
+store_issue_try : 0
+stval_issue_success : 0
+stval_issue_try : 0
+total_instructions : 31457629
+
+Global Simulation Speed: 371.027 Instructions per ms 
+Remaining Time: 5 mins 
+Remaining Instructions: 113770035
+
+--- Pythia Core 0 Simulation Speed: 35.3159 contexts per ms 
+IPC : 2.18008
+Average BW : 0 GB/s 
+Average Bandwidth (PBC) : 0 GB/s 
+L1 Miss Rate: 30.3163%
+ACCELERATOR : 0
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+BARRIER : 0
+BS_DONE : 0
+BS_VECTOR_INC : 0
+BS_WAKE : 0
+CALL_BS : 0
+CAST : 3803465
+CORE_INTERRUPT : 0
+FP_ADDSUB : 6492304
+FP_DIV : 1498096
+FP_MULT : 5144086
+FP_REM : 0
+GEP : 4926583
+INVALID : 100059
+I_ADDSUB : 3470198
+I_DIV : 0
+I_MULT : 16645
+I_REM : 0
+LD : 4984754
+LD_PROD : 0
+LLAMA : 0
+LOGICAL : 3328966
+PHI : 3603358
+RECV : 0
+SEND : 0
+ST : 2221937
+STADDR : 0
+STVAL : 0
+TERMINATOR : 4011131
+TRM_ATOMIC_CAS : 0
+TRM_ATOMIC_FADD : 0
+TRM_ATOMIC_MIN : 0
+bytes_read : 19939016
+bytes_write : 8887748
+cache_access : 0
+cache_evicts : 0
+cache_pending : 0
+comp_issue_success : 36394951
+comp_issue_try : 0
+contexts : 4011131
+cycles : 20000000
+dram_access_count : 0
+dram_accesses : 0
+dram_loads : 0
+forwarded : 482251
+l1_hits : 7355889
+l1_hits_non_prefetch : 5401541
+l1_load_hits : 5108231
+l1_load_misses : 3200192
+l1_misses : 3200219
+l1_misses_non_prefetch : 1322481
+l2_hits : 0
+l2_hits_non_prefetch : 0
+l2_load_hits : 0
+l2_load_misses : 0
+l2_misses : 0
+l2_misses_non_prefetch : 0
+l3_hits : 0
+l3_hits_non_prefetch : 0
+l3_load_hits : 0
+l3_load_misses : 0
+l3_misses : 0
+l3_misses_non_prefetch : 0
+ld_prod_issue_success : 0
+ld_prod_issue_try : 0
+llama_dram_accesses : 0
+load_issue_success : 4984768
+load_issue_try : 0
+lsq_insert_fail : 0
+lsq_insert_success : 0
+misspeculated : 0
+recv_issue_success : 0
+recv_issue_try : 0
+send_issue_success : 0
+send_issue_try : 0
+speculated : 0
+speculatively_forwarded : 425
+staddr_issue_success : 0
+staddr_issue_try : 0
+store_issue_success : 2221937
+store_issue_try : 0
+stval_issue_success : 0
+stval_issue_try : 0
+total_instructions : 43601582
+
+Global Simulation Speed: 364.661 Instructions per ms 
+Remaining Time: 4 mins 
+Remaining Instructions: 101704611
+
+--- Pythia Core 0 Simulation Speed: 35.1477 contexts per ms 
+IPC : 2.22953
+Average BW : 0 GB/s 
+Average Bandwidth (PBC) : 0 GB/s 
+L1 Miss Rate: 30.3447%
+ACCELERATOR : 0
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+BARRIER : 0
+BS_DONE : 0
+BS_VECTOR_INC : 0
+BS_WAKE : 0
+CALL_BS : 0
+CAST : 4870139
+CORE_INTERRUPT : 0
+FP_ADDSUB : 8132909
+FP_DIV : 1897166
+FP_MULT : 6385625
+FP_REM : 0
+GEP : 6370117
+INVALID : 114861
+I_ADDSUB : 4482568
+I_DIV : 0
+I_MULT : 21571
+I_REM : 0
+LD : 6460297
+LD_PROD : 0
+LLAMA : 0
+LOGICAL : 4299497
+PHI : 4655103
+RECV : 0
+SEND : 0
+ST : 2864871
+STADDR : 0
+STVAL : 0
+TERMINATOR : 5183624
+TRM_ATOMIC_CAS : 0
+TRM_ATOMIC_FADD : 0
+TRM_ATOMIC_MIN : 0
+bytes_read : 25841188
+bytes_write : 11459484
+cache_access : 0
+cache_evicts : 0
+cache_pending : 0
+comp_issue_success : 46413247
+comp_issue_try : 0
+contexts : 5183624
+cycles : 25000000
+dram_access_count : 0
+dram_accesses : 0
+dram_loads : 0
+forwarded : 624946
+l1_hits : 9504871
+l1_hits_non_prefetch : 6985503
+l1_load_hits : 6607135
+l1_load_misses : 4140691
+l1_misses : 4140718
+l1_misses_non_prefetch : 1714160
+l2_hits : 0
+l2_hits_non_prefetch : 0
+l2_load_hits : 0
+l2_load_misses : 0
+l2_misses : 0
+l2_misses_non_prefetch : 0
+l3_hits : 0
+l3_hits_non_prefetch : 0
+l3_load_hits : 0
+l3_load_misses : 0
+l3_misses : 0
+l3_misses_non_prefetch : 0
+ld_prod_issue_success : 0
+ld_prod_issue_try : 0
+llama_dram_accesses : 0
+load_issue_success : 6460314
+load_issue_try : 0
+lsq_insert_fail : 0
+lsq_insert_success : 0
+misspeculated : 0
+recv_issue_success : 0
+recv_issue_try : 0
+send_issue_success : 0
+send_issue_try : 0
+speculated : 0
+speculatively_forwarded : 564
+staddr_issue_success : 0
+staddr_issue_try : 0
+store_issue_success : 2864871
+store_issue_try : 0
+stval_issue_success : 0
+stval_issue_try : 0
+total_instructions : 55738348
+
+Global Simulation Speed: 362.497 Instructions per ms 
+Remaining Time: 4 mins 
+Remaining Instructions: 89560658
+
+--- Pythia Core 0 Simulation Speed: 35.0468 contexts per ms 
+IPC : 2.25702
+Average BW : 0 GB/s 
+Average Bandwidth (PBC) : 0 GB/s 
+L1 Miss Rate: 30.3445%
+ACCELERATOR : 0
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+BARRIER : 0
+BS_DONE : 0
+BS_VECTOR_INC : 0
+BS_WAKE : 0
+CALL_BS : 0
+CAST : 5922782
+CORE_INTERRUPT : 0
+FP_ADDSUB : 9751615
+FP_DIV : 2290976
+FP_MULT : 7610783
+FP_REM : 0
+GEP : 7794350
+INVALID : 129495
+I_ADDSUB : 5480829
+I_DIV : 0
+I_MULT : 26435
+I_REM : 0
+LD : 7915895
+LD_PROD : 0
+LLAMA : 0
+LOGICAL : 5256489
+PHI : 5691924
+RECV : 0
+SEND : 0
+ST : 3499314
+STADDR : 0
+STVAL : 0
+TERMINATOR : 6339853
+TRM_ATOMIC_CAS : 0
+TRM_ATOMIC_FADD : 0
+TRM_ATOMIC_MIN : 0
+bytes_read : 31663580
+bytes_write : 13997256
+cache_access : 0
+cache_evicts : 0
+cache_pending : 0
+comp_issue_success : 56295546
+comp_issue_try : 0
+contexts : 6339853
+cycles : 30000000
+dram_access_count : 0
+dram_accesses : 0
+dram_loads : 0
+forwarded : 765632
+l1_hits : 11627896
+l1_hits_non_prefetch : 8551016
+l1_load_hits : 8088973
+l1_load_misses : 5065522
+l1_misses : 5065549
+l1_misses_non_prefetch : 2097865
+l2_hits : 0
+l2_hits_non_prefetch : 0
+l2_load_hits : 0
+l2_load_misses : 0
+l2_misses : 0
+l2_misses_non_prefetch : 0
+l3_hits : 0
+l3_hits_non_prefetch : 0
+l3_load_hits : 0
+l3_load_misses : 0
+l3_misses : 0
+l3_misses_non_prefetch : 0
+ld_prod_issue_success : 0
+ld_prod_issue_try : 0
+llama_dram_accesses : 0
+load_issue_success : 7915895
+load_issue_try : 0
+lsq_insert_fail : 0
+lsq_insert_success : 0
+misspeculated : 0
+recv_issue_success : 0
+recv_issue_try : 0
+send_issue_success : 0
+send_issue_try : 0
+speculated : 0
+speculatively_forwarded : 694
+staddr_issue_success : 0
+staddr_issue_try : 0
+store_issue_success : 3499314
+store_issue_try : 0
+stval_issue_success : 0
+stval_issue_try : 0
+total_instructions : 67710740
+
+Global Simulation Speed: 352.897 Instructions per ms 
+Remaining Time: 3 mins 
+Remaining Instructions: 77423892
+
+--- Pythia Core 0 Simulation Speed: 35.2798 contexts per ms 
+IPC : 2.2844
+Average BW : 0 GB/s 
+Average Bandwidth (PBC) : 0 GB/s 
+L1 Miss Rate: 30.3831%
+ACCELERATOR : 0
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+BARRIER : 0
+BS_DONE : 0
+BS_VECTOR_INC : 0
+BS_WAKE : 0
+CALL_BS : 0
+CAST : 6998795
+CORE_INTERRUPT : 0
+FP_ADDSUB : 11406598
+FP_DIV : 2693534
+FP_MULT : 8863175
+FP_REM : 0
+GEP : 9250538
+INVALID : 144435
+I_ADDSUB : 6502130
+I_DIV : 0
+I_MULT : 31405
+I_REM : 0
+LD : 9404399
+LD_PROD : 0
+LLAMA : 0
+LOGICAL : 6235602
+PHI : 6752978
+RECV : 0
+SEND : 0
+ST : 4147869
+STADDR : 0
+STVAL : 0
+TERMINATOR : 7522679
+TRM_ATOMIC_CAS : 0
+TRM_ATOMIC_FADD : 0
+TRM_ATOMIC_MIN : 0
+bytes_read : 37617596
+bytes_write : 16591476
+cache_access : 0
+cache_evicts : 0
+cache_pending : 0
+comp_issue_success : 66401909
+comp_issue_try : 0
+contexts : 7522679
+cycles : 35000000
+dram_access_count : 0
+dram_accesses : 0
+dram_loads : 0
+forwarded : 909675
+l1_hits : 13798405
+l1_hits_non_prefetch : 10154181
+l1_load_hits : 9603337
+l1_load_misses : 6022042
+l1_misses : 6022069
+l1_misses_non_prefetch : 2487633
+l2_hits : 0
+l2_hits_non_prefetch : 0
+l2_load_hits : 0
+l2_load_misses : 0
+l2_misses : 0
+l2_misses_non_prefetch : 0
+l3_hits : 0
+l3_hits_non_prefetch : 0
+l3_load_hits : 0
+l3_load_misses : 0
+l3_misses : 0
+l3_misses_non_prefetch : 0
+ld_prod_issue_success : 0
+ld_prod_issue_try : 0
+llama_dram_accesses : 0
+load_issue_success : 9404411
+load_issue_try : 0
+lsq_insert_fail : 0
+lsq_insert_success : 0
+misspeculated : 0
+recv_issue_success : 0
+recv_issue_try : 0
+send_issue_success : 0
+send_issue_try : 0
+speculated : 0
+speculatively_forwarded : 781
+staddr_issue_success : 0
+staddr_issue_try : 0
+store_issue_success : 4147869
+store_issue_try : 0
+stval_issue_success : 0
+stval_issue_try : 0
+total_instructions : 79954137
+
+Global Simulation Speed: 372.683 Instructions per ms 
+Remaining Time: 2 mins 
+Remaining Instructions: 65451500
+
+--- Pythia Core 0 Simulation Speed: 34.7454 contexts per ms 
+IPC : 2.30514
+Average BW : 0 GB/s 
+Average Bandwidth (PBC) : 0 GB/s 
+L1 Miss Rate: 30.4128%
+ACCELERATOR : 0
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+BARRIER : 0
+BS_DONE : 0
+BS_VECTOR_INC : 0
+BS_WAKE : 0
+CALL_BS : 0
+CAST : 8075496
+CORE_INTERRUPT : 0
+FP_ADDSUB : 13062637
+FP_DIV : 3096344
+FP_MULT : 10116371
+FP_REM : 0
+GEP : 10707659
+INVALID : 159381
+I_ADDSUB : 7524102
+I_DIV : 0
+I_MULT : 36379
+I_REM : 0
+LD : 10893838
+LD_PROD : 0
+LLAMA : 0
+LOGICAL : 7215359
+PHI : 7814749
+RECV : 0
+SEND : 0
+ST : 4796850
+STADDR : 0
+STVAL : 0
+TERMINATOR : 8706282
+TRM_ATOMIC_CAS : 0
+TRM_ATOMIC_FADD : 0
+TRM_ATOMIC_MIN : 0
+bytes_read : 43575352
+bytes_write : 19187400
+cache_access : 0
+cache_evicts : 0
+cache_pending : 0
+comp_issue_success : 76514798
+comp_issue_try : 0
+contexts : 8706282
+cycles : 40000000
+dram_access_count : 0
+dram_accesses : 0
+dram_loads : 0
+forwarded : 1053745
+l1_hits : 15963235
+l1_hits_non_prefetch : 11753008
+l1_load_hits : 11111599
+l1_load_misses : 6976645
+l1_misses : 6976672
+l1_misses_non_prefetch : 2882981
+l2_hits : 0
+l2_hits_non_prefetch : 0
+l2_load_hits : 0
+l2_load_misses : 0
+l2_misses : 0
+l2_misses_non_prefetch : 0
+l3_hits : 0
+l3_hits_non_prefetch : 0
+l3_load_hits : 0
+l3_load_misses : 0
+l3_misses : 0
+l3_misses_non_prefetch : 0
+ld_prod_issue_success : 0
+ld_prod_issue_try : 0
+llama_dram_accesses : 0
+load_issue_success : 10893847
+load_issue_try : 0
+lsq_insert_fail : 0
+lsq_insert_success : 0
+misspeculated : 0
+recv_issue_success : 0
+recv_issue_try : 0
+send_issue_success : 0
+send_issue_try : 0
+speculated : 0
+speculatively_forwarded : 957
+staddr_issue_success : 0
+staddr_issue_try : 0
+store_issue_success : 4796850
+store_issue_try : 0
+stval_issue_success : 0
+stval_issue_try : 0
+total_instructions : 92205447
+
+Global Simulation Speed: 359.846 Instructions per ms 
+Remaining Time: 2 mins 
+Remaining Instructions: 53208103
+
+--- Pythia Core 0 Simulation Speed: 34.6373 contexts per ms 
+IPC : 2.31887
+Average BW : 0 GB/s 
+Average Bandwidth (PBC) : 0 GB/s 
+L1 Miss Rate: 30.4101%
+ACCELERATOR : 0
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+BARRIER : 0
+BS_DONE : 0
+BS_VECTOR_INC : 0
+BS_WAKE : 0
+CALL_BS : 0
+CAST : 9142761
+CORE_INTERRUPT : 0
+FP_ADDSUB : 14704142
+FP_DIV : 3495618
+FP_MULT : 11358563
+FP_REM : 0
+GEP : 12151992
+INVALID : 174207
+I_ADDSUB : 8537090
+I_DIV : 0
+I_MULT : 41309
+I_REM : 0
+LD : 12370206
+LD_PROD : 0
+LLAMA : 0
+LOGICAL : 8186519
+PHI : 8867178
+RECV : 0
+SEND : 0
+ST : 5440131
+STADDR : 0
+STVAL : 0
+TERMINATOR : 9879481
+TRM_ATOMIC_CAS : 0
+TRM_ATOMIC_FADD : 0
+TRM_ATOMIC_MIN : 0
+bytes_read : 49480824
+bytes_write : 21760524
+cache_access : 0
+cache_evicts : 0
+cache_pending : 0
+comp_issue_success : 86538889
+comp_issue_try : 0
+contexts : 9879481
+cycles : 45000000
+dram_access_count : 0
+dram_accesses : 0
+dram_loads : 0
+forwarded : 1196543
+l1_hits : 18126947
+l1_hits_non_prefetch : 13343761
+l1_load_hits : 12624553
+l1_load_misses : 7921287
+l1_misses : 7921314
+l1_misses_non_prefetch : 3268942
+l2_hits : 0
+l2_hits_non_prefetch : 0
+l2_load_hits : 0
+l2_load_misses : 0
+l2_misses : 0
+l2_misses_non_prefetch : 0
+l3_hits : 0
+l3_hits_non_prefetch : 0
+l3_load_hits : 0
+l3_load_misses : 0
+l3_misses : 0
+l3_misses_non_prefetch : 0
+ld_prod_issue_success : 0
+ld_prod_issue_try : 0
+llama_dram_accesses : 0
+load_issue_success : 12370212
+load_issue_try : 0
+lsq_insert_fail : 0
+lsq_insert_success : 0
+misspeculated : 0
+recv_issue_success : 0
+recv_issue_try : 0
+send_issue_success : 0
+send_issue_try : 0
+speculated : 0
+speculatively_forwarded : 1096
+staddr_issue_success : 0
+staddr_issue_try : 0
+store_issue_success : 5440131
+store_issue_try : 0
+stval_issue_success : 0
+stval_issue_try : 0
+total_instructions : 104349197
+
+Global Simulation Speed: 359.325 Instructions per ms 
+Remaining Time: 1 mins 
+Remaining Instructions: 40956793
+
+--- Pythia Core 0 Simulation Speed: 34.935 contexts per ms 
+IPC : 2.33338
+Average BW : 0 GB/s 
+Average Bandwidth (PBC) : 0 GB/s 
+L1 Miss Rate: 30.427%
+ACCELERATOR : 0
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+BARRIER : 0
+BS_DONE : 0
+BS_VECTOR_INC : 0
+BS_WAKE : 0
+CALL_BS : 0
+CAST : 10225501
+CORE_INTERRUPT : 0
+FP_ADDSUB : 16369458
+FP_DIV : 3900690
+FP_MULT : 12618779
+FP_REM : 0
+GEP : 13617273
+INVALID : 189243
+I_ADDSUB : 9564761
+I_DIV : 0
+I_MULT : 46309
+I_REM : 0
+LD : 13867998
+LD_PROD : 0
+LLAMA : 0
+LOGICAL : 9171738
+PHI : 9934842
+RECV : 0
+SEND : 0
+ST : 6092739
+STADDR : 0
+STVAL : 0
+TERMINATOR : 11069681
+TRM_ATOMIC_CAS : 0
+TRM_ATOMIC_FADD : 0
+TRM_ATOMIC_MIN : 0
+bytes_read : 55471992
+bytes_write : 24370956
+cache_access : 0
+cache_evicts : 0
+cache_pending : 0
+comp_issue_success : 96708329
+comp_issue_try : 0
+contexts : 11069681
+cycles : 50000000
+dram_access_count : 0
+dram_accesses : 0
+dram_loads : 0
+forwarded : 1341433
+l1_hits : 20309036
+l1_hits_non_prefetch : 14955632
+l1_load_hits : 14146290
+l1_load_misses : 8881906
+l1_misses : 8881933
+l1_misses_non_prefetch : 3662445
+l2_hits : 0
+l2_hits_non_prefetch : 0
+l2_load_hits : 0
+l2_load_misses : 0
+l2_misses : 0
+l2_misses_non_prefetch : 0
+l3_hits : 0
+l3_hits_non_prefetch : 0
+l3_load_hits : 0
+l3_load_misses : 0
+l3_misses : 0
+l3_misses_non_prefetch : 0
+ld_prod_issue_success : 0
+ld_prod_issue_try : 0
+llama_dram_accesses : 0
+load_issue_success : 13868010
+load_issue_try : 0
+lsq_insert_fail : 0
+lsq_insert_success : 0
+misspeculated : 0
+recv_issue_success : 0
+recv_issue_try : 0
+send_issue_success : 0
+send_issue_try : 0
+speculated : 0
+speculatively_forwarded : 1238
+staddr_issue_success : 0
+staddr_issue_try : 0
+store_issue_success : 6092739
+store_issue_try : 0
+stval_issue_success : 0
+stval_issue_try : 0
+total_instructions : 116669012
+
+Global Simulation Speed: 361.614 Instructions per ms 
+Remaining Time: 1 mins 
+Remaining Instructions: 28813043
+
+--- Pythia Core 0 Simulation Speed: 34.6019 contexts per ms 
+IPC : 2.34326
+Average BW : 0 GB/s 
+Average Bandwidth (PBC) : 0 GB/s 
+L1 Miss Rate: 30.4282%
+ACCELERATOR : 0
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+BARRIER : 0
+BS_DONE : 0
+BS_VECTOR_INC : 0
+BS_WAKE : 0
+CALL_BS : 0
+CAST : 11298585
+CORE_INTERRUPT : 0
+FP_ADDSUB : 18019942
+FP_DIV : 4302154
+FP_MULT : 13867775
+FP_REM : 0
+GEP : 15069501
+INVALID : 204135
+I_ADDSUB : 10583287
+I_DIV : 0
+I_MULT : 51265
+I_REM : 0
+LD : 15352446
+LD_PROD : 0
+LLAMA : 0
+LOGICAL : 10148179
+PHI : 10993019
+RECV : 0
+SEND : 0
+ST : 6739539
+STADDR : 0
+STVAL : 0
+TERMINATOR : 12249293
+TRM_ATOMIC_CAS : 0
+TRM_ATOMIC_FADD : 0
+TRM_ATOMIC_MIN : 0
+bytes_read : 61409784
+bytes_write : 26958156
+cache_access : 0
+cache_evicts : 0
+cache_pending : 0
+comp_issue_success : 106787209
+comp_issue_try : 0
+contexts : 12249293
+cycles : 55000000
+dram_access_count : 0
+dram_accesses : 0
+dram_loads : 0
+forwarded : 1484987
+l1_hits : 22477014
+l1_hits_non_prefetch : 16551811
+l1_load_hits : 15660019
+l1_load_misses : 9830616
+l1_misses : 9830643
+l1_misses_non_prefetch : 4053788
+l2_hits : 0
+l2_hits_non_prefetch : 0
+l2_load_hits : 0
+l2_load_misses : 0
+l2_misses : 0
+l2_misses_non_prefetch : 0
+l3_hits : 0
+l3_hits_non_prefetch : 0
+l3_load_hits : 0
+l3_load_misses : 0
+l3_misses : 0
+l3_misses_non_prefetch : 0
+ld_prod_issue_success : 0
+ld_prod_issue_try : 0
+llama_dram_accesses : 0
+load_issue_success : 15352461
+load_issue_try : 0
+lsq_insert_fail : 0
+lsq_insert_success : 0
+misspeculated : 0
+recv_issue_success : 0
+recv_issue_try : 0
+send_issue_success : 0
+send_issue_try : 0
+speculated : 0
+speculatively_forwarded : 1408
+staddr_issue_success : 0
+staddr_issue_try : 0
+store_issue_success : 6739539
+store_issue_try : 0
+stval_issue_success : 0
+stval_issue_try : 0
+total_instructions : 128879120
+
+Global Simulation Speed: 355.918 Instructions per ms 
+Remaining Time: 0 mins 
+Remaining Instructions: 16493228
+[SIM] ...Finished reading the Memory trace!
+
+[SIM] ------- End of Simulation!!! ------------------------
+
+------------- Final Pythia Core 0 Stats --------------
+IPC : 2.34637
+Average BW : 0 GB/s 
+Average Bandwidth (PBC) : 0 GB/s 
+L1 Miss Rate: 30.4363%
+ACCELERATOR : 0
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+BARRIER : 0
+BS_DONE : 0
+BS_VECTOR_INC : 0
+BS_WAKE : 0
+CALL_BS : 0
+CAST : 11675013
+CORE_INTERRUPT : 0
+FP_ADDSUB : 18598909
+FP_DIV : 4442984
+FP_MULT : 14305907
+FP_REM : 0
+GEP : 15578924
+INVALID : 209364
+I_ADDSUB : 10940569
+I_DIV : 0
+I_MULT : 53003
+I_REM : 0
+LD : 15873173
+LD_PROD : 0
+LLAMA : 0
+LOGICAL : 10490695
+PHI : 11364195
+RECV : 0
+SEND : 0
+ST : 6966426
+STADDR : 0
+STVAL : 0
+TERMINATOR : 12663078
+TRM_ATOMIC_CAS : 0
+TRM_ATOMIC_FADD : 0
+TRM_ATOMIC_MIN : 0
+bytes_read : 63492692
+bytes_write : 27865704
+cache_access : 0
+cache_evicts : 0
+cache_pending : 0
+comp_issue_success : 110322641
+comp_issue_try : 0
+contexts : 12663078
+cycles : 56752499
+dram_access_count : 0
+dram_accesses : 0
+dram_loads : 0
+forwarded : 1535363
+l1_hits : 23234821
+l1_hits_non_prefetch : 17113967
+l1_load_hits : 16187679
+l1_load_misses : 10165958
+l1_misses : 10165985
+l1_misses_non_prefetch : 4188835
+l2_hits : 0
+l2_hits_non_prefetch : 0
+l2_load_hits : 0
+l2_load_misses : 0
+l2_misses : 0
+l2_misses_non_prefetch : 0
+l3_hits : 0
+l3_hits_non_prefetch : 0
+l3_load_hits : 0
+l3_load_misses : 0
+l3_misses : 0
+l3_misses_non_prefetch : 0
+ld_prod_issue_success : 0
+ld_prod_issue_try : 0
+llama_dram_accesses : 0
+load_issue_success : 15873173
+load_issue_try : 0
+lsq_insert_fail : 0
+lsq_insert_success : 0
+misspeculated : 0
+recv_issue_success : 0
+recv_issue_try : 0
+send_issue_success : 0
+send_issue_try : 0
+speculated : 0
+speculatively_forwarded : 1434
+staddr_issue_success : 0
+staddr_issue_try : 0
+store_issue_success : 6966426
+store_issue_try : 0
+stval_issue_success : 0
+stval_issue_try : 0
+total_instructions : 133162240
+total_energy : 0.106411 Joules
+avg_power : 0 Watts
+
+----------------GLOBAL STATS--------------
+IPC : 2.34637
+Average BW : 0.160303 GB/s 
+Average Bandwidth (PBC) : 0.160303 GB/s 
+L1 Miss Rate: 30.4363%
+L2 Miss Rate: 13.7029%
+ACCELERATOR : 0
+ATOMIC_ADD : 0
+ATOMIC_CAS : 0
+ATOMIC_FADD : 0
+ATOMIC_MIN : 0
+BARRIER : 0
+BS_DONE : 0
+BS_VECTOR_INC : 0
+BS_WAKE : 0
+CALL_BS : 0
+CAST : 11675013
+CORE_INTERRUPT : 0
+FP_ADDSUB : 18598909
+FP_DIV : 4442984
+FP_MULT : 14305907
+FP_REM : 0
+GEP : 15578924
+INVALID : 209364
+I_ADDSUB : 10940569
+I_DIV : 0
+I_MULT : 53003
+I_REM : 0
+LD : 15873173
+LD_PROD : 0
+LLAMA : 0
+LOGICAL : 10490695
+PHI : 11364195
+RECV : 0
+SEND : 0
+ST : 6966426
+STADDR : 0
+STVAL : 0
+TERMINATOR : 12663078
+TRM_ATOMIC_CAS : 0
+TRM_ATOMIC_FADD : 0
+TRM_ATOMIC_MIN : 0
+bytes_read : 63492692
+bytes_write : 27865704
+cache_access : 36734624
+cache_evicts : 2335610
+cache_pending : 0
+comp_issue_success : 110322641
+comp_issue_try : 0
+contexts : 12663078
+cycles : 56752499
+dram_access_count : 71075
+dram_accesses : 4548800
+dram_loads : 0
+forwarded : 1535363
+l1_hits : 23234821
+l1_hits_non_prefetch : 17113967
+l1_load_hits : 16187679
+l1_load_misses : 10165958
+l1_misses : 10165985
+l1_misses_non_prefetch : 4188835
+l2_hits : 2044321
+l2_hits_non_prefetch : 763554
+l2_load_hits : 2044321
+l2_load_misses : 324542
+l2_misses : 324613
+l2_misses_non_prefetch : 120118
+l3_hits : 0
+l3_hits_non_prefetch : 0
+l3_load_hits : 0
+l3_load_misses : 0
+l3_misses : 0
+l3_misses_non_prefetch : 0
+ld_prod_issue_success : 0
+ld_prod_issue_try : 0
+llama_dram_accesses : 0
+load_issue_success : 15873173
+load_issue_try : 0
+lsq_insert_fail : 0
+lsq_insert_success : 7681265
+misspeculated : 0
+recv_issue_success : 0
+recv_issue_try : 0
+send_issue_success : 0
+send_issue_try : 0
+speculated : 0
+speculatively_forwarded : 1434
+staddr_issue_success : 0
+staddr_issue_try : 0
+store_issue_success : 6966426
+store_issue_try : 0
+stval_issue_success : 0
+stval_issue_try : 0
+total_instructions : 133162240
+Total GFLOPs : 0.0329048
+-------All (1) cores energy (J) : 0.106411
+-------L3_energy (J) : 0
+-------DRAM_energy (J) : 0.000785389
+-------Acc_energy (J) : 0
+global_energy : 0.107196 Joules
+global_avg_power : 6.04428 Watts
+Total Simulation Time: 6 mins 
+Average Global Simulation Speed: 353066 Instructions per sec 

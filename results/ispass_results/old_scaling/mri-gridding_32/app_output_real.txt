@@ -1,0 +1,19 @@
+
+Reading parameters
+  Number of samples = 26559
+  Grid Size = 256x256x256
+  Input Matrix Size = 60x60x60
+  Recon Matrix Size = 60x60x60
+  Kernel Width = 5.000000
+  KMax = 150.00 150.00 150.00
+  Oversampling = 5.000000
+  GPU Binsize = 1
+  Use LUT = Yes
+Reading input data from files
+Generating Look-Up Table
+
+kernel computation time: 0.050039s
+
+IO        : 0.003271
+Compute   : 0.050054
+Timer Wall Time: 0.053671

@@ -1,0 +1,19 @@
+cachereferences: 2403482
+cachemisses: 17455
+cycles: 452966308
+instructions: 845121263
+L1dcachestores: 174406688
+nodeloads: 8097
+nodestores: 14443
+L1dcacheloads: 339847305
+L1dcacheloadmisses: 26226082
+LLCloads: 331935
+LLCloadmisses: 2330
+
+RESULTS:
+----------
+Calculated L1 Miss Rate: 7.717019265460999
+Calculated LLC Miss Rate: 0.0006856020235323037
+Calculated Compute to Memory Ratio: 0.6433927096410509
+Average BW: 0.0039244616970082686
+Calculated IPC: 1.8657486176654003

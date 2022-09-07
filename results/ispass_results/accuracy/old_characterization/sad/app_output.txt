@@ -1,0 +1,5 @@
+
+kernel computation time: 18.061171s
+IO        : 0.133635
+Compute   : 18.061598
+Timer Wall Time: 18.195290

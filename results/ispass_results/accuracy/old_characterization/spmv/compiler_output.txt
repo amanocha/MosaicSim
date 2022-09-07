@@ -1,0 +1,44 @@
+executing: 
+clang++ -E -DBISCUIT_SYNC_MODE=0 -DSCRATCHPAD_SIZE=8192 -I../../../../common/include/ -I /home/aninda/DECADES_compiler/build/include -I /home/ts20/share/llvm9/llvm-project/build/projects/openmp/runtime/src/ ../../../../common/src/parboil.c -o decades_base/parboil_pp.cpp
+executing: 
+/home/aninda/DECADES_compiler/build/passes/ClangVisitor/DECVisitor decades_base/parboil_pp.cpp -- 2> error.log >  decades_base/parboil_visited.cpp
+executing: 
+clang++ -E -DBISCUIT_SYNC_MODE=0 -DSCRATCHPAD_SIZE=8192 -I../../../../common/include/ -I /home/aninda/DECADES_compiler/build/include -I /home/ts20/share/llvm9/llvm-project/build/projects/openmp/runtime/src/ main_seq.cc -o decades_base/main_seq_pp.cpp
+executing: 
+/home/aninda/DECADES_compiler/build/passes/ClangVisitor/DECVisitor decades_base/main_seq_pp.cpp -- 2> error.log >  decades_base/main_seq_visited.cpp
+executing: 
+clang++ -E -DBISCUIT_SYNC_MODE=0 -DSCRATCHPAD_SIZE=8192 -I../../../../common/include/ -I /home/aninda/DECADES_compiler/build/include -I /home/ts20/share/llvm9/llvm-project/build/projects/openmp/runtime/src/ file.c -o decades_base/file_pp.cpp
+executing: 
+/home/aninda/DECADES_compiler/build/passes/ClangVisitor/DECVisitor decades_base/file_pp.cpp -- 2> error.log >  decades_base/file_visited.cpp
+executing: 
+clang++ -E -DBISCUIT_SYNC_MODE=0 -DSCRATCHPAD_SIZE=8192 -I../../../../common/include/ -I /home/aninda/DECADES_compiler/build/include -I /home/ts20/share/llvm9/llvm-project/build/projects/openmp/runtime/src/ convert-dataset/convert_dataset.c -o decades_base/convert_dataset_pp.cpp
+executing: 
+/home/aninda/DECADES_compiler/build/passes/ClangVisitor/DECVisitor decades_base/convert_dataset_pp.cpp -- 2> error.log >  decades_base/convert_dataset_visited.cpp
+executing: 
+clang++ -E -DBISCUIT_SYNC_MODE=0 -DSCRATCHPAD_SIZE=8192 -I../../../../common/include/ -I /home/aninda/DECADES_compiler/build/include -I /home/ts20/share/llvm9/llvm-project/build/projects/openmp/runtime/src/ convert-dataset/mmio.c -o decades_base/mmio_pp.cpp
+executing: 
+/home/aninda/DECADES_compiler/build/passes/ClangVisitor/DECVisitor decades_base/mmio_pp.cpp -- 2> error.log >  decades_base/mmio_visited.cpp
+executing: 
+clang++ -std=c++14 -O3 -S -static -fno-slp-vectorize -fno-vectorize -fno-unroll-loops -emit-llvm -fopenmp=libomp   -I../../../../common/include/ -I /home/aninda/DECADES_compiler/build/include -I /home/ts20/share/llvm9/llvm-project/build/projects/openmp/runtime/src/ decades_base/parboil_visited.cpp -o decades_base/parboil_visited.cpp.ll
+executing: 
+clang++ -std=c++14 -O3 -S -static -fno-slp-vectorize -fno-vectorize -fno-unroll-loops -emit-llvm -fopenmp=libomp   -I../../../../common/include/ -I /home/aninda/DECADES_compiler/build/include -I /home/ts20/share/llvm9/llvm-project/build/projects/openmp/runtime/src/ decades_base/main_seq_visited.cpp -o decades_base/main_seq_visited.cpp.ll
+executing: 
+clang++ -std=c++14 -O3 -S -static -fno-slp-vectorize -fno-vectorize -fno-unroll-loops -emit-llvm -fopenmp=libomp   -I../../../../common/include/ -I /home/aninda/DECADES_compiler/build/include -I /home/ts20/share/llvm9/llvm-project/build/projects/openmp/runtime/src/ decades_base/file_visited.cpp -o decades_base/file_visited.cpp.ll
+executing: 
+clang++ -std=c++14 -O3 -S -static -fno-slp-vectorize -fno-vectorize -fno-unroll-loops -emit-llvm -fopenmp=libomp   -I../../../../common/include/ -I /home/aninda/DECADES_compiler/build/include -I /home/ts20/share/llvm9/llvm-project/build/projects/openmp/runtime/src/ decades_base/convert_dataset_visited.cpp -o decades_base/convert_dataset_visited.cpp.ll
+executing: 
+clang++ -std=c++14 -O3 -S -static -fno-slp-vectorize -fno-vectorize -fno-unroll-loops -emit-llvm -fopenmp=libomp   -I../../../../common/include/ -I /home/aninda/DECADES_compiler/build/include -I /home/ts20/share/llvm9/llvm-project/build/projects/openmp/runtime/src/ decades_base/mmio_visited.cpp -o decades_base/mmio_visited.cpp.ll
+executing: 
+llvm-link -S decades_base/parboil_visited.cpp.ll decades_base/main_seq_visited.cpp.ll decades_base/file_visited.cpp.ll decades_base/convert_dataset_visited.cpp.ll decades_base/mmio_visited.cpp.ll -o decades_base/llvm_combined.ll
+executing: 
+opt -S   -lowerinvoke  decades_base/llvm_combined.ll -o decades_base/llvm_combined.ll
+executing: 
+opt -S  -load /home/aninda/DECADES_compiler/build/passes/AlwaysInliner/libAlwaysInlinerPass.so -alwaysinline decades_base/llvm_combined.ll -o decades_base/llvm_combined.ll
+executing: 
+opt -S  -load /home/aninda/DECADES_compiler/build/passes/PrintFunctionCalls/libPrintFunctionCallsPass.so -printfunctioncalls decades_base/llvm_combined.ll -o decades_base/llvm_combined.ll
+executing: 
+opt -S   -sroa  decades_base/llvm_combined.ll -o decades_base/llvm_combined.ll
+executing: 
+clang++ -fopenmp=libomp -L/home/ts20/share/llvm9/llvm-project/build/lib/ decades_base/llvm_combined.ll -o decades_base/decades_base
+
+total time (seconds): 11.193713426589966
